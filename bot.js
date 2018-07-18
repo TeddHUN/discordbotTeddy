@@ -18,7 +18,34 @@ client.on('message', message => {
 	if(command === "help") {
 		message.channel.send("Még fejleszt engem a fejlesztőm, légy türelemmel! ;)");	
 	}	
+	
+	if(command === "makerangget") {
+		let guild = client.guilds.find("id", "464233102143651840");
+		let channel = guild.channels.find("id", "469283523283517440");
+		
+		channel.send("A listából válaszd ki azt a játékot amivel játszol egy Pipa rakással!\n");
+		let crew1 = channel.send("**The Crew**");
+		let crew2 = channel.send("**The Crew 2**");
+		
+		await crew1.react(":white_check_mark:");
+		await crew2.react(":white_check_mark:");
+		
+		channel.send("\nSzintén válaszd ki azt, hogy mely platformon játszol egy Pipa rakással!\n");
+		let pc = channel.send("**PC**");
+		let xbox = channel.send("**XBOX**");
+		let ps = channel.send("**PS**");
+				
+		await pc.react(":white_check_mark:");
+		await xbox.react(":white_check_mark:");
+		await ps.react(":white_check_mark:");
+	}
 });
+
+client.on('messageReactionAdd', (reaction, user) => {
+    if(reaction.emoji.name === ":white_check_mark:") {
+    	console.log(reaction.emoji.users);
+    }
+}
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
