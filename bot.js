@@ -17,11 +17,15 @@ const commands = {
 	}
 };
 
-client.on('message', msg => {	
-   	if(msg.author.bot) return;
-	if (!msg.content.startsWith(prefix)) return;
-	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(prefix.length).split(' ')[0]](msg);
+client.on('message', msg => {		
+	if(message.author.bot) return;
+	if(message.content.indexOf(config.prefix) !== 0) return;
+	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+	const command = args.shift().toLowerCase();
 	
+	if(command === "help") {
+		
+	}
 });
 
 // THIS  MUST  BE  THIS  WAY
