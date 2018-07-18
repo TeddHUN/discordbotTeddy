@@ -5,17 +5,18 @@ client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
     client.user.setGame('Moderátori munka', "https://twitch.tv/teddhun");
-    
     i = 0;
-    while (true) {
-        if(i == 15) {
-            client.user.setGame('Összeses szerver: ${client.guilds.size}');
-        } else if(i == 30) {
-            client.user.setGame('Moderátori munka', "https://twitch.tv/teddhun");
-            i = 0;
-        }      
+    setInterval(function(){ 
         i++;
-    }   
+        if(i == 1) {
+            client.user.setGame('Moderátori munka', "https://twitch.tv/teddhun");
+        } else if(i == 2) {
+            i = 0;
+            client.user.setGame('Rendszerfrissítés...');
+        }
+    
+    }, 60000); 
+   
 });
 
 client.on('message', message => {
