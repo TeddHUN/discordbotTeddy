@@ -11,14 +11,14 @@ client.on('ready', () => {
     client.user.setGame('~tb help', "https://twitch.tv/teddhun");
 });
 
-client.on('message', message => {
-    if(message.author.bot) return;
+client.on('message', msg => {
+    if(msg.author.bot) return;
     
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const args = msg.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     
     if(command === "help") {
-        message.channel.send("Még fejleszt engem a fejlesztőm, légy türelemmel! ;)\n```🐻 Teddhun beszéldéje >> TeddHUN```");
+        msg.channel.send("Még fejleszt engem a fejlesztőm, légy türelemmel! ;)\n```🐻 Teddhun beszéldéje >> TeddHUN```");
     }
     
     if(command === "play") {
