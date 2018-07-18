@@ -8,7 +8,7 @@ const fetchVideoInfo = require("youtube-info");
 
 var prefix = "~tb";
 
-const yt_api_key = config.yt_api_key;
+const yt_api_key = "AIzaSyCC4FIS5AXNMyTSjmEiGvQIOs2bgSytXjo";
 var guilds = {};
 
 client.on('ready', () => {
