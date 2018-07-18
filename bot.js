@@ -27,17 +27,17 @@ client.on('message', message => {
 		let crew1 = channel.send("**The Crew**");
 		let crew2 = channel.send("**The Crew 2**");
 		
-		await crew1.react(":white_check_mark:");
-		await crew2.react(":white_check_mark:");
+		crew1.react(":white_check_mark:");
+		crew2.react(":white_check_mark:");
 		
 		channel.send("\nSzintén válaszd ki azt, hogy mely platformon játszol egy Pipa rakással!\n");
 		let pc = channel.send("**PC**");
 		let xbox = channel.send("**XBOX**");
 		let ps = channel.send("**PS**");
 				
-		await pc.react(":white_check_mark:");
-		await xbox.react(":white_check_mark:");
-		await ps.react(":white_check_mark:");
+		pc.react(":white_check_mark:");
+		xbox.react(":white_check_mark:");
+		ps.react(":white_check_mark:");
 	}
 });
 
