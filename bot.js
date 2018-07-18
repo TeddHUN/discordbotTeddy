@@ -5,7 +5,7 @@ client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("online");
     client.user.setGame('Moderátori munka', { type: 'WATCHING' });
-    client.SetGameAsync("Események kiírása & Rendszer fenttartása", "https://twitch.tv/teddhun", StreamType.Twitch);
+    client.SetGameAsync("Események kiírása & Rendszer fenttartása", "https://twitch.tv/teddhun", WATCHING);
 });
 
 client.on('message', message => {
