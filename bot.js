@@ -1,8 +1,15 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const ytdl = require("ytdl-core");
+const request = require("request");
+const fs = require("fs");
+const getYouTubeID = require("get-youtube-id");
+const fetchVideoInfo = require("youtube-info");
 
 var prefix = "~tb";
 
+const yt_api_key = "AIzaSyCC4FIS5AXNMyTSjmEiGvQIOs2bgSytXjo";
+var guilds = {};
 
 client.on('ready', () => {
     console.log('Elindult!');
@@ -19,6 +26,18 @@ client.on('message', message => {
 	if(command === "help") {
 		message.channel.send("Még fejleszt engem a fejlesztőm, légy türelemmel! ;)");	
 	}
+	
+	if (!guilds[message.guild.id]) {
+		guilds[message.guild.id] = {
+		    queue: [],
+		    queueNames: [],
+		    isPlaying: false,
+		    dispatcher: null,
+		    voiceChannel: null,
+		    skipReq: 0,
+		    skippers: []
+		};
+   	}
 	
 	if(command === "play") {
 		if (message.member.voidceChannel || guilds[message.guild.id].voiceChannel != null) {
