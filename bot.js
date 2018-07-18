@@ -3,7 +3,8 @@ const client = new Discord.Client();
 
 client.on('ready', () => {
     console.log('Elindult!');
-    client.user.setActivity('Moderátori munka', { type: 'WATCHING' });
+    client.user.setStatus("online");
+    client.user.setGame('Moderátori munka', { type: 'WATCHING' });
 });
 
 client.on('message', message => {
