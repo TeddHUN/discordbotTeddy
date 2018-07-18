@@ -45,7 +45,7 @@ client.on('messageReactionAdd', (reaction, user) => {
     if(reaction.emoji.name === ":white_check_mark:") {
     	console.log(reaction.emoji.users);
     }
-}
+});
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
