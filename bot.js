@@ -41,7 +41,7 @@ client.on('message', message => {
 	
 	if(command === "play") {
 		if (message.member.voiceChannel || guilds[message.guild.id].voiceChannel != null) {
-		    if (guilds[message.guild.id].queue.length > 0 || guilds[mefssage.guild.id].isPlaying) {
+		    if (guilds[message.guild.id].queue.length > 0 || guilds[message.guild.id].isPlaying) {
 			getID(args, function(id) {
 			    add_to_queue(id, message);
 			    fetchVideoInfo(id, function(err, videoInfo) {
