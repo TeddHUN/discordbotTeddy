@@ -6,7 +6,7 @@ var prefix = "~tb";
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setGame('~tb help', "https://twitch.tv/teddhun");
+    client.user.setGame('Fejlesztés alatt!', "https://twitch.tv/teddhun");
 });
 
 client.on('message', message => {		
