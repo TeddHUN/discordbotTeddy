@@ -3,9 +3,8 @@ const client = new Discord.Client();
 
 client.on('ready', () => {
     console.log('Elindult!');
-    client.user.setStatus("online");
-    client.user.setGame('Moderátori munka', { type: 'WATCHING' });
-    client.SetGameAsync("Események kiírása & Rendszer fenttartása", "https://twitch.tv/teddhun", WATCHING);
+    client.user.setStatus("dnd");
+    client.user.setGame('Moderátori munka', "https://twitch.tv/teddhun");
 });
 
 client.on('message', message => {
