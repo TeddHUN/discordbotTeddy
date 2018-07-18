@@ -15,7 +15,7 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
     
     if(command === "help") {
-        await message.channel.send("Még fejleszt engem a fejlesztőm, légy türelemmel! ;)  (TeddHUN, 🐻 Teddhun beszéldéje");
+        message.channel.send("Még fejleszt engem a fejlesztőm, légy türelemmel! ;)  (TeddHUN, 🐻 Teddhun beszéldéje");
     }
 });
 
