@@ -141,7 +141,7 @@ function getID(str, cb) {
     if (isYoutube(str)) {
         cb(getYouTubeID(str));
     } else {
-        search_vsideo(str, function(id) {
+        search_video(str, function(id) {
             cb(id);
         });
     }
@@ -150,8 +150,6 @@ function getID(str, cb) {
 function add_to_queue(strID, message) {
     if (isYoutube(strID)) {
         guilds[message.guild.id].queue.push(getYouTubeID(strID));
-    } else {
-        guilds[message.guild.id].queue.push(strID);
     }
 }
 
@@ -163,8 +161,4 @@ function search_video(query, callback) {
             callback(jsonf.items[0].id.videoId);
         }
     });
-}
-
-function isYoutube(str) {
-    return str.toLowerCase().indexOf("youtube.com") > -1;
 }
