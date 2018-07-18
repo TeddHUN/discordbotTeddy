@@ -9,7 +9,7 @@ client.on('ready', () => {
     i = 0;
     while (true) {
         if(i == 15) {
-            client.user.setGame('Összeses szerver: ${client.guilds.size});
+            client.user.setGame('Összeses szerver: ${client.guilds.size}');
         } else if(i == 30) {
             client.user.setGame('Moderátori munka', "https://twitch.tv/teddhun");
             i = 0;
