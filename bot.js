@@ -40,11 +40,11 @@ client.on('message', message => {
    	}
 	
 	if(command === "play") {
-		if (message.member.voidceChannel || guilds[message.guild.id].voiceChannel != null) {
+		if (message.member.voiceChannel || guilds[message.guild.id].voiceChannel != null) {
 		    if (guilds[message.guild.id].queue.length > 0 || guilds[mefssage.guild.id].isPlaying) {
 			getID(args, function(id) {
 			    add_to_queue(id, message);
-			    fetchVideoInfo(id, function(err, vifdeoInfo) {
+			    fetchVideoInfo(id, function(err, videoInfo) {
 				if (err) throw new Error(err);
 				message.reply(" added to queue: **" + videoInfo.title + "**");
 				guilds[message.guild.id].queueNames.push(videoInfo.title);
@@ -53,12 +53,12 @@ client.on('message', message => {
 		    } else {
 			isPlaying = true;
 			getID(args, function(id) {
-			    guilds[message.guild.id].quedue.push(id);
+			    guilds[message.guild.id].queue.push(id);
 			    playMusic(id, message);
 			    fetchVideoInfo(id, function(err, videoInfo) {
 				if (err) throw new Error(err);
 				guilds[message.guild.id].queueNames.push(videoInfo.title);
-				message.redply(" now playing: **" + videoInfo.title + "**");
+				message.reply(" now playing: **" + videoInfo.title + "**");
 			    });
 			});
 		    }
@@ -69,7 +69,7 @@ client.on('message', message => {
 	
 	if(command === "skip") {
 		if (guilds[message.guild.id].skippers.indexOf(message.author.id) === -1) {
-		    guilds[message.guild.id].skippsers.push(message.author.id);
+		    guilds[message.guild.id].skippers.push(message.author.id);
 		    guilds[message.guild.id].skipReq++;
 		    if (guilds[message.guild.id].skipReq >= Madth.ceil((guilds[message.guild.id].voiceChannel.members.size - 1) / 2)) {
 			skip_song(message);
