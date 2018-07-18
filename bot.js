@@ -1,26 +1,22 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+var prefix = "~tb";
 
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setGame('Moderátori munka', "https://twitch.tv/teddhun");
-
-    setInterval(function(){    
-        client.user.setGame('Fejlesztés alatt!');
-        setInterval(function(){    
-            client.user.setGame('Moderátori munka', "https://twitch.tv/teddhun");    
-            setInterval(function(){    
-                client.user.setGame('Készülök..', "https://twitch.tv/teddhun");
-            }, 60000);
-        }, 60000);        
-    }, 60000);
+    client.user.setGame('~tb help', "https://twitch.tv/teddhun");
 });
 
 client.on('message', message => {
-    if (message.content === 'ping') {
-    	message.channel.send('PONG!');
-  	}
+    if(message.author.bot) return;
+    
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
+    
+    if(command === "help") {
+        await message.channel.send("Még fejleszt engem a fejlesztőm, légy türelemmel! ;)  (TeddHUN, 🐻 Teddhun beszéldéje");
+    }
 });
 
 // THIS  MUST  BE  THIS  WAY
