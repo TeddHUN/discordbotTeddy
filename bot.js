@@ -10,7 +10,7 @@ client.on('ready', () => {
     client.user.setGame('~tb help', "https://twitch.tv/teddhun");
 });
 
-client.on('message', msg => {		
+client.on('message', message => {		
 	if(message.author.bot) return;
 	if(message.content.indexOf(prefix) !== 0) return;
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
