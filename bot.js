@@ -48,9 +48,8 @@ client.on('message', message => {
 	}
 });
 
-client.on('messageReactionAdd', (reaction, user) => {
-    if(reaction.emoji.name === "👍🏻") {
-    	console.log(reaction.emoji.users);
+client.on('messageReactionAdd', (reaction, user) => {   
+	reaction.emoji.remove(user);
     }
 });
 
