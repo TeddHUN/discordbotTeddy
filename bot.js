@@ -21,26 +21,30 @@ client.on('message', message => {
    	}	
 	
 	if(command === "makerangget") {
-		let guild = client.guilds.find("id", "464233102143651840");
-		let channel = guild.channels.find("id", "469512614553059338");
-		
-		channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot írd be a `~tb rang` parancsot majd ezután 1 perced **van** reagálni, hogy melyiket is kéred!").then(sent => {
-			message.delete(1);	
-		});
+		if(message.author.id == 312631597222592522) {	
+			let guild = client.guilds.find("id", "464233102143651840");
+			let channel = guild.channels.find("id", "469512614553059338");
+
+			channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot írd be a `~tb rang` parancsot majd ezután 1 perced **van** reagálni, hogy melyiket is kéred!").then(sent => {
+				message.delete(1);	
+			});
+		}
 	}
 	
 	if(command === "rang") {		
-		let guild = client.guilds.find("id", "464233102143651840");
-		let channel = guild.channels.find("id", "469512614553059338");
-		
-		if(message.channel === channel) {
-			let uzenet = channel.send(message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
-				message.delete(1);
-				
-				sent.react(":one:");
-				
-				sent.delete(10000);
-			});				
+		if(message.author.id == 312631597222592522) {	
+			let guild = client.guilds.find("id", "464233102143651840");
+			let channel = guild.channels.find("id", "469512614553059338");
+
+			if(message.channel === channel) {
+				let uzenet = channel.send(message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
+					message.delete(1);
+
+					sent.react(":one:");
+
+					sent.delete(10000);
+				});				
+			}
 		}
 	}
 	
