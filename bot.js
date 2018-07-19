@@ -23,25 +23,28 @@ client.on('message', message => {
 		let guild = client.guilds.find("id", "464233102143651840");
 		let channel = guild.channels.find("id", "469283523283517440");
 		
-		channel
-		
 		channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot dobj egy 👍🏻 jelet az adott rangra és megkapod!");
 		channel.send("**Játék:**");
-		let crew1 = channel.send("     **The Crew**");
-		let crew2 = channel.send("     **The Crew 2**");
+		channel.send("     **The Crew**").then(sent => {
+		    sent.react("👍");
+		});
+		channel.send("     **The Crew 2**").then(sent => {
+		    sent.react("👍");
+		});
 		
 		channel.send("\n**Platform:**");
-		
-		crew1.react("👍🏻");
-		crew2.react("👍🏻");
-	
-		let pc = channel.send("     **PC**");
-		let xbox = channel.send("     **XBOX**");
-		let ps = channel.send("     **PS**");
+
+		let pc = channel.send("     **PC**").then(sent => {
+		    sent.react("👍");
+		});
+		let xbox = channel.send("     **XBOX**").then(sent => {
+		    sent.react("👍");
+		});
+		let ps = channel.send("     **PS**").then(sent => {
+		    sent.react("👍");
+		});
 				
-		pc.react("👍🏻");
-		xbox.react("👍🏻");
-		ps.react("👍🏻");
+		
 	}
 });
 
