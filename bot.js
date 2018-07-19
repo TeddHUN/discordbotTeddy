@@ -17,7 +17,7 @@ client.on('message', message => {
 	
 	if(command === "help") {
 		var commandtext = "# addstream\n* A parancsot csak a medvezér használhatja az élőadásainak kiíratására!";
-		message.channel.send("```* Heóó " + message.author + ", látom érdekel, hogy mit is tudok! :)\n\n " + commandtext + "\nHa bármilyen egyéb információ vagy segítség kell akkor keresd fel a készítőmet, TeddHUN-t!```");	
+		message.channel.send("```css* Heóó " + message.author.name + ", látom érdekel, hogy mit is tudok! :)\n\n" + commandtext + "\n\nHa bármilyen egyéb információ vagy segítség kell akkor keresd fel a készítőmet, TeddHUN-t!```");	
 	}	
 	
 	if(command === "makerangget") {
