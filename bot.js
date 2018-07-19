@@ -31,12 +31,12 @@ client.on('message', message => {
 		let channel = guild.channels.find("id", "469283523283517440");
 		
 		if(message.channel === channel) {
-			message.delete(1);
 			let uzenet = channel.send(message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
-				sent.react(":one"); 	
-			});	
-			
-			uzenet.delete(5000);
+				message.delete(1);
+				sent.react(":one");
+				
+				sent.delete(10000);
+			});				
 		}
 	}
 });
