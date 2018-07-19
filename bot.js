@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-var prefix = "~tb";
+var prefix = "-tb";
 
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setGame('~tb help', "https://twitch.tv/teddhun");
+    client.user.setGame('-tb help', "https://twitch.tv/teddhun");
 });
 
 client.on('message', message => {	
@@ -25,7 +25,7 @@ client.on('message', message => {
 			let guild = client.guilds.find("id", "464233102143651840");
 			let channel = guild.channels.find("id", "469512614553059338");
 
-			channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot írd be a `~tb rang` parancsot majd ezután 1 perced **van** reagálni, hogy melyiket is kéred!").then(sent => {
+			channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot írd be a `" + prefix + " rang` parancsot majd ezután 1 perced **van** reagálni, hogy melyiket is kéred!").then(sent => {
 				message.delete(1);	
 			});
 		}
