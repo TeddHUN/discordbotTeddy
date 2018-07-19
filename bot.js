@@ -17,8 +17,8 @@ client.on('message', message => {
 	
 	if(command === "help") {
 		var commandtext = "# addstream\n* A parancsot csak a medvezér használhatja az élőadásainak kiíratására!";
-		message.channel.send("```css* Heóó " + message.author.name + ", látom érdekel, hogy mit is tudok! :)\n\n" + commandtext + "\n\nHa bármilyen egyéb információ vagy segítség kell akkor keresd fel a készítőmet, TeddHUN-t!```");	
-	}	
+		message.channel.send(message.author + ", ```Mindenkinek:\n   -\n\nAdminisztrátoroknak:\n   ~tb addstream	| Medvezér élőadásaihoz kapcsolódó menetrend kiírása.```\n\nÖrülök, hogy érdekel az amit tudok! ;)"		    
+   	}	
 	
 	if(command === "makerangget") {
 		let guild = client.guilds.find("id", "464233102143651840");
