@@ -25,22 +25,22 @@ client.on('message', message => {
 		
 		channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot dobj egy 👍🏻 jelet az adott rangra és megkapod!");
 		channel.send("**Játék:**");
-		channel.send("     The Crew").then(sent => {
+		channel.send("The Crew").then(sent => {
 		    sent.react("👍");
 		});
-		channel.send("     The Crew 2").then(sent => {
+		channel.send("The Crew 2").then(sent => {
 		    sent.react("👍");
 		});
 		
 		channel.send("\n**Platform:**");
 
-		let pc = channel.send("     PC").then(sent => {
+		let pc = channel.send("PC").then(sent => {
 		    sent.react("👍");
 		});
-		let xbox = channel.send("     XBOX").then(sent => {
+		let xbox = channel.send("XBOX").then(sent => {
 		    sent.react("👍");
 		});
-		let ps = channel.send("     PS").then(sent => {
+		let ps = channel.send("PS").then(sent => {
 		    sent.react("👍");
 		});
 				
