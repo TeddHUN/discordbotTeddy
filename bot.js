@@ -31,16 +31,13 @@ client.on('message', message => {
 		let channel = guild.channels.find("id", "469283523283517440");
 		
 		if(message.channel === channel) {
-			channel.send("${message.author.mention} Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
+			channel.send(message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
 			    sent.react(":one:");
 			    sent.react(":two:");
 			    sent.react(":three:");
 			    sent.react(":four:");
 			    sent.react(":five:");
 			});				
-			message.remove(message.author);
-		} else {
-			message.remove(message.author);
 		}
 	}
 });
