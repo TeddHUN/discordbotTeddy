@@ -2,14 +2,20 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 var prefix = "~tb";
+var karbantartas = 1;
 
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setGame('Fejlesztés alatt!', "https://twitch.tv/teddhun");
+    if(karbantartas == 1) {
+	client.user.setGame('Karbantartás alatt!', "https://twitch.tv/teddhun");    
+    } else {
+    	client.user.setGame('~tb help', "https://twitch.tv/teddhun");
+    }
 });
 
-client.on('message', message => {		
+client.on('message', message => {	
+	if(karbantartas == 1) return;
 	if(message.author.bot) return;
 	if(message.content.indexOf(prefix) !== 0) return;
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
