@@ -16,7 +16,8 @@ client.on('message', message => {
 	const command = args.shift().toLowerCase();
 	
 	if(command === "help") {
-		message.channel.send("Még fejleszt engem a fejlesztőm, légy türelemmel! ;)");	
+		var commandtext = "# addstream\n* A parancsot csak a medvezér használhatja az élőadásainak kiíratására!";
+		message.channel.send("```* Heóó " + message.author + ", látom érdekel, hogy mit is tudok! :)\n\n " + commandtext + "\nHa bármilyen egyéb információ vagy segítség kell akkor keresd fel a készítőmet, TeddHUN-t!```");	
 	}	
 	
 	if(command === "makerangget") {
