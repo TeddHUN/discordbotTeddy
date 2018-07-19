@@ -33,11 +33,7 @@ client.on('message', message => {
 		if(message.channel === channel) {
 			let uzenet = channel.send(message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
 				message.delete(1);
-				sent.react("1️⃣");
-				sent.react("2️⃣");
-				sent.react("3️⃣");
-				sent.react("4️⃣");
-				sent.react("5️⃣");
+				sent.react(":one:");
 								
 				sent.delete(10000);
 			});				
