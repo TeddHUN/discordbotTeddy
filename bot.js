@@ -49,7 +49,9 @@ client.on('message', message => {
 });
 
 client.on('messageReactionAdd', (reaction, user) => {
-    if(reaction.emoji.name === "👍") {
+    console.log(reaction);
+	
+	/*if(reaction.emoji.name === "👍") {
         //console.log(reaction.users);
 	let channel = reaction.message.channel;
 	
@@ -66,7 +68,7 @@ client.on('messageReactionAdd', (reaction, user) => {
 			channel.send("The Crew");
 		}
 	}
-    }
+    }*/
 });
 
 // THIS  MUST  BE  THIS  WAY
