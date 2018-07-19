@@ -42,28 +42,5 @@ client.on('message', message => {
 	}
 });
 
-client.on('messageReactionAdd', (reaction, user) => {
-    console.log(reaction);
-	
-	/*if(reaction.emoji.name === "👍") {
-        //console.log(reaction.users);
-	let channel = reaction.message.channel;
-	
-	if(channel === "tesztrang") {
-		reaction.remove(user);
-		
-		const usermessage = user + " rangodat megkaptad! ;)";
-		
-		channel.send(usermessage).then(sent => {
-			sent.delete(10000);
-		});
-		
-		if(reaction.message === "The Crew") {
-			channel.send("The Crew");
-		}
-	}
-    }*/
-});
-
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
