@@ -31,7 +31,7 @@ client.on('message', message => {
 	
 	if(command === "rang") {		
 		let guild = client.guilds.find("id", "464233102143651840");
-		let channel = guild.channels.find("id", "469283523283517440");
+		let channel = guild.channels.find("id", "469512614553059338");
 		
 		if(message.channel === channel) {
 			let uzenet = channel.send(message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
