@@ -84,7 +84,7 @@ client.on('message', message => {
 				for (i = 0; i < streamek ; i++) { 
 				    const embed = new Discord.RichEmbed()
 				    	.setColor(0x6441A4)
-				    	.setTitle(streamNev[i]))
+				    	.setTitle(streamNev[i])
 					.setDescription("**Kezdés:** " + streamDatum[i] + "\n**Játék:** " + streamJatek[i] + "\n**Közvetítés helyszíne:** https://twitch.tv/teddhun" + "\n" + ":heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign:")
 					.setImage(streamKep[i]);
 				    
