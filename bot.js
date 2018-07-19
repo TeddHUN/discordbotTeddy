@@ -17,7 +17,7 @@ client.on('message', message => {
 	
 	if(command === "help") {
 		var commandtext = "# addstream\n* A parancsot csak a medvezér használhatja az élőadásainak kiíratására!";
-		message.channel.send(message.author + ", ```Mindenkinek:\n   -\n\nAdminisztrátoroknak:\n   ~tb addstream	| Medvezér élőadásaihoz kapcsolódó menetrend kiírása.```\n\nÖrülök, hogy érdekel az amit tudok! ;)"		    
+		message.channel.send(message.author + ", ```Mindenkinek:\n   -\n\nAdminisztrátoroknak:\n   " + prefix + " addstream	| Medvezér élőadásaihoz kapcsolódó menetrend kiírása.```\n\nÖrülök, hogy érdekel az amit tudok! ;)");		    
    	}	
 	
 	if(command === "makerangget") {
