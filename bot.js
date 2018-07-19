@@ -22,7 +22,7 @@ client.on('message', message => {
 	
 	if(command === "makerangget") {
 		let guild = client.guilds.find("id", "464233102143651840");
-		let channel = guild.channels.find("id", "469283523283517440");
+		let channel = guild.channels.find("id", "469512614553059338");
 		
 		channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot írd be a `~tb rang` parancsot majd ezután 1 perced **van** reagálni, hogy melyiket is kéred!").then(sent => {
 			message.delete(1);	
