@@ -30,7 +30,7 @@ client.on('message', message => {
 		let guild = client.guilds.find("id", "464233102143651840");
 		let channel = guild.channels.find("id", "469283523283517440");
 		
-		if(channel === "tesztrang") {
+		if(message.channel === channel) {
 			channel.send("${message.author} Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**:three: PC\n:four: XBOX\n:five: PS").then(sent => {
 			    sent.react(":one:");
 			    sent.react(":two:");
