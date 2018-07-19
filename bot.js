@@ -16,7 +16,7 @@ client.on('message', message => {
 	const command = args.shift().toLowerCase();
 	
 	if(command === "help") {
-		await message.channel.send("Még fejleszt engem a fejlesztőm, légy türelemmel! ;)");	
+		message.channel.send("Még fejleszt engem a fejlesztőm, légy türelemmel! ;)");	
 	}	
 	
 	if(command === "makerangget") {
@@ -48,7 +48,7 @@ client.on('message', message => {
 			let guild = client.guilds.find("id", "352591575639130112");
 			let channel = guild.channels.find("id", "384300207933882370");		
 			
-			await message.reply(message.author + ", Menetrend kiküldve!").then(sent => {
+			message.reply(message.author + ", Menetrend kiküldve!").then(sent => {
 				message.delete(1);
 				sent.delete(5000);
 				
