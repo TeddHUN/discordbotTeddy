@@ -32,11 +32,7 @@ client.on('message', message => {
 		
 		if(message.channel === channel) {
 			channel.send(message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
-			    sent.react(":one:");
-			    sent.react(":two:");
-			    sent.react(":three:");
-			    sent.react(":four:");
-			    sent.react(":five:");
+			 	message.delete(5000);
 			});				
 		}
 	}
