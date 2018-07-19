@@ -23,7 +23,9 @@ client.on('message', message => {
 		let guild = client.guilds.find("id", "464233102143651840");
 		let channel = guild.channels.find("id", "469283523283517440");
 		
-		channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot írd be a `~tb rang` parancsot majd ezután 1 perced **van** reagálni, hogy melyiket is kéred!");
+		channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot írd be a `~tb rang` parancsot majd ezután 1 perced **van** reagálni, hogy melyiket is kéred!").then(sent => {
+			message.delete(1);	
+		});
 	}
 	
 	if(command == "rang") {		
@@ -33,11 +35,7 @@ client.on('message', message => {
 		if(message.channel === channel) {
 			let uzenet = channel.send(message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
 				message.delete(1);
-				sent.react("1⃣ ");
-				sent.react("2⃣ ");
-				sent.react("3⃣ ");
-				sent.react("4⃣ ");
-				sent.react("5⃣ ");
+				sent.react(message.guild.emojis.get('123456789012345678'))
 				
 				sent.delete(10000);
 			});				
