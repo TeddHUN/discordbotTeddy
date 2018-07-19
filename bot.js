@@ -9,7 +9,7 @@ client.on('ready', () => {
     client.user.setGame('Fejlesztés alatt!', "https://twitch.tv/teddhun");
 });
 
-client.on('message', async message => {		
+client.on('message', message => {		
 	if(message.author.bot) return;
 	if(message.content.indexOf(prefix) !== 0) return;
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -33,10 +33,10 @@ client.on('message', async message => {
 		let channel = guild.channels.find("id", "469283523283517440");
 		
 		if(message.channel === channel) {
-			let uzenet = await channel.send(message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
+			let uzenet = channel.send(message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
 				message.delete(1);
 				
-				await sent.react(":one:");
+				sent.react(":one:");
 				
 				sent.delete(10000);
 			});				
@@ -76,9 +76,9 @@ client.on('message', async message => {
 				];
 				
 				if(streamek > 1) {
-					await channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
+					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
 				} else {
-					await channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
+					channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
 				}				
 								
 				for (i = 0; i < streamek ; i++) { 
@@ -88,7 +88,7 @@ client.on('message', async message => {
 					.setDescription("**Kezdés:** " + streamDatum[i] + "\n**Játék:** " + streamJatek[i] + "\n**Közvetítés helyszíne:** https://twitch.tv/teddhun" + "\n" + ":heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign:")
 					.setImage(streamKep[i]);
 				    
-				    await channel.send({embed});
+				    channel.send({embed});
 				}
 			});
 		}
