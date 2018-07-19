@@ -23,28 +23,24 @@ client.on('message', message => {
 		let guild = client.guilds.find("id", "464233102143651840");
 		let channel = guild.channels.find("id", "469283523283517440");
 		
-		channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot dobj egy 👍🏻 jelet az adott rangra és megkapod!");
-		channel.send("**Játék:**");
-		channel.send("The Crew").then(sent => {
-		    sent.react("👍");
-		});
-		channel.send("The Crew 2").then(sent => {
-		    sent.react("👍");
-		});
+		channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot írd be a `~tb rang` parancsot majd ezután 1 perced **van** reagálni, hogy melyiket is kéred!");
+	}
+	
+	if(command == "rang") {		
+		let guild = client.guilds.find("id", "464233102143651840");
+		let channel = guild.channels.find("id", "469283523283517440");
 		
-		channel.send("\n**Platform:**");
-
-		let pc = channel.send("PC").then(sent => {
-		    sent.react("👍");
-		});
-		let xbox = channel.send("XBOX").then(sent => {
-		    sent.react("👍");
-		});
-		let ps = channel.send("PS").then(sent => {
-		    sent.react("👍");
-		});
-				
-		
+		if(channel === "tesztrang") {
+			const uzenet = message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**:three: PC\n:four: XBOX\n:five: PS");
+			
+			channel.send(uzenet).then(sent => {
+			    sent.react(":one:");
+			    sent.react(":two:");
+			    sent.react(":three:");
+			    sent.react(":four:");
+			    sent.react(":five:");
+			});			
+		}
 	}
 });
 
