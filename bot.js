@@ -1,7 +1,24 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+const YIDL = require("ytdl-core");
+
+function play(connection, message) {
+	var server = servers[message.guild.id];
+	
+	server.dispatcher = connection.playStream(YIDL(server.queue[0], {filter: "audioonly"}));
+	
+	server.queue.shift();
+	server.dispatcher.on("end", function() {
+		if(server.queue[0]) play(connection, message);
+		else connection.disconnect();
+	});
+	
+}
+
 var prefix = "-tb";
+
+var servers = {};
 
 client.on('ready', () => {
     console.log('Elindult!');
@@ -46,6 +63,40 @@ client.on('message', message => {
 				});				
 			}
 		}
+	}
+	
+	if(command === "play") {
+		if(!args[1]) {	
+			message.channel.send(message.author + ", Kérlek adj meg egy linket!");	
+			return;
+		}
+		
+		if(!message.member.voiceChannel) {
+			message.channel.send(message.author + ", Egy voice szobában kell lenned ahhoz, hogy lejátszak neked egy zenét!");	
+			return;
+		}
+		
+		if(!servers[message.guild.id]) servers[message.guild.id] = { 
+			queue: []
+		};
+		
+		var server = servers[message.guild.id];
+		
+		if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+			play(connection, message);	
+		});
+	}
+	
+	if(command === "skip") {
+		var server = servers[message.guild.id];
+		
+		if(server.dispatcher) server.dispatcher.end();
+	}
+	
+	if(command === "stop") {
+		var server = servers[message.guild.id];
+		
+		if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
 	}
 	
 	if(command === "addstream") {
