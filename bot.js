@@ -1,24 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-
-const YIDL = require("ytdl-core");
-
-function play(connection, message) {
-	var server = servers[message.guild.id];
-	
-	server.dispatcher = connection.playStream(YIDL(server.queue[0], {filter: "audioonly"}));
-	
-	server.queue.shift();
-	server.dispatcher.on("end", function() {
-		if(server.queue[0]) play(connection, message);
-		else connection.disconnect();
-	});
-	
-}
+const ytdl = require("ytdl-core");
 
 var prefix = "-tb";
-
-var servers = {};
 
 client.on('ready', () => {
     console.log('Elindult!');
@@ -29,8 +13,8 @@ client.on('ready', () => {
 client.on('message', message => {	
 	if(message.author.bot) return;
 	if(message.content.indexOf(prefix) !== 0) return;
-	const args = message.content.slice(prefix.length).trim().split(/ +/g);
-	const command = args.shift().toLowerCase();
+	const args = message.content.slice(prefix.length).trim().split(' ');
+	const command = args[0];
 	
 	if(command === "help") {
 		var commandtext = "# addstream\n* A parancsot csak a medvezér használhatja az élőadásainak kiíratására!";
@@ -66,39 +50,29 @@ client.on('message', message => {
 	}
 	
 	if(command === "play") {
-		if(!args[2]) {	
-			message.channel.send(message.author + ", Kérlek adj meg egy linket!");	
-			return;
-		}
+		if(!message.member.voiceChannel) return message.channel.send(message.author + ", Nem tudok eljutni hozzád!");	
 		
-		if(!message.member.voiceChannel) {
-			message.channel.send(message.author + ", Egy voice szobában kell lenned ahhoz, hogy lejátszak neked egy zenét!");	
-			return;
-		}
+		if(message.guild.me.voiceChannel) return message.channel.send(message.author + ", Már egyszer becsatlakoztam!");
 		
-		if(!servers[message.guild.id]) servers[message.guild.id] = { 
-			queue: []
-		};
+		if(!args[1]) return message.channel.send(message.author + ", Meg kell, hogy adj egy Youtube zene linket!");
 		
-		var server = servers[message.guild.id];
+		let validate = ytdl.validateURL(args[1]);
 		
-		server.queue.push(args[2]);
+		if(!validate) return message.channel.send(message.author + ", **Érvényes** linket kell, hogy megadj!");
 		
-		if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-			play(connection, message);	
-		});
+		let connection = message.member.voiceChannel.join();
+		
+		let dispatcher = connection.play(ytdl(args[1], { filter: 'audioonly' }));
+		
+		message.channel.send("Most lejátszódik: ${info.title}");
 	}
 	
 	if(command === "skip") {
-		var server = servers[message.guild.id];
 		
-		if(server.dispatcher) server.dispatcher.end();
 	}
 	
 	if(command === "stop") {
-		var server = servers[message.guild.id];
 		
-		if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
 	}
 	
 	if(command === "addstream") {
