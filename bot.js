@@ -76,7 +76,7 @@ client.on('message', message => {
 		}
 		
 		if(!servers[message.guild.id]) servers[message.guild.id] = {
-			queue: [];	
+			queue: []	
 		};
 		
 		var server = servers[message.guild.id];
