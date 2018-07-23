@@ -84,7 +84,7 @@ client.on('message', message => {
 		server.queue.push(args[1]);
 		
 		if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-			
+			play(connection, message);
 		});
 	}
 	
