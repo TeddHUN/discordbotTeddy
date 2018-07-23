@@ -109,27 +109,31 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 				
-				var idoszak = "2018.07.20 - 2018.07.21";
-				var streamek = 2; //Streamek száma
+				var idoszak = "2018.07.23 - 2018.07.26";
+				var streamek = 3; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [ 
-					"»TC2« | Drag, Drift, Race, Amerika. Mi kell ide még?! 🚗 | #10 🐻",
-					"»PUBG« | Ismét szeretem ezt a játékot!44! | #55 🐻"
+					"»PUBG« | Csirke szag, gránát robbanás... | #57 🐻",
+					"»PUBG« | Winner winner chickön dínner! | #56 🐻",
+					"»TC2« | Versengés New York-tól Los Angeles-ig! 🚗 | #11 🐻"
 				];
 				
 				 streamDatum= [ 
-					"júl. 21., szombat 17:00 – 19:00",
-					"júl. 20., péntek 17:00 – 19:00"
+					"júl. 26., csütörtök 17:30 – 19:30",
+					"júl. 24., kedd 17:30 – 19:30",
+					"júl. 23., hétfő 17:30 – 19:30"
 				];
 				
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/af9c77c7-fcd3-4d4f-b92f-2ac711c85644-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/b46a9d4a-3172-47e5-a906-1e64f1efaefb-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/2c3d16de-a808-431c-b109-e4359d283093-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/3eb9c1ca-76cd-44c9-b518-bf40ebc38561-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/1d24b925-c968-40dd-9c58-a39875e9ad5c-350x150"
 				];
 				
 				streamJatek = [ 
-					"The Crew 2",
-					"PLAYERUNKNOWN'S BATTLEGROUNDS"
+					"PLAYERUNKNOWN'S BATTLEGROUNDS",
+					"PLAYERUNKNOWN'S BATTLEGROUNDS",
+					"The Crew 2"
 				];
 				
 				if(streamek > 1) {
