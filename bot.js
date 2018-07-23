@@ -19,14 +19,14 @@ function play(connection, message) {
 
 var servers = {};
 
-let initialMessage = `A rangok igénylése **automatikusan** működik így ha szeretnél egy rangot akkor csak reagálj rá! ;)`;
+let initialMessage = `@everyone A rangok igénylése **automatikusan** működik így ha szeretnél egy rangot akkor csak reagálj rá! ;)`;
 const roles = ["The Crew", "The Crew 2", "PC", "XBOX", "PS"];
 const reactions = ["🆕", "🆕", "🆕", "🆕", "🆕"];
 
 function generateMessages(){
     var messages = [];
     messages.push(initialMessage);
-    for (let role of roles) messages.push(`**"${role}"**`);
+    for (let role of roles) messages.push(`**${role}**`);
     return messages;
 }
 
@@ -167,7 +167,17 @@ client.on('raw', event => {
         if (msg.author.id == client.user.id && msg.content != initialMessage){
        
             var re = `\\*\\*"(.+)?(?="\\*\\*)`;
-            var role = msg.content.match(re)[1];
+	    if(msg.content.match("**The Crew**")) {
+		var role = "The Crew"    
+	    } else if(msg.content.match("**The Crew 2**")) {
+		var role = "The Crew 2"    
+	    } else if(msg.content.match("**PC**")) {
+		var role = "PC"    
+	    } else if(msg.content.match("**XBOX**")) {
+		var role = "XBOX"    
+	    } else if(msg.content.match("**PS**")) {
+		var role = "PS"    
+	    }
         
             if (user != client.user.id){
                 var roleObj = msg.guild.roles.find('name', role);
