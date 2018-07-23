@@ -26,7 +26,7 @@ const reactions = [":one:", ":two:", ":three", ":four:", ":five"];
 function generateMessages(){
     var messages = [];
     messages.push(initialMessage);
-    for (let role of roles) messages.push('Reagálj az adott rangokra! **"${role}"** role!`); //DONT CHANGE THIS
+    for (let role of roles) messages.push("Reagálj az adott rangokra! **${role}** role!"); //DONT CHANGE THIS
     return messages;
 }
 
