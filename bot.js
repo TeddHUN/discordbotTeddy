@@ -2,22 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const ytdl = require("ytdl-core");
 
-function play(connection, message) {
-	var server = servers[message.guild.id];
-	
-	server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
-	
-	server.queue.shift();
-	
-	server.dispatcher.on("end", function() {
-		if(server.queue[0]) play(connection, message);
-		else connection.disconnect();
-	});
-}
-
 var prefix = "-tb";
-
-var servers = {};
 
 client.on('ready', () => {
     console.log('Elindult!');
@@ -65,39 +50,31 @@ client.on('message', message => {
 	}
 	
 	if(command === "play") {
-		if(!args[1]) {
-			message.channel.send(message.author + ", Előbb adj meg egy linket!");
-			return;
-		}
+		if(!message.member.voiceChannel) return message.channel.send(message.author + ", Nem tudok eljutni hozzád!");
 		
-		if(!message.member.voiceChannel) {
-			message.channel.send(message.author + ", Nem tudok oda menni hozzád!");
-			return;
-		}
+		if(message.guild.me.voiceChannel) return message.channel.send(message.author + ", Már egyszer becsatlakoztam!");
 		
-		if(!servers[message.guild.id]) servers[message.guild.id] = {
-			queue: []	
-		};
+		if(!args[1]) return message.channel.send(message.author + ", Először adj meg egy linket!");
 		
-		var server = servers[message.guild.id];
+		let validate = ytdl.validateURL(args[1]);
 		
-		server.queue.push(args[1]);
+		if(!validate) return message.channel.send(message.author + ", **Érvénytelen** link, kérlek adj meg egy létezőt!");
 		
-		if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-			play(connection, message);	
-		});
+		let info = ytdl.getInfo(args[1]);
+		
+		let connection = message.member.voiceChannel.join();
+		
+		let dispatcher = connection.play(ytdl(args[1], {filter: "audioonly"}));
+		
+		message.channel.send("Most játszom: ${info.title}");
 	}
 	
 	if(command === "skip") {
-		var server = servers[message.guild.id];
 		
-		if(server.dispatcher) server.dispatcher.end();
 	}
 	
 	if(command === "stop") {
-		var server = servers[message.guild.id];
 		
-		if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
 	}
 	
 	if(command === "addstream") {
