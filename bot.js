@@ -60,7 +60,7 @@ client.on('message', message => {
 		
 		let connection = message.member.voiceChannel.join();
 		
-		let dispatcher = connection.play(ytdl(args[1], {filter: "audioonly"}));
+		let dispatcher = connection.playStream(ytdl(args[1], {filter: "audioonly"}), message);
 		
 		message.channel.send("Most játszom: ${info.title}");
 	}
