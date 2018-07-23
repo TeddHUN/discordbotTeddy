@@ -169,7 +169,7 @@ client.on('raw', event => {
             var re = `\\*\\*"(.+)?(?="\\*\\*)`;
             var role = msg.content.match(re)[1];
         
-            if (user.id != client.user.id){
+            if (user != client.user.id){
                 var roleObj = msg.guild.roles.find('name', role);
                 var memberObj = msg.guild.members.get(user.id);
                 
