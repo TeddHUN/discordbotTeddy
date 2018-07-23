@@ -26,7 +26,7 @@ const reactions = ["🆕", "🆕", "🆕", "🆕", "🆕"];
 function generateMessages(){
     var messages = [];
     messages.push(initialMessage);
-    for (let role of roles) messages.push(`**${role}**`);
+    for (let role of roles) messages.push(`**"${role}"**`);
     return messages;
 }
 
