@@ -19,14 +19,14 @@ function play(connection, message) {
 
 var servers = {};
 
-let initialMessage = `**React to the messages below to receive the associated role. If you would like to remove the role, simply remove your reaction!**`;
-const roles = ["**The Crew**", "**The Crew 2**", "`PC`", "`XBOX`", "`PS`"];
+let initialMessage = `A rangok igénylése **automatikusan** működik így ha szeretnél egy rangot akkor csak reagálj rá! ;)`;
+const roles = ["The Crew", "The Crew 2", "PC", "XBOX", "PS"];
 const reactions = ["🆕", "🆕", "🆕", "🆕", "🆕"];
 
 function generateMessages(){
     var messages = [];
     messages.push(initialMessage);
-    for (let role of roles) messages.push(`React below to get the **"${role}"** role!`); //DONT CHANGE THIS
+    for (let role of roles) messages.push(`**"${role}"**`);
     return messages;
 }
 
@@ -52,37 +52,18 @@ client.on('message', message => {
 			let guild = client.guilds.find("id", "464233102143651840");
 			let channel = guild.channels.find("id", "469512614553059338");
 
-			channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot írd be a `" + prefix + " rang` parancsot majd ezután 1 perced **van** reagálni, hogy melyiket is kéred!").then(sent => {
-				message.delete(1);	
-				var toSend = generateMessages();
-				let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions[idx]])];
-				for (let mapObj of mappedArray){
-				    message.channel.send(mapObj[0]).then( sentt => {
-					if (mapObj[1]){
-					  sentt.react(mapObj[1]);  
-					} 
-				    });
-				}
-			});
-		}
-	}
-	
-	if(command === "rang") {		
-		if(message.author.id == 312631597222592522) {	
-			let guild = client.guilds.find("id", "464233102143651840");
-			let channel = guild.channels.find("id", "469512614553059338");
-
-			if(message.channel === channel) {
-				let uzenet = channel.send(message.author + " Ahhoz, hogy megkapd az adott rangot válaszd ki a megfelelő Emojit!\n**Játék:**\n:one: The Crew\n:two: The Crew 2\n\n**Platform:**\n:three: PC\n:four: XBOX\n:five: PS").then(sent => {
-					message.delete(1);
-
-					sent.react(":one:");
-
-					sent.delete(10000);
-				});				
+			message.delete(1);
+			var toSend = generateMessages();
+			let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions[idx]])];
+			for (let mapObj of mappedArray){
+			    channel.send(mapObj[0]).then( sent => {
+				if (mapObj[1]){
+				  sent.react(mapObj[1]);  
+				} 
+			    });
 			}
 		}
-	}
+	}	
 	
 	if(command === "play") {
 		if(!args[1]) {
