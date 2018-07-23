@@ -4,6 +4,21 @@ const ytdl = require("ytdl-core");
 
 var prefix = "-tb";
 
+function play(connection, message) {
+	var server = servers[message.guild.id];
+	
+	server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
+	
+	server.queue.shift();
+	
+	server.dispatcher.on("end", function() {
+		if(server.queue[0]) play(connection, message);
+		else connection.disconnect();
+	});
+}
+
+var servers = {};
+
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
@@ -50,27 +65,39 @@ client.on('message', message => {
 	}
 	
 	if(command === "play") {
-		if(!message.member.voiceChannel) return message.channel.send(message.author + ", Nem tudok eljutni hozzád!");
+		if(!args[1]) {
+			message.channel.send(message.author + ", Elsőnek adj meg egy linket!");
+			return;
+		}
 		
-		if(message.guild.me.voiceChannel) return message.channel.send(message.author + ", Már egyszer becsatlakoztam!");
+		if(!message.member.voiceChannel) {
+			message.channel.send(message.author + ", Nem tudok oda menni hozzád!");
+			return;
+		}
 		
-		if(!args[1]) return message.channel.send(message.author + ", Először adj meg egy linket!");
+		if(!servers[message.guild.id]) servers[message.guild.id] = {
+			queue: []
+		};
 		
-		let info = ytdl.getInfo(args[1]);
+		var server = servers[message.guild.id];
 		
-		let connection = message.member.voiceChannel.join();
+		server.queue.push(args[1]);
 		
-		let dispatcher = connection.playStream(ytdl(args[1], {filter: "audioonly"}), message);
-		
-		message.channel.send("Most játszom: ${info.title}");
+		if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+			
+		});
 	}
 	
 	if(command === "skip") {
+		var server = servers[message.guild.id];
 		
+		if(server.dispatcher) server.dispatcher.end();
 	}
 	
 	if(command === "stop") {
+		var server = servers[message.guild.id];
 		
+		if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();		
 	}
 	
 	if(command === "addstream") {
