@@ -167,15 +167,15 @@ client.on('raw', event => {
         if (msg.author.id == client.user.id && msg.content != initialMessage){
        
             var re = `\\*\\*"(.+)?(?="\\*\\*)`;
-	    if(msg.content.match("**The Crew**")) {
+	    if(msg.content === "**The Crew**") {
 		var role = "The Crew"    
-	    } else if(msg.content.match("**The Crew 2**")) {
+	    } else if(msg.content === "**The Crew 2**") {
 		var role = "The Crew 2"    
-	    } else if(msg.content.match("**PC**")) {
+	    } else if(msg.content === "**PC**") {
 		var role = "PC"    
-	    } else if(msg.content.match("**XBOX**")) {
+	    } else if(msg.content === "**XBOX**") {
 		var role = "XBOX"    
-	    } else if(msg.content.match("**PS**")) {
+	    } else if(msg.content === "**PS**") {
 		var role = "PS"    
 	    }
         
