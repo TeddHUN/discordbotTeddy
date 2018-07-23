@@ -19,7 +19,7 @@ function play(connection, message) {
 
 var servers = {};
 
-let initialMessage = `A rangok igénylése **automatikusan** működik így ha szeretnél egy rangot akkor csak reagálj rá! ;)\n**Ha** már nem szeretnéd a rangot vond vissza a reakciót és elveszi a rendszer!`;
+let initialMessage = `A rangok igénylése **automatikusan** működik így ha szeretnél egy rangot akkor csak reagálj rá! ;)`;
 const roles = ["The Crew", "The Crew 2", "PC", "XBOX", "PS"];
 const reactions = ["🆕", "🆕", "🆕", "🆕", "🆕"];
 
@@ -50,7 +50,7 @@ client.on('message', message => {
 	if(command === "makerangget") {
 		if(message.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "464233102143651840");
-			let channel = guild.channels.find("id", "468548954704052235");
+			let channel = guild.channels.find("id", "470963699796934656");
 
 			message.delete(1);
 			var toSend = generateMessages();
