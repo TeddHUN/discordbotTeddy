@@ -56,10 +56,6 @@ client.on('message', message => {
 		
 		if(!args[1]) return message.channel.send(message.author + ", Először adj meg egy linket!");
 		
-		let validate = ytdl.validateURL(args[1]);
-		
-		if(!validate) return message.channel.send(message.author + ", **Érvénytelen** link, kérlek adj meg egy létezőt!");
-		
 		let info = ytdl.getInfo(args[1]);
 		
 		let connection = message.member.voiceChannel.join();
