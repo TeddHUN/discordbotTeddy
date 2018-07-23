@@ -19,6 +19,17 @@ function play(connection, message) {
 
 var servers = {};
 
+let initialMessage = `**React to the messages below to receive the associated role. If you would like to remove the role, simply remove your reaction!**`;
+const roles = ["**The Crew**", "**The Crew 2**", "`PC`", "`XBOX`", "`PS`"];
+const reactions = [":one:", ":two:", ":three", ":four:", ":five"];
+
+function generateMessages(){
+    var messages = [];
+    messages.push(initialMessage);
+    for (let role of roles) messages.push('Reagálj az adott rangokra! **"${role}"** role!`); //DONT CHANGE THIS
+    return messages;
+}
+
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
@@ -43,6 +54,15 @@ client.on('message', message => {
 
 			channel.send("**Figyelem**, mostantól (2018.07.20) a játék és platform rang igénylések *automatikusan* zajlanak le!\n**Ahhoz**, hogy igényeld az egyik rangot írd be a `" + prefix + " rang` parancsot majd ezután 1 perced **van** reagálni, hogy melyiket is kéred!").then(sent => {
 				message.delete(1);	
+				var toSend = generateMessages();
+				let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions[idx]])];
+				for (let mapObj of mappedArray){
+				    message.channel.send(mapObj[0]).then( sentt => {
+					if (mapObj[1]){
+					  sentt.react(mapObj[1]);  
+					} 
+				    });
+				}
 			});
 		}
 	}
@@ -156,5 +176,32 @@ client.on('message', message => {
 	}
 });
 
+client.on('raw', event => {
+    if (event.t === 'MESSAGE_REACTION_ADD' || event.t == "MESSAGE_REACTION_REMOVE"){
+        
+        let channel = bot.channels.get(event.d.channel_id);
+        let message = channel.fetchMessage(event.d.message_id).then(msg=> {
+        let user = msg.guild.members.get(event.d.user_id);
+        
+        if (msg.author.id == bot.user.id && msg.content != initialMessage){
+       
+            var re = `\\*\\*"(.+)?(?="\\*\\*)`;
+            var role = msg.content.match(re)[1];
+        
+            if (user.id != bot.user.id){
+                var roleObj = msg.guild.roles.find('name', role);
+                var memberObj = msg.guild.members.get(user.id);
+                
+                if (event.t === "MESSAGE_REACTION_ADD"){
+                    memberObj.addRole(roleObj)
+                } else {
+                    memberObj.removeRole(roleObj);
+                }
+            }
+        }
+        })
+ 
+    }   
+});
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
