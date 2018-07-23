@@ -53,40 +53,16 @@ client.on('message', message => {
 			let channel = guild.channels.find("id", "470963699796934656");
 
 			message.delete(1);
-			channel.send("A rangok igénylése **automatikusan** működik így ha szeretnél egy rangot akkor csak reagálj rá! ;)\n@everyone ");
-			channel.send("*Játék:*");
 			
-			channel.send("**The Crew**).then(sent => {
-				sent.react("🆕");	     
-		        });
-		
-			channel.send("**The Crew 2**).then(sent => {
-				sent.react("🆕");	     
-		        });
-	
-			channel.send("\n*Platform:*");
-		
-			channel.send("**PC**).then(sent => {
-				sent.react("🆕");	     
-		        });
-
-			channel.send("**XBOX**).then(sent => {
-				sent.react("🆕");	     
-		        });
-
-			channel.send("**PS**).then(sent => {
-				sent.react("🆕");	     
-		        });
-			
-			//var toSend = generateMessages();
-			//let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions[idx]])];
-			//for (let mapObj of mappedArray){
-			//    channel.send(mapObj[0]).then( sent => {
-			//	if (mapObj[1]){
-			//	  sent.react(mapObj[1]);  
-			//	} 
-			//    });
-			//}
+			var toSend = generateMessages();
+			let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions[idx]])];
+			for (let mapObj of mappedArray){
+			    channel.send(mapObj[0]).then( sent => {
+				if (mapObj[1]){
+				  sent.react(mapObj[1]);  
+				} 
+			    });
+			}
 		}
 	}	
 	
