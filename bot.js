@@ -21,12 +21,12 @@ var servers = {};
 
 let initialMessage = `**React to the messages below to receive the associated role. If you would like to remove the role, simply remove your reaction!**`;
 const roles = ["**The Crew**", "**The Crew 2**", "`PC`", "`XBOX`", "`PS`"];
-const reactions = [":one:", ":two:", ":three", ":four:", ":five"];
+const reactions = ["🆕", "🆕", "🆕", "🆕", "🆕"];
 
 function generateMessages(){
     var messages = [];
     messages.push(initialMessage);
-    for (let role of roles) messages.push("Reagálj az adott rangokra! **${role}** role!"); //DONT CHANGE THIS
+    for (let role of roles) messages.push(`React below to get the **"${role}"** role!`); //DONT CHANGE THIS
     return messages;
 }
 
