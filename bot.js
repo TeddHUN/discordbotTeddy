@@ -75,17 +75,17 @@ client.on('message', message => {
 			return;
 		}
 		
-		if(!servers[message.guild.id]) servers[message.guild.id] = {
-			queue: []
-		};
+		//if(!servers[message.guild.id]) servers[message.guild.id] = {
+		//	queue: []
+		//};
 		
-		var server = servers[message.guild.id];
+		//var server = servers[message.guild.id];
 		
-		server.queue.push(args[1]);
-		
-		if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-			play(connection, message);
-		});
+		//server.queue.push(args[1]);
+		message.member.voiceChannel.join();
+		//if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+			//play(connection, message);
+		//});
 	}
 	
 	if(command === "skip") {
