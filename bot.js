@@ -174,7 +174,7 @@ client.on('raw', event => {
                 var memberObj = msg.guild.members.get(user.id);
                 
                 if (event.t === "MESSAGE_REACTION_ADD"){
-                    memberObj.addRole(roleObj)
+                    memberObj.addRole(roleObj);
                 } else {
                     memberObj.removeRole(roleObj);
                 }
