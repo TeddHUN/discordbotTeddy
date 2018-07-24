@@ -49,7 +49,7 @@ client.on('message', message => {
 		}
 		
 		if(command2 === "youtube") {		
-			message.channel.send(message.author + ", https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUC2Lbgg1O-Qv9Bq-VV1g6SVw&h=AT35UoBWQ8peOe6G2wBCu1WXN1ASvYbdbJAlH5gyGVyCz4TP7w9tFZrf_We-RNTp090_psZtlbCCiro6Ae7pi6FyqYMjhGJydgLAvshCBNtiJ7lsnCR5uamb2zUb5f9cXqA9MQ");	
+			message.channel.send(message.author + ", https://www.youtube.com/channel/UC2Lbgg1O-Qv9Bq-VV1g6SVw");	
 		}
 	} else {
 		if(message.content.indexOf(prefix) !== 0) return;
