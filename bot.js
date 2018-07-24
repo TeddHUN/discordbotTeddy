@@ -33,7 +33,7 @@ function generateMessages(){
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setGame('-tb help', "https://twitch.tv/teddhun");
+    client.user.setGame('-tb help | -tb liga', "https://twitch.tv/teddhun");
 });
 
 client.on('message', message => {	
@@ -46,6 +46,10 @@ client.on('message', message => {
 		var commandtext = "# addstream\n* A parancsot csak a medvezér használhatja az élőadásainak kiíratására!";
 		message.channel.send(message.author + ", ```Mindenkinek:\n   -\n\nAdminisztrátoroknak:\n   " + prefix + " addstream	| Medvezér élőadásaihoz kapcsolódó menetrend kiírása.```\n\nÖrülök, hogy érdekel az amit tudok! ;)");		    
    	}	
+	
+	if(command === "liga") {
+		message.channel.send(message.author + ", **Akutális ligák:**\nThe Crew 2 Liga #1 - http://www.thecrew2liga.teddhun.ml/ - https://discord.gg/YVnBaKv\nRocket League Liga #1 - *Hamarosan*\nPUBG Liga #1 - *Hamarosan*");
+	}
 	
 	if(command === "makerangget") {
 		if(message.author.id == 312631597222592522) {	
