@@ -44,7 +44,7 @@ client.on('message', message => {
 	
 	if(command === "twitch") {
 		if(message.guild.id == 471294084732944406) {
-			message.channel.send(message.author + ", https://twitch.tv/teddhun");	
+			message.channel.send(message.author + ", Gyere és nézz fel ide is: https://twitch.tv/teddhun");	
 		}
 	}
 	
