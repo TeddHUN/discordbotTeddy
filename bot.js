@@ -48,7 +48,7 @@ client.on('message', message => {
    	}	
 	
 	if(command === "liga") {
-		message.channel.send(message.author + ", **Akutális ligák:**\nThe Crew 2 Liga #1 - http://www.thecrew2liga.teddhun.ml/ - https://discord.gg/YVnBaKv\nRocket League Liga #1 - *Hamarosan*\nPUBG Liga #1 - *Hamarosan*");
+		message.channel.send(message.author + ", **Akutális ligák:**\n\nThe Crew 2 Liga #1 - http://www.thecrew2liga.teddhun.ml/ - https://discord.gg/YVnBaKv - https://goo.gl/forms/1scwYF9o7mWW1wUr1\nRocket League Liga #1 - *Hamarosan*\nPUBG Liga #1 - *Hamarosan*");
 	}
 	
 	if(command === "makerangget") {
