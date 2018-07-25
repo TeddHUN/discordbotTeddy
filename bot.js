@@ -232,7 +232,7 @@ async function play(client, active, data) {
 	data.dispatcher = await data.connection.playStream(ytdl(data.queue[0].url, { filter: "audioonly" }));
 	data.dispatcher.guildID = data.guildID;
 	
-	data.dispatcher.once("finish", function() {
+	data.dispatcher.once("end", function() {
 		finish(client, active, this);	
 	});
 }
