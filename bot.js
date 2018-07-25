@@ -4,20 +4,7 @@ const ytdl = require("ytdl-core");
 
 var prefix = "-tb";
 
-function play(connection, message) {
-	var server = servers[message.guild.id];
-	
-	server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
-	
-	server.queue.shift();
-	
-	server.dispatcher.on("end", function() {
-		if(server.queue[0]) play(connection, message);
-		else connection.disconnect();
-	});
-}
-
-var servers = {};
+const active = new Map();
 
 let initialMessage = `@everyone A rangok igénylése **automatikusan** működik így ha szeretnél egy rangot akkor csak reagálj rá! ;)`;
 const roles = ["The Crew", "The Crew 2", "PC", "XBOX", "PS"];
@@ -55,7 +42,7 @@ client.on('message', message => {
 		.addField(prefix + " queue", "Lista az aktuális zenei várólistáról.")
 		.addField(prefix + " stop", "Megtudod állítani a zenét.");
   		
-		message.channel.send(message.author + {embed});		
+		message.channel.send({embed});		
 	}	
 
 	if(command === "liga") {
@@ -82,41 +69,55 @@ client.on('message', message => {
 	}	
 
 	if(command === "play") {
-		if(!args[1]) {
-			message.channel.send(message.author + ", Elsőnek adj meg egy linket!");
-			return;
-		}
-
-		if(!message.member.voiceChannel) {
-			message.channel.send(message.author + ", Nem tudok oda menni hozzád!");
-			return;
-		}
-
-		if(!servers[message.guild.id]) servers[message.guild.id] = {
-			queue: []
-		};
-
-		var server = servers[message.guild.id];
-
-		server.queue.push(args[1]);
-	
-		if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-			play(connection, message);
+		if(!message.meber.voiceChannel) return message.channel.send(message.author + ", Sajnos nem tudok eljutni hozzád!");
+		//if(message.guild.me.voiceChannel) return message.channel.send(message.author + ", Sajnálom, de már másnak játszok zenét!");
+		if(!args[1]) return message.channel.send(message.author + ", Egy linket meg kell, hogy adj!");
+		if(!ytdl.validateURL(args[1])) return message.channel.send(message.author, ", Ez egy érvénytelen link!");
+		
+		let data = active.get(message.guild.id) || {};
+		
+		if(!data.connection) data.connection = message.member.voiceChannel.join();
+		if(!data.queue) data.queue = [];
+		data.guildID = message.guild.id;
+		
+		data.queue.push({
+			songTitle: info.title,
+			requester: message.author,
+			url: args[1],
+			announceChannel: message.channel.id
 		});
+		
+		if(!data.dispatcher) play(client, active, data);
+		else {
+			message.channel.send(message.author + " ${info.songTitle} hozzáadva a lejátszási listához!");
+		}
+		
+		active.set(message.guild.id, data);			
 	}
-
-	if(command === "skip") {
-		var server = servers[message.guild.id];
-
-		if(server.dispatcher) server.dispatcher.end();
-	}
-
+	
 	if(command === "stop") {
-		var server = servers[message.guild.id];
-
-		if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();		
+		if(!message.member.voiceChannel) return message.channel.send(message.author + ", Sajnos onnan ahol most vagy ezt nem tudod megtenni!");
+		if(!message.guild.me.voiceChannel) return message.channel.send(message.author + ", Nem játszom egy zenét sem!");
+		if(message.guild.me.voiceChannelID !== message.member.voiceChannelID) return message.channel.send(message.author + ", Nem az én hangcsatornámban vagy!");
+		
+		message.guild.me.voiceChannel.disconnect();
+		message.channel.send("Zene lejátszás kikapcsolva!");
 	}
 
+	if(command === "queue") {
+		let fetched = active.get(message.guild.id);
+		if(!fetched) return message.channel.send(message.author + ", Jelenleg nem játszom semmilyen zenét!");
+		
+		let queue = fetched.queue;
+		let nowPlaying = queue[0];
+		let resp = "Most játszom: ${nowPlaying.songTitle} | Kérte: ${nowPlaying.requester}\n\nLejátszási lista:";
+		
+		for(var i = 1; i < queue.length; i++) {
+			resp += "${i}. ${queue[i].songTitle} | Kérte: ${queue[i].requester}\n";			
+		}
+		message.channel.send(message.author + "\n" + resp);
+	}
+	
 	if(command === "addstream") {
 		if(message.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "352591575639130112");
@@ -223,5 +224,33 @@ client.on('raw', event => {
  
     }   
 });
+
+async function play(client, active, data) {
+	client.channels.get(data.queue[0].announceChannel).send("Most játszom: ${data.queue[0]} | Beküldő: ${data.requester}");
+	
+	data.dispatcher = await data.connection.play(ytdl(data.queue[0].url, { filter: "audioonly" }));
+	data.dispatcher.guildID = data.guildID;
+	
+	data.dispatcher.once("finish", function() {
+		finish(client, active, this);	
+	});
+}
+
+function finish(client, active, dispatcher) {
+	let fetched = active.get(dispatcher.guildID);
+	
+	fetched.queue.shift();
+	
+	if(fetched.queue.length > 0) {
+		active.set(dispatcher.guildID, fetched);
+		
+		play(client, active, fetched);
+	} else {
+		active.delete(dispatcher.guildID);
+		let vc = client.guilds.get(dispatcher.guildID).me.voiceChannel;
+		if(vc) vc.disconnect();
+	}
+}
+
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
