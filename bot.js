@@ -41,19 +41,7 @@ client.on('message', message => {
 	if(message.content.indexOf(prefix) !== 0) return;
 	const args = message.content.slice(prefix.length).trim().split(' ');
 	const command = args[0];
-	
-	if(command === "twitch") {
-		if(message.guild.id == 471294084732944406) {
-			message.channel.send(message.author + ", Gyere és nézz fel ide is: https://twitch.tv/teddhun");	
-		}
-	}
-	
-	if(command === "youtube") {
-		if(message.guild.id == 471294084732944406) {		
-			message.channel.send(message.author + ", https://www.youtube.com/channel/UC2Lbgg1O-Qv9Bq-VV1g6SVw");	
-		}
-	}	
-	
+		
 	if(command === "help") {
 		const embed = new Discord.RichEmbed()
 		.setTitle("Segítség kell?! Itt megtalálod!")
@@ -110,8 +98,10 @@ client.on('message', message => {
 
 		var server = servers[message.guild.id];
 
-		server.queue.push(args[2]);
+		server.queue.push(args[1]);
+		
 		message.member.voiceChannel.join();
+		
 		if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
 			play(connection, message);
 		});
@@ -181,6 +171,19 @@ client.on('message', message => {
 				    channel.send({embed});
 				}
 			});
+		}
+	}
+	
+	
+	if(command === "twitch") {
+		if(message.guild.id == 471294084732944406) {
+			message.channel.send(message.author + ", Gyere és nézz fel ide is: https://twitch.tv/teddhun");	
+		}
+	}
+	
+	if(command === "youtube") {
+		if(message.guild.id == 471294084732944406) {		
+			message.channel.send(message.author + ", https://www.youtube.com/channel/UC2Lbgg1O-Qv9Bq-VV1g6SVw");	
 		}
 	}	
 });
