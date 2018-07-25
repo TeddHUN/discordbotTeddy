@@ -227,9 +227,9 @@ client.on('raw', event => {
 });
 
 async function play(client, active, data) {
-	client.channels.get(data.queue[0].announceChannel).send("Most játszom: ${data.queue[0]} | Beküldő: ${data.requester}");
+	client.channels.get(data.queue[0].announceChannel).send('Most játszom: ${data.queue[0]} | Beküldő: ${data.requester}');
 	
-	data.dispatcher = await data.connection.play(ytdl(data.queue[0].url, { filter: "audioonly" }));
+	data.dispatcher = await data.connection.playStream(ytdl(data.queue[0].url, { filter: "audioonly" }));
 	data.dispatcher.guildID = data.guildID;
 	
 	data.dispatcher.once("finish", function() {
