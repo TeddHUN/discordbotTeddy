@@ -74,7 +74,7 @@ client.on('message', message => {
 		if(!args[1]) return message.channel.send(message.author + ", Egy linket meg kell, hogy adj!");
 		if(!ytdl.validateURL(args[1])) return message.channel.send(message.author, ", Ez egy érvénytelen link!");
 		
-		let info = await ytdl.getInfo(args[1]);
+		let info = ytdl.getInfo(args[1]);
 		let data = active.get(message.guild.id) || {};
 		
 		if(!data.connection) data.connection = message.member.voiceChannel.join();
