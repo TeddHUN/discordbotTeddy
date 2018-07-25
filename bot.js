@@ -55,12 +55,11 @@ client.on('message', message => {
 	}	
 	
 	if(command === "help") {
-		var commandtext = "# addstream\n* A parancsot csak a medvezér használhatja az élőadásainak kiíratására!";
-		message.channel.send(message.author + ", ```Mindenkinek:\n   -\n\nAdminisztrátoroknak:\n   " + prefix + " addstream	| Medvezér élőadásaihoz kapcsolódó menetrend kiírása.```\n\nÖrülök, hogy érdekel az amit tudok! ;)");		    
+		message.channel.send(message.author + ", ```Mindenkinek:\n   " + prefix + "liga   | Az aktuális ligákról való információk.\n\nAdminisztrátoroknak:\n   " + prefix + " addstream	| Medvezér élőadásaihoz kapcsolódó menetrend kiírása.```\n\nÖrülök, hogy érdekel az amit tudok! ;)");		    
 	}	
 
 	if(command === "liga") {
-		message.channel.send(message.author + ", **Akutális ligák:**\n\nThe Crew 2 Liga #1 - http://www.thecrew2liga.teddhun.ml/ - https://discord.gg/YVnBaKv - https://goo.gl/forms/1scwYF9o7mWW1wUr1\nRocket League Liga #1 - *Hamarosan*\nPUBG Liga #1 - *Hamarosan*");
+		message.channel.send(message.author + ", **Akutális ligák:**\n\nThe Crew 2 Liga #1 - http://www.thecrew2liga.teddhun.ml/ - https://discord.gg/YVnBaKv - https://goo.gl/forms/1scwYF9o7mWW1wUr1\nRocket League Liga #1 - http://rocketleagueliga.teddhun.ml/ - https://discord.gg/QjU7KdD - https://goo.gl/forms/lwxwKLnZyqgX7AFJ3\nPUBG Liga #1 - *Hamarosan*");
 	}
 
 	if(command === "makerangget") {
