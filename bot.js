@@ -107,13 +107,15 @@ client.on('message', message => {
 
 		server.queue.push(args[1]);
 	
-		if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-			play(connection, message);
-		});
+		if(message.guild.voiceConnection) message.channel.send(message.author + ", Hozzáadva a lejátszási listához!");
+		else {
+			message.member.voiceChannel.join().then(function(connection) {
+				play(connection, message);
+				message.channel.send("Most játszom: ");
+			});
+		}
 		
-		let info = ytdl.getInfo(args[1]);
-		
-		message.channel.send("Most játszom: ${info.title}");
+		let info = ytdl.getInfo(args[1]);		
 	}
 
 	if(command === "skip") {
