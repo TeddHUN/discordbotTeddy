@@ -82,7 +82,7 @@ client.on('message', message => {
 		data.queue.push({
 			songTitle: info.title,
 			requester: message.author.tag,
-			url: args[0],
+			url: args[1],
 			announceChannel: message.channel.id
 		});
 
