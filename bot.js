@@ -127,13 +127,7 @@ client.on('message', message => {
 
 		if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();		
 	}
-
-	if(command === "queue") {
-		var server = servers[message.guild.id];
-		
-		message.channel.send(message.author + ", Most: 
-	}
-
+	
 	if(command === "addstream") {
 		if(message.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "352591575639130112");
