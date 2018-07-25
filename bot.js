@@ -69,7 +69,7 @@ client.on('message', message => {
 	}	
 
 	if(command === "play") {
-		if(!message.meber.voiceChannel) return message.channel.send(message.author + ", Sajnos nem tudok eljutni hozzád!");
+		if(!message.member.voiceChannel) return message.channel.send(message.author + ", Sajnos nem tudok eljutni hozzád!");
 		//if(message.guild.me.voiceChannel) return message.channel.send(message.author + ", Sajnálom, de már másnak játszok zenét!");
 		if(!args[1]) return message.channel.send(message.author + ", Egy linket meg kell, hogy adj!");
 		if(!ytdl.validateURL(args[1])) return message.channel.send(message.author, ", Ez egy érvénytelen link!");
