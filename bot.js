@@ -99,9 +99,7 @@ client.on('message', message => {
 		var server = servers[message.guild.id];
 
 		server.queue.push(args[1]);
-		
-		message.member.voiceChannel.join();
-		
+	
 		if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
 			play(connection, message);
 		});
