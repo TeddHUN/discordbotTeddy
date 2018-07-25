@@ -55,7 +55,19 @@ client.on('message', message => {
 	}	
 	
 	if(command === "help") {
-		message.channel.send(message.author + ", ```Mindenkinek:\n   " + prefix + "liga   | Az aktuális ligákról való információk.\n\nAdminisztrátoroknak:\n   " + prefix + " addstream	| Medvezér élőadásaihoz kapcsolódó menetrend kiírása.```\n\nÖrülök, hogy érdekel az amit tudok! ;)");		    
+		const embed = new Discord.RichEmbed()
+		.setTitle("Segítség kell?! Itt megtalálod!")
+		.setColor(0xFFFFFF)
+		.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg")
+		.setTimestamp()
+		
+		.addField(prefix + " liga", "Lista az aktuális ligákról.")
+		.addField(prefix + " play [url]", "Zene lejátszás Youtube-ról.")
+		.addField(prefix + " skip", "Aktuális zene továbbléptetése.")
+		.addField(prefix + " queue", "Lista az aktuális zenei várólistáról.")
+		.addField(prefix + " stop", "Megtudod állítani a zenét.");
+  		
+		message.channel.send(message.author + {embed});		
 	}	
 
 	if(command === "liga") {
@@ -92,17 +104,17 @@ client.on('message', message => {
 			return;
 		}
 
-		//if(!servers[message.guild.id]) servers[message.guild.id] = {
-		//	queue: []
-		//};
+		if(!servers[message.guild.id]) servers[message.guild.id] = {
+			queue: []
+		};
 
-		//var server = servers[message.guild.id];
+		var server = servers[message.guild.id];
 
-		//server.queue.push(args[1]);
+		server.queue.push(args[1]);
 		message.member.voiceChannel.join();
-		//if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-			//play(connection, message);
-		//});
+		if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+			play(connection, message);
+		});
 	}
 
 	if(command === "skip") {
