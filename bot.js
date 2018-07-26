@@ -3,7 +3,6 @@ const client = new Discord.Client();
 const ytdl = require("ytdl-core");
 
 var prefix = "-tb";
-var zeneMost = "null";
 
 function play(connection, message) {
 	var server = servers[message.guild.id];
@@ -84,22 +83,15 @@ client.on('message', message => {
 	}	
 
 	if(command === "play") {
-		if(!args[1]) {
-			message.channel.send(message.author + ", Elsőnek adj meg egy linket!");
-			return;
-		}
+		if(!args[1]) return message.channel.send(message.author + ", Elsőnek adj meg egy linket!");
+		if(!message.member.voiceChannel) return message.channel.send(message.author + ", Nem tudok oda menni hozzád!");
+		if(!ytdl.validateURL(args[1])) return message.channel.send(message.author + ", Ez a link nem érvényes!");
 
-		if(!message.member.voiceChannel) {
-			message.channel.send(message.author + ", Nem tudok oda menni hozzád!");
-			return;
-		}
+		let info = ytdl.getInfo(args[1]);
 		
-		if(!ytdl.validateURL(args[1])) {
-			message.channel.send(message.author + ", Ez a link nem érvényes!");
-			return;
-		}
-
 		if(!servers[message.guild.id]) servers[message.guild.id] = {
+			videoTitle: info.title,
+			requester: message.author,
 			queue: []
 		};
 
@@ -107,11 +99,11 @@ client.on('message', message => {
 
 		server.queue.push(args[1]);
 	
-		if(message.guild.voiceConnection) message.channel.send(message.author + ", Hozzáadva a lejátszási listához!");
+		if(message.guild.voiceConnection) message.channel.send(message.author + `, ${server.videoTitle} hozzáadva a lejátszási listához! | Kérte: ${server.requester}`);
 		else {
 			message.member.voiceChannel.join().then(function(connection) {
 				play(connection, message);
-				message.channel.send("Most játszom: ");
+				message.channel.send(`Most játszom: ${server.videoTitle}`);
 			});
 		}
 		
@@ -122,6 +114,8 @@ client.on('message', message => {
 		var server = servers[message.guild.id];
 
 		if(server.dispatcher) server.dispatcher.end();
+		
+		message.channel.send(message.author
 	}
 
 	if(command === "stop") {
