@@ -103,11 +103,9 @@ client.on('message', message => {
 		else {
 			message.member.voiceChannel.join().then(function(connection) {
 				play(connection, message);
-				message.channel.send(`Most játszom: ${server.videoTitle}`);
+				message.channel.send(`Most játszom: ${server.videoTitle} | Kérte: ${server.requester}`);
 			});
-		}
-		
-		let info = ytdl.getInfo(args[1]);		
+		}		
 	}
 
 	if(command === "skip") {
