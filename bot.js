@@ -112,8 +112,6 @@ client.on('message', message => {
 		var server = servers[message.guild.id];
 
 		if(server.dispatcher) server.dispatcher.end();
-		
-		message.channel.send(message.author
 	}
 
 	if(command === "stop") {
