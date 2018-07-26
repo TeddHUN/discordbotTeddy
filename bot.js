@@ -129,31 +129,23 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.07.23 - 2018.07.26";
-				var streamek = 3; //Streamek száma
+				var idoszak = "2018.07.27";
+				var streamek = 0; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [ 
-					"»PUBG« | Csirke szag, gránát robbanás... | #57 🐻",
-					"»PUBG« | Winner winner chickön dínner! | #56 🐻",
-					"»TC2« | Versengés New York-tól Los Angeles-ig! 🚗 | #11 🐻"
+					"»OVERWATCH« | Free weekend!! | #1 🐻"
 				];
 
 				 streamDatum= [ 
-					"júl. 26., csütörtök 17:30 – 19:30",
-					"júl. 24., kedd 17:30 – 19:30",
-					"júl. 23., hétfő 17:30 – 19:30"
+					"júl. 27., péntek 17:30 – 19:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/2c3d16de-a808-431c-b109-e4359d283093-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/3eb9c1ca-76cd-44c9-b518-bf40ebc38561-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/1d24b925-c968-40dd-9c58-a39875e9ad5c-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/41bfaa8d-58f2-43ff-b8a1-9c0ad0f45613-350x150"
 				];
 
 				streamJatek = [ 
-					"PLAYERUNKNOWN'S BATTLEGROUNDS",
-					"PLAYERUNKNOWN'S BATTLEGROUNDS",
-					"The Crew 2"
+					"Overwatch"
 				];
 
 				if(streamek > 1) {
