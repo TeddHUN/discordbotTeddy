@@ -130,7 +130,7 @@ client.on('message', message => {
 				sent.delete(5000);
 
 				var idoszak = "2018.07.27";
-				var streamek = 0; //Streamek száma
+				var streamek = 1; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [ 
 					"»OVERWATCH« | Free weekend!! | #1 🐻"
