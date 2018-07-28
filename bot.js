@@ -129,7 +129,7 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.07.27";
+				var idoszak = "2018.07.30 - 2018.08.02";
 				var streamek = 4; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [ 
