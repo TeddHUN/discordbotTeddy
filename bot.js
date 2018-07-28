@@ -130,22 +130,34 @@ client.on('message', message => {
 				sent.delete(5000);
 
 				var idoszak = "2018.07.27";
-				var streamek = 1; //Streamek száma
+				var streamek = 4; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [ 
-					"»OVERWATCH« | Free weekend!! | #1 🐻"
+					"»R6S« | Régen volt kommandó... | #12 🐻",
+					"»PUBG« | Legyen Custom?! | #58 🐻",
+					"»OW« | Kezdjünk el gyakorolni!! | #1 🐻",
+					"»TC2« | Versengés USA utcáin.. 🚗 | #12 🐻"
 				];
 
 				 streamDatum= [ 
-					"júl. 27., péntek 17:30 – 19:30"
+					"aug. 2., csütörtök 17:30 – 18:30",
+					"júl. 31., kedd 20:00 – 22:00",
+					"júl. 31., kedd 17:30 – 19:30",
+					"júl. 30., hétfő 17:30 – 19:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/41bfaa8d-58f2-43ff-b8a1-9c0ad0f45613-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/14dd3e8c-a3f7-4b48-b35a-d54a265d979b-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/b7727bfd-efad-4648-8f5c-1936a1970f18-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/5904d11e-6a23-4d7d-aa8c-d17444907e8f-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/ecfe4183-93e0-4879-aba5-e28cb53c53d4-350x150"
 				];
 
 				streamJatek = [ 
-					"Overwatch"
+					"Tom Clancy's Rainbow Six: Siege",
+					"PLAYERUNKNOWN'S BATTLEGROUNDS",
+					"Overwatch",
+					"The Crew 2"
 				];
 
 				if(streamek > 1) {
