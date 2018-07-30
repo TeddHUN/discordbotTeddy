@@ -60,7 +60,7 @@ client.on('message', message => {
 	}	
 
 	if(command === "liga") {
-		message.channel.send(message.author + ", **Akutális ligák:**\n\nThe Crew 2 Liga #1 - http://www.thecrew2liga.teddhun.ml/ - Jelentkezés lejárt\nRocket League Liga #1 - http://rocketleagueliga.teddhun.ml/ - https://discord.gg/QjU7KdD - https://goo.gl/forms/lwxwKLnZyqgX7AFJ3\nPUBG Liga #1 - *Hamarosan*");
+		message.channel.send(message.author + ", **Akutális ligák:**\n\nTeddy CUP: The Crew 2 #2 - http://www.thecrew2liga.teddhun.ml/ - Jelentkezés hamarosan indul!\nRocket League Liga #1 - http://rocketleagueliga.teddhun.ml/ - https://discord.gg/QjU7KdD - https://goo.gl/forms/lwxwKLnZyqgX7AFJ3");
 	}
 
 	if(command === "makerangget") {
