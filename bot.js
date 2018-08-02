@@ -129,40 +129,27 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.07.30 - 2018.08.03";
-				var streamek = 5; //Streamek száma
+				var idoszak = "2018.08.03";
+				var streamek = 2; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [ 
-					"»OW« | A hörcsög mindent visz. | #2 🐻",
 					"»R6S« | Régen volt kommandó... | #12 🐻",
-					"»OW« | Kezdjünk el gyakorolni!! | #1 🐻",
-					"»PUBG« | Optyval és veletek Custom. | #58 🐻",
-					"»TC2« | Versengés USA utcáin.. 🚗 | #12 🐻"
+					"»PUBG« | Optyval és a többiekkel custom, gyertek ti is! | #60 🐻"
 				];
 
-				 streamDatum= [ 
-					"aug. 3., péntek 17:30 – 19:30",
-					"aug. 2., csütörtök 17:30 – 18:30",
-					"aug. 1., szerda 17:30 – 19:30",
-					"júl. 31., kedd 18:00 – 21:00",
-					"júl. 30., hétfő 17:30 – 19:30"
-					
+				 streamDatum= [ 					
+					"aug. 3., péntek 21:00 – 23:00",
+					"aug. 3., péntek 18:00 – 21:00"
 				];
 
 				streamKep = [ 					
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/8fbdee94-d491-4270-bb22-fe73e29b977f-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/14dd3e8c-a3f7-4b48-b35a-d54a265d979b-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/5904d11e-6a23-4d7d-aa8c-d17444907e8f-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/b7727bfd-efad-4648-8f5c-1936a1970f18-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/ecfe4183-93e0-4879-aba5-e28cb53c53d4-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/1e0f3679-11a6-4be6-a510-e8f65c3cfb0d-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/73e4f27c-4f01-4084-9758-cf55fa98eac3-350x150"
 				];
 
-				streamJatek = [ 
-					"The Crew 2",
-					"PLAYERUNKNOWN'S BATTLEGROUNDS",
-					"Overwatch",
+				streamJatek = [ 					
 					"Tom Clancy's Rainbow Six: Siege",
-					"Overwatch"
+					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
 				if(streamek > 1) {
