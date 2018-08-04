@@ -99,11 +99,11 @@ client.on('message', message => {
 
 		server.queue.push(args[1]);
 	
-		if(message.guild.voiceConnection) message.channel.send(message.author + `, ${server.videoTitle} hozzáadva a lejátszási listához! | Kérte: ${server.requester}`);
+		if(message.guild.voiceConnection) message.channel.send(message.author + `, ${server.videoTitle[server.length]} hozzáadva a lejátszási listához! | Kérte: ${server.requester[server.length]}`);
 		else {
 			message.member.voiceChannel.join().then(function(connection) {
 				play(connection, message);
-				message.channel.send(`Most játszom: ${server.videoTitle} | Kérte: ${server.requester}`);
+				message.channel.send(`Most játszom: ${server.videoTitle[0]} | Kérte: ${server.requester[0]}`);
 			});
 		}		
 	}
