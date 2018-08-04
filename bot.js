@@ -34,7 +34,7 @@ function generateMessages(){
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setGame('-tb help | -tb liga', "https://twitch.tv/teddhun");
+    client.user.setGame('-tb help', "https://twitch.tv/teddhun");
 });
 
 client.on('message', message => {	
