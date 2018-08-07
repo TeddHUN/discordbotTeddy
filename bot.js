@@ -129,35 +129,35 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.08.06 - 2018.08.08";
+				var idoszak = "2018.08.08 - 2018.08.09";
 				var streamek = 4; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [ 
-					 "»R6S« | Kommandózzunk újra. | #13 🐻",
-					 "»PUBG« | Legyen custom?! | #62 🐻",
-					 "»TC2« | Maxoljuk ki a kocsinkat!! 🚗 | #13 🐻",
-					 "»JWE« | Vissza a parkba... 🦖 | #8 🐻"
+					 "»TC2« | Várható liga?! 🚗 | #14 🐻",
+					 "»WARFRAME« | Folytassuk a történetet... | #2 🐻",
+					 "»WARFRAME« | Ez egy iszonyat jó játék!! | #1 🐻",
+					 "»R6S« | Kommandózzunk újra. | #13 🐻"
 				];
 
 				 streamDatum= [ 
-					 "aug. 8., szerda 17:30 – 18:30",
-					 "aug. 7., kedd 18:00 – 21:00",
-					 "aug. 6., hétfő 20:00 – 21:30",
-					 "aug. 6., hétfő 17:30 – 19:30"
+					 "aug. 9., csütörtök 21:00 – 23:00",
+					 "aug. 9., csütörtök 18:00 – 21:00",
+					 "aug. 8., szerda 19:30 – 21:30",
+					 "aug. 8., szerda 17:30 – 18:30"
 				];
 
 				streamKep = [ 
-					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/aeab2f70-de48-401c-a37f-ca8feb60d995-350x150",
-					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/301a4a68-1dbf-427b-805c-c5713b4dcda6-350x150",
-					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/ca82c904-b7bf-450c-8e65-e2ee2b83ae49-350x150",
-					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/395406f1-fb1d-402f-9d24-feac9f435667-350x150"
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/f2b44173-023b-41a1-b0c0-3bd232efa9a8-350x150",
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/77db1ec1-9449-4796-8b4a-e825ca6ef90f-350x150",
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/0b60acba-15df-4dd8-9bac-7a64f171c6cb-350x150",
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/aeab2f70-de48-401c-a37f-ca8feb60d995-350x150"
 				];
 
 				streamJatek = [ 	
-					 "Tom Clancy's Rainbow Six: Siege",
-					 "PLAYERUNKNOWN'S BATTLEGROUNDS",
 					 "The Crew 2",
-					 "Jurassic World Evolution"
+					 "Warframe",
+					 "Warframe",
+					 "Tom Clancy's Rainbow Six: Siege"
 				];
 
 				if(streamek > 1) {
