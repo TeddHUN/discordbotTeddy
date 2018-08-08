@@ -139,7 +139,7 @@ client.on('message', message => {
 
 				 streamDatum= [
 					"aug. 9., csütörtök 21:00 – 23:00",
-					"aug. 9., csütörtök 15:00 – 21:00"
+					"aug. 9., csütörtök 16:00 – 21:00"
 				];
 
 				streamKep = [ 
