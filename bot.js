@@ -133,31 +133,23 @@ client.on('message', message => {
 				var streamek = 4; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [ 
-					 "»TC2« | Várható liga?! 🚗 | #14 🐻",
-					 "»WARFRAME« | Folytassuk a történetet... | #2 🐻",
-					 "»WARFRAME« | Ez egy iszonyat jó játék!! | #1 🐻",
-					 "»R6S« | Kommandózzunk újra. | #13 🐻"
+					"»TC2« | Várható liga?! 🚗 | #14 🐻",
+					"»WARFRAME« | Ez egy iszonyat jó játék!! | #1 🐻"
 				];
 
-				 streamDatum= [ 
-					 "aug. 9., csütörtök 21:00 – 23:00",
-					 "aug. 9., csütörtök 18:00 – 21:00",
-					 "aug. 8., szerda 19:30 – 21:30",
-					 "aug. 8., szerda 17:30 – 18:30"
+				 streamDatum= [
+					"aug. 9., csütörtök 21:00 – 23:00",
+					"aug. 9., csütörtök 15:00 – 21:00"
 				];
 
 				streamKep = [ 
-					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/f2b44173-023b-41a1-b0c0-3bd232efa9a8-350x150",
-					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/77db1ec1-9449-4796-8b4a-e825ca6ef90f-350x150",
-					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/0b60acba-15df-4dd8-9bac-7a64f171c6cb-350x150",
-					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/aeab2f70-de48-401c-a37f-ca8feb60d995-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/f2b44173-023b-41a1-b0c0-3bd232efa9a8-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/77db1ec1-9449-4796-8b4a-e825ca6ef90f-350x150"
 				];
 
 				streamJatek = [ 	
-					 "The Crew 2",
-					 "Warframe",
-					 "Warframe",
-					 "Tom Clancy's Rainbow Six: Siege"
+					"The Crew 2",
+					"Warframe"
 				];
 
 				if(streamek > 1) {
