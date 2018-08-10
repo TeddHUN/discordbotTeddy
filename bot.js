@@ -129,26 +129,22 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.08.08 - 2018.08.09";
-				var streamek = 4; //Streamek száma
+				var idoszak = "2018.08.10";
+				var streamek = 1; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [ 
-					"»TC2« | Várható liga?! 🚗 | #14 🐻",
-					"»WARFRAME« | Ez egy iszonyat jó játék!! | #1 🐻"
+					"»WARFRAME« | További fejlődések! | #2 🐻"
 				];
 
 				 streamDatum= [
-					"aug. 9., csütörtök 21:00 – 23:00",
-					"aug. 9., csütörtök 16:00 – 21:00"
+					"aug. 10., péntek 18:00 – 21:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/f2b44173-023b-41a1-b0c0-3bd232efa9a8-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/77db1ec1-9449-4796-8b4a-e825ca6ef90f-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/d187b0ed-f486-4a4f-8f15-dabb2a7e34a3-350x150"
 				];
 
-				streamJatek = [ 	
-					"The Crew 2",
+				streamJatek = [ 
 					"Warframe"
 				];
 
