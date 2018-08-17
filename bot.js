@@ -293,7 +293,7 @@ client.on('raw', event => {
 			}
 		    }
 		} 
-	});
+	})
     }   
 });
 // THIS  MUST  BE  THIS  WAY
