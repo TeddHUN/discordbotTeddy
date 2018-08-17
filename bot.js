@@ -236,63 +236,46 @@ client.on('raw', event => {
         
         let channel = client.channels.get(event.d.channel_id);
         let message = channel.fetchMessage(event.d.message_id).then(msg=> {
-		let user = msg.guild.members.get(event.d.user_id);
+	let user = msg.guild.members.get(event.d.user_id);
 
-		if (msg.author.id == client.user.id && msg.content != initialMessage){
+	if (msg.author.id == client.user.id && msg.content != initialMessage){
 
-		    var re = `\\*\\*"(.+)?(?="\\*\\*)`;
-		    if(msg.content === "**The Crew**") {
-			var role = "The Crew"    
-		    } else if(msg.content === "**The Crew 2**") {
-			var role = "The Crew 2"    
-		    } else if(msg.content === "**PC**") {
-			var role = "PC"    
-		    } else if(msg.content === "**XBOX**") {
-			var role = "XBOX"    
-		    } else if(msg.content === "**PS**") {
-			var role = "PS"    
-		    }
+	    var re = `\\*\\*"(.+)?(?="\\*\\*)`;
+	    if(msg.content === "**The Crew**") {
+		var role = "The Crew"    
+	    } else if(msg.content === "**The Crew 2**") {
+		var role = "The Crew 2"    
+	    } else if(msg.content === "**PC**") {
+		var role = "PC"    
+	    } else if(msg.content === "**XBOX**") {
+		var role = "XBOX"    
+	    } else if(msg.content === "**PS**") {
+		var role = "PS"    
+	    } else if(msg.content === "**PUBG**") {
+		var role = "PUBG"    
+	    } else if(msg.content === "**Warframe**") {
+		var role = "Warframe"    
+	    } else if(msg.content === "**Rainbow Six Siege**") {
+		var role = "Rainbow Six Siege"    
+	    } else if(msg.content === "**Deceit**") {
+		var role = "Deceit"    
+	    } else if(msg.content === "**Dead by Daylight**") {
+		var role = "Dead by Daylight"    
+	    } else if(msg.content === "**Rocket League**") {
+		var role = "Rocket League"    
+	    }
 
-		    if (user != client.user.id){
-			var roleObj = msg.guild.roles.find('name', role);
-			var memberObj = msg.guild.members.get(user.id);
+	    if (user != client.user.id){
+		var roleObj = msg.guild.roles.find('name', role);
+		var memberObj = msg.guild.members.get(user.id);
 
-			if (event.t === "MESSAGE_REACTION_ADD"){
-			    memberObj.addRole(roleObj);
-			} else {
-			    memberObj.removeRole(roleObj);
-			}
-		    }
-		} else if (msg.author.id == client.user.id && msg.content != initialMessage2){
-
-		    var re = `\\*\\*"(.+)?(?="\\*\\*)`;
-		    if(msg.content === "**PUBG**") {
-			var role = "PUBG"    
-		    } else if(msg.content === "**The Crew 2**") {
-			var role = "The Crew 2"    
-		    } else if(msg.content === "**Warframe**") {
-			var role = "Warframe"    
-		    } else if(msg.content === "**Rainbow Six Siege**") {
-			var role = "Rainbow Six Siege"    
-		    } else if(msg.content === "**Deceit**") {
-			var role = "Deceit"    
-		    } else if(msg.content === "**Dead by Daylight**") {
-			var role = "Dead by Daylight"    
-		    } else if(msg.content === "**Rocket League**") {
-			var role = "Rocket League"    
-		    }
-
-		    if (user != client.user.id){
-			var roleObj = msg.guild.roles.find('name', role);
-			var memberObj = msg.guild.members.get(user.id);
-
-			if (event.t === "MESSAGE_REACTION_ADD"){
-			    memberObj.addRole(roleObj);
-			} else {
-			    memberObj.removeRole(roleObj);
-			}
-		    }
-		} 
+		if (event.t === "MESSAGE_REACTION_ADD"){
+		    memberObj.addRole(roleObj);
+		} else {
+		    memberObj.removeRole(roleObj);
+		}
+	    }
+	}
 	})
     }   
 });
