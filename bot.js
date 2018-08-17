@@ -36,10 +36,10 @@ const roles2 = ["PUBG", "Rainbow Six Siege", "Warframe", "The Crew 2", "Deceit",
 const reactions2 = ["🆕", "🆕", "🆕", "🆕", "🆕", "🆕", "🆕"];
 
 function generateMessages2(){
-    var messages2 = [];
-    messages2.push(initialMessage2);
-    for (let role of roles2) messages2.push(`**${role}**`);
-    return messages2;
+    var messages = [];
+    messages.push(initialMessage2);
+    for (let role of roles2) messages.push(`**${role}**`);
+    return messages;
 }
 
 client.on('ready', () => {
