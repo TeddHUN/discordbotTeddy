@@ -31,6 +31,17 @@ function generateMessages(){
     return messages;
 }
 
+let initialMessage2 = `**Szertnél** egy játék rangot?!\nNyugodtan kattints arra amilykkel játszol, automatikusan megkapod!`;
+const roles2 = ["PUBG", "Rainbow Six Siege", "Warframe", "The Crew 2", "Deceit", "Dead by Daylight", "Rocket League"];
+const reactions2 = ["🆕", "🆕", "🆕", "🆕", "🆕", "🆕", "🆕"];
+
+function generateMessages2(){
+    var messages2 = [];
+    messages2.push(initialMessage2);
+    for (let role of roles2) messages2.push(`**${role}**`);
+    return messages2;
+}
+
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
@@ -81,6 +92,25 @@ client.on('message', message => {
 			}
 		}
 	}	
+
+	if(command === "makerangget2") {
+		if(message.author.id == 312631597222592522) {	
+			let guild = client.guilds.find("id", "352591575639130112");
+			let channel = guild.channels.find("id", "470963699796934656");
+
+			message.delete(1);
+
+			var toSend = generateMessages2();
+			let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions2[idx]])];
+			for (let mapObj of mappedArray){
+			    channel.send(mapObj[0]).then( sent => {
+				if (mapObj[1]){
+				  sent.react(mapObj[1]);  
+				} 
+			    });
+			}
+		}
+	}
 
 	if(command === "play") {
 		if(!args[1]) return message.channel.send(message.author + ", Elsőnek adj meg egy linket!");
@@ -233,9 +263,36 @@ client.on('raw', event => {
                     memberObj.removeRole(roleObj);
                 }
             }
-        }
-        })
- 
+        } else if (msg.author.id == client.user.id && msg.content != initialMessage2){
+       
+            var re = `\\*\\*"(.+)?(?="\\*\\*)`;
+	    if(msg.content === "**PUBG**") {
+		var role = "PUBG"    
+	    } else if(msg.content === "**The Crew 2**") {
+		var role = "The Crew 2"    
+	    } else if(msg.content === "**Warframe**") {
+		var role = "Warframe"    
+	    } else if(msg.content === "**Rainbow Six Siege**") {
+		var role = "Rainbow Six Siege"    
+	    } else if(msg.content === "**Deceit**") {
+		var role = "Deceit"    
+	    } else if(msg.content === "**Dead by Daylight**") {
+		var role = "Dead by Daylight"    
+	    } else if(msg.content === "**Rocket League**") {
+		var role = "Rocket League"    
+	    }
+        
+            if (user != client.user.id){
+                var roleObj = msg.guild.roles.find('name', role);
+                var memberObj = msg.guild.members.get(user.id);
+                
+                if (event.t === "MESSAGE_REACTION_ADD"){
+                    memberObj.addRole(roleObj);
+                } else {
+                    memberObj.removeRole(roleObj);
+                }
+            }
+        } 
     }   
 });
 // THIS  MUST  BE  THIS  WAY
