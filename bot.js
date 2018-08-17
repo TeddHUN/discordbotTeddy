@@ -31,7 +31,7 @@ function generateMessages(){
     return messages;
 }
 
-let initialMessage2 = `**Szertnél** egy játék rangot?!\nNyugodtan kattints arra amilykkel játszol, automatikusan megkapod!`;
+let initialMessage2 = `**Szertnél** egy játék rangot?!\nNyugodtan kattints arra amelyikkel játszol, automatikusan megkapod!`;
 const roles2 = ["PUBG", "Rainbow Six Siege", "Warframe", "The Crew 2", "Deceit", "Dead by Daylight", "Rocket League"];
 const reactions2 = ["🆕", "🆕", "🆕", "🆕", "🆕", "🆕", "🆕"];
 
