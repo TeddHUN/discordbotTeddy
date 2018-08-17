@@ -96,7 +96,7 @@ client.on('message', message => {
 	if(command === "makerangget2") {
 		if(message.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "352591575639130112");
-			let channel = guild.channels.find("id", "470963699796934656");
+			let channel = guild.channels.find("id", "479913233277255731");
 
 			message.delete(1);
 
