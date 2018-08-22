@@ -159,35 +159,31 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.08.20 - 2018.08.26";
-				var streamek = 4; //Streamek száma
+				var idoszak = "2018.08.23 - 2018.08.24";
+				var streamek = 3; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [ 
-					"»TC2« | Versenyeket HARD-ra!! 🚗 | #16 🐻",
-					"»OW« | Defend, Attack minden van! | #2 🐻",
-					"»PUBG« | Custom ha leszünk elegen. :) | #68 🐻",
-					"»PUBG« | Csirke, csirke.. | #67🐻"
+					 "ROAD TO 200 FOLLOWER | »PUBG« | #70 🐻",
+					 "»TC2« | Versenyeket HARD-ra!! 🚗 | #16 🐻",
+					 "ROAD TO 200 FOLLOWER | »PUBG« | #69 🐻"
 				];
 
 				 streamDatum= [
-					"aug. 24., péntek 18:00 – 20:00",
-					"aug. 23., csütörtök 17:30 – 19:30",
-					"aug. 20., hétfő 20:00 – 22:00",
-					"aug. 20., hétfő 15:00 – 18:00"
+					 "aug. 24., péntek 20:00 – 22:00",
+					 "aug. 24., péntek 17:30 – 20:00",
+					 "aug. 23., csütörtök 17:30 – 19:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/53ebe931-b8b0-4561-94fe-ebdc4af0794f-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/0dde1876-345e-4f12-b943-a06eda899ee3-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/2a168044-7201-46e0-89a4-906ec50cd7ce-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/027963c0-37f2-46ed-b2a3-0d6cf8263de1-350x150"
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/9c0e03d3-bfed-46d4-a415-a710700592e9-350x150",
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/53ebe931-b8b0-4561-94fe-ebdc4af0794f-350x150",
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/85b41938-c873-46c3-847a-050d2e9c725f-350x150"
 				];
 
 				streamJatek = [ 
-					"The Crew 2",
-					"Overwatch",
-					"PLAYERUNKNOWN'S BATTLEGROUNDS",
-					"PLAYERUNKNOWN'S BATTLEGROUNDS"
+					 "PLAYERUNKNOWN'S BATTLEGROUNDS",
+					 "The Crew 2",
+					 "PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
 				if(streamek > 1) {
