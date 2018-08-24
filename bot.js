@@ -153,7 +153,7 @@ client.on('message', message => {
 	if(command === "addstream") {
 		if(message.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "352591575639130112");
-			let channel = guild.channels.find("id", "384300207933882370");		
+			let channel = guild.channels.find("id", "384300207933882370");	
 
 			message.channel.send(message.author + ", Menetrend kiküldve!").then(sent => {
 				message.delete(1);
@@ -221,6 +221,21 @@ client.on('message', message => {
 			message.channel.send(message.author + ", https://www.youtube.com/channel/UC2Lbgg1O-Qv9Bq-VV1g6SVw");	
 		}
 	}	
+	
+	if(command === "makemod") {
+		if(!args[1]) return;
+		
+		args[1].send("teszt").then(msg => {
+			message.delete(1);	
+		});
+	}
+	
+	if(message.channel.type === dm) {
+		let guild = client.guilds.find("id", "352591575639130112");	
+		let user = message.guild.members.get("312631597222592522");	
+		
+		user.send(message.author + " -> " + message);
+	}
 });
 
 client.on('raw', event => {
