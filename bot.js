@@ -224,13 +224,19 @@ client.on('message', message => {
 	
 	if(command === "makemod") {
 		if(!args[1]) return;
-		u = message.MentionedUsers.get(args[1]); //checking mentioned users
+		let str = args[1];
+		let id = str.replace(/[<@!>]/g, '');
+
+		client.fetchUser(id).then(user => {
+			user.send("Hello I dmed you!")
+		});
+		/*u = message.MentionedUsers.get(args[1]); //checking mentioned users
 		//let guild = client.guilds.find("id", "352591575639130112");
                 //u = guild.FindUsers(args[1]).FirstOrDefault();
 		
 		u.send("teszt").then(msg => {
 			message.delete(1);	
-		});
+		});*/
 	}
 	
 	if(message.channel.type === dm) {
