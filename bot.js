@@ -159,34 +159,30 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.08.24 - 2018.08.24";
-				var streamek = 4; //Streamek száma
+				var idoszak = "2018.08.27 - 2018.09.02";
+				var streamek = 3; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [ 
-					"ROAD TO 200 FOLLOWER | »PUBG« | #70 🐻",
-					"ROAD TO 200 FOLLOWER | »DBD« Éjszakai túlélés a sötétben!! 🔪 | #1 🐻",
-					"»TC2« | Versenyeket HARD-ra!! 🚗 | #16 🐻",
-					"ROAD TO 200 FOLLOWER | »PUBG« | #69 🐻"
+					"»R6S« Chilles lövöldözés... | #15 🐻",
+					"»NEON.CODE« Egy magyar által fejlesztett Cyberpunk játék!! | #1 🐻",
+					"»PUBG« Hajsza a csirkéért! | #70 🐻"
 				];
 
 				 streamDatum= [
-					"aug. 24., péntek 23:00 – aug. 25., szombat 01:00",
-					"aug. 24., péntek 20:30 – 23:00",
-					"aug. 24., péntek 17:30 – 20:00",
-					"aug. 24., péntek 15:00 – 17:00"
+					"aug. 31., péntek 17:30 – 19:30",
+					"aug. 29., szerda 17:30 – 19:30",
+					"aug. 28., kedd 17:30 – 19:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/85b41938-c873-46c3-847a-050d2e9c725f-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/aee71d09-0997-4eb9-b4dd-73970319a2d2-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/53ebe931-b8b0-4561-94fe-ebdc4af0794f-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/9c0e03d3-bfed-46d4-a415-a710700592e9-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/f6d5cc56-2bf2-46b1-b770-2fd4d82db2d3-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/a177233f-1702-45e3-b5d2-2a6231929693-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/b34b9e7f-8e37-41ef-80a0-66d83ecd4110-350x150"
 				];
 
 				streamJatek = [ 
-					"PLAYERUNKNOWN'S BATTLEGROUNDS",
-					"Dead by Daylight",
-					"The Crew 2",
+					"Tom Clancy's Rainbow Six: Siege",
+					"NEON.CODE",
 					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
