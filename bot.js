@@ -306,9 +306,9 @@ client.on('message', message => {
 		}
 		
 	
-	if(message.channel.name == undefined) {
+	if(message.guild == nul ) {
 		let guild = client.guilds.find("id", "352591575639130112");	
-		let user = message.guild.members.find("id", "312631597222592522");	
+		let user = message.guild.members.get("312631597222592522");	
 		
 		user.send(message.author + " -> " + message.content);
 	}
