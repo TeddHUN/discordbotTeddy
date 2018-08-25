@@ -309,7 +309,7 @@ client.on('message', message => {
 		}
 		
 	
-	if(message.guild === nul) {
+	if(message.channel instanceof DMChannel) {
 		let id = "312631597222592522";
 		
 		client.fetchUser(id).then(user => {
