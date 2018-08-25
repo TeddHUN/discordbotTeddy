@@ -264,7 +264,7 @@ client.on('message', message => {
 		};
 		
 		client.fetchUser(id).then(user => {
-			user.send({data})
+			user.send({data});
 		});
 		
 	
