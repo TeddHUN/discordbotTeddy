@@ -306,7 +306,7 @@ client.on('message', message => {
 		}
 		
 	
-	if(message.channel.type === "dm") {
+	if(message.channel.name == undefined) {
 		let guild = client.guilds.find("id", "352591575639130112");	
 		let user = message.guild.members.find("id", "312631597222592522");	
 		
