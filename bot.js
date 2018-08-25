@@ -263,7 +263,9 @@ client.on('message', message => {
 		  ]
 		};
 		
-		client.fetchUser(id).then(user => {user.send({data})})
+		client.fetchUser(id).then(user => {
+			user.send("teszt");						  
+		});
 		
 	
 	if(message.channel.type == 1) {
