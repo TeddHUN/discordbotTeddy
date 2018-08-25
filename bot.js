@@ -226,6 +226,9 @@ client.on('message', message => {
 			if(!args[1]) return;
 			let str = args[1];
 			let id = str.replace(/[<@!>]/g, '');
+			
+			message.delete(1);
+			
 			const data = {
 			  "description": "Kedves nézőm!\n\n**Esélyes** vagy egy moderátori posztra a [csatornámon](https://twitch.tv/teddhun)!\n\nHa érdekel az ajánlat akkor kérlek a következő kérdésekre esetleg kérésekre írd meg nekem a választ, amire legkésőbb 24 órán belül kapsz választ a medvezértől. 😉",
 			  "url": "https://twitch.tv/teddhun",
@@ -306,7 +309,7 @@ client.on('message', message => {
 		}
 		
 	
-	if(message.guild === null) {
+	if(message.guild === nul) {
 		let id = "312631597222592522";
 		
 		client.fetchUser(id).then(user => {
