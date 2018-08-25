@@ -305,13 +305,13 @@ client.on('message', message => {
 		}
 		
 	
-	if(message.channel.type instanceof discord.DMChannel) {
+/*	if(message.channel.type instanceof discord.DMChannel) {
 		let id = "312631597222592522";
 		
 		client.fetchUser(id).then(user => {
 			send(message.author + " -> " + message.content);
 		});
-	}
+	}*/
 });
 
 client.on('raw', event => {
