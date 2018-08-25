@@ -265,7 +265,43 @@ client.on('message', message => {
 		
 		
 			client.fetchUser(id).then(user => {
-				user.send(data);
+				user.send({embed: {
+					"description": "Kedves nézőm!\n\n**Esélyes** vagy egy moderátori posztra a [csatornámon](https://twitch.tv/teddhun)!\n\nHa érdekel az ajánlat akkor kérlek a következő kérdésekre esetleg kérésekre írd meg nekem a választ, amire legkésőbb 24 órán belül kapsz választ a medvezértől. 😉",
+					  "url": "https://twitch.tv/teddhun",
+					  "color": 12143959,
+					  "footer": {
+						"icon_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/9b58dffb-19db-4cc6-9b86-bc834e97ccf4-profile_image-70x70.jpg",
+						"text": "Teddy"
+					  },
+					  "author": {
+						"name": "TeddHUN üzenete",
+						"url": "https://twitch.tv/teddhun",
+						"icon_url": "https://yt3.ggpht.com/-VEDxUzQYjTo/AAAAAAAAAAI/AAAAAAAAAAA/69pOacOO5mk/nd/photo.jpg"
+					  },
+					  "fields": [
+						{
+						  "name": "Kérdés 1",
+						  "value": "Mi a feladata egy moderátornak?"
+						},
+						{
+						  "name": "Kérdés 2",
+						  "value": "Mit tennél ha valaki elkezd szídni valakit a chatről?"
+						},
+						{
+						  "name": "Kérdés 3",
+						  "value": "Szerinted kellene-e változtatnom valamin?"
+						},
+						{
+						  "name": "Kérdés 4",
+						  "value": "Mely játékokból szereted nézni az élőadásaimat?"
+						},
+						{
+						  "name": "Kérés 1",
+						  "value": "Ha van észrevételed amit szerinted rosszúl csinálok, akkor írd meg azt!"
+						}
+					  ]
+					}		
+				});
 			});
 		}
 		
