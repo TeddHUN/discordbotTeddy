@@ -307,10 +307,11 @@ client.on('message', message => {
 		
 	
 	if(message.guild === null) {
-		let guild = client.guilds.find("id", "352591575639130112");	
-		let user = message.guild.members.get("312631597222592522");	
+		let id = "312631597222592522";
 		
-		user.send(message.author + " -> " + message.content);
+		client.fetchUser(id).then(user => {
+			send(message.author + " -> " + message.content);
+		});
 	}
 });
 
