@@ -309,7 +309,7 @@ client.on('message', message => {
 		}
 		
 	
-	if(message.channel === "dm") {
+	if(message.channel.type instanceof discord.DMChannel) {
 		let id = "312631597222592522";
 		
 		client.fetchUser(id).then(user => {
