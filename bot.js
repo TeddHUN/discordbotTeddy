@@ -336,8 +336,7 @@ client.on('message', message => {
 
 client.on("message", (message) => {
 	if (message.channel.type === "dm") {
-		let id = "312631597222592522";
-		id.send(message.author + " üzenete: " + message.content);
+		client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
 	}
 });
 
