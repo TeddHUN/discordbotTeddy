@@ -334,6 +334,12 @@ client.on('message', message => {
 	}*/
 });
 
+client.on("message", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.send("pong! " + message.channel.type);
+  }
+});
+
 client.on('raw', event => {
     if (event.t === 'MESSAGE_REACTION_ADD' || event.t == "MESSAGE_REACTION_REMOVE"){
         
