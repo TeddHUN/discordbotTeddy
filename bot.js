@@ -335,9 +335,10 @@ client.on('message', message => {
 });
 
 client.on("message", (message) => {
-  if (message.content.startsWith("ping")) {
-    message.channel.send("pong! " + message.channel.type);
-  }
+	if (message.channel.type === "dm") {
+		let id = "312631597222592522";
+		id.send(message.author + " üzenete: " + message.content);
+	}
 });
 
 client.on('raw', event => {
