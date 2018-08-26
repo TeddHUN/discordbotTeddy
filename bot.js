@@ -160,29 +160,49 @@ client.on('message', message => {
 				sent.delete(5000);
 
 				var idoszak = "2018.08.27 - 2018.09.02";
-				var streamek = 3; //Streamek száma
+				var streamek = 8; //Streamek száma
 				//Visszafele kell megadni az adatokat
-				streamNev = [ 
+				streamNev = [
+					"»R6S« Chilles lövöldözés... | #16 🐻",
+					"»TC2« | Éjszakai túrázás... 🚗 | #16 🐻",
+					"»DBD« Éjszakai túlélés a sötétben!! 🔪 | #2 🐻",
 					"»R6S« Chilles lövöldözés... | #15 🐻",
+					"»WARFRAME« | Nagyobb kihagyás után újra itt!! | #4 🐻",
 					"»NEON.CODE« Egy magyar által fejlesztett Cyberpunk játék!! | #1 🐻",
+					"»PUBG« Hajsza a mezőn! | #71 🐻",
 					"»PUBG« Hajsza a csirkéért! | #70 🐻"
 				];
 
 				 streamDatum= [
+					"szept. 1., szombat 17:30 – 20:00",
+					"aug. 31., péntek 23:00 – szept. 1., szombat 01:00",
+					"aug. 31., péntek 19:30 – 21:30",
 					"aug. 31., péntek 17:30 – 19:30",
+					"aug. 30., csütörtök 17:30 – 19:00",
 					"aug. 29., szerda 17:30 – 19:30",
-					"aug. 28., kedd 17:30 – 19:30"
+					"aug. 28., kedd 17:30 – 19:30",
+					"aug. 27., hétfő 14:30 – 16:30"
 				];
 
 				streamKep = [ 
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/60e12df6-bf5a-4371-ad83-419336f1013b-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/2c93b46f-bced-414e-9ef2-757968221878-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/4aef365a-15c9-40b9-bfb6-2a509802451d-350x150",
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/f6d5cc56-2bf2-46b1-b770-2fd4d82db2d3-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/32bd3cf3-2d69-4476-8c01-1ff1a26401d8-350x150",
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/a177233f-1702-45e3-b5d2-2a6231929693-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/b34b9e7f-8e37-41ef-80a0-66d83ecd4110-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/b34b9e7f-8e37-41ef-80a0-66d83ecd4110-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/3e0ef8c9-2bb4-4e15-b166-cdbc13209b53-350x150"
 				];
 
 				streamJatek = [ 
 					"Tom Clancy's Rainbow Six: Siege",
+					"The Crew 2",
+					"Dead by Daylight",
+					"Tom Clancy's Rainbow Six: Siege",
+					"Warframe",
 					"NEON.CODE",
+					"PLAYERUNKNOWN'S BATTLEGROUNDS",
 					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
