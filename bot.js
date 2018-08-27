@@ -238,7 +238,7 @@ client.on('message', message => {
 		}
 	}	
 	
-		if(command === "makemod") {
+	if(command === "makemod") {
 			if(!args[1]) return;
 			let str = args[1];
 			let id = str.replace(/[<@!>]/g, '');
@@ -284,7 +284,7 @@ client.on('message', message => {
 					}		
 				});
 			});
-		}
+	}
 		
 	if(command === "makemod2") {
 			if(!args[1]) return;
@@ -296,22 +296,23 @@ client.on('message', message => {
 			client.fetchUser(id).then(user => {
 				user.send({embed: {
 					"description": "**Gratulálok sikeresen megnyerted a nem rég említett posztott a [csatornámra](https://twitch.tv/teddhun)!**\n\nRang átvételéhez írj egy *köszönöm* szót. 😋\n`Ha mégsem szeretnéd, akkor azt írd meg.`",
-    "url": "https://discordapp.com",
-    "color": 8781568,
-    "footer": {
-      "icon_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/9b58dffb-19db-4cc6-9b86-bc834e97ccf4-profile_image-70x70.jpg",
-      "text": "Teddy"
-    },
-    "image": {
-      "url": "https://media.tenor.com/images/85df88979b539ebc13d488454b232f6b/tenor.gif"
-    },
-    "author": {
-      "name": "TeddHUN üzenete",
-      "url": "https://twitch.tv/teddhun",
-      "icon_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/7d72dde0f450abc2-profile_image-300x300.jpeg"
-    }	
+					    "url": "https://discordapp.com",
+					    "color": 8781568,
+					    "footer": {
+					      "icon_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/9b58dffb-19db-4cc6-9b86-bc834e97ccf4-profile_image-70x70.jpg",
+					      "text": "Teddy"
+					    },
+					    "image": {
+					      "url": "https://media.tenor.com/images/85df88979b539ebc13d488454b232f6b/tenor.gif"
+					    },
+					    "author": {
+					      "name": "TeddHUN üzenete",
+					      "url": "https://twitch.tv/teddhun",
+					      "icon_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/7d72dde0f450abc2-profile_image-300x300.jpeg"
+					    }	
 				});
 			});
+		}
 	}
 });
 
