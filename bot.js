@@ -292,7 +292,7 @@ client.on('message', message => {
 		let id = str.replace(/[<@!>]/g, '');
 
 		message.delete(1);
-			
+
 		client.fetchUser(id).then(user => {
 			user.send({embed: {
 					"description": "**Gratulálok, válaszaid meggyőzték a medvezért így átveheted a rangodat, ha szeretnéd!**\n\n Írj egy *köszönöm*-öt ahhoz, hogy megkapd.\n\n`Üdv a csapatban!` 😍 ",
@@ -310,9 +310,9 @@ client.on('message', message => {
 					  "url": "https://twitch.tv/teddhun",
 					  "icon_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/7d72dde0f450abc2-profile_image-300x300.jpeg"
 					}	
-				});
+				}
 			});
-		}
+		});
 	}
 });
 
