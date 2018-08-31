@@ -179,10 +179,10 @@ client.on('message', message => {
 				];
 
 				if(streamek > 1) {
-					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
+					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
 				} else {
-					//channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
-					channel.send("@everyone :new: Változás!\nÚj esemény!");
+					channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
+					//channel.send("@everyone :new: Változás!\nÚj esemény!");
 				}				
 
 				for (i = 0; i < streamek ; i++) { 
