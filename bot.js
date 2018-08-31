@@ -160,44 +160,29 @@ client.on('message', message => {
 				sent.delete(5000);
 
 				var idoszak = "2018.08.30 - 2018.09.02";
-				var streamek = 5; //Streamek száma
+				var streamek = 1; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
-					"»TC2« | Chilles autókázás!! 🚗 | #16 🐻",
-					"»R6S« Chilles lövöldözés... | #16 🐻",
-					"»DBD« Éjszakai túlélés a sötétben!! 🔪 | #2 🐻",
-					"»PUBG« Opty társaságában :D | #72 🐻",
-					"»WARFRAME« | Nagyobb kihagyás után újra itt!! | #4 🐻"
+					"DreamHack Weekly Duo /w zozi »PUBG« | #73 🐻"
 				];
 
 				 streamDatum= [
-					"szept. 2., vasárnap 15:00 – 17:00",
-					"szept. 1., szombat 17:30 – 20:00",
-					"aug. 31., péntek 21:00 – 23:00",
-					"aug. 31., péntek 18:00 – 21:00",
-					"aug. 30., csütörtök 17:30 – 19:00"
+					"szept. 1., szombat 17:00 – 20:00"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/f1bff9e0-274e-4de7-b6a2-894118381863-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/60e12df6-bf5a-4371-ad83-419336f1013b-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/4aef365a-15c9-40b9-bfb6-2a509802451d-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/9e8bad46-6165-41c2-a67b-fc369925a813-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/32bd3cf3-2d69-4476-8c01-1ff1a26401d8-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/26a1dfb2-85c7-441e-aa29-a01c5d61efc9-350x150"
 				];
 
 				streamJatek = [ 
-					"The Crew 2",
-					"Tom Clancy's Rainbow Six: Siege",
-					"Dead by Daylight",
-					"PLAYERUNKNOWN'S BATTLEGROUNDS",
-					"Warframe"
+					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
 				if(streamek > 1) {
-					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
+					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
 				} else {
-					channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
+					//channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
+					channel.send("@everyone :new: Változás!\nÚj esemény!");
 				}				
 
 				for (i = 0; i < streamek ; i++) { 
