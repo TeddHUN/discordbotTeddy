@@ -159,22 +159,30 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.08.30 - 2018.09.02";
-				var streamek = 1; //Streamek száma
+				var idoszak = "2018.09.03 - 2018.09.09";
+				var streamek = 3; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
-					"DreamHack Weekly Duo /w zozi »PUBG« | #73 🐻"
+					"Chilles »R6S« éjszakai kommandó... | #15 🐻",
+					"CSIRKEVACSI, vagy sem?! »PUBG« | #75 🐻",
+					"Milyen napod volt PUBG csapatás. | #74 🐻"
 				];
 
 				 streamDatum= [
-					"szept. 1., szombat 17:00 – 20:00"
+					"szept. 7., péntek 17:30 – 19:30",
+					"szept. 5., szerda 17:30 – 19:30",
+					"szept. 3., hétfő 17:30 – 19:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/26a1dfb2-85c7-441e-aa29-a01c5d61efc9-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/20ffaade-c70c-49ee-ad83-5fdbee5d51e8-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/cb390a71-9136-4ed6-ab3b-192ab2d4b85e-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/494ac316-11f5-4307-a81c-756533fc3f4c-350x150"
 				];
 
 				streamJatek = [ 
+					"Tom Clancy's Rainbow Six: Siege",
+					"PLAYERUNKNOWN'S BATTLEGROUNDS",
 					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
