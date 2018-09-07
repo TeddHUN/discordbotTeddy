@@ -159,38 +159,30 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.09.03 - 2018.09.09";
-				var streamek = 3; //Streamek száma
+				var idoszak = "2018.09.08";
+				var streamek = 1; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
-					"Chilles »R6S« éjszakai kommandó... | #15 🐻",
-					"CSIRKEVACSI, vagy sem?! »PUBG« | #75 🐻",
-					"Milyen napod volt PUBG csapatás. | #74 🐻"
+					"Vadászat a senki földjén... »PUBG« | #76 🐻"
 				];
 
 				 streamDatum= [
-					"szept. 7., péntek 17:30 – 19:30",
-					"szept. 5., szerda 17:30 – 19:30",
-					"szept. 3., hétfő 17:30 – 19:30"
+					"szept. 8., szombat 17:00 – 21:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/20ffaade-c70c-49ee-ad83-5fdbee5d51e8-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/cb390a71-9136-4ed6-ab3b-192ab2d4b85e-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/494ac316-11f5-4307-a81c-756533fc3f4c-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/806d96af-884e-4a22-b8a8-e75778b92e6d-350x150"
 				];
 
 				streamJatek = [ 
-					"Tom Clancy's Rainbow Six: Siege",
-					"PLAYERUNKNOWN'S BATTLEGROUNDS",
 					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
 				if(streamek > 1) {
 					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
 				} else {
-					channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
-					//channel.send("@everyone :new: Változás!\nÚj esemény!");
+					//channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
+					channel.send("@everyone :exclamation: Változás!\nÚj esemény!");
 				}				
 
 				for (i = 0; i < streamek ; i++) { 
