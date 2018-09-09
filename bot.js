@@ -188,7 +188,7 @@ client.on('message', message => {
 
 				if(streamek > 1) {
 					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
-					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Nem végleges!);	
+					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Nem végleges!");	
 				} else {
 					channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
 					//channel.send("@everyone :exclamation: Változás!\nÚj esemény!");
