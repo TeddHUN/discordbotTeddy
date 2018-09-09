@@ -159,30 +159,39 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.09.08";
-				var streamek = 1; //Streamek száma
+				var idoszak = "2018.09.10 - 2018.09.16";
+				var streamek = 3; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
-					"Vadászat a senki földjén... »PUBG« | #76 🐻"
+					"🔪 Éljünk túl a sötétben... »DBD« | #3 🐻",
+					"Keddi csetepaté!! »PUBG« | #78 🐻",
+					"Délutáni laza csirkevacsi?! »PUBG« | #77 🐻"
 				];
 
 				 streamDatum= [
-					"szept. 8., szombat 17:00 – 21:30"
+					"szept. 14., péntek 19:00 – 22:00",
+					"szept. 11., kedd 14:00 – 16:00",
+					"szept. 10., hétfő 17:30 – 19:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/806d96af-884e-4a22-b8a8-e75778b92e6d-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/59bcc54b-5eb6-4780-9068-05e088062a0e-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/6c2033d1-45cb-4119-8089-555f2e8aaaf1-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/ee73f572-bbdd-4b22-853a-7a74e36de7f6-350x150"
 				];
 
 				streamJatek = [ 
+					"Dead by Daylight",
+					"PLAYERUNKNOWN'S BATTLEGROUNDS",
 					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
 				if(streamek > 1) {
-					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
+					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
+					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Nem végleges!);	
 				} else {
-					//channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
-					channel.send("@everyone :exclamation: Változás!\nÚj esemény!");
+					channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
+					//channel.send("@everyone :exclamation: Változás!\nÚj esemény!");
 				}				
 
 				for (i = 0; i < streamek ; i++) { 
