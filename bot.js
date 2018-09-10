@@ -163,32 +163,32 @@ client.on('message', message => {
 				var streamek = 3; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
+					"Gator Rush hamarosan!! 🚗 »TC2« | #17 🐻",
 					"🔪 Éljünk túl a sötétben... »DBD« | #3 🐻",
-					"Keddi csetepaté!! »PUBG« | #78 🐻",
-					"Délutáni laza csirkevacsi?! »PUBG« | #77 🐻"
+					"Keddi csetepaté!! »PUBG« | #78 🐻"
 				];
 
 				 streamDatum= [
+					"szept. 15., szombat 15:00 – 17:00",
 					"szept. 14., péntek 19:00 – 22:00",
-					"szept. 11., kedd 14:00 – 16:00",
-					"szept. 10., hétfő 17:30 – 19:30"
+					"szept. 11., kedd 17:30 – 19:30"
 				];
 
 				streamKep = [ 
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/da746fe1-8b2c-4bd6-82ee-183f606128f1-350x150",
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/59bcc54b-5eb6-4780-9068-05e088062a0e-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/6c2033d1-45cb-4119-8089-555f2e8aaaf1-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/ee73f572-bbdd-4b22-853a-7a74e36de7f6-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/6c2033d1-45cb-4119-8089-555f2e8aaaf1-350x150"
 				];
 
 				streamJatek = [ 
+					"The Crew 2",
 					"Dead by Daylight",
-					"PLAYERUNKNOWN'S BATTLEGROUNDS",
 					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
 				if(streamek > 1) {
 					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
-					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Nem végleges!");	
+					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Nem végleges!");	
 				} else {
 					channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
 					//channel.send("@everyone :exclamation: Változás!\nÚj esemény!");
