@@ -163,31 +163,31 @@ client.on('message', message => {
 				var streamek = 4; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
-					"Gator Rush hamarosan!! 🚗 »TC2« | #17 🐻",
-					"🔪 Éljünk túl a sötétben... »DBD« | #3 🐻",
-					"21. UPDATE, gyakorló pálya, új fegyver, attachment és jármű!! »PUBG« | #79 🐻",
-					"Keddi csetepaté!! »PUBG« | #78 🐻"
+					 "Milyen is az új BATTLE ROYALE?! | #1 🐻",
+					 "Gator Rush hamarosan!! 🚗 »TC2« | #17 🐻",
+					 "🔪 Éljünk túl a sötétben... »DBD« | #3 🐻",
+					 "21. UPDATE, gyakorló pálya, új fegyver, attachment és jármű!! »PUBG« | #79 🐻"
 				];
 
 				 streamDatum= [
-					"szept. 15., szombat 15:00 – 17:00",
-					"szept. 14., péntek 19:00 – 22:00",
-					"szept. 12., szerda 17:30 – 19:30",
-					"szept. 11., kedd 17:30 – 19:30"
+					 "szept. 16., vasárnap 14:00 – 16:00",
+					 "szept. 15., szombat 15:00 – 17:00",
+					 "szept. 14., péntek 19:00 – 22:00",
+					 "szept. 12., szerda 17:30 – 19:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/da746fe1-8b2c-4bd6-82ee-183f606128f1-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/59bcc54b-5eb6-4780-9068-05e088062a0e-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/a48066b6-7232-4adc-9b32-4a337866dda3-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/6c2033d1-45cb-4119-8089-555f2e8aaaf1-350x150"
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/56a26eab-2615-4ed0-970f-5a52aae5d442-350x150",
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/da746fe1-8b2c-4bd6-82ee-183f606128f1-350x150",
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/59bcc54b-5eb6-4780-9068-05e088062a0e-350x150",
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/a48066b6-7232-4adc-9b32-4a337866dda3-350x150"
 				];
 
 				streamJatek = [ 
-					"The Crew 2",
-					"Dead by Daylight",
-					"PLAYERUNKNOWN'S BATTLEGROUNDS",
-					"PLAYERUNKNOWN'S BATTLEGROUNDS"
+					 "Call of Duty: Black Ops 4",
+					 "The Crew 2",
+					 "Dead by Daylight",
+					 "PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
 				if(streamek > 1) {
