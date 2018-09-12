@@ -166,21 +166,21 @@ client.on('message', message => {
 					 "Milyen is az új BATTLE ROYALE?! | #1 🐻",
 					 "Gator Rush hamarosan!! 🚗 »TC2« | #17 🐻",
 					 "🔪 Éljünk túl a sötétben... »DBD« | #3 🐻",
-					 "21. UPDATE, gyakorló pálya, új fegyver, attachment és jármű!! »PUBG« | #79 🐻"
+					 "Egy kis gyakorlópályázás!! »PUBG« | #80 🐻"
 				];
 
 				 streamDatum= [
 					 "szept. 16., vasárnap 14:00 – 16:00",
 					 "szept. 15., szombat 15:00 – 17:00",
-					 "szept. 14., péntek 19:00 – 22:00",
-					 "szept. 12., szerda 17:30 – 19:30"
+					 "szept. 14., péntek 20:00 – 22:00",
+					 "szept. 14., péntek 19:00 – 20:00"
 				];
 
 				streamKep = [ 
 					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/56a26eab-2615-4ed0-970f-5a52aae5d442-350x150",
 					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/da746fe1-8b2c-4bd6-82ee-183f606128f1-350x150",
 					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/59bcc54b-5eb6-4780-9068-05e088062a0e-350x150",
-					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/a48066b6-7232-4adc-9b32-4a337866dda3-350x150"
+					 "https://static-cdn.jtvnw.net/twitch-event-images-v2/fe688f0f-2644-4be4-8663-2f061ba2559c-350x150"
 				];
 
 				streamJatek = [ 
