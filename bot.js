@@ -160,15 +160,16 @@ client.on('message', message => {
 				sent.delete(5000);
 
 				var idoszak = "2018.09.20 - 2018.09.30";
-				var streamek = 8; //Streamek száma
+				var streamek = 9; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
 					"🚗 Gator Rush ismét!!! »TC2« | #20 🐻",
 					"🔪 Megölök mindenkit is!! »DBD« | #4 🐻",
-					"Péntek az én napom... »PUBG« | #85 🐻",
+					"Péntek az én napom... »PUBG« | #86 🐻",
 					"Gator Rush BABY!!!! 🚗 »TC2« | #19 🐻",
 					"GTX 1060 Első napja!! | Sokan leszünk akkor 5v5 custom!!! »R6S« | #15 🐻",
-					"GTX 1050 Ti utolsó napja!! »PUBG« | #84 🐻",
+					"GTX 1050 Ti utolsó napja!! »PUBG« | #85 🐻",
+					"Esti dara »PUBG« | #84 🐻",
 					"Már csak pár nap és Gator Rush!!!! 🚗 »TC2« | #18 🐻",
 					"Reménytelen futkározás... »PUBG« | #83 🐻"
 				];
@@ -179,6 +180,7 @@ client.on('message', message => {
 					"szept. 28., péntek 17:30 – 20:00",
 					"szept. 26., szerda 18:00 – 20:00",
 					"szept. 25., kedd 18:00 – 21:00",
+					"szept. 23., vasárnap 17:30 – 19:30",
 					"szept. 22., szombat 19:30 – 22:00",
 					"szept. 22., szombat 14:30 – 16:30",
 					"szept. 21., péntek 18:00 – 21:00"
@@ -190,6 +192,7 @@ client.on('message', message => {
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/80220466-fbd5-4bb3-b986-e311ed8bfa23-350x150",
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/d9e8aaa3-656b-492c-b5f3-4b1cd5c89216-350x150",
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/df1d8bf9-e9db-49ff-8753-a521baf0e015-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/bcbf1b42-4bfd-44c8-b011-faca5c7bb6bd-320x180",
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/81a5142f-2bce-4c4c-b9ad-d583e94c0770-350x150",
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/cef42974-3aa5-432a-bc4e-89d0f013e9eb-350x150",
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/ea925b4f-54c9-4183-b03d-9d23529b2d47-350x150"
@@ -202,12 +205,13 @@ client.on('message', message => {
 					"The Crew 2",
 					"Tom Clancy's Rainbow Six: Siege",
 					"PLAYERUNKNOWN'S BATTLEGROUNDS",
+					"PLAYERUNKNOWN'S BATTLEGROUNDS",
 					"The Crew 2",
 					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
 				if(streamek > 1) {
-					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
+					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
 					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Nem végleges!");	
 				} else {
 					channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
