@@ -159,27 +159,39 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.09.24 - 2018.09.30";
-				var streamek = 1; //Streamek száma
+				var idoszak = "2018.10.01 - 2018.10.07";
+				var streamek = 4; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
-					"🔪 Megölök mindenkit is!! »DBD« | #4 🐻"
+					"🚗 Minden versenyt ACE módra... »TC2« | #20 🐻",
+					"Ha péntek, akkor menekülés!!! 🔪 »DBD« | #5 🐻",
+					"Fal, ablak, ajtó nem marad fent! »R6S« | #17 🐻",
+					"Csoportos csirke kergetés... »PUBG« | #89 🐻"
 				];
 
 				 streamDatum= [
-					"szept. 29., szombat 18:00 – 20:00"
+					"okt. 6., szombat 18:00 – 20:00",
+					"okt. 5., péntek 20:00 – 22:00",
+					"okt. 3., szerda 18:00 – 21:00",
+					"okt. 2., kedd 18:00 – 21:00"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/9d494ec6-23f6-4b4a-9f34-8d2688c47d71-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/07a5233e-6c1e-464f-8460-520ab0312842-320x180",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/878a7c03-e0a2-47fb-97a6-f6f5082bf3d0-320x180",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/a90fae8f-9ee5-4d09-bd6b-ac47af5616c7-320x180",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/301e8a9f-9394-4954-b4cc-fa9e16d2022a-320x180"
 				];
 
 				streamJatek = [ 
-					"Dead by Daylight"
+					"The Crew 2",
+					"Dead by Daylight",
+					"Tom Clancy's Rainbow Six: Siege",
+					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
 
 				if(streamek > 1) {
-					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
+					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
 					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Nem végleges!");	
 				} else {
 					channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
