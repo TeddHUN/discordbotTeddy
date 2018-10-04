@@ -8,8 +8,7 @@ function play(connection, message) {
 	var server = servers[message.guild.id];
 	
 	server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
-	
-	zeneMost = server.queue;
+
 	server.queue.shift();
 	
 	server.dispatcher.on("end", function() {
@@ -45,7 +44,7 @@ function generateMessages2(){
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setGame('-tb help', "https://twitch.tv/teddhun");
+    client.user.setGame('Folyamatos fejlesztés alatt...', "https://twitch.tv/teddhun");
 });
 
 client.on('message', message => {	
@@ -54,6 +53,18 @@ client.on('message', message => {
 	const args = message.content.slice(prefix.length).trim().split(' ');
 	const command = args[0];
 		
+	//New version commands
+	if(command === "szerverek") {
+		let szoveg = "**A következő szervereken vagyok elérhető:** \n\n";
+		client.guilds.forEach(guild => {
+			szoveg += "Szerver neve: **" + guild.name + "**\n";	
+		});
+		
+		message.channel.send(message.author + " " + szoveg);
+	}
+	
+	//--------------------
+	
 	if(command === "help") {
 		const embed = new Discord.RichEmbed()
 		.setTitle("Segítség kell?! Itt megtalálod!")
@@ -117,10 +128,12 @@ client.on('message', message => {
 		if(!message.member.voiceChannel) return message.channel.send(message.author + ", Nem tudok oda menni hozzád!");
 		if(!ytdl.validateURL(args[1])) return message.channel.send(message.author + ", Ez a link nem érvényes!");
 
-		let info = ytdl.getInfo(args[1]);
-		
+		getInfo(args[1], function(err, info) {
+			  let cim = info.title;
+		});
+				
 		if(!servers[message.guild.id]) servers[message.guild.id] = {
-			videoTitle: info.title,
+			videoTitle: cim,
 			requester: message.author,
 			queue: []
 		};
