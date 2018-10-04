@@ -128,13 +128,10 @@ client.on('message', message => {
 		if(!message.member.voiceChannel) return message.channel.send(message.author + ", Nem tudok oda menni hozzád!");
 		if(!ytdl.validateURL(args[1])) return message.channel.send(message.author + ", Ez a link nem érvényes!");
 
-		var cim = "";
-		ytdl.getInfo(args[1], function(err, info) {
-			  cim = info.title;
-		});
+		let info = await ytdl.getInfo(args[1]);
 				
 		if(!servers[message.guild.id]) servers[message.guild.id] = {
-			videoTitle: cim,
+			videoTitle: info.title,
 			requester: message.author,
 			queue: []
 		};
