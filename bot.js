@@ -170,23 +170,27 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.10.01 - 2018.10.07";
-				var streamek = 1; //Streamek száma
+				var idoszak = "2018.10.06 - 2018.10.07";
+				var streamek = 2; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
-					"Fal, ablak, ajtó nem marad fent! »R6S« | #17 🐻"
+					"Taktikázás a szivárvány csapatban! »R6S« | #18 🐻",
+					"🚗 Minden versenyt ACE módra... »TC2« | #20 🐻"
 				];
 
 				 streamDatum= [
-					"okt. 4., csütörtök 18:00 – 21:00",
+					"okt. 7., vasárnap 15:00 – 17:00",
+					"okt. 6., szombat 18:00 – 20:00"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/a90fae8f-9ee5-4d09-bd6b-ac47af5616c7-320x180"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/6b5bab1a-16ac-47fc-882e-d587a563783a-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/07a5233e-6c1e-464f-8460-520ab0312842-350x150"
 				];
 
 				streamJatek = [ 
-					"Tom Clancy's Rainbow Six: Siege"
+					"Tom Clancy's Rainbow Six: Siege",
+					"The Crew 2"
 				];
 
 				if(streamek > 1) {
