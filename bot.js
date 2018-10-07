@@ -170,31 +170,43 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.10.06 - 2018.10.07";
-				var streamek = 2; //Streamek száma
+				var idoszak = "2018.10.08 - 2018.10.14";
+				var streamek = 5; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
-					"Taktikázás a szivárvány csapatban! »R6S« | #18 🐻",
-					"🚗 Minden versenyt ACE módra... »TC2« | #20 🐻"
+					"ÚJ STREAM INTRÓ HYPE!!!! »R6S« | #20 🐻",
+					"Rég volt már! »PUBG« | #90 🐻",
+					"Ha péntek, akkor menekülés!!! 🔪 »DBD« | #6 🐻",
+					"Chilles autókázás... 🚗 »TC2« | #21 🐻",
+					"Az ostrom nem maradhat el! »R6S« | #19 🐻"
 				];
 
 				 streamDatum= [
-					"okt. 7., vasárnap 15:00 – 17:00",
-					"okt. 6., szombat 18:00 – 20:00"
+					"okt. 14., vasárnap 17:30 – 19:30",
+					"okt. 13., szombat 17:30 – 20:00",
+					"okt. 12., péntek 20:00 – 22:00",
+					"okt. 9., kedd 19:30 – 21:30",
+					"okt. 9., kedd 17:30 – 19:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/6b5bab1a-16ac-47fc-882e-d587a563783a-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/07a5233e-6c1e-464f-8460-520ab0312842-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/c8b08b97-b375-423b-823a-fa7226291da2-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/7a504e0b-f3e6-4cf2-8035-b52ebbb1acbc-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/2a7f99c1-ca2e-4a1e-a870-a732d401de08-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/8d38dbe1-16d4-4eee-9298-2c25e776a980-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/91507c9f-a656-403e-96a3-b0c416dfcddd-350x150"
 				];
 
 				streamJatek = [ 
 					"Tom Clancy's Rainbow Six: Siege",
-					"The Crew 2"
+					"PLAYERUNKNOWN'S BATTLEGROUNDS",
+					"Dead by Daylight",
+					"The Crew 2",
+					"Tom Clancy's Rainbow Six: Siege"
 				];
 
 				if(streamek > 1) {
-					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
+					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
 					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Nem végleges!");	
 				} else {
 					//channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
