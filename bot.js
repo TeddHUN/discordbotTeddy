@@ -170,39 +170,47 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.10.08 - 2018.10.14";
-				var streamek = 4; //Streamek száma
+				var idoszak = "2018.10.15 - 2018.10.21";
+				var streamek = 6; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
-					"Ostrom hada! »R6S« | #20 🐻",
-					"Chilles autókázás... 🚗 »TC2« | #21 🐻",
-					"Ha péntek, akkor menekülés!!! 🔪 »DBD« | #6 🐻",
-					"Rég volt már! »PUBG« | #90 🐻"
+					"Kérésetek parancs! 🚗 »TC2« | #22 🐻",
+					"Mostantól szombaton félek!!! 🔪 »DBD« | #8 🐻",
+					"Chilles lövöldözések... »R6S« | #20 🐻",
+					"Ha péntek, akkor menekülés!!! 🔪 »DBD« | #7 🐻",
+					"WINNER WINNER CHICKEN DINNER »PUBG« | #91 🐻",
+					"Hétközepi csetepaté »R6S« | #20 🐻"
 				];
 
 				 streamDatum= [
-					"okt. 14., vasárnap 17:30 – 19:30",
-					"okt. 14., vasárnap 15:30 – 17:30",
-					"okt. 13., szombat 21:00 – 23:00",
-					"okt. 13., szombat 18:00 – 21:00"
+					"okt. 21., vasárnap 17:30 – 19:30",
+					"okt. 20., szombat 18:00 – 20:00",
+					"okt. 20., szombat 14:00 – 18:00",
+					"okt. 19., péntek 20:00 – 22:00",
+					"okt. 19., péntek 17:30 – 20:00",
+					"okt. 17., szerda 17:30 – 21:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/c8b08b97-b375-423b-823a-fa7226291da2-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/8d38dbe1-16d4-4eee-9298-2c25e776a980-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/2a7f99c1-ca2e-4a1e-a870-a732d401de08-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/7a504e0b-f3e6-4cf2-8035-b52ebbb1acbc-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/78f14623-c111-425a-a788-47552e096ac6-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/4067031f-b3fa-45d4-afb9-954d0bf79ed4-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/1abb203a-c292-4831-8633-9e233bd56c0e-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/34dcf6c9-4691-4035-9bec-4c475089772d-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/47e163f1-91c8-4234-a798-686c49d7e921-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/e22538bd-5e7f-4c65-9298-61afe8b5365b-350x150"
 				];
 
 				streamJatek = [ 
-					"Tom Clancy's Rainbow Six: Siege",
 					"The Crew 2",
 					"Dead by Daylight",
-					"PLAYERUNKNOWN'S BATTLEGROUNDS"
+					"Tom Clancy's Rainbow Six: Siege",
+					"Dead by Daylight",
+					"PLAYERUNKNOWN'S BATTLEGROUNDS",
+					"Tom Clancy's Rainbow Six: Siege"
 				];
 
 				if(streamek > 1) {
-					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
+					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
 					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Nem végleges!");	
 				} else {
 					//channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
