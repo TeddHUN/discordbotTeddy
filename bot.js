@@ -180,8 +180,8 @@ client.on('message', message => {
 				];
 
 				 streamDatum= [
-					"okt. 26., péntek 18:00 – 21:00",
-					"okt. 24., szerda 17:30 – 19:30",
+					"okt. 26., péntek 17:30 – 19:30",
+					"okt. 24., szerda 18:00 – 21:00",
 					"okt. 22., hétfő 17:30 – 19:30"
 				];
 
@@ -199,7 +199,7 @@ client.on('message', message => {
 
 				if(streamek > 1) {
 					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
-					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Hétvége még változhat!");	
+					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Hétvége még változhat!");	
 				} else {
 					//channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
 					//channel.send("@everyone :exclamation: Változás!\nÚj esemény!");
