@@ -170,41 +170,33 @@ client.on('message', message => {
 				message.delete(1);
 				sent.delete(5000);
 
-				var idoszak = "2018.10.29 - 2018.11.04";
-				var streamek = 6; //Streamek száma
+				var idoszak = "2018.11.05 - 2018.11.11";
+				var streamek = 4; //Streamek száma
 				//Visszafele kell megadni az adatokat
 				streamNev = [
-					"Vasárnapi gyilkolászás! »PUBG« | #95 🐻",
-					"Versenyek ACE módra való húzása... 🚗 »TC2« | #22 🐻",
-					"Túlélés a sötétben! 🔪 »DBD« | #10 🐻",
-					"Halloween-i borzongás🔪 »DBD« | #9 🐻",
-					"Jó lesz ez! :D »R6S« | #21 🐻",
-					"»PUBG« | #94 🐻"
+					"Sötétben való borzongás🔪 »DBD« | #10 🐻",
+					"Versenyek ACE módra való húzása... 🚗 »TC2« | #23 🐻",
+					"Dara, dara hátán! »R6S« | #22 🐻",
+					"Hétfői öldöklés! »PUBG« | #95 🐻"
 				];
 
 				 streamDatum= [
-					"nov. 4., vasárnap 17:30 – 20:00",
-					"nov. 3., szombat 17:30 – 19:30",
-					"nov. 2., péntek 20:00 – 22:00",
-					"okt. 31., szerda 20:00 – 22:00",
-					"okt. 30., kedd 17:30 – 19:30",
-					"okt. 29., hétfő 17:30 – 19:30"
+					"nov. 9., péntek 20:00 – 22:00",
+					"nov. 7., szerda 17:30 – 18:30",
+					"nov. 6., kedd 17:30 – 19:30",
+					"nov. 5., hétfő 17:30 – 19:30"
 				];
 
 				streamKep = [ 
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/94cc9583-3123-4527-b2e1-51f21f42455c-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/0ed6746b-d5e9-4a59-a8c5-035591332e85-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/841eba6d-d4e6-4025-828a-d8fe7dca0e07-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/07d6f493-5c05-4698-8357-bce993765c85-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/6941a06b-7e5d-42c3-a74f-72856dadf60f-350x150",
-					"https://static-cdn.jtvnw.net/twitch-event-images-v2/4e18362a-c482-4374-9fc5-815397f5c231-350x150"
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/459525a6-6270-4392-80bc-cdb8ad294945-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/ca31d1ef-04ca-44a4-9f0b-a623816094e6-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/ec8eb0a4-e735-4e35-86c6-9401566e2a6f-350x150",
+					"https://static-cdn.jtvnw.net/twitch-event-images-v2/94cc9583-3123-4527-b2e1-51f21f42455c-350x150"
 				];
 
-				streamJatek = [ 
-					"PLAYERUNKNOWN'S BATTLEGROUNDS",
+				streamJatek = [
+					"Dead by Daylight",
 					"The Crew 2",
-					"Dead by Daylight",
-					"Dead by Daylight",
 					"Tom Clancy's Rainbow Six: Siege",
 					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
