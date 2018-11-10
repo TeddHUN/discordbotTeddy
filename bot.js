@@ -311,6 +311,44 @@ client.on('message', message => {
 			});
 		});
 	}
+	
+	if(command == "frissit") {
+		if(message.guild.id == 326001549711114241) {
+			let guild = client.guilds.find("id", "326001549711114241");// zozi dcje
+			let szam = guild.members;
+			let membercount = "Tagok: " + szam;
+			let membercountch = guild.channels.find("id", "510797260389482496");	
+			mebercountch.setName(membercount);
+			message.channel.sendMessage(message.author + " Átírva!").then(sent => {
+				message.delete(1);
+				sent.delete(5000);
+			});
+		}
+	}
+});
+
+client.on('guildMemberAdd', guildMemberAdd => {
+	let guild = client.guilds.find("id", "326001549711114241");// zozi dcje
+		
+	if(guild != null) {
+		let membercount = guild.channels.find("id", "510797260389482496");	
+		let usercount = guild.channels.find("id", "510797263593799690");	
+		let botcount = guild.channels.find("id", "510797264260694018");		
+		
+		
+	}
+});
+
+client.on("guildMemberRemove", (member) => {
+	let guild = client.guilds.find("id", "326001549711114241");// zozi dcje
+		
+	if(guild != null) {
+		let membercount = guild.channels.find("id", "510797260389482496");	
+		let usercount = guild.channels.find("id", "510797263593799690");	
+		let botcount = guild.channels.find("id", "510797264260694018");		
+		
+		
+	}
 });
 
 client.on("message", (message) => {
