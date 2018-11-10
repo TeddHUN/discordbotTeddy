@@ -403,7 +403,7 @@ function serverStats(guild) {
 	let usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
 	let botcount = "Botok: " + guild.members.filter(member => member.user.bot).size;
 	
-	if(message.guild.id == 326001549711114241) { //Zozi DC
+	if(guild.id == 326001549711114241) { //Zozi DC
 		const membercountch = guild.channels.find("id", "510797260389482496");	
 		let usercountch = guild.channels.find("id", "510797263593799690");	
 		let botcountch = guild.channels.find("id", "510797264260694018");	
@@ -411,11 +411,6 @@ function serverStats(guild) {
 		usercountch.setName(usercount);
 		botcountch.setName(botcount);
 	}
-	
-	message.channel.sendMessage(message.author + " Átírva!").then(sent => {
-		message.delete(1);
-		sent.delete(5000);
-	});
 }
 
 // THIS  MUST  BE  THIS  WAY
