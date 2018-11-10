@@ -317,8 +317,8 @@ client.on('message', message => {
 			let guild = client.guilds.find("id", "326001549711114241");// zozi dcje
 			let szam = guild.members;
 			let membercount = "Tagok: " + szam;
-			let membercountch = guild.channels.find("id", "510797260389482496");	
-			mebercountch.setName(membercount);
+			const membercountch = guild.channels.find("id", "510797260389482496");	
+			membercountch.name(membercount);
 			message.channel.sendMessage(message.author + " Átírva!").then(sent => {
 				message.delete(1);
 				sent.delete(5000);
