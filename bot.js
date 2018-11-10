@@ -332,14 +332,14 @@ client.on('message', message => {
 	}
 });
 
-client.on('guildMemberAdd', (member, event) => {
-    	let guildID = event.d.guild_id;
-	serverStats(guildID);
+client.on("guildMemberAdd", (member) => {
+  	const guild = member.guild;
+	serverStats(guild);
 });
 
-client.on('guildMemberRemove', (member, event) => {
-    	let guildID = event.d.guild_id;
-	serverStats(guildID);
+client.on('guildMemberRemove', (member) => {
+  	const guild = member.guild;
+	serverStats(guild);
 });
 
 client.on("message", (message) => {
