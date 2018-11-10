@@ -315,10 +315,15 @@ client.on('message', message => {
 	if(command == "frissit") {
 		if(message.guild.id == 326001549711114241) {
 			let guild = client.guilds.find("id", "326001549711114241");// zozi dcje
-			let szam = guild.members;
-			let membercount = "Tagok: " + szam;
+			let membercount = "Tagok: " + guild.members.size;
+			let usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
+			let botcount = "Botok: " + guild.members.filter(member => member.user.bot).size;
 			const membercountch = guild.channels.find("id", "510797260389482496");	
+			let usercountch = guild.channels.find("id", "510797263593799690");	
+			let botcountch = guild.channels.find("id", "510797264260694018");	
 			membercountch.setName(membercount);
+			usercountch.setName(usercount);
+			botcountch.setName(botcount);
 			message.channel.sendMessage(message.author + " Átírva!").then(sent => {
 				message.delete(1);
 				sent.delete(5000);
