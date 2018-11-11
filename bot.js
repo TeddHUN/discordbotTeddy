@@ -557,8 +557,8 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 				sent.delete(5000);
 			});
 		}
-	}*/
-});
+	}
+});*/
 
 client.on("guildMemberAdd", (member) => {
   	const guild = member.guild;
