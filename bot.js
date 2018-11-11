@@ -5,7 +5,7 @@ const YouTube = require('simple-youtube-api');
 
 var prefix = "-tb";
 
-const youtube = new YouTube("");
+const youtube = new YouTube("AIzaSyBKR_t85ukmSb6C7Bm-ZMmH6nrfi9j9hJ4");
 const queue = new Map();
 /*function play(connection, message) {
 	var server = servers[message.guild.id];
