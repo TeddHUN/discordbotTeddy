@@ -53,9 +53,15 @@ client.on('ready', () => {
 
 client.on('message', message => {	
 	if(message.author.bot) return;
-	if(message.content.indexOf(prefix) !== 0) return;
-	const args = message.content.slice(prefix.length).trim().split(' ');
-	const command = args[0];
+	if(message.content.indexOf(prefix) !== 0) return
+	
+	const args = msg.content.split(' ');
+	const searchString = args.slice(1).join(' ');
+	const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
+	const serverQueue = queue.get(msg.guild.id);
+
+	let command = msg.content.toLowerCase().split(' ')[0];
+	command = command.slice(PREFIX.length)
 		
 	//New version commands
 	if(command === "szerverek") {
