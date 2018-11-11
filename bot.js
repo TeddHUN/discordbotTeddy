@@ -469,7 +469,6 @@ function serverStats(guild) {
 
 async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	const serverQueue = queue.get(msg.guild.id);
-	console.log(video);
 	const song = {
 		id: video.id,
 		title: video.title,
@@ -493,15 +492,13 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 			queueConstruct.connection = connection;
 			play(msg.guild, queueConstruct.songs[0]);
 		} catch (error) {
-			console.error(`I could not join the voice channel: ${error}`);
 			queue.delete(msg.guild.id);
-			return msg.channel.send(`I could not join the voice channel: ${error}`);
+			return msg.channel.send(`Nem tudok csatlakozni: ${error}`);
 		}
 	} else {
 		serverQueue.songs.push(song);
-		console.log(serverQueue.songs);
 		if (playlist) return undefined;
-		else return msg.channel.send(`✅ **${song.title}** has been added to the queue!`);
+		else return msg.channel.send(`✅ Zene hozzáadva a lejátszási listához: **${song.title}**`);
 	}
 	return undefined;
 }
@@ -514,8 +511,7 @@ function play(guild, song) {
 		queue.delete(guild.id);
 		return;
 	}
-	console.log(serverQueue.songs);
-
+	
 	const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
 		.on('end', reason => {
 			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
@@ -526,7 +522,7 @@ function play(guild, song) {
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 
-	serverQueue.textChannel.send(`🎶 Start playing: **${song.title}**`);
+	serverQueue.textChannel.send(`🎶 Zene elindítva: **${song.title}**`);
 }
 
 // THIS  MUST  BE  THIS  WAY
