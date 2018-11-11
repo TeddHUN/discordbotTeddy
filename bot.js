@@ -1385,7 +1385,7 @@ function serverStats(guild) {
 	}
 }
 
-lass Music {
+class Music {
     constructor(client, options) {
       // Data Objects
       this.commands = new Map();
