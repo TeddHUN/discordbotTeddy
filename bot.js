@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const ytdl = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
 
-var prefix = "-tb ";
+var prefix = "-tb";
 
 const youtube = new YouTube("AIzaSyBKR_t85ukmSb6C7Bm-ZMmH6nrfi9j9hJ4");
 const queue = new Map();
@@ -61,7 +61,7 @@ client.on('message', async msg => { // eslint-disable-line
 	const serverQueue = queue.get(msg.guild.id);
 
 	let command = msg.content.toLowerCase().split(' ')[0];
-	command = command.slice(prefix.length)
+	command = command.slice(prefix.length+1)
 
 	if (command === 'play') {
 		const voiceChannel = msg.member.voiceChannel;
