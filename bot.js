@@ -61,7 +61,7 @@ client.on('message', message => {
 	const serverQueue = queue.get(message.guild.id);
 
 	let command = message.content.toLowerCase().split(' ')[0];
-	command = command.slice(PREFIX.length)
+	command = command.slice(prefix.length)
 		
 	//New version commands
 	if(command === "szerverek") {
