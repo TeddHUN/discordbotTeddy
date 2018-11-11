@@ -79,19 +79,19 @@ client.on('message', message => {
 		}
 
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-			const playlist = await youtube.getPlaylist(url);
-			const videos = await playlist.getVideos();
+			const playlist = youtube.getPlaylist(url);
+			const videos = playlist.getVideos();
 			for (const video of Object.values(videos)) {
-				const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-				await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+				const video2 = youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
+				handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
 			}
 			return msg.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
 		} else {
 			try {
-				var video = await youtube.getVideo(url);
+				var video = youtube.getVideo(url);
 			} catch (error) {
 				try {
-					var videos = await youtube.searchVideos(searchString, 10);
+					var videos = youtube.searchVideos(searchString, 10);
 					let index = 0;
 					msg.channel.send(`
 __**Song selection:**__
@@ -100,7 +100,7 @@ Please provide a value to select one of the search results ranging from 1-10.
 					`);
 					// eslint-disable-next-line max-depth
 					try {
-						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
+						var response = msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
 							maxMatches: 1,
 							time: 10000,
 							errors: ['time']
@@ -110,7 +110,7 @@ Please provide a value to select one of the search results ranging from 1-10.
 						return msg.channel.send('No or invalid value entered, cancelling video selection.');
 					}
 					const videoIndex = parseInt(response.first().content);
-					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
+					var video = youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
 					console.error(err);
 					return msg.channel.send('🆘 I could not obtain any search results.');
