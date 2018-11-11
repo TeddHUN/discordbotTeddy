@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const ytdl = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
 
-var prefix = "-tb";
+var prefix = "-tb ";
 
 const youtube = new YouTube("AIzaSyBKR_t85ukmSb6C7Bm-ZMmH6nrfi9j9hJ4");
 const queue = new Map();
@@ -79,7 +79,7 @@ client.on('message', async msg => { // eslint-disable-line
 			const videos = await playlist.getVideos();
 			for (const video of Object.values(videos)) {
 				const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-				await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+				await handleVideo(video2, url, voiceChannel, true); // eslint-disable-line no-await-in-loop
 			}
 			return msg.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
 		} else {
@@ -646,7 +646,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	console.log(video);
 	const song = {
 		id: video.id,
-		title: Util.escapeMarkdown(video.title),
+		title: video.title,
 		url: `https://www.youtube.com/watch?v=${video.id}`
 	};
 	if (!serverQueue) {
