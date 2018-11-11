@@ -7,21 +7,6 @@ var prefix = "--";
 
 const youtube = new YouTube("AIzaSyBKR_t85ukmSb6C7Bm-ZMmH6nrfi9j9hJ4");
 const queue = new Map();
-/*function play(connection, message) {
-	var server = servers[message.guild.id];
-	
-	server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
-
-	server.queue.shift();
-	
-	server.dispatcher.on("end", function() {
-		if(server.queue[0]) play(connection, message);
-		else connection.disconnect();
-	});
-}
-
-var servers = {};*/
-
 
 let initialMessage = `@everyone A rangok igénylése **automatikusan** működik így ha szeretnél egy rangot akkor csak reagálj rá! ;)`;
 const roles = ["The Crew", "The Crew 2", "PC", "XBOX", "PS"];
@@ -68,20 +53,20 @@ client.on('message', async msg => { // eslint-disable-line
 		if (!voiceChannel) return msg.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
 		if (!permissions.has('CONNECT')) {
-			return msg.channel.send('I cannot connect to your voice channel, make sure I have the proper permissions!');
+			return msg.channel.send(msg.author + " , Nem tudok csatlakozni a csatornádhoz mert nincs jogom a csatlakozáshoz!");
 		}
 		if (!permissions.has('SPEAK')) {
-			return msg.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
+			return msg.channel.send(msg.author +  ", Nem tudok zenét lejátszani a csatornádon mert nincs jogom hozzá!");
 		}
 
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
 			const playlist = await youtube.getPlaylist(url);
 			const videos = await playlist.getVideos();
 			for (const video of Object.values(videos)) {
-				const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-				await handleVideo(video2, url, voiceChannel, true); // eslint-disable-line no-await-in-loop
+				const video2 = await youtube.getVideoByID(video.id);
+				await handleVideo(video2, url, voiceChannel, true);
 			}
-			return msg.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
+			return msg.channel.send(`✅ Zene hozzáadva a lejátszási listához: **${playlist.title}**`);
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
@@ -89,10 +74,10 @@ client.on('message', async msg => { // eslint-disable-line
 				try {
 					var videos = await youtube.searchVideos(searchString, 10);
 					let index = 0;
-					msg.channel.send(`
-__**Song selection:**__
+					msg.channel.send(msg.author + `, Több találatot találtam!\n
+__**Válasz az alábbiak közül:**__
 ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
-Please provide a value to select one of the search results ranging from 1-10.
+A válaszodat 1-10 -es számozással várom válaszban.
 					`);
 					// eslint-disable-next-line max-depth
 					try {
@@ -103,76 +88,62 @@ Please provide a value to select one of the search results ranging from 1-10.
 						});
 					} catch (err) {
 						console.error(err);
-						return msg.channel.send('No or invalid value entered, cancelling video selection.');
+						return msg.channel.send('Nem érkezett válasz ezért nem történik lejátszás.');
 					}
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
 					console.error(err);
-					return msg.channel.send('🆘 I could not obtain any search results.');
+					return msg.channel.send('🆘 Nem tudok lejátszani az alábbi listából. Írj a fejlesztőmnek! (TeddHUN)');
 				}
 			}
 			return handleVideo(video, msg, voiceChannel);
 		}
 	} else if (command === 'skip') {
-		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return msg.channel.send('There is nothing playing that I could skip for you.');
-		serverQueue.connection.dispatcher.end('Skip command has been used!');
+		if (!msg.member.voiceChannel) return msg.channel.send(msg.author + ', Nem vagy hangcsatornában!');
+		if (!serverQueue) return msg.channel.send('A semmit nem tudom átugroni!');
+		serverQueue.connection.dispatcher.end('Atugorva!');
 		return undefined;
 	} else if (command === 'stop') {
-		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return msg.channel.send('There is nothing playing that I could stop for you.');
+		if (!msg.member.voiceChannel) return msg.channel.send(msg.author + ', Nem vagy hangcsatornában!');
+		if (!serverQueue) return msg.channel.send('A semmit nem tudom megállítani!');
 		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('Stop command has been used!');
+		serverQueue.connection.dispatcher.end('Leallitva!');
 		return undefined;
 	} else if (command === 'volume') {
-		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return msg.channel.send('There is nothing playing.');
-		if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}**`);
+		if (!msg.member.voiceChannel) return msg.channel.send(msg.author + ', Nem vagy hangcsatornában!');
+		if (!serverQueue) return msg.channel.send('Jelenleg nem játszom semmit.');
+		if (!args[1]) return msg.channel.send(`Jelenlegi hangerő: **${serverQueue.volume}**`);
 		serverQueue.volume = args[1];
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
 		return msg.channel.send(`I set the volume to: **${args[1]}**`);
 	} else if (command === 'np') {
-		if (!serverQueue) return msg.channel.send('There is nothing playing.');
-		return msg.channel.send(`🎶 Now playing: **${serverQueue.songs[0].title}**`);
+		if (!serverQueue) return msg.channel.send('Jelenleg nem játszom semmit.');
+		return msg.channel.send(`🎶 Jelenleg megy: **${serverQueue.songs[0].title}**`);
 	} else if (command === 'queue') {
-		if (!serverQueue) return msg.channel.send('There is nothing playing.');
+		if (!serverQueue) return msg.channel.send('Nincs itt semmi.');
+		let index = 0;
 		return msg.channel.send(`
-__**Song queue:**__
-${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
+__**Várakozó zenék:**__
+${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 **Now playing:** ${serverQueue.songs[0].title}
 		`);
 	} else if (command === 'pause') {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
-			return msg.channel.send('⏸ Paused the music for you!');
+			return msg.channel.send('⏸ A zene megállítva!');
 		}
-		return msg.channel.send('There is nothing playing.');
+		return msg.channel.send('Jelenleg nem játszom semmit.');
 	} else if (command === 'resume') {
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
-			return msg.channel.send('▶ Resumed the music for you!');
+			return msg.channel.send('▶ A zene folytatva!');
 		}
-		return msg.channel.send('There is nothing playing.');
+		return msg.channel.send('Jelenleg nem játszom semmit.');
 	}
 
-	return undefined;
-});
-
-/*client.on('message', message => {	
-	if(message.author.bot) return;
-	if(message.content.indexOf(prefix) !== 0) return
-	
-	const args = message.content.split(' ');
-	const searchString = args.slice(1).join(' ');
-	const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
-	const serverQueue = queue.get(message.guild.id);
-
-	let command = message.content.toLowerCase().split(' ')[0];
-	command = command.slice(prefix.length)
-		
 	//New version commands
 	if(command === "szerverek") {
 		let szoveg = "**A következő szervereken vagyok elérhető:** \n\n";
@@ -180,119 +151,9 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 			szoveg += "Szerver neve: **" + guild.name + "**\n";	
 		});
 		
-		message.channel.send(message.author + " " + szoveg);
+		msg.channel.send(msg.author + " " + szoveg);
 	}
-	
-	if (command === 'play') {
-		const voiceChannel = message.member.voiceChannel;
-		if (!voiceChannel) return message.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
-		const permissions = voiceChannel.permissionsFor(message.client.user);
-		if (!permissions.has('CONNECT')) {
-			return message.channel.send('I cannot connect to your voice channel, make sure I have the proper permissions!');
-		}
-		if (!permissions.has('SPEAK')) {
-			return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
-		}
-
-		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-			const playlist = youtube.getPlaylist(url);
-			const videos = playlist.getVideos();
-			for (const video of Object.values(videos)) {
-				const video2 = youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-				handleVideo(video2, url, voiceChannel, true); // eslint-disable-line no-await-in-loop
-			}
-			return message.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
-		} else {
-			try {
-				var video = youtube.getVideo(url);
-			} catch (error) {
-				try {
-					var videos = youtube.searchVideos(searchString, 10);
-					let index = 0;
-					message.channel.send(`
-__**Song selection:**__
-${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
-Please provide a value to select one of the search results ranging from 1-10.
-					`);
-					// eslint-disable-next-line max-depth
-					try {
-						var response = message.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
-							maxMatches: 1,
-							time: 10000,
-							errors: ['time']
-						});
-					} catch (err) {
-						console.error(err);
-						return message.channel.send('No or invalid value entered, cancelling video selection.');
-					}
-					const videoIndex = parseInt(response.first().content);
-					var video = youtube.getVideoByID(videos[videoIndex - 1].id);
-				} catch (err) {
-					console.error(err);
-					return message.channel.send('🆘 I could not obtain any search results.');
-				}
-			}
-			return handleVideo(video, message, voiceChannel);
-		}
-	} 
-	
-	if (command === 'skip') {
-		if (!message.member.voiceChannel) return message.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return message.channel.send('There is nothing playing that I could skip for you.');
-		serverQueue.connection.dispatcher.end('Skip command has been used!');
-		return undefined;
-	} 
-	
-	if (command === 'stop') {
-		if (!message.member.voiceChannel) return message.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return message.channel.send('There is nothing playing that I could stop for you.');
-		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('Stop command has been used!');
-		return undefined;
-	} 
-	if (command === 'volume') {
-		if (!message.member.voiceChannel) return message.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return message.channel.send('There is nothing playing.');
-		if (!args[1]) return message.channel.send(`The current volume is: **${serverQueue.volume}**`);
-		serverQueue.volume = args[1];
-		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
-		return message.channel.send(`I set the volume to: **${args[1]}**`);
-	} 
-	
-	if (command === 'np') {
-		if (!serverQueue) return message.channel.send('There is nothing playing.');
-		return message.channel.send(`🎶 Now playing: **${serverQueue.songs[0].title}**`);
-	} 
-	
-	if (command === 'queue') {
-		if (!serverQueue) return message.channel.send('There is nothing playing.');
-		return message.channel.send(`
-__**Song queue:**__
-${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
-**Now playing:** ${serverQueue.songs[0].title}
-		`);
-	} 
-	
-	if (command === 'pause') {
-		if (serverQueue && serverQueue.playing) {
-			serverQueue.playing = false;
-			serverQueue.connection.dispatcher.pause();
-			return message.channel.send('⏸ Paused the music for you!');
-		}
-		return message.channel.send('There is nothing playing.');
-	} 
-	
-	if (command === 'resume') {
-		if (serverQueue && !serverQueue.playing) {
-			serverQueue.playing = true;
-			serverQueue.connection.dispatcher.resume();
-			return message.channel.send('▶ Resumed the music for you!');
-		}
-		return message.channel.send('There is nothing playing.');
-	}/*
-	
-	//--------------------
-	
+		
 	if(command === "help") {
 		const embed = new Discord.RichEmbed()
 		.setTitle("Segítség kell?! Itt megtalálod!")
@@ -306,22 +167,22 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		.addField(prefix + " queue", "Lista az aktuális zenei várólistáról.")
 		.addField(prefix + " stop", "Megtudod állítani a zenét.");
   		
-		message.channel.send({embed});		
+		msg.channel.send({embed});		
 	}	
 
 	if(command === "liga") {
-		message.channel.send(message.author + ", **Akutális ligák:**\n\nTeddy CUP: The Crew 2 #2 - http://www.thecrew2liga.teddhun.ml/ - Jelentkezés hamarosan indul!\nRocket League Liga #1 - http://rocketleagueliga.teddhun.ml/ - https://discord.gg/QjU7KdD - https://goo.gl/forms/lwxwKLnZyqgX7AFJ3");
+		msg.channel.send(msg.author + ", **Akutális ligák:**\n\nTeddy CUP: The Crew 2 #2 - http://www.thecrew2liga.teddhun.ml/ - Jelentkezés hamarosan indul!\nRocket League Liga #1 - http://rocketleagueliga.teddhun.ml/ - https://discord.gg/QjU7KdD - https://goo.gl/forms/lwxwKLnZyqgX7AFJ3");
 	}
 
 	if(command === "makerangget") {
-		if(message.author.id == 312631597222592522) {	
+		if(msg.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "464233102143651840");
 			let channel = guild.channels.find("id", "470963699796934656");
 
-			message.delete(1);
+			msg.delete(1);
 
 			var toSend = generateMessages();
-			let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions[idx]])];
+			let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (msg, idx) => [msg, reactions[idx]])];
 			for (let mapObj of mappedArray){
 			    channel.send(mapObj[0]).then( sent => {
 				if (mapObj[1]){
@@ -333,14 +194,14 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 	}	
 
 	if(command === "makerangget2") {
-		if(message.author.id == 312631597222592522) {	
+		if(msg.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "352591575639130112");
 			let channel = guild.channels.find("id", "479913233277255731");
 
-			message.delete(1);
+			msg.delete(1);
 
 			var toSend = generateMessages2();
-			let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions2[idx]])];
+			let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (msg, idx) => [msg, reactions2[idx]])];
 			for (let mapObj of mappedArray){
 			    channel.send(mapObj[0]).then( sent => {
 				if (mapObj[1]){
@@ -351,51 +212,13 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		}
 	}
 
-	if(command === "play") {
-		if(!args[1]) return message.channel.send(message.author + ", Elsőnek adj meg egy linket!");
-		if(!message.member.voiceChannel) return message.channel.send(message.author + ", Nem tudok oda menni hozzád!");
-		if(!ytdl.validateURL(args[1])) return message.channel.send(message.author + ", Ez a link nem érvényes!");
-
-		let info = ytdl.getInfo(args[1]);
-				
-		if(!servers[message.guild.id]) servers[message.guild.id] = {
-			videoTitle: info.title,
-			requester: message.author,
-			queue: []
-		};
-
-		var server = servers[message.guild.id];
-
-		server.queue.push(args[1]);
-	
-		if(message.guild.voiceConnection) message.channel.send(message.author + `, ${server.videoTitle} hozzáadva a lejátszási listához! | Kérte: ${server.requester}`);
-		else {
-			message.member.voiceChannel.join().then(function(connection) {
-				play(connection, message);
-				message.channel.send(`Most játszom: ${server.videoTitle} | Kérte: ${server.requester}`);
-			});
-		}		
-	}
-
-	if(command === "skip") {
-		var server = servers[message.guild.id];
-
-		if(server.dispatcher) server.dispatcher.end();
-	}
-
-	if(command === "stop") {
-		var server = servers[message.guild.id];
-
-		if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();		
-	}
-	
 	if(command === "addstream") {
-		if(message.author.id == 312631597222592522) {	
+		if(msg.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "352591575639130112");
 			let channel = guild.channels.find("id", "384300207933882370");	
 
-			message.channel.send(message.author + ", Menetrend kiküldve!").then(sent => {
-				message.delete(1);
+			msg.channel.send(msg.author + ", Menetrend kiküldve!").then(sent => {
+				msg.delete(1);
 				sent.delete(5000);
 
 				var idoszak = "2018.11.05 - 2018.11.11";
@@ -452,14 +275,14 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 	
 	
 	if(command === "twitch") {
-		if(message.guild.id == 471294084732944406) {
-			message.channel.send(message.author + ", Gyere és nézz fel ide is: https://twitch.tv/teddhun");	
+		if(msg.guild.id == 471294084732944406) {
+			msg.channel.send(msg.author + ", Gyere és nézz fel ide is: https://twitch.tv/teddhun");	
 		}
 	}
 	
 	if(command === "youtube") {
-		if(message.guild.id == 471294084732944406) {		
-			message.channel.send(message.author + ", https://www.youtube.com/channel/UC2Lbgg1O-Qv9Bq-VV1g6SVw");	
+		if(msg.guild.id == 471294084732944406) {		
+			msg.channel.send(msg.author + ", https://www.youtube.com/channel/UC2Lbgg1O-Qv9Bq-VV1g6SVw");	
 		}
 	}	
 	
@@ -468,7 +291,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		let str = args[1];
 		let id = str.replace(/[<@!>]/g, '');
 
-		message.delete(1);
+		msg.delete(1);
 			
 		client.fetchUser(id).then(user => {
 			user.send({embed: {
@@ -516,7 +339,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		let str = args[1];
 		let id = str.replace(/[<@!>]/g, '');
 
-		message.delete(1);
+		msg.delete(1);
 
 		client.fetchUser(id).then(user => {
 			user.send({embed: {
@@ -541,7 +364,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 	}
 	
 	if(command == "frissit") {
-		if(message.guild.id == 326001549711114241) {
+		if(msg.guild.id == 326001549711114241) {
 			let guild = client.guilds.find("id", "326001549711114241");// zozi dcje
 			let membercount = "Tagok: " + guild.members.size;
 			let usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
@@ -552,13 +375,16 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 			membercountch.setName(membercount);
 			usercountch.setName(usercount);
 			botcountch.setName(botcount);
-			message.channel.sendMessage(message.author + " Átírva!").then(sent => {
-				message.delete(1);
+			msg.channel.sendMessage(message.author + " Átírva!").then(sent => {
+				msg.delete(1);
 				sent.delete(5000);
 			});
 		}
 	}
-});*/
+	
+	return undefined;
+});
+
 
 client.on("guildMemberAdd", (member) => {
   	const guild = member.guild;
