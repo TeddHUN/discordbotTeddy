@@ -79,7 +79,6 @@ __**Válasz az alábbiak közül:**__
 ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
 A válaszodat 1-10 -es számozással várom válaszban.
 					`);
-					// eslint-disable-next-line max-depth
 					try {
 						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
 							maxMatches: 1,
@@ -161,11 +160,11 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 		.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg")
 		.setTimestamp()
 		
-		.addField(prefix + " liga", "Lista az aktuális ligákról.")
-		.addField(prefix + " play [url]", "Zene lejátszás Youtube-ról.")
-		.addField(prefix + " skip", "Aktuális zene továbbléptetése.")
-		.addField(prefix + " queue", "Lista az aktuális zenei várólistáról.")
-		.addField(prefix + " stop", "Megtudod állítani a zenét.");
+		.addField(prefix + "liga", "Lista az aktuális ligákról.")
+		.addField(prefix + "play [url]", "Zene lejátszás Youtube-ról.")
+		.addField(prefix + "skip", "Aktuális zene továbbléptetése.")
+		.addField(prefix + "queue", "Lista az aktuális zenei várólistáról.")
+		.addField(prefix + "stop", "Megtudod állítani a zenét.");
   		
 		msg.channel.send({embed});		
 	}	
