@@ -374,7 +374,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 			membercountch.setName(membercount);
 			usercountch.setName(usercount);
 			botcountch.setName(botcount);
-			msg.channel.sendMessage(message.author + " Átírva!").then(sent => {
+			msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
 				msg.delete(1);
 				sent.delete(5000);
 			});
