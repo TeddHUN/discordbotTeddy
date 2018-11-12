@@ -115,7 +115,7 @@ A válaszodat 1-10 -es számozással várom válaszban.
 		if (!args[1]) return msg.channel.send(`Jelenlegi hangerő: **${serverQueue.volume}**`);
 		serverQueue.volume = args[1];
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
-		return msg.channel.send(`I set the volume to: **${args[1]}**`);
+		return msg.channel.send(`Hangerő beállítva: **${args[1]}** -ra/re!`);
 	} else if (command === 'np') {
 		if (!serverQueue) return msg.channel.send('Jelenleg nem játszom semmit.');
 		return msg.channel.send(`🎶 Jelenleg megy: **${serverQueue.songs[0].title}**`);
