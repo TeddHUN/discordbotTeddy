@@ -50,7 +50,7 @@ client.on('message', async msg => { // eslint-disable-line
 
 	if (command === 'play') {
 		const voiceChannel = msg.member.voiceChannel;
-		if (!voiceChannel) return msg.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
+		if (!voiceChannel) return msg.channel.send(msg.author + ", Ahhoz, hogy oda tudjak menni hozzád egy hangcsatornában kell lenned!");
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
 		if (!permissions.has('CONNECT')) {
 			return msg.channel.send(msg.author + " , Nem tudok csatlakozni a csatornádhoz mert nincs jogom a csatlakozáshoz!");
@@ -125,7 +125,7 @@ A válaszodat 1-10 -es számozással várom válaszban.
 		return msg.channel.send(`
 __**Várakozó zenék:**__
 ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
-**Now playing:** ${serverQueue.songs[0].title}
+**🎶 Jelenleg megy:** ${serverQueue.songs[0].title}
 		`);
 	} else if (command === 'pause') {
 		if (serverQueue && serverQueue.playing) {
