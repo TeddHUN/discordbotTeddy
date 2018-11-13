@@ -33,7 +33,7 @@ function generateMessages2(){
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setGame('Folyamatos fejlesztés alatt...', "https://twitch.tv/teddhun");
+    client.user.setGame('MusicBOT funkció...', "https://twitch.tv/teddhun");
 });
 
 client.on('message', async msg => { // eslint-disable-line
@@ -64,9 +64,9 @@ client.on('message', async msg => { // eslint-disable-line
 			const videos = await playlist.getVideos();
 			for (const video of Object.values(videos)) {
 				const video2 = await youtube.getVideoByID(video.id);
-				await handleVideo(video2, url, voiceChannel, true);
+				await handleVideo(video2, url, voiceChannel, true, msg.author);
 			}
-			return msg.channel.send(`✅ Zene hozzáadva a lejátszási listához: **${playlist.title}**`);
+			return msg.channel.send(`✅ Zene hozzáadva a lejátszási listához: **${playlist.title}**, Kérte: **${msg.author}**`);
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
@@ -96,7 +96,7 @@ A válaszodat 1-10 -es számozással várom válaszban.
 					return msg.channel.send('🆘 Nem tudok lejátszani az alábbi listából. Írj a fejlesztőmnek! (TeddHUN)');
 				}
 			}
-			return handleVideo(video, msg, voiceChannel);
+			return handleVideo(video, msg, voiceChannel, false, msg.author);
 		}
 	} else if (command === 'skip') {
 		if (!msg.member.voiceChannel) return msg.channel.send(msg.author + ', Nem vagy hangcsatornában!');
@@ -378,6 +378,21 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 				msg.delete(1);
 				sent.delete(5000);
 			});
+		} else if(msg.guild.id == 352591575639130112) {
+			let guild = client.guilds.find("id", "352591575639130112");// dcm
+			let membercount = "Tagok: " + guild.members.size;
+			let usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
+			let botcount = "Botok: " + guild.members.filter(member => member.user.bot).size;
+			const membercountch = guild.channels.find("id", "512050355153010698");	
+			let usercountch = guild.channels.find("id", "512050639170306055");	
+			let botcountch = guild.channels.find("id", "512050691728998402");	
+			membercountch.setName(membercount);
+			usercountch.setName(usercount);
+			botcountch.setName(botcount);
+			msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
+				msg.delete(1);
+				sent.delete(5000);
+			});
 		}
 	}
 	
@@ -463,14 +478,22 @@ function serverStats(guild) {
 		membercountch.setName(membercount);
 		usercountch.setName(usercount);
 		botcountch.setName(botcount);
+	} else if(guild.id == 352591575639130112) { //DCm
+		const membercountch = guild.channels.find("id", "512050355153010698");	
+		let usercountch = guild.channels.find("id", "512050639170306055");	
+		let botcountch = guild.channels.find("id", "512050691728998402");	
+		membercountch.setName(membercount);
+		usercountch.setName(usercount);
+		botcountch.setName(botcount);
 	}
 }
 
-async function handleVideo(video, msg, voiceChannel, playlist = false) {
+async function handleVideo(video, msg, voiceChannel, playlist = false, kero) {
 	const serverQueue = queue.get(msg.guild.id);
 	const song = {
 		id: video.id,
 		title: video.title,
+		request: kero,
 		url: `https://www.youtube.com/watch?v=${video.id}`
 	};
 	if (!serverQueue) {
@@ -497,7 +520,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	} else {
 		serverQueue.songs.push(song);
 		if (playlist) return undefined;
-		else return msg.channel.send(`✅ Zene hozzáadva a lejátszási listához: **${song.title}**`);
+		else return msg.channel.send(`✅ Zene hozzáadva a lejátszási listához: **${song.title}**, Kérte: **${song.request}**`);
 	}
 	return undefined;
 }
@@ -521,7 +544,7 @@ function play(guild, song) {
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 
-	serverQueue.textChannel.send(`🎶 Zene elindítva: **${song.title}**`);
+	serverQueue.textChannel.send(`🎶 Zene elindítva: **${song.title}**, Kérte: **${song.request}**`);
 }
 
 // THIS  MUST  BE  THIS  WAY
