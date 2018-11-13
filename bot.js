@@ -383,9 +383,9 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 			let membercount = "Tagok: " + guild.members.size;
 			let usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
 			let botcount = "Botok: " + guild.members.filter(member => member.user.bot).size;
-			const membercountch = guild.channels.find("id", "512050355153010698");	
-			let usercountch = guild.channels.find("id", "512050639170306055");	
-			let botcountch = guild.channels.find("id", "512050691728998402");	
+			let membercountch = guild.channels.find("id", "512052743775715329");	
+			let usercountch = guild.channels.find("id", "512052843016880138");	
+			let botcountch = guild.channels.find("id", "512052859764736010");	
 			membercountch.setName(membercount);
 			usercountch.setName(usercount);
 			botcountch.setName(botcount);
@@ -472,16 +472,16 @@ function serverStats(guild) {
 	let botcount = "Botok: " + guild.members.filter(member => member.user.bot).size;
 	
 	if(guild.id == 326001549711114241) { //Zozi DC
-		const membercountch = guild.channels.find("id", "510797260389482496");	
+		let membercountch = guild.channels.find("id", "510797260389482496");	
 		let usercountch = guild.channels.find("id", "510797263593799690");	
 		let botcountch = guild.channels.find("id", "510797264260694018");	
 		membercountch.setName(membercount);
 		usercountch.setName(usercount);
 		botcountch.setName(botcount);
 	} else if(guild.id == 352591575639130112) { //DCm
-		const membercountch = guild.channels.find("id", "512050355153010698");	
-		let usercountch = guild.channels.find("id", "512050639170306055");	
-		let botcountch = guild.channels.find("id", "512050691728998402");	
+		let membercountch = guild.channels.find("id", "512052743775715329");	
+		let usercountch = guild.channels.find("id", "512052843016880138");	
+		let botcountch = guild.channels.find("id", "512052859764736010");	
 		membercountch.setName(membercount);
 		usercountch.setName(usercount);
 		botcountch.setName(botcount);
