@@ -110,6 +110,9 @@ A válaszodat 1-10 -es számozással várom válaszban.
 		serverQueue.connection.dispatcher.end('Leallitva!');
 		return undefined;
 	} else if (command === 'volume') {
+		msg.channel.send(msg.author + ", Jelenleg nem elérhető funkció!");
+		return undefined;
+		
 		if (!msg.member.voiceChannel) return msg.channel.send(msg.author + ', Nem vagy hangcsatornában!');
 		if (!serverQueue) return msg.channel.send('Jelenleg nem játszom semmit.');
 		if (!args[1]) return msg.channel.send(`Jelenlegi hangerő: **${serverQueue.volume}**`);
@@ -118,14 +121,14 @@ A válaszodat 1-10 -es számozással várom válaszban.
 		return msg.channel.send(`Hangerő beállítva: **${args[1]}** -ra/re!`);
 	} else if (command === 'np') {
 		if (!serverQueue) return msg.channel.send('Jelenleg nem játszom semmit.');
-		return msg.channel.send(`🎶 Jelenleg megy: **${serverQueue.songs[0].title}**`);
+		return msg.channel.send(`🎶 Jelenleg megy: **${serverQueue.songs[0].title}**, Kérte: **${serverQueue.songs[0].request}**`);
 	} else if (command === 'queue') {
 		if (!serverQueue) return msg.channel.send('Nincs itt semmi.');
 		let index = 0;
 		return msg.channel.send(`
 __**Várakozó zenék:**__
-${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
-**🎶 Jelenleg megy:** ${serverQueue.songs[0].title}
+${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${song.request}**`).join('\n')}
+**🎶 Jelenleg megy:** ${serverQueue.songs[0].title}, Kérte: ${serverQueue.songs[0].request}
 		`);
 	} else if (command === 'pause') {
 		if (serverQueue && serverQueue.playing) {
