@@ -396,7 +396,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				msg.delete(1);
 				sent.delete(5000);
 			});
-		} else if(msg.guild.id == 352591575639130112) {
+		} else if(msg.guild.id == 492678754678865940) {
 			let guild = client.guilds.find("id", "492678754678865940");// sanyi dc
 			let membercount = "Tagok: " + guild.members.size;
 			let usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
