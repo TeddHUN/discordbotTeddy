@@ -152,7 +152,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		}
 
 		if (!args[1]) return undefined;
-		let guild = client.guilds.find("id", "352591575639130112");
+		let guild = client.guilds.find("id", args[1]);
    		if(!guild) return msg.channel.send("Nincs ilyen szerver!");
 		
 		guild.leave()
