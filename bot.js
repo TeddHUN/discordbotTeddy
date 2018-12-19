@@ -148,10 +148,10 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 
 	 if (command === 'leaveserver') {
 		if(msg.author.id != "312631597222592522") {
-			return undefined;	
+			return msg.channel.send("Nincs hozzá jogod, bibíbí!");;	
 		}
 
-		if (!args[1]) return undefined;
+		if (!args[1]) return msg.channel.send("Nincs ilyen szerver!");
 		let guild = client.guilds.find("id", args[1]);
    		if(!guild) return msg.channel.send("Nincs ilyen szerver!");
 		
@@ -409,21 +409,6 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				msg.delete(1);
 				sent.delete(5000);
 			});
-		} else if(msg.guild.id == 492678754678865940) {
-			let guild = client.guilds.find("id", "492678754678865940");// sanyi dc
-			let membercount = "Tagok: " + guild.members.size;
-			let usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
-			let botcount = "Botok: " + guild.members.filter(member => member.user.bot).size;
-			let membercountch = guild.channels.find("id", "509750459779776532");	
-			let usercountch = guild.channels.find("id", "512713137674256394");	
-			let botcountch = guild.channels.find("id", "509750460450603028");	
-			membercountch.setName(membercount);
-			usercountch.setName(usercount);
-			botcountch.setName(botcount);
-			msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
-				msg.delete(1);
-				sent.delete(5000);
-			});
 		}
 	}
 	
@@ -513,13 +498,6 @@ function serverStats(guild) {
 		let membercountch = guild.channels.find("id", "512052743775715329");	
 		let usercountch = guild.channels.find("id", "512052843016880138");	
 		let botcountch = guild.channels.find("id", "512052859764736010");	
-		membercountch.setName(membercount);
-		usercountch.setName(usercount);
-		botcountch.setName(botcount);
-	} else if(guild.id == 492678754678865940) { //sanyi dc
-		let membercountch = guild.channels.find("id", "509750459779776532");	
-		let usercountch = guild.channels.find("id", "512713137674256394");	
-		let botcountch = guild.channels.find("id", "509750460450603028");	
 		membercountch.setName(membercount);
 		usercountch.setName(usercount);
 		botcountch.setName(botcount);
