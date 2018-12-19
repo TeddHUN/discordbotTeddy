@@ -146,11 +146,24 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		return msg.channel.send('Jelenleg nem játszom semmit.');
 	}
 
+	 if (command === 'leaveserver') {
+		if(msg.author.id != "312631597222592522") {
+			return undefined;	
+		}
+
+		if (!args[1]) return undefined;
+		let guild = client.guilds.find("id", "352591575639130112");
+   		if(!guild) return msg.channel.send("Nincs ilyen szerver!");
+		
+		guild.leave()
+		msg.channel.send("A szerverről leléptem!");
+	}
+	
 	//New version commands
 	if(command === "szerverek") {
 		let szoveg = "**A következő szervereken vagyok elérhető:** \n\n";
 		client.guilds.forEach(guild => {
-			szoveg += "Szerver neve: **" + guild.name + "**\n";	
+			szoveg += "Szerver neve: **" + guild.name + ", ID: " + guild.id + "**\n";	
 		});
 		
 		msg.channel.send(msg.author + " " + szoveg);
