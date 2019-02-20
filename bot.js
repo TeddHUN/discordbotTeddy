@@ -409,6 +409,18 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				msg.delete(1);
 				sent.delete(5000);
 			});
+		} else if(msg.guild.id == 547498318834565130) {//klandC
+			let guild = client.guilds.find("id", "547498318834565130");// dcm
+			let membercount = "Tagok: " + guild.members.filter(member => !member.user.bot).size;
+			let botcount = "Botok: " + guild.members.filter(member => member.user.bot).size;	
+			let membercountch = guild.channels.find("id", "547811561654190085");	
+			let botcountch = guild.channels.find("id", "547811588883873824");
+			membercountch.setName(membercount);
+			botcountch.setName(botcount);
+			msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
+				msg.delete(1);
+				sent.delete(5000);
+			});	
 		}
 	}
 	
@@ -500,6 +512,11 @@ function serverStats(guild) {
 		let botcountch = guild.channels.find("id", "512052859764736010");	
 		membercountch.setName(membercount);
 		usercountch.setName(usercount);
+		botcountch.setName(botcount);
+	} else if(guild.id == 547498318834565130) {//klandC	
+		let membercountch = guild.channels.find("id", "547811561654190085");	
+		let botcountch = guild.channels.find("id", "547811588883873824");	
+		membercountch.setName(usercount);
 		botcountch.setName(botcount);
 	}
 }
