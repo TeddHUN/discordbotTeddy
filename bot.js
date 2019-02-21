@@ -33,7 +33,7 @@ function generateMessages2(){
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setActivity('Már MusicBOT funkcióval', { type: 'WATCHING' });
+  //  client.user.setActivity('Már MusicBOT funkcióval', { type: 'WATCHING' });
 });
 
 client.on('message', async msg => { // eslint-disable-line
