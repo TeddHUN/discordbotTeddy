@@ -19,21 +19,10 @@ function generateMessages(){
     return messages;
 }
 
-let initialMessage2 = `**Szertnél** egy játék rangot?!\nNyugodtan kattints arra amelyikkel játszol, automatikusan megkapod!`;
-const roles2 = ["PUBG", "Rainbow Six Siege", "Warframe", "The Crew 2", "Deceit", "Dead by Daylight", "Rocket League"];
-const reactions2 = ["🆕", "🆕", "🆕", "🆕", "🆕", "🆕", "🆕"];
-
-function generateMessages2(){
-    var messages = [];
-    messages.push(initialMessage2);
-    for (let role of roles2) messages.push(`**${role}**`);
-    return messages;
-}
-
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setActivity('Már MusicBOT funkcióval', { type: 'WATCHING' });
+    client.user.setActivity('MusicBOT, Statisztika...', { type: 'WATCHING' });
 });
 
 client.on('message', async msg => { // eslint-disable-line
@@ -176,7 +165,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg")
 		.setTimestamp()
 		
-		.addField(prefix + "liga", "Lista az aktuális ligákról.")
+		//.addField(prefix + "liga", "Lista az aktuális ligákról.")
 		.addField(prefix + "play [url]", "Zene lejátszás Youtube-ról.")
 		.addField(prefix + "skip", "Aktuális zene továbbléptetése.")
 		.addField(prefix + "queue", "Lista az aktuális zenei várólistáról.")
@@ -184,11 +173,6 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
   		
 		msg.channel.send({embed});		
 	}	
-
-	if(command === "liga") {
-		msg.channel.send(msg.author + ", **Akutális ligák:**\n\nTeddy CUP: The Crew 2 #2 - http://www.thecrew2liga.teddhun.ml/ - Jelentkezés hamarosan indul!\nRocket League Liga #1 - http://rocketleagueliga.teddhun.ml/ - https://discord.gg/QjU7KdD - https://goo.gl/forms/lwxwKLnZyqgX7AFJ3");
-	}
-
 	if(command === "makerangget") {
 		if(msg.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "464233102143651840");
@@ -208,26 +192,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		}
 	}	
 
-	if(command === "makerangget2") {
-		if(msg.author.id == 312631597222592522) {	
-			let guild = client.guilds.find("id", "352591575639130112");
-			let channel = guild.channels.find("id", "479913233277255731");
-
-			msg.delete(1);
-
-			var toSend = generateMessages2();
-			let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (msg, idx) => [msg, reactions2[idx]])];
-			for (let mapObj of mappedArray){
-			    channel.send(mapObj[0]).then( sent => {
-				if (mapObj[1]){
-				  sent.react(mapObj[1]);  
-				} 
-			    });
-			}
-		}
-	}
-
-	if(command === "addstream") {
+	/*if(command === "addstream") {
 		if(msg.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "352591575639130112");
 			let channel = guild.channels.find("id", "384300207933882370");	
@@ -287,19 +252,6 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			});
 		}
 	}
-	
-	
-	if(command === "twitch") {
-		if(msg.guild.id == 471294084732944406) {
-			msg.channel.send(msg.author + ", Gyere és nézz fel ide is: https://twitch.tv/teddhun");	
-		}
-	}
-	
-	if(command === "youtube") {
-		if(msg.guild.id == 471294084732944406) {		
-			msg.channel.send(msg.author + ", https://www.youtube.com/channel/UC2Lbgg1O-Qv9Bq-VV1g6SVw");	
-		}
-	}	
 	
 	if(command === "makemod") {
 		if(!args[1]) return;
@@ -376,52 +328,16 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				}
 			});
 		});
-	}
+	}*/
 	
 	if(command == "frissit") {
-		if(msg.guild.id == 326001549711114241) {
-			let guild = client.guilds.find("id", "326001549711114241");// zozi dcje
-			let membercount = "Tagok: " + guild.members.size;
-			let usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
-			let botcount = "Botok: " + guild.members.filter(member => member.user.bot).size;
-			const membercountch = guild.channels.find("id", "510797260389482496");	
-			let usercountch = guild.channels.find("id", "510797263593799690");	
-			let botcountch = guild.channels.find("id", "510797264260694018");	
-			membercountch.setName(membercount);
-			usercountch.setName(usercount);
-			botcountch.setName(botcount);
-			msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
-				msg.delete(1);
-				sent.delete(5000);
-			});
-		} else if(msg.guild.id == 352591575639130112) {
-			let guild = client.guilds.find("id", "352591575639130112");// dcm
-			let membercount = "Tagok: " + guild.members.size;
-			let usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
-			let botcount = "Botok: " + guild.members.filter(member => member.user.bot).size;
-			let membercountch = guild.channels.find("id", "512052743775715329");	
-			let usercountch = guild.channels.find("id", "512052843016880138");	
-			let botcountch = guild.channels.find("id", "512052859764736010");	
-			membercountch.setName(membercount);
-			usercountch.setName(usercount);
-			botcountch.setName(botcount);
-			msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
-				msg.delete(1);
-				sent.delete(5000);
-			});
-		} else if(msg.guild.id == 547498318834565130) {//klandC
-			let guild = client.guilds.find("id", "547498318834565130");// dcm
-			let membercount = "Tagok: " + guild.members.filter(member => !member.user.bot).size;
-			let botcount = "Botok: " + guild.members.filter(member => member.user.bot).size;	
-			let membercountch = guild.channels.find("id", "547811561654190085");	
-			let botcountch = guild.channels.find("id", "547811588883873824");
-			membercountch.setName(membercount);
-			botcountch.setName(botcount);
-			msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
-				msg.delete(1);
-				sent.delete(5000);
-			});	
-		}
+		serverStats(326001549711114241);
+		serverStats(352591575639130112);
+		serverStats(547498318834565130);
+		msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
+			msg.delete(1);
+			sent.delete(5000);
+		});		
 	}
 	
 	return undefined;
