@@ -61,12 +61,12 @@ client.on('message', async msg => { // eslint-disable-line
 				var video = await youtube.getVideo(url);
 			} catch (error) {
 				try {
-					var videos = await youtube.searchVideos(searchString, 10);
+					var videos = await youtube.searchVideos(searchString, 5);
 					let index = 0;
-					msg.channel.send(msg.author + `, Több találatot találtam!\n
+					var talalatok = msg.channel.send(msg.author + `, Több találatot találtam!\n
 __**Válasz az alábbiak közül:**__
 ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
-A válaszodat 1-10 -es számozással várom válaszban.
+A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)
 					`);
 					try {
 						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
@@ -76,6 +76,7 @@ A válaszodat 1-10 -es számozással várom válaszban.
 						});
 					} catch (err) {
 						console.error(err);
+						talalatok.delete();
 						return msg.channel.send('Nem érkezett válasz ezért nem történik lejátszás.');
 					}
 					const videoIndex = parseInt(response.first().content);
@@ -99,7 +100,7 @@ A válaszodat 1-10 -es számozással várom válaszban.
 		serverQueue.connection.dispatcher.end('Leallitva!');
 		return undefined;
 	} else if (command === 'volume') {
-		msg.channel.send(msg.author + ", Jelenleg nem elérhető funkció!");
+		msg.channel.send(msg.author + ", A funkció korlátozott!");
 		return undefined;
 		
 		if (!msg.member.voiceChannel) return msg.channel.send(msg.author + ', Nem vagy hangcsatornában!');
@@ -140,15 +141,14 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			return msg.channel.send("Nincs hozzá jogod, bibíbí!");;	
 		}
 
-		if (!args[1]) return msg.channel.send("Nincs ilyen szerver!");
+		if (!args[1]) return msg.channel.send("**Használat:** --leaveserver `[SzerverID]`");
 		let guild = client.guilds.find("id", args[1]);
    		if(!guild) return msg.channel.send("Nincs ilyen szerver!");
 		
 		guild.leave()
 		msg.channel.send("A szerverről leléptem!");
 	}
-	
-	//New version commands
+
 	if(command === "szerverek") {
 		let szoveg = "**A következő szervereken vagyok elérhető:** \n\n";
 		client.guilds.forEach(guild => {
@@ -160,18 +160,20 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		
 	if(command === "help") {
 		const embed = new Discord.RichEmbed()
-		.setTitle("Segítség kell?! Itt megtalálod!")
+		.setTitle("MusicBOT")
 		.setColor(0xFFFFFF)
 		.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg")
 		.setTimestamp()
 		
 		//.addField(prefix + "liga", "Lista az aktuális ligákról.")
-		.addField(prefix + "play [url]", "Zene lejátszás Youtube-ról.")
+		.addField(prefix + "play [url/név]", "Zene lejátszás Youtube-ról.")
 		.addField(prefix + "skip", "Aktuális zene továbbléptetése.")
 		.addField(prefix + "queue", "Lista az aktuális zenei várólistáról.")
-		.addField(prefix + "stop", "Megtudod állítani a zenét.");
+		.addField(prefix + "stop", "Megtudod állítani a zenét.")
+		.addField(prefix + "volume", "A hangerő állítása.");
   		
-		msg.channel.send({embed});		
+		msg.channel.send("A segítséget elküldtem privát üzenetben!");
+		msg.author.send({embed});		
 	}	
 	if(command === "makerangget") {
 		if(msg.author.id == 312631597222592522) {	
