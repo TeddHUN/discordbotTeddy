@@ -331,9 +331,9 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 	}*/
 	
 	if(command == "frissit") {
-		serverStats(326001549711114241);
-		serverStats(352591575639130112);
-		serverStats(547498318834565130);
+		serverStats(client.guilds.find("id", "326001549711114241"));
+		serverStats(client.guilds.find("id", "352591575639130112"));
+		serverStats(client.guilds.find("id", "547498318834565130"));
 		msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
 			msg.delete(1);
 			sent.delete(5000);
