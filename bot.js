@@ -439,9 +439,9 @@ function serverStats(guild) {
 		botcountch.setName(botcount);
 	} else if(guild.id == 547498318834565130) {//klandC	
 		let membercountch = guild.channels.find("id", "547811561654190085");	
-		let botcountch = guild.channels.find("id", "547811588883873824");	
+
+		let usercount = "E: " + guild.members.filter(member => !member.user.bot).size + " / B: " + guild.members.filter(member => member.user.bot).size;
 		membercountch.setName(usercount);
-		botcountch.setName(botcount);
 	}
 }
 
