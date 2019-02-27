@@ -1,6 +1,6 @@
 {
   "mention": "here",
-  "twitch_client_id": "<SET_ME>",
+  "twitch_client_id": "dcbot",
   "twitch_check_interval_ms": 60000,
   "twitch_channels": "wearethevr"
 }
