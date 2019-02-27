@@ -612,11 +612,6 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	let existingMessage = oldMsgs[messageDiscriminator] || null;
 
 	if (existingMessage) {
-	    // Updating existing message
-	    existingMessage.edit(msgFormatted, {msgEmbed}).then((message) => {
-		console.log('[Discord]', `Updated announce msg in #${targetChannel.name} on ${targetChannel.guild.name}`);
-	    });
-
 	    if (!twitchChannelIsLive) {
 		// Mem cleanup: If channel just went offline, delete the entry in the message list
 		delete oldMsgs[messageDiscriminator];
