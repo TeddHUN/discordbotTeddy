@@ -586,23 +586,6 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 
     // Broadcast to all target channels
     let msgFormatted = `${twitchChannel.display_name} élőadásban van, gyere és nézz be! `;
-
-/*    let msgEmbed = new Discord.MessageEmbed({
-        description: `:red_circle: **${twitchChannel.display_name} jelenleg élőadásban van!**`,
-        title: twitchChannel.url,
-        url: twitchChannel.url
-    });
-
-
-    msgEmbed.setColor(twitchChannelIsLive ? "RED" : "GREY");
-    msgEmbed.setThumbnail(twitchStream.preview.medium + "?t=" + cacheBustTs);
-    msgEmbed.addField("Játék", twitchStream.game || "Nincs beállítva", true);
-    msgEmbed.addField("Státusz", twitchChannelIsLive ? `Élőadás ${twitchStream.viewers} nézővel` : 'Az adás végetért', true);
-    msgEmbed.setFooter(twitchChannel.status, twitchChannel.logo);
-
-    if (!twitchChannelIsLive) {
-        msgEmbed.setDescription(`:white_circle:  ${twitchChannel.display_name} élőadást indított!`);
-    }*/
 	
     let cacheBustTs = (Date.now() / 1000).toFixed(0);
 	
@@ -612,10 +595,10 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
   	.setThumbnail(twitchChannel.logo)
 	.setDescription("https://twitch.tv/" + twitchChannel.display_name)
     	.addField("Játék", twitchStream.game || "Nincs beállítva", true)
-    	.addBlankField(true)
+    	.addBlankField(false)
     	.addField("Nézők", twitchStream.viewers || "Az adás végetért.", true)
 	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs)
-    	.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg")
+    	//.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg")
     	.setTimestamp();
 
     let anySent = false;
