@@ -587,13 +587,12 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     // Broadcast to all target channels
     let msgFormatted = `${twitchChannel.display_name} élőadást indított!`;
 
-    let msgEmbed = new Discord.MessageEmbed({
+/*    let msgEmbed = new Discord.MessageEmbed({
         description: `:red_circle: **${twitchChannel.display_name} jelenleg élőadásban van!**`,
         title: twitchChannel.url,
         url: twitchChannel.url
     });
 
-    let cacheBustTs = (Date.now() / 1000).toFixed(0);
 
     msgEmbed.setColor(twitchChannelIsLive ? "RED" : "GREY");
     msgEmbed.setThumbnail(twitchStream.preview.medium + "?t=" + cacheBustTs);
@@ -603,7 +602,15 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 
     if (!twitchChannelIsLive) {
         msgEmbed.setDescription(`:white_circle:  ${twitchChannel.display_name} élőadást indított!`);
-    }
+    }*/
+	
+    let cacheBustTs = (Date.now() / 1000).toFixed(0);
+	
+    const msgEmbed = new Discord.RichEmbed()
+	.setColor(0x6441A4)
+	.setTitle(twitchChannel.display_name)
+	.setDescription("Teszt")
+	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs);
 
     let anySent = false;
     let didSendVoice = false;
@@ -616,9 +623,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 
 	if (existingMessage) {
 	    // Updating existing message
-	    existingMessage.edit(msgFormatted, {
-		embed: msgEmbed
-	    }).then((message) => {
+	    existingMessage.edit(msgFormatted, {msgEmbed}).then((message) => {
 		console.log('[Discord]', `Updated announce msg in #${targetChannel.name} on ${targetChannel.guild.name}`);
 	    });
 
