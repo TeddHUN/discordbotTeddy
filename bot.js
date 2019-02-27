@@ -614,7 +614,8 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 
     let anySent = false;
     let didSendVoice = false;
-
+	
+    let guild = client.guilds.find("id", "547498318834565130");
     let targetChannel = guild.channels.find("id", "547557423318040603");//"bot-channel";//"streamerek";
     try {
 	// Either send a new message, or update an old one
