@@ -632,25 +632,22 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	    }
 	} else {
 	    // Sending a new message
-	    if (!twitchChannelIsLive) {
-		// We do not post "new" notifications for channels going/being offline
-		break;
-	    } 
-		
-	    let mentionMode = config.mention || null;
-	    let msgToSend = msgFormatted;
+	    if (twitchChannelIsLive) {		
+		    let mentionMode = config.mention || null;
+		    let msgToSend = msgFormatted;
 
-	    if (mentionMode) {
-		msgToSend = msgFormatted + ` @${mentionMode}`
+		    if (mentionMode) {
+			msgToSend = msgFormatted + ` @${mentionMode}`
+		    }
+
+		    targetChannel.send(msgToSend, {
+			embed: msgEmbed
+		    })
+		    .then((message) => {
+			oldMsgs[messageDiscriminator] = message;
+			console.log('[Discord]', `Sent announce msg to #${targetChannel.name} on ${targetChannel.guild.name}`);
+		    });
 	    }
-
-	    targetChannel.send(msgToSend, {
-		embed: msgEmbed
-	    })
-	    .then((message) => {
-		oldMsgs[messageDiscriminator] = message;
-		console.log('[Discord]', `Sent announce msg to #${targetChannel.name} on ${targetChannel.guild.name}`);
-	    });
 	}
 
 	anySent = true;
