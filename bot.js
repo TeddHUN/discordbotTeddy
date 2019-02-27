@@ -27,7 +27,6 @@ client.on('ready', () => {
     client.user.setStatus("dnd");
     client.user.setActivity('MusicBOT, Statisztika...', { type: 'WATCHING' });
 	
-    StreamActivity.init(client);
     TwitchMonitor.start();
 });
 
