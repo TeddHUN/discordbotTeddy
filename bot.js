@@ -634,11 +634,9 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	    // Sending a new message
 	    if (!twitchChannelIsLive) {
 		// We do not post "new" notifications for channels going/being offline
-		continue;
-	    }
-
-	    // Expand the message with a @mention for "here" or "everyone"
-	    // We don't do this in updates because it causes some people to get spammed
+		break;
+	    } 
+		
 	    let mentionMode = config.mention || null;
 	    let msgToSend = msgFormatted;
 
