@@ -585,7 +585,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     StreamActivity.setChannelOnline(twitchChannel);
 
     // Broadcast to all target channels
-    let msgFormatted = `${twitchChannel.display_name} élőadást indított!`;
+    let msgFormatted = `${twitchChannel.display_name} élőadásban van, gyere és nézz be! `;
 
 /*    let msgEmbed = new Discord.MessageEmbed({
         description: `:red_circle: **${twitchChannel.display_name} jelenleg élőadásban van!**`,
@@ -608,9 +608,13 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	
     const msgEmbed = new Discord.RichEmbed()
 	.setColor(0x6441A4)
-	.setTitle(twitchChannel.display_name)
-	.setDescription("Teszt")
-	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs);
+	.setAuthor(twitchChannel.display_name, twitchChannel.logo)
+	.setDescription("https://twitch.tv/" + twitchChannel.display_name)
+    	.addField("Játék", twitchStream.game || "Nincs beállítva", true)
+    	.addField("Nézők", twitchStream.viewers || "Az adás végetért.", true)
+    	.addBlankField(true)
+	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs)
+    	.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg");
 
     let anySent = false;
     let didSendVoice = false;
