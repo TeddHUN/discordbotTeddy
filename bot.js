@@ -543,7 +543,7 @@ class StreamActivity {
      * Either clears the activity if no channels are online, or sets it to "watching" if a stream is up.
      */
     static updateActivity() {
-        let displayChannel = this.getDisplayChannel();
+      /*  let displayChannel = this.getDisplayChannel();
 
         if (displayChannel) {
             this.discordClient.user.setActivity(displayChannel.display_name, {
@@ -556,7 +556,7 @@ class StreamActivity {
             console.log('[StreamActivity]', 'Cleared current activity.');
 
             this.discordClient.user.setActivity(null);
-        }
+        }*/
     }
 
     static init(discordClient) {
