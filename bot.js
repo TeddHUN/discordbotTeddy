@@ -608,13 +608,15 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	
     const msgEmbed = new Discord.RichEmbed()
 	.setColor(0x6441A4)
-	.setAuthor(twitchChannel.display_name, twitchChannel.logo)
+	.setAuthor(twitchChannel.display_name, twitchChannel.logo)    
+  	.setThumbnail(twitchChannel.logo)
 	.setDescription("https://twitch.tv/" + twitchChannel.display_name)
     	.addField("Játék", twitchStream.game || "Nincs beállítva", true)
-    	.addField("Nézők", twitchStream.viewers || "Az adás végetért.", true)
     	.addBlankField(true)
+    	.addField("Nézők", twitchStream.viewers || "Az adás végetért.", true)
 	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs)
-    	.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg");
+    	.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg")
+    	.setTimestamp();
 
     let anySent = false;
     let didSendVoice = false;
