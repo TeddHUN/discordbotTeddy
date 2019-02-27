@@ -504,10 +504,6 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`🎶 Zene elindítva: **${song.title}**, Kérte: **${song.request}**`);
 }
 
-// THIS  MUST  BE  THIS  WAY
-client.login(process.env.BOT_TOKEN);
-
-
 class StreamActivity {
     /**
      * Registers a channel that has come online, and updates the user activity.
@@ -657,3 +653,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 
     return anySent;
 });
+
+
+// THIS  MUST  BE  THIS  WAY
+client.login(process.env.BOT_TOKEN);
