@@ -589,10 +589,10 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     StreamActivity.setChannelOnline(twitchChannel);
 
     // Broadcast to all target channels
-    let msgFormatted = `${twitchChannel.display_name} went live on Twitch!`;
+    let msgFormatted = `${twitchChannel.display_name} élőadást indított!`;
 
     let msgEmbed = new Discord.MessageEmbed({
-        description: `:red_circle: **${twitchChannel.display_name} is currently live on Twitch!**`,
+        description: `:red_circle: **${twitchChannel.display_name} jelenleg élőadásban van!**`,
         title: twitchChannel.url,
         url: twitchChannel.url
     });
@@ -612,7 +612,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let anySent = false;
     let didSendVoice = false;
 
-    let targetChannel = "streamerek";
+    let targetChannel = "bot-channel";//"streamerek";
     try {
 	// Either send a new message, or update an old one
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
