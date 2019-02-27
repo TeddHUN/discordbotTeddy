@@ -595,8 +595,8 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
   	.setThumbnail(twitchChannel.logo)
 	.setDescription("https://twitch.tv/" + twitchChannel.display_name)
     	.addField("Játék", twitchStream.game || "Nincs beállítva", true)
+    	.addField("Nézők", twitchStream.viewers || "Az adás most kezdődött!", true)
     	.addBlankField(false)
-    	.addField("Nézők", twitchStream.viewers || "Az adás végetért.", true)
 	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs)
     	//.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg")
     	.setTimestamp();
@@ -633,8 +633,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 
 		    targetChannel.send(msgToSend, {
 			embed: msgEmbed
-		    })
-		    .then((message) => {
+		    }).then((message) => {
 			oldMsgs[messageDiscriminator] = message;
 			console.log('[Discord]', `Sent announce msg to #${targetChannel.name} on ${targetChannel.guild.name}`);
 		    });
