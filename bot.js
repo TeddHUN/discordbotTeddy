@@ -5,6 +5,9 @@ const YouTube = require('simple-youtube-api');
 
 var prefix = "--";
 
+const config = require('./config.json');
+const TwitchMonitor = require("./twitch-monitor");
+
 const youtube = new YouTube("AIzaSyBKR_t85ukmSb6C7Bm-ZMmH6nrfi9j9hJ4");
 const queue = new Map();
 
@@ -23,6 +26,9 @@ client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
     client.user.setActivity('MusicBOT, Statisztika...', { type: 'WATCHING' });
+	
+    StreamActivity.init(client);
+    TwitchMonitor.start();
 });
 
 client.on('message', async msg => { // eslint-disable-line
@@ -500,3 +506,159 @@ function play(guild, song) {
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
+
+
+class StreamActivity {
+    /**
+     * Registers a channel that has come online, and updates the user activity.
+     */
+    static setChannelOnline(channel) {
+        this.onlineChannels[channel.name] = channel;
+
+        this.updateActivity();
+    }
+
+    /**
+     * Marks a channel has having gone offline, and updates the user activity if needed.
+     */
+    static setChannelOffline(channel) {
+        delete this.onlineChannels[channel.name];
+
+        this.updateActivity();
+    }
+
+    /**
+     * Fetches the channel that went online most recently, and is still currently online.
+     */
+    static getDisplayChannel() {
+        let lastChannel = null;
+
+        for (let channelName in this.onlineChannels) {
+            if (typeof channelName !== "undefined" && channelName) {
+                lastChannel = this.onlineChannels[channelName];
+            }
+        }
+
+        return lastChannel;
+    }
+
+    /**
+     * Updates the user activity on Discord.
+     * Either clears the activity if no channels are online, or sets it to "watching" if a stream is up.
+     */
+    static updateActivity() {
+        let displayChannel = this.getDisplayChannel();
+
+        if (displayChannel) {
+            this.discordClient.user.setActivity(displayChannel.display_name, {
+                "url": displayChannel.url,
+                "type": "STREAMING"
+            });
+
+            console.log('[StreamActivity]', `Update current activity: watching ${displayChannel.display_name}.`);
+        } else {
+            console.log('[StreamActivity]', 'Cleared current activity.');
+
+            this.discordClient.user.setActivity(null);
+        }
+    }
+
+    static init(discordClient) {
+        this.discordClient = discordClient;
+        this.onlineChannels = { };
+
+        this.updateActivity();
+
+        // Continue to update current stream activity every 5 minutes or so
+        // We need to do this b/c Discord sometimes refuses to update for some reason
+        // ...maybe this will help, hopefully
+        setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
+    }
+}
+
+// Listen to Twitch monitor events
+let oldMsgs = { };
+
+TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsLive) => {
+    try {
+        // Refresh channel list
+        syncServerList(false);
+    } catch (e) { }
+
+    // Update activity
+    StreamActivity.setChannelOnline(twitchChannel);
+
+    // Broadcast to all target channels
+    let msgFormatted = `${twitchChannel.display_name} went live on Twitch!`;
+
+    let msgEmbed = new Discord.MessageEmbed({
+        description: `:red_circle: **${twitchChannel.display_name} is currently live on Twitch!**`,
+        title: twitchChannel.url,
+        url: twitchChannel.url
+    });
+
+    let cacheBustTs = (Date.now() / 1000).toFixed(0);
+
+    msgEmbed.setColor(twitchChannelIsLive ? "RED" : "GREY");
+    msgEmbed.setThumbnail(twitchStream.preview.medium + "?t=" + cacheBustTs);
+    msgEmbed.addField("Játék", twitchStream.game || "Nincs beállítva", true);
+    msgEmbed.addField("Státusz", twitchChannelIsLive ? `Élőadás ${twitchStream.viewers} nézővel` : 'Az adás végetért', true);
+    msgEmbed.setFooter(twitchChannel.status, twitchChannel.logo);
+
+    if (!twitchChannelIsLive) {
+        msgEmbed.setDescription(`:white_circle:  ${twitchChannel.display_name} élőadást indított!`);
+    }
+
+    let anySent = false;
+    let didSendVoice = false;
+
+    let targetChannel = "streamerek";
+    try {
+	// Either send a new message, or update an old one
+	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
+	let existingMessage = oldMsgs[messageDiscriminator] || null;
+
+	if (existingMessage) {
+	    // Updating existing message
+	    existingMessage.edit(msgFormatted, {
+		embed: msgEmbed
+	    }).then((message) => {
+		console.log('[Discord]', `Updated announce msg in #${targetChannel.name} on ${targetChannel.guild.name}`);
+	    });
+
+	    if (!twitchChannelIsLive) {
+		// Mem cleanup: If channel just went offline, delete the entry in the message list
+		delete oldMsgs[messageDiscriminator];
+	    }
+	} else {
+	    // Sending a new message
+	    if (!twitchChannelIsLive) {
+		// We do not post "new" notifications for channels going/being offline
+		continue;
+	    }
+
+	    // Expand the message with a @mention for "here" or "everyone"
+	    // We don't do this in updates because it causes some people to get spammed
+	    let mentionMode = config.mention || null;
+	    let msgToSend = msgFormatted;
+
+	    if (mentionMode) {
+		msgToSend = msgFormatted + ` @${mentionMode}`
+	    }
+
+	    targetChannel.send(msgToSend, {
+		embed: msgEmbed
+	    })
+	    .then((message) => {
+		oldMsgs[messageDiscriminator] = message;
+		console.log('[Discord]', `Sent announce msg to #${targetChannel.name} on ${targetChannel.guild.name}`);
+	    });
+	}
+
+	anySent = true;
+    } catch (e) {
+	console.warn('[Discord]', 'Message send problem:', e);
+    }
+
+    return anySent;
+});
