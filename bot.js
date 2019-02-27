@@ -27,6 +27,7 @@ client.on('ready', () => {
     client.user.setStatus("dnd");
     client.user.setActivity('MusicBOT, Statisztika...', { type: 'WATCHING' });
 	
+    StreamActivity.init(client);
     TwitchMonitor.start();
 });
 
@@ -562,12 +563,12 @@ class StreamActivity {
         this.discordClient = discordClient;
         this.onlineChannels = { };
 
-        this.updateActivity();
+      //  this.updateActivity();
 
         // Continue to update current stream activity every 5 minutes or so
         // We need to do this b/c Discord sometimes refuses to update for some reason
         // ...maybe this will help, hopefully
-        setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
+      //  setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
     }
 }
 
