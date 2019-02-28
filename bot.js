@@ -614,6 +614,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	if (existingMessage) {
 	    if (!twitchChannelIsLive) {
 		// Mem cleanup: If channel just went offline, delete the entry in the message list
+		oldMsgs[messageDiscriminator].delete();
 		delete oldMsgs[messageDiscriminator];
 	    }
 	} else {
@@ -629,7 +630,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 		    targetChannel.send(msgToSend, {
 			embed: msgEmbed
 		    }).then((message) => {
-			oldMsgs[messageDiscriminator] = message;
+			oldMsgs[messageDiscriminator] = message;			
 			console.log('[Discord]', `Sent announce msg to #${targetChannel.name} on ${targetChannel.guild.name}`);
 		    });
 	    }
