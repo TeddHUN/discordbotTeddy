@@ -25,7 +25,7 @@ function generateMessages(){
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setActivity('MusicBOT, Statisztika...', { type: 'WATCHING' });
+    client.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
 	
     StreamActivity.init(client);
     TwitchMonitor.start();
@@ -340,7 +340,6 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 	
 	if(command == "frissit") {
 		serverStats(client.guilds.find("id", "326001549711114241"));
-		serverStats(client.guilds.find("id", "352591575639130112"));
 		serverStats(client.guilds.find("id", "547498318834565130"));
 		msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
 			msg.delete(1);
@@ -427,13 +426,6 @@ function serverStats(guild) {
 		let membercountch = guild.channels.find("id", "510797260389482496");	
 		let usercountch = guild.channels.find("id", "510797263593799690");	
 		let botcountch = guild.channels.find("id", "510797264260694018");	
-		membercountch.setName(membercount);
-		usercountch.setName(usercount);
-		botcountch.setName(botcount);
-	} else if(guild.id == 352591575639130112) { //DCm
-		let membercountch = guild.channels.find("id", "512052743775715329");	
-		let usercountch = guild.channels.find("id", "512052843016880138");	
-		let botcountch = guild.channels.find("id", "512052859764736010");	
 		membercountch.setName(membercount);
 		usercountch.setName(usercount);
 		botcountch.setName(botcount);
@@ -631,7 +623,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 			embed: msgEmbed
 		    }).then((message) => {
 			oldMsgs[messageDiscriminator] = message;			
-			console.log('[Discord]', `Sent announce msg to #${targetChannel.name} on ${targetChannel.guild.name}`);
+			console.log('[Discord]', `Értesítés kiküldve a streamről. (#${targetChannel.name}) - ${targetChannel.guild.name}Ö`);
 		    });
 	    }
 	}
