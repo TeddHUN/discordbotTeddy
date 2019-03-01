@@ -87,7 +87,7 @@ class TwitchMonitor {
 
             if (this.activeStreams.indexOf(_chanName) === -1) {
                 // Stream was not in the list before
-                console.log('[TwitchMonitor]', 'Egy csatorna élőben van:', _chanName);
+                console.log('[TwitchMonitor]', 'Egy csatorna élőben van: ', _chanName);
                 anyChanges = true;
             }
 
@@ -102,7 +102,7 @@ class TwitchMonitor {
 
             if (nextOnlineList.indexOf(_chanName) === -1) {
                 // Stream was in the list before, but no longer
-                console.log('[TwitchMonitor]', 'Egy csatorna már nincs élőben:', _chanName);
+                console.log('[TwitchMonitor]', 'Egy csatorna már nincs élőben: ', _chanName);
                 this.handleChannelOffline(this.channelData[_chanName], this.streamData[_chanName]);
                 anyChanges = true;
             }
