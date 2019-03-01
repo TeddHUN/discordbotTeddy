@@ -535,7 +535,7 @@ class StreamActivity {
      * Either clears the activity if no channels are online, or sets it to "watching" if a stream is up.
      */
     static updateActivity() {
-      /*  let displayChannel = this.getDisplayChannel();
+        let displayChannel = this.getDisplayChannel();
 
         if (displayChannel) {
             this.discordClient.user.setActivity(displayChannel.display_name, {
@@ -543,24 +543,24 @@ class StreamActivity {
                 "type": "STREAMING"
             });
 
-            console.log('[StreamActivity]', `Update current activity: watching ${displayChannel.display_name}.`);
+            console.log('[Aktivitás]', `Aktivitás frissítve: ${displayChannel.display_name} nézése.`);
         } else {
-            console.log('[StreamActivity]', 'Cleared current activity.');
-
-            this.discordClient.user.setActivity(null);
-        }*/
+            console.log('[Aktivitás]', 'Nincs aktív streamer!');
+            
+	    this.discordClient.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
+        }
     }
 
     static init(discordClient) {
         this.discordClient = discordClient;
         this.onlineChannels = { };
 
-      //  this.updateActivity();
+        this.updateActivity();
 
         // Continue to update current stream activity every 5 minutes or so
         // We need to do this b/c Discord sometimes refuses to update for some reason
         // ...maybe this will help, hopefully
-      //  setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
+        setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
     }
 }
 
@@ -586,9 +586,8 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	.setAuthor(twitchChannel.display_name, twitchChannel.logo)    
   	.setThumbnail(twitchChannel.logo)
 	.setDescription("https://twitch.tv/" + twitchChannel.display_name)
-    	.addField("Játék", twitchStream.game || "Nincs beállítva", true)
-    	.addField("Nézők", twitchStream.viewers || "Az adás most kezdődött!", true)
-    	.addBlankField(false)
+    	.addField("Játék", twitchStream.game || "Nincs beállítva")
+    	.addField("Nézők", twitchStream.viewers || "Az adás most kezdődött!")
 	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs)
     	//.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg")
     	.setTimestamp();
