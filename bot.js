@@ -44,32 +44,46 @@ client.on('message', async msg => { // eslint-disable-line
 	command = command.slice(prefix.length);
 
 	if(command === 'cigi') {
-		msg.channel.send('**BISSSSHES IM SMOKING**').then(async msg2 => {
-		setTimeout(() => {
-		    msg2.edit('🚬');
-		}, 500);
-		setTimeout(() => {
-		    msg2.edit('🚬 ☁ ');
-		}, 1000);
-		setTimeout(() => {
-		    msg2.edit('🚬 ☁☁ ');
-		}, 1500);
-		setTimeout(() => {
-		    msg2.edit('🚬 ☁☁☁ ');
-		}, 2000);
-		setTimeout(() => {
-		    msg2.edit('🚬 ☁☁');
-		}, 2500);
-		setTimeout(() => {
-		    msg2.edit('🚬 ☁');
-		}, 3000);
-		setTimeout(() => {
-		    msg2.edit('🚬 ');
-		}, 3500);
-		setTimeout(() => {
-		    msg2.delete();
-		}, 4000);
-	    });	
+		msg.channel.send('🚬').then(async msg2 => {
+			msg.delete();
+			setTimeout(() => {
+			    msg2.edit('🚬 ☁ ');
+			}, 500);
+			setTimeout(() => {
+			    msg2.edit('🚬 ☁☁ ');
+			}, 2000);
+			setTimeout(() => {
+			    msg2.edit('🚬 ☁☁☁ ');
+			}, 4000);
+			setTimeout(() => {
+			    msg2.edit('🚬 ☁☁');
+			}, 4500);
+			setTimeout(() => {
+			    msg2.edit('🚬 ☁');
+			}, 5000);
+			setTimeout(() => {
+			    msg2.edit('🚬 ');
+			}, 5500);
+			setTimeout(() => {
+			    msg2.delete();
+			}, 6000);
+	    	});	
+	}
+	
+	if(command === 'test') {
+		const embed = new Discord.MessageEmbed()
+		    .setColor('#36393e')
+		    .setThumbnail(msg.author.displayAvatarURL())
+		    .setAuthor(`${msg.author.username}#${msg.author.discriminator}`, msg.author.displayAvatarURL())
+		    .addField("ID:", `${msg.author.id}`, true)
+		    .addField("Nickname:", `${msg.author.nickname || 'None'}`, true)
+		    .addField("Created At" + ` (${moment(msg.author.createdAt, "dd").fromNow()})`, `${moment.utc(msg.author.createdAt).format('dddd, MMMM Do YYYY, HH:mm:ss')}`, false)
+		    .addField("Joined Server" + ` (${moment(msg.author.joinedAt, "dd").fromNow()})`, `${moment.utc(msg.author.joinedAt).format('dddd, MMMM Do YYYY, HH:mm:ss')}`, false)
+		    .addField("Highest Role", msg.author.highestRole, true)
+		    .addField("Roles:", msg.author.roles.map(roles => `${roles.name}`).join(', '), true)
+		msg.channel.send({
+		    embed
+		});	
 	}
 	
 	if (command === 'play') {
