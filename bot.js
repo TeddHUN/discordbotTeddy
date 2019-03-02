@@ -538,7 +538,7 @@ class StreamActivity {
         /*let displayChannel = this.getDisplayChannel();
 
         if (displayChannel) {
-            this.discordClient.user.setActivity(displayChannel.display_name, {
+            this.discordClient.user.setActivity("📡 "+displayChannel.display_name, {
                 "url": displayChannel.url,
                 "type": "STREAMING"
             });
@@ -555,12 +555,12 @@ class StreamActivity {
         this.discordClient = discordClient;
         this.onlineChannels = { };
 
-        this.updateActivity();
+     //   this.updateActivity();
 
         // Continue to update current stream activity every 5 minutes or so
         // We need to do this b/c Discord sometimes refuses to update for some reason
         // ...maybe this will help, hopefully
-        setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
+     //   setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
     }
 }
 
