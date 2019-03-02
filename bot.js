@@ -71,7 +71,7 @@ client.on('message', async msg => { // eslint-disable-line
 	}
 	
 	if(command === 'test') {
-		const embed = new Discord.MessageEmbed()
+		const embed = new Discord.RichEmbed()
 		    .setColor('#36393e')
 		    .setThumbnail(msg.author.displayAvatarURL())
 		    .setAuthor(`${msg.author.username}#${msg.author.discriminator}`, msg.author.displayAvatarURL())
