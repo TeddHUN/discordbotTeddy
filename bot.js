@@ -77,9 +77,8 @@ client.on('message', async msg => { // eslint-disable-line
 		    .setAuthor(`${msg.author.username}#${msg.author.discriminator}`, msg.author.displayAvatarURL)
 		    .addField("ID:", `${msg.author.id}`, true)
 		    .addField("Nickname:", `${msg.author.nickname || 'None'}`, true)
-		    .addField("Created At" + ` (${moment(msg.author.createdAt, "dd").fromNow()})`, `${moment.utc(msg.author.createdAt).format('dddd, MMMM Do YYYY, HH:mm:ss')}`, false)
-		    .addField("Joined Server" + ` (${moment(msg.author.joinedAt, "dd").fromNow()})`, `${moment.utc(msg.author.joinedAt).format('dddd, MMMM Do YYYY, HH:mm:ss')}`, false)
-		    .addField("Highest Role", msg.author.highestRole, true)
+		    .addField("Created At" + ` (${msg.author.createdAt})`, false)
+		    .addField("Joined Server" + ` (${msg.author.joinedAt})`, false)
 		    .addField("Roles:", msg.author.roles.map(roles => `${roles.name}`).join(', '), true)
 		msg.channel.send({
 		    embed
