@@ -651,14 +651,11 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 		// Mem cleanup: If channel just went offline, delete the entry in the message list
 		oldMsgs[messageDiscriminator].delete();
 		delete oldMsgs[messageDiscriminator];
-		console.log('[Discord]', `TÖröl`);	
-	    }
-		
-	    console.log('[Discord]', `Streamel`);	
+		return true;
+	    }		
 	} else {
 	    // Sending a new message
 	    if (twitchChannelIsLive) {	
-		    console.log('[Discord]', `Üzenetküldése`);	
 		    let mentionMode = config.mention || null;
 		    let msgToSend = msgFormatted;
 
