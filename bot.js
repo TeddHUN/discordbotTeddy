@@ -611,7 +611,6 @@ class StreamActivity {
 
 // Listen to Twitch monitor events
 let oldMsgs = { };
-
 TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsLive) => {
     try {
         // Refresh channel list
@@ -639,9 +638,10 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 
     let anySent = false;
     let didSendVoice = false;
-	
+
     let guild = client.guilds.find("id", "547498318834565130");
     let targetChannel = guild.channels.find("id", "547557423318040603");//"bot-channel";//"streamerek";
+ 
     try {
 	// Either send a new message, or update an old one
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
@@ -650,13 +650,15 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	if (existingMessage) {
 	    if (!twitchChannelIsLive) {
 		// Mem cleanup: If channel just went offline, delete the entry in the message list
-		oldMsgs[messageDiscriminator].delete();
+	        oldMsgs[messageDiscriminator].delete();
 		delete oldMsgs[messageDiscriminator];
-	    }		
+	    }
 	} else {
 	    // Sending a new message
-	    if (twitchChannelIsLive) {	
-		    let mentionMode = config.mention || null;
+	    if (twitchChannelIsLive) {
+		    // Expand the message with a @mention for "here" or "everyone"
+		    // We don't do this in updates because it causes some people to get spammed
+		    let mentionMode = config.mention;
 		    let msgToSend = msgFormatted;
 
 		    if (mentionMode) {
@@ -665,9 +667,10 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 
 		    targetChannel.send(msgToSend, {
 			embed: msgEmbed
-		    }).then((message) => {
-			oldMsgs[messageDiscriminator] = message;			
-			console.log('[Discord]', `Értesítés kiküldve a streamről. (#${targetChannel.name}) - ${targetChannel.guild.name}`);
+		    })
+		    .then((message) => {
+			oldMsgs[messageDiscriminator] = message;
+			console.log('[Discord]', `Sent announce msg to #${targetChannel.name} on ${targetChannel.guild.name}`);
 		    });
 	    }
 	}
@@ -676,10 +679,8 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     } catch (e) {
 	console.warn('[Discord]', 'Message send problem:', e);
     }
-
     return anySent;
 });
-
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
