@@ -79,7 +79,7 @@ client.on('message', async msg => { // eslint-disable-line
 		    .addField("Nickname:", `${msg.author.nickname || 'None'}`, true)
 		    .addField("Created At" + ` (${msg.author.createdAt})`, false)
 		    .addField("Joined Server" + ` (${msg.author.joinedAt})`, false)
-		    .addField("Roles:", msg.author.roles.map(roles => `${roles.name}`).join(', '), true)
+		    .addField("Roles:", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
 		msg.channel.send({
 		    embed
 		});	
