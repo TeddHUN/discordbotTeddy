@@ -72,17 +72,20 @@ client.on('message', async msg => { // eslint-disable-line
 	
 	if(command === 'test') {
 		const embed = new Discord.RichEmbed()
-		    .setColor('#36393e')
-		    .setThumbnail(msg.author.displayAvatarURL)
-		    .setAuthor(`${msg.author.username}#${msg.author.discriminator}`, msg.author.displayAvatarURL)
+		    .setColor('#70EA6A')
+		    .setThumbnail(msg.author.avatarURL)
+		    .setAuthor(`${msg.author.username}#${msg.author.discriminator}`, msg.author.avatarURL)
 		    .addField("ID:", `${msg.author.id}`, true)
-		    .addField("Nickname:", `${msg.author.nickname || 'None'}`, true)
-		    .addField("Created At" + ` (${msg.author.createdAt})`, false)
-		    .addField("Joined Server" + ` (${msg.author.joinedAt})`, false)
-		    .addField("Roles:", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
-		msg.channel.send({
-		    embed
-		});	
+		    .addField("Becenév", `${msg.author.nickname || 'Még nincs'}`, true)
+		    .addField("Fiók létrehozva", `${msg.author.createdAt}`)
+		    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
+		    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
+		    .addField("Utolsó üzenete", msg.author.lastMessage)
+		    .addField("Email", msg.author.client.user.email)
+	
+		msg.channel.send(msg.author + ", csatlakozott. Itt egy kis infó:", {
+		    embed: embed
+		});
 	}
 	
 	if (command === 'play') {
@@ -629,7 +632,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
   	.setThumbnail(twitchChannel.logo)
 	.setDescription("https://twitch.tv/" + twitchChannel.display_name)
     	.addField("Játék", twitchStream.game || "Nincs beállítva")
-    	.addField("Nézők", twitchStream.viewers || "Az adás most kezdődött!")
+    	.addField("Nézők", twitchStream.viewers || "Az adás most indult.")
 	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs)
     	//.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg")
     	.setTimestamp();
@@ -664,7 +667,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 			embed: msgEmbed
 		    }).then((message) => {
 			oldMsgs[messageDiscriminator] = message;			
-			console.log('[Discord]', `Értesítés kiküldve a streamről. (#${targetChannel.name}) - ${targetChannel.guild.name}Ö`);
+			console.log('[Discord]', `Értesítés kiküldve a streamről. (#${targetChannel.name}) - ${targetChannel.guild.name}`);
 		    });
 	    }
 	}
