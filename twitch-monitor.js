@@ -23,7 +23,7 @@ class TwitchMonitor {
         }, checkIntervalMs);
 
         // OK
-        console.log('[TwitchMonitor]', `Streamerek ellenőrzése [${checkIntervalMs}ms] időközönként. ([${config.twitch_channels}])`);
+        console.log('[TwitchMonitor]', `Configured stream status polling [${checkIntervalMs}ms] for channels [${config.twitch_channels}].`);
 
         // Immediate refresh after startup (allow voice etc to settle)
         setTimeout(() => {
@@ -33,7 +33,7 @@ class TwitchMonitor {
 
     static refresh() {
         if (!config.twitch_channels) {
-            console.warn('[TwitchMonitor]', 'Nincs csatorna beállítva!');
+            console.warn('[TwitchMonitor]', 'No channels configured');
             return;
         }
 
@@ -59,7 +59,7 @@ class TwitchMonitor {
             if (data && data.streams) {
                 this.handleStreamList(data);
             } else {
-                console.warn('[TwitchMonitor]', 'Az API-ből nem tudtam elérni a kiszolgálót.')
+                console.warn('[TwitchMonitor]', 'Did not receive a response from the server with stream info.')
             }
         });
     }
@@ -87,7 +87,7 @@ class TwitchMonitor {
 
             if (this.activeStreams.indexOf(_chanName) === -1) {
                 // Stream was not in the list before
-                console.log('[TwitchMonitor]', 'Egy csatorna élőben van: ', _chanName);
+                console.log('[TwitchMonitor]', 'Stream channel has gone online:', _chanName);
                 anyChanges = true;
             }
 
@@ -102,7 +102,7 @@ class TwitchMonitor {
 
             if (nextOnlineList.indexOf(_chanName) === -1) {
                 // Stream was in the list before, but no longer
-                console.log('[TwitchMonitor]', 'Egy csatorna már nincs élőben: ', _chanName);
+                console.log('[TwitchMonitor]', 'Stream channel has gone offline:', _chanName);
                 this.handleChannelOffline(this.channelData[_chanName], this.streamData[_chanName]);
                 anyChanges = true;
             }
@@ -119,7 +119,7 @@ class TwitchMonitor {
                 this.eventBufferStartTime = Date.now();
             }
         } else {
-            console.log('[TwitchMonitor]', 'Nem tudtam értesíteni, újra próbálás!');
+            console.log('[TwitchMonitor]', 'Could not notify channel, will try again next update.');
         }
     }
 
