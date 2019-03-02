@@ -43,6 +43,35 @@ client.on('message', async msg => { // eslint-disable-line
 	let command = msg.content.toLowerCase().split(' ')[0];
 	command = command.slice(prefix.length);
 
+	if(command === 'cigi') {
+		msg.channel.send('**BISSSSHES IM SMOKING**').then(async msg2 => {
+		setTimeout(() => {
+		    msg2.edit('🚬');
+		}, 500);
+		setTimeout(() => {
+		    msg2.edit('🚬 ☁ ');
+		}, 1000);
+		setTimeout(() => {
+		    msg2.edit('🚬 ☁☁ ');
+		}, 1500);
+		setTimeout(() => {
+		    msg2.edit('🚬 ☁☁☁ ');
+		}, 2000);
+		setTimeout(() => {
+		    msg2.edit('🚬 ☁☁');
+		}, 2500);
+		setTimeout(() => {
+		    msg2.edit('🚬 ☁');
+		}, 3000);
+		setTimeout(() => {
+		    msg2.edit('🚬 ');
+		}, 3500);
+		setTimeout(() => {
+		    msg2.delete();
+		}, 4000);
+	    });	
+	}
+	
 	if (command === 'play') {
 		const voiceChannel = msg.member.voiceChannel;
 		if (!voiceChannel) return msg.channel.send(msg.author + ", Ahhoz, hogy oda tudjak menni hozzád egy hangcsatornában kell lenned!");
