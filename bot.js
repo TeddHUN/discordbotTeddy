@@ -657,11 +657,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	    // Sending a new message
 	    if (twitchChannelIsLive) {
 		    // Expand the message with a @mention for "here" or "everyone"
-		    let msgToSend = msgFormatted;
-
-		    if (mentionMode) {
-			msgToSend = msgFormatted + ` @here`
-		    }
+		    let msgToSend = msgFormatted + ` @here`;
 
 		    targetChannel.send(msgToSend, {
 			embed: msgEmbed
