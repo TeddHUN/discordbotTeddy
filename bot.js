@@ -650,8 +650,8 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	if (existingMessage) {
 	    if (!twitchChannelIsLive) {
 		// Mem cleanup: If channel just went offline, delete the entry in the message list
-	        oldMsgs[messageDiscriminator].delete();
-		delete oldMsgs[messageDiscriminator];
+	        existingMessage.delete();
+		delete oldMsgs[messageDiscriminator];		
 	    }
 	} else {
 	    // Sending a new message
