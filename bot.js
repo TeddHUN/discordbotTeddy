@@ -25,8 +25,8 @@ function generateMessages(){
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-   // client.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
-    client.user.setActivity('In Test Period', { type: 'WATCHING' });
+    client.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
+    //client.user.setActivity('In Test Period', { type: 'WATCHING' });
 	
     StreamActivity.init(client);
     TwitchMonitor.start();
