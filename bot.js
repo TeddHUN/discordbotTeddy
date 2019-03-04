@@ -25,8 +25,8 @@ function generateMessages(){
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    //client.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
-    client.user.setActivity('In Test Period', { type: 'WATCHING' });
+    client.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
+    //client.user.setActivity('In Test Period', { type: 'WATCHING' });
 	
     StreamActivity.init(client);
     TwitchMonitor.start();
@@ -640,7 +640,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let didSendVoice = false;
 
     let guild = client.guilds.find("id", "547498318834565130");
-    let targetChannel = guild.channels.find("id", "547557423318040603");//"bot-channel";//"streamerek";
+    let targetChannel = guild.channels.find("id", "547538758900252672");//"bot-channel";//"streamerek";
  
     try {
 	// Either send a new message, or update an old one
@@ -657,7 +657,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	    // Sending a new message
 	    if (twitchChannelIsLive) {
 		    // Expand the message with a @mention for "here" or "everyone"
-		    let msgToSend = msgFormatted;// + ` @here`;
+		    let msgToSend = msgFormatted + ` @here`;
 
 		    targetChannel.send(msgToSend, {
 			embed: msgEmbed
