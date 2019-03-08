@@ -77,13 +77,13 @@ client.on('message', async msg => { // eslint-disable-line
 		    .setThumbnail(msg.author.avatarURL)
 		    .setAuthor(`${msg.author.username}#${msg.author.discriminator}`, msg.author.avatarURL)
 		    .addField("ID:", `${msg.author.id}`, true)
-		    .addField("Becenév", msg.author.displayname || 'Még nincs', true)
+		    .addField("Becenév", msg.member.nickname || 'Még nincs', true)
 		    .addField("Fiók létrehozva", `${msg.author.createdAt}`)
 		    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
 		    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
 		    .addField("Utolsó üzenete", msg.author.lastMessage)
 	
-		msg.channel.send(msg.author + ", csatlakozott. Itt egy kis infó:" + msg.author.nickname + ", " + msg.author.displayname + ", " + msg.author.username, {
+		msg.channel.send(msg.author + ", csatlakozott. Itt egy kis infó:" + msg.member.nickname + ", " + msg.author.displayname + ", " + msg.author.username, {
 		    embed: embed
 		});
 	}
