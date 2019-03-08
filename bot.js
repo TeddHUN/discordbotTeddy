@@ -393,10 +393,8 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 	}
 	
 	if(command === "testjoin") {
-		let slothgang = client.guilds.find("id", "547498318834565130");
-		msg.author.send("**Üdvözöllek a Sloth Gang discord szerverén!** *(" + slothgang + ")\nA szerverünkön 'családias' hangulat van, ezért szeretnénk egy kicsit megismerni minden tagot, hogy ki kicsoda valójában.\nEzért **szeretnénk**, hogy ha egy kicsit bemutatkoznál nekünk, illetve leírnád a Twitch nevedet.\n**Fontos, hogy a botnak, ide válaszolj!**\n\nElőre is köszönjük!");
-	}
-	
+		msg.author.send("**Üdvözöllek a Sloth Gang discord szerverén!**\nA szerverünkön 'családias' hangulat van, ezért szeretnénk egy kicsit megismerni minden tagot, hogy ki kicsoda valójában.\nEzért **szeretnénk**, hogy ha egy kicsit bemutatkoznál nekünk, illetve leírnád a Twitch nevedet.\n**Fontos, hogy a botnak, ide válaszolj!**\n\nElőre is köszönjük! 💙");
+	}	
 	return undefined;
 });
 
@@ -419,7 +417,6 @@ client.on("message", (message) => {
 		let slothgang = userclient.guilds.find("id", "547498318834565130");
 		let user = slothgang.members.find("id", message.author.id);
 		
-		//client.users.get("312631597222592522").send(message.author + " id: " + slothgang.id);
 		if(slothgang.id == "547498318834565130") {
 			let bemutatkozok = slothgang.channels.find("id", "553337569127956480");	
 
@@ -664,7 +661,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
 	let existingMessage = oldMsgs[messageDiscriminator] || null;
 
-	/*if (existingMessage) {
+	if (existingMessage) {
 	    if (!twitchChannelIsLive) {
 		// Mem cleanup: If channel just went offline, delete the entry in the message list
 	        existingMessage.delete();
@@ -684,7 +681,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 			console.log('[Discord]', `Sent announce msg to #${targetChannel.name} on ${targetChannel.guild.name}`);
 		    });
 	    }
-	}*/
+	}
 
 	anySent = true;
     } catch (e) {
