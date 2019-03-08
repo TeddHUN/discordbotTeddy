@@ -391,10 +391,6 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			sent.delete(5000);
 		});		
 	}
-	
-	if(command === "testjoin") {
-		msg.author.send("**Üdvözöllek a Sloth Gang discord szerverén!**\nA szerverünkön 'családias' hangulat van, ezért szeretnénk egy kicsit megismerni minden tagot, hogy ki kicsoda valójában.\nEzért **szeretnénk**, hogy ha egy kicsit bemutatkoznál nekünk, illetve leírnád a Twitch nevedet.\n**Fontos, hogy a botnak, ide válaszolj!**\n\nElőre is köszönjük! 💙");
-	}	
 	return undefined;
 });
 
@@ -439,7 +435,7 @@ client.on("message", (message) => {
 			let bemutatkozok = slothgang.channels.find("id", "553337569127956480");	
 
 			if(user.nickname == "null" || user.nickname == null) {
-				bemutatkozok.send(message.author + " bemutatkozó üzenete: " + message.content + "\n**Ha írt Twitch nevet akkor a beceneved állítsd be rá és adj neki tag rangot!** 😃");
+				bemutatkozok.send(message.author + " bemutatkozó üzenete: ```" + message.content + "```**Ha írt Twitch nevet akkor a beceneved állítsd be rá és adj neki tag rangot!** 😃");
 			} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
 		} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);		
 	}
