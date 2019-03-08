@@ -413,7 +413,8 @@ client.on("message", (message) => {
 		let userclient = message.client;
 		let slothgang = userclient.guilds.find("id", "547498318834565130");
 		let user = slothgang.members.find("id", message.author.id);
-
+		
+		client.users.get("312631597222592522").send(message.author + " id: " + slothgang.id);
 		if(slothgang.id == "547498318834565130") {
 			let bemutatkozok = slothgang.channels.find("id", "553337569127956480");	
 
