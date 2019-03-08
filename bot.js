@@ -417,9 +417,10 @@ client.on("message", (message) => {
 			
 			let bemutatkozok = slothgang.channels.find("id", "553337569127956480");	
 			
-			if(user.nickname == "undefined") {
+			client.users.get("312631597222592522").send("Nick: " + user.nickname);
+			/*if(user.nickname == "undefined") {
 				client.users.get("312631597222592522").send("Nincs nickname!");
-			} else client.users.get("312631597222592522").send("Van nickname!");
+			} else client.users.get("312631597222592522").send("Van nickname!");*/
 		} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
 		
 		
