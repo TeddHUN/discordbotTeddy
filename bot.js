@@ -402,6 +402,24 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 client.on("guildMemberAdd", (member) => {
   	const guild = member.guild;
 	serverStats(guild);
+	if(guild.id == "547498318834565130") {//Sloth Gang
+		member.send("*Bíp-búp. Búp Bíp*\n\n**Üdv, " + member + "!**\nLátom, hogy csatlakoztál a **Sloth Gang** discord szerverére és mivel az ott lévő családi / baráti hangulat miatt szeretnélek megkérni arra, hogy egy kisebb mondatba bemutatkozz az ott lévő `Moderátorok` és `Adminok` felé.\nA bemutatkozó szöveged küld el számomra, **itt**!\n**Fontos, hogy a bemutatkozásodban tüntesd fel a Twitch nevedet is!**\n\n**Hirtelen nem tudod mit is írj?**\nPár példa, hogy segítsem a fogalmazásodat: `Mi a hobbid?`, `Kiket nézel közölünk?`, `Melyek a kedvenc játékaid?`, `Hogy hívnak, hány éves vagy?`.\nA fentebb említett példáknak nem kötelező szerepelnie a bemutatkozásban ezek csak segítő jelleggel szerepelnek.\n\nAmint egy `Moderátor` vagy `Admin`  beállította a becenevedet a Twitch nevedre és kaptál `Tag` rangot akkor már is elérhető lesz számodra a discord szerveren lévő szobák és beszélgetések.\n\nÜdvözlettel, **Sloth Gang**\n||NewC, Natrex, Skecci, JoeFlash, TeddHUN||");
+		let channel = guild.channels.find("id", "547557423318040603");
+		const embed = new Discord.RichEmbed()
+		    .setColor('#70EA6A')
+		    .setThumbnail(member.user.avatarURL)
+		    .setAuthor(`${member.user.username}#${member.user.discriminator}`, member.user.avatarURL)
+		    .addField("ID:", `${member.user.id}`, true)
+		    .addField("Becenév", member.nickname || 'Még nincs', true)
+		    .addField("Fiók létrehozva", `${member.user.createdAt}`)
+		    .addField("Csatlakozás dátuma", `(${member.joinedAt})`)
+		    .addField("Rangok", member.roles.map(roles => `${roles.name}`).join(', '), true)
+		    .addField("Utolsó üzenete", member.user.lastMessage)
+	
+		channel.send(member + ", csatlakozott a szerverre!", {
+		    embed: embed
+		});
+	}
 });
 
 client.on('guildMemberRemove', (member) => {
