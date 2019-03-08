@@ -654,7 +654,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
 	let existingMessage = oldMsgs[messageDiscriminator] || null;
 
-	if (existingMessage) {
+	/*if (existingMessage) {
 	    if (!twitchChannelIsLive) {
 		// Mem cleanup: If channel just went offline, delete the entry in the message list
 	        existingMessage.delete();
@@ -674,7 +674,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 			console.log('[Discord]', `Sent announce msg to #${targetChannel.name} on ${targetChannel.guild.name}`);
 		    });
 	    }
-	}
+	}*/
 
 	anySent = true;
     } catch (e) {
