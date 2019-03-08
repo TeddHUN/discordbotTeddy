@@ -418,10 +418,10 @@ client.on("message", (message) => {
 		if(slothgang.id == "547498318834565130") {
 			let bemutatkozok = slothgang.channels.find("id", "553337569127956480");	
 
-			if(user.nickname == "null") {
+			if(user.nickname == "null" || user.nickname == null) {
 				bemutatkozok.send(message.author + " bemutatkozó üzenete: " + message.content + "\n**Ha írt Twitch nevet akkor a beceneved állítsd be rá!**```--tag " + message.author + "```");
-			} else client.users.get("312631597222592522").send(message.author + " üzenete1: " + message.content);
-		} else client.users.get("312631597222592522").send(message.author + " üzenete2: " + message.content);		
+			} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
+		} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);		
 	}
 });
 
