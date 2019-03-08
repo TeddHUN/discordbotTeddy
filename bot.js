@@ -77,7 +77,7 @@ client.on('message', async msg => { // eslint-disable-line
 		    .setThumbnail(msg.author.avatarURL)
 		    .setAuthor(`${msg.author.username}#${msg.author.discriminator}`, msg.author.avatarURL)
 		    .addField("ID:", `${msg.author.id}`, true)
-		    .addField("Becenév", msg.author.nickname || 'Még nincs', true)
+		    .addField("Becenév", msg.author.displayname || 'Még nincs', true)
 		    .addField("Fiók létrehozva", `${msg.author.createdAt}`)
 		    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
 		    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
