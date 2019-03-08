@@ -83,7 +83,7 @@ client.on('message', async msg => { // eslint-disable-line
 		    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
 		    .addField("Utolsó üzenete", msg.author.lastMessage)
 	
-		msg.channel.send(msg.author + ", csatlakozott. Itt egy kis infó:", {
+		msg.channel.send(msg.author + ", csatlakozott. Itt egy kis infó:" + msg.author.nickname + ", " + msg.author.displayname, {
 		    embed: embed
 		});
 	}
