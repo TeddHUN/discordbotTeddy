@@ -413,7 +413,7 @@ client.on("message", (message) => {
 		if(message.author.id == "312631597222592522" || message.author.id == "553334933624586241") {
 			let userclient = message.client;
 			let slothgang = userclient.guilds.find("id", "547498318834565130");
-			message.send("Szerver: " + slothgang);
+			client.users.get("312631597222592522").send("Szerver: " + slothgang);
 		} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
 		
 		
