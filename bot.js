@@ -413,7 +413,13 @@ client.on("message", (message) => {
 		if(message.author.id == "312631597222592522" || message.author.id == "553334933624586241") {
 			let userclient = message.client;
 			let slothgang = userclient.guilds.find("id", "547498318834565130");
-			client.users.get("312631597222592522").send("Szerver: " + slothgang);
+			let user = slothgang.members.find("id", message.author.id);
+			
+			let bemutatkozok = slothgang.channels.find("id", "553337569127956480");	
+			
+			if(user.nickname == "undefined") {
+				client.users.get("312631597222592522").send("Nincs nickname!");
+			} else client.users.get("312631597222592522").send("Van nickname!");
 		} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
 		
 		
