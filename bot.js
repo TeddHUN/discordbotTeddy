@@ -83,7 +83,7 @@ client.on('message', async msg => { // eslint-disable-line
 		    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
 		    .addField("Utolsó üzenete", msg.author.lastMessage)
 	
-		msg.channel.send(msg.author + ", csatlakozott. Itt egy kis infó:" + msg.member.nickname + ", " + msg.author.displayname + ", " + msg.author.username, {
+		msg.channel.send(msg.author, {
 		    embed: embed
 		});
 	}
@@ -409,7 +409,14 @@ client.on('guildMemberRemove', (member) => {
 client.on("message", (message) => {
 	if (message.channel.type === "dm") {
 		if(message.author.username == "Teddy") return; 
-		client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
+		
+		if(message.author.id == "312631597222592522" || message.author.id == "553334933624586241") {
+			let userclient = message.client;
+			let slothgang = userclient.guilds.find("id", "547498318834565130");
+			message.send("Szerver: " + slothgang);
+		} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
+		
+		
 	}
 });
 
