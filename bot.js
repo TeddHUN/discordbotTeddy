@@ -414,7 +414,7 @@ client.on("message", (message) => {
 		let slothgang = userclient.guilds.find("id", "547498318834565130");
 		let user = slothgang.members.find("id", message.author.id);
 
-		if(slothgang != "null") {
+		if(slothgang.id == "547498318834565130") {
 			let bemutatkozok = slothgang.channels.find("id", "553337569127956480");	
 
 			if(user.nickname == "null") {
