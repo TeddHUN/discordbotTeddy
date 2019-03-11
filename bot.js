@@ -576,45 +576,38 @@ function play(guild, song) {
 }
 
 class StreamActivity {
-    /**
-     * Registers a channel that has come online, and updates the user activity.
-     */
     static setChannelOnline(channel) {
         this.onlineChannels[channel.name] = channel;
 
         this.updateActivity();
     }
 
-    /**
-     * Marks a channel has having gone offline, and updates the user activity if needed.
-     */
     static setChannelOffline(channel) {
         delete this.onlineChannels[channel.name];
 
         this.updateActivity();
     }
 
-    /**
-     * Fetches the channel that went online most recently, and is still currently online.
-     */
     static getDisplayChannel() {
         let lastChannel = null;
 
-        for (let channelName in this.onlineChannels) {
+        var rand = this.onlineChannels[Math.floor(Math.random() * this.onlineChannels.length)];
+	   
+	if(typeof rand !== "undefined" && rand) {
+		lastChannel = rand;	
+	}
+	    
+        /*for (let channelName in this.onlineChannels) {
             if (typeof channelName !== "undefined" && channelName) {
                 lastChannel = this.onlineChannels[channelName];
             }
-        }
+        }*/
 
         return lastChannel;
     }
 
-    /**
-     * Updates the user activity on Discord.
-     * Either clears the activity if no channels are online, or sets it to "watching" if a stream is up.
-     */
     static updateActivity() {
-        /*let displayChannel = this.getDisplayChannel();
+        let displayChannel = this.getDisplayChannel();
 
         if (displayChannel) {
             this.discordClient.user.setActivity("📡 "+displayChannel.display_name, {
@@ -625,36 +618,29 @@ class StreamActivity {
             console.log('[Aktivitás]', `Aktivitás frissítve: ${displayChannel.display_name} nézése.`);
         } else {
             console.log('[Aktivitás]', 'Nincs aktív streamer!');
-            
+		
 	    this.discordClient.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
-        }*/
+        }
     }
 
     static init(discordClient) {
         this.discordClient = discordClient;
         this.onlineChannels = { };
 
-     //   this.updateActivity();
+        this.updateActivity();
 
-        // Continue to update current stream activity every 5 minutes or so
-        // We need to do this b/c Discord sometimes refuses to update for some reason
-        // ...maybe this will help, hopefully
-     //   setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
+        setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
     }
 }
 
-// Listen to Twitch monitor events
 let oldMsgs = { };
 TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsLive) => {
     try {
-        // Refresh channel list
         syncServerList(false);
     } catch (e) { }
 
-    // Update activity
     StreamActivity.setChannelOnline(twitchChannel);
 
-    // Broadcast to all target channels
     let msgFormatted = `${twitchChannel.display_name} élőadásban van, gyere és nézz be! `;
 	
     let cacheBustTs = (Date.now() / 1000).toFixed(0);
@@ -674,41 +660,38 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let didSendVoice = false;
 
     let guild = client.guilds.find("id", "547498318834565130");
-    let targetChannel = guild.channels.find("id", "547538758900252672");//"bot-channel";//"streamerek";
+    let targetChannel = guild.channels.find("id", "547557423318040603");
  
     try {
-	// Either send a new message, or update an old one
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
 	let existingMessage = oldMsgs[messageDiscriminator] || null;
 
 	if (existingMessage) {
 	    if (!twitchChannelIsLive) {
-		// Mem cleanup: If channel just went offline, delete the entry in the message list
 	        existingMessage.delete();
 		delete oldMsgs[messageDiscriminator];		
 	    }
 	} else {
 	    // Sending a new message
 	    if (twitchChannelIsLive) {
-		    // Expand the message with a @mention for "here" or "everyone"
-		    let msgToSend = msgFormatted + ` @here`;
+		    let msgToSend = msgFormatted + ` `;
 
 		    targetChannel.send(msgToSend, {
 			embed: msgEmbed
 		    })
 		    .then((message) => {
 			oldMsgs[messageDiscriminator] = message;
-			console.log('[Discord]', `Sent announce msg to #${targetChannel.name} on ${targetChannel.guild.name}`);
+			console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren #${targetChannel.name}-ról/ről.`);
 		    });
 	    }
 	}
 
 	anySent = true;
     } catch (e) {
-	console.warn('[Discord]', 'Message send problem:', e);
+	console.warn('[Discord]', 'Üzenet küldési hiba:', e);
     }
     return anySent;
 });
 
-// THIS  MUST  BE  THIS  WAY
+
 client.login(process.env.BOT_TOKEN);
