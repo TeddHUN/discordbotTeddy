@@ -19,7 +19,7 @@ class TwitchMonitor {
             this.refresh();
         }, checkIntervalMs);
 
-        console.log('[TwitchMonitor]', `Twitch csatornák figyelése ${checkIntervalMs}másodperc időközönként. (${config.twitch_channels})`);
+        console.log('[TwitchMonitor]', `Twitch csatornák figyelése ${checkIntervalMs}ms időközönként. (${config.twitch_channels})`);
 
         setTimeout(() => {
             this.refresh();
