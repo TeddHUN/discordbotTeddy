@@ -638,8 +638,6 @@ class StreamActivity {
         this.onlineChannels = { };
 	this.activeChannel2 = null;
 
-        this.updateActivity();
-
         setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
     }
 }
@@ -671,7 +669,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let didSendVoice = false;
 
     let guild = client.guilds.find("id", "547498318834565130");
-    let targetChannel = guild.channels.find("id", "547557423318040603");
+    let targetChannel = guild.channels.find("id", "547538758900252672");
  
     try {
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
@@ -684,7 +682,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	    }
 	} else {
 	    if (twitchChannelIsLive) {
-		    let msgToSend = msgFormatted + ` `;
+		    let msgToSend = msgFormatted + ` @here`;
 
 		    targetChannel.send(msgToSend, {
 			embed: msgEmbed
