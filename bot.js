@@ -613,13 +613,17 @@ class StreamActivity {
         let displayChannel = this.getDisplayChannel();
 
         if (displayChannel) {
-            this.discordClient.user.setActivity("📡 " + displayChannel + " 📡", {
-                "url": "https://twitch.tv/"+displayChannel,
-                "type": "STREAMING"
-            });
+	    if(this.activeChannel !== displayChannel) {
+		    this.discordClient.user.setActivity("📡 " + displayChannel + " 📡", {
+			"url": "https://twitch.tv/"+displayChannel,
+			"type": "STREAMING"
+		    });
 
-            console.log('[Aktivitás]', `Aktivitás frissítve: ${displayChannel} nézése.`);
+		    this.activeChannel = displayChannel;
+		    console.log('[Aktivitás]', `Aktivitás frissítve: ${displayChannel} nézése.`);
+	    }
         } else {
+	    this.activeChannel = null;
             console.log('[Aktivitás]', 'Nincs aktív streamer!');
 		
 	    this.discordClient.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
@@ -629,6 +633,7 @@ class StreamActivity {
     static init(discordClient) {
         this.discordClient = discordClient;
         this.onlineChannels = { };
+	this.activeChannel = null;
 
         this.updateActivity();
 
@@ -644,7 +649,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 
     StreamActivity.setChannelOnline(twitchChannel);
 
-    let msgFormatted = `${twitchChannel.display_name} élőadásban van, gyere és nézz be! `;
+    let msgFormatted = `${twitchChannel.display_name} élőadásban van, gyere és nézz be!`;
 	
     let cacheBustTs = (Date.now() / 1000).toFixed(0);
 	
@@ -663,7 +668,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let didSendVoice = false;
 
     let guild = client.guilds.find("id", "547498318834565130");
-    let targetChannel = guild.channels.find("id", "547557423318040603");
+    let targetChannel = guild.channels.find("id", "547538758900252672");
  
     try {
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
@@ -677,7 +682,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	} else {
 	    // Sending a new message
 	    if (twitchChannelIsLive) {
-		    let msgToSend = msgFormatted + ` `;
+		    let msgToSend = msgFormatted + ` @here`;
 
 		    targetChannel.send(msgToSend, {
 			embed: msgEmbed
