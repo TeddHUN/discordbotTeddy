@@ -698,5 +698,5 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 });
 
 
-client.user.setActivity('Betöltés...', { type: 'WATCHING' });
 client.login(process.env.BOT_TOKEN);
+client.user.setActivity('Betöltés...', { type: 'WATCHING' });
