@@ -624,7 +624,7 @@ class StreamActivity {
 	    }
         } else {
 	    if(this.activeChannel2 !== "null") {
-	    	this.activeChannel2 = null;
+	    	this.activeChannel2 = "null";
             	console.log('[Aktivitás]', 'Nincs aktív streamer!');
 		
 	    	this.discordClient.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
@@ -635,7 +635,7 @@ class StreamActivity {
     static init(discordClient) {
         this.discordClient = discordClient;
         this.onlineChannels = { };
-	this.activeChannel2 = null;
+	this.activeChannel2 = "null";
 
         this.updateActivity();
 
