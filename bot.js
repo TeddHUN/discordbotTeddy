@@ -578,8 +578,6 @@ function play(guild, song) {
 class StreamActivity {
     static setChannelOnline(channel) {
         this.onlineChannels[channel.name] = channel;
-
-        this.updateActivity();
     }
 
     static setChannelOffline(channel) {
