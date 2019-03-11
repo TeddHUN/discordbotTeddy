@@ -583,9 +583,11 @@ class StreamActivity {
     }
 
     static setChannelOffline(channel) {
-        delete this.onlineChannels[channel.name];
-
-        this.updateActivity();
+       	if(this.activeChannel2 == channel.name) {
+        	this.updateActivity();
+	}
+	    
+	delete this.onlineChannels[channel.name];
     }
 
     static getDisplayChannel() {
@@ -599,6 +601,7 @@ class StreamActivity {
 	}
 	var rand = Math.floor(Math.random() * csatornak.length);
 
+	console.log('[Debug]', rand, csatornak.length);
 	lastChannel = csatornak[rand];
         /*for (let channelName in this.onlineChannels) {
             if (typeof channelName !== "undefined" && channelName) {
@@ -623,8 +626,8 @@ class StreamActivity {
 		    console.log('[Aktivitás]', `Aktivitás frissítve: ${displayChannel} nézése.`);
 	    }
         } else {
-	    if(this.activeChannel2 !== "null") {
-	    	this.activeChannel2 = "null";
+	    if(this.activeChannel2 !== null) {
+	    	this.activeChannel2 = null;
             	console.log('[Aktivitás]', 'Nincs aktív streamer!');
 		
 	    	this.discordClient.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
@@ -635,7 +638,7 @@ class StreamActivity {
     static init(discordClient) {
         this.discordClient = discordClient;
         this.onlineChannels = { };
-	this.activeChannel2 = "null";
+	this.activeChannel2 = null;
 
         this.updateActivity();
 
@@ -670,7 +673,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let didSendVoice = false;
 
     let guild = client.guilds.find("id", "547498318834565130");
-    let targetChannel = guild.channels.find("id", "547538758900252672");
+    let targetChannel = guild.channels.find("id", "547557423318040603");
  
     try {
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
@@ -683,7 +686,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	    }
 	} else {
 	    if (twitchChannelIsLive) {
-		    let msgToSend = msgFormatted + ` @here`;
+		    let msgToSend = msgFormatted + ` `;
 
 		    targetChannel.send(msgToSend, {
 			embed: msgEmbed
