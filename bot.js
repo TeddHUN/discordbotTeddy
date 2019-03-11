@@ -590,7 +590,7 @@ class StreamActivity {
 
     static getDisplayChannel() {
         let lastChannel = null;
-	let csatornak = {}
+	var csatornak = [];
 	     
 	for (let channelName in this.onlineChannels) {
 		if (typeof channelName !== "undefined" && channelName) {
@@ -618,7 +618,7 @@ class StreamActivity {
                 "type": "STREAMING"
             });
 
-            console.log('[Aktivitás]', `Aktivitás frissítve: ${displayChannel.display_name} nézése.`);
+            console.log('[Aktivitás]', `Aktivitás frissítve: ${displayChannel} nézése.`);
         } else {
             console.log('[Aktivitás]', 'Nincs aktív streamer!');
 		
