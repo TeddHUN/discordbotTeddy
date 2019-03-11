@@ -591,11 +591,15 @@ class StreamActivity {
     static getDisplayChannel() {
         let lastChannel = null;
 
-        var rand = this.onlineChannels[Math.floor(Math.random() * this.onlineChannels.length)];
+        let rand = this.onlineChannels[Math.floor(Math.random() * this.onlineChannels.length)];
 	   
+            console.log('[Debug]', rand);
 	if(typeof rand !== "undefined" && rand) {
-		lastChannel = rand;	
+		lastChannel = rand;
+		console.log('[Debug]', lastChannel);	
 	}
+	console.log('[Debug]', rand);
+	    
 	    
         /*for (let channelName in this.onlineChannels) {
             if (typeof channelName !== "undefined" && channelName) {
