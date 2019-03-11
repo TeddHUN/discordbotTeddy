@@ -613,8 +613,8 @@ class StreamActivity {
         let displayChannel = this.getDisplayChannel();
 
         if (displayChannel) {
-            this.discordClient.user.setActivity("📡 "+displayChannel.display_name, {
-                "url": displayChannel.url,
+            this.discordClient.user.setActivity("📡 " + displayChannel, {
+                "url": "https://twitch.tv/"+displayChannel,
                 "type": "STREAMING"
             });
 
