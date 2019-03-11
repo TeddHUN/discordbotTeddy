@@ -681,7 +681,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 		    })
 		    .then((message) => {
 			oldMsgs[messageDiscriminator] = message;
-			console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren #${targetChannel.name}-ról/ről.`);
+			console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában #${twitchChannel.display_name}-ról/ről!`);
 		    });
 	    }
 	}
