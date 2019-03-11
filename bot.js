@@ -613,27 +613,29 @@ class StreamActivity {
         let displayChannel = this.getDisplayChannel();
 
         if (displayChannel) {
-	    if(this.activeChannel !== displayChannel) {
+	    if(this.activeChannel2 !== displayChannel) {
 		    this.discordClient.user.setActivity("📡 " + displayChannel + " 📡", {
 			"url": "https://twitch.tv/"+displayChannel,
 			"type": "STREAMING"
 		    });
 
-		    this.activeChannel = displayChannel;
+		    this.activeChannel2 = displayChannel;
 		    console.log('[Aktivitás]', `Aktivitás frissítve: ${displayChannel} nézése.`);
 	    }
         } else {
-	    this.activeChannel = null;
-            console.log('[Aktivitás]', 'Nincs aktív streamer!');
+	    if(this.activeChannel2 !== "null") {
+	    	this.activeChannel2 = null;
+            	console.log('[Aktivitás]', 'Nincs aktív streamer!');
 		
-	    this.discordClient.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
+	    	this.discordClient.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
+	    }
         }
     }
 
     static init(discordClient) {
         this.discordClient = discordClient;
         this.onlineChannels = { };
-	this.activeChannel = null;
+	this.activeChannel2 = null;
 
         this.updateActivity();
 
@@ -680,7 +682,6 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 		delete oldMsgs[messageDiscriminator];		
 	    }
 	} else {
-	    // Sending a new message
 	    if (twitchChannelIsLive) {
 		    let msgToSend = msgFormatted + ` @here`;
 
