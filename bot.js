@@ -591,11 +591,11 @@ class StreamActivity {
     static getDisplayChannel() {
         let lastChannel = null;
 
-        let rand = this.onlineChannels[Math.floor(Math.random() * this.onlineChannels.length)];
+        let rand = Math.floor(Math.random() * this.onlineChannels.length);
 	   
             console.log('[Debug]', rand);
 	if(typeof rand !== "undefined" && rand) {
-		lastChannel = rand;
+		lastChannel = this.onlineChannels[rand];
 		console.log('[Debug]', lastChannel);	
 	}
 	console.log('[Debug]', rand);
@@ -685,7 +685,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 		    })
 		    .then((message) => {
 			oldMsgs[messageDiscriminator] = message;
-			console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában #${twitchChannel.display_name}-ról/ről!`);
+			console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
 		    });
 	    }
 	}
@@ -698,4 +698,5 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 });
 
 
+client.user.setActivity('Betöltés...', { type: 'WATCHING' });
 client.login(process.env.BOT_TOKEN);
