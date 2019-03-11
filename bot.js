@@ -590,20 +590,16 @@ class StreamActivity {
 
     static getDisplayChannel() {
         let lastChannel = null;
-	var csatornak = -1;
+	let csatornak = {}
 	     
-        console.log('[Debug]1', csatornak);
 	for (let channelName in this.onlineChannels) {
 		if (typeof channelName !== "undefined" && channelName) {
-			csatornak++;
+			csatornak.push(channelName);
 		} 
 	}
-	console.log('[Debug]2', csatornak);
-	var rand = Math.floor(Math.random() * csatornak);
-	console.log('[Debug]3', rand);
-	lastChannel = this.onlineChannels[rand];
-	console.log('[Debug]4', lastChannel);
-	console.log('[Debug]5', this.onlineChannels);
+	var rand = Math.floor(Math.random() * csatornak.length);
+
+	lastChannel = csatornak[rand];
         /*for (let channelName in this.onlineChannels) {
             if (typeof channelName !== "undefined" && channelName) {
                 lastChannel = this.onlineChannels[channelName];
