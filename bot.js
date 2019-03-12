@@ -384,7 +384,6 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 	}*/
 	
 	if(command == "frissit") {
-		serverStats(client.guilds.find("id", "326001549711114241"));
 		serverStats(client.guilds.find("id", "547498318834565130"));
 		msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
 			msg.delete(1);
@@ -496,19 +495,8 @@ client.on('raw', event => {
     }   
 });
 
-function serverStats(guild) {
-	let membercount = "Tagok: " + guild.members.size;
-	let usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
-	let botcount = "Botok: " + guild.members.filter(member => member.user.bot).size;
-	
-	if(guild.id == 326001549711114241) { //Zozi DC
-		let membercountch = guild.channels.find("id", "510797260389482496");	
-		let usercountch = guild.channels.find("id", "510797263593799690");	
-		let botcountch = guild.channels.find("id", "510797264260694018");	
-		membercountch.setName(membercount);
-		usercountch.setName(usercount);
-		botcountch.setName(botcount);
-	} else if(guild.id == 547498318834565130) {//klandC	
+function serverStats(guild) {	
+	if(guild.id == 547498318834565130) {//klandC	
 		let membercountch = guild.channels.find("id", "547811561654190085");	
 
 		let usercount = "E: " + guild.members.filter(member => !member.user.bot).size + " / B: " + guild.members.filter(member => member.user.bot).size;
@@ -581,10 +569,6 @@ class StreamActivity {
     }
 
     static setChannelOffline(channel) {
-       	if(this.activeChannel2 == channel.name) {
-        	this.updateActivity();
-	}
-	    
 	delete this.onlineChannels[channel.name];
     }
 
@@ -611,7 +595,7 @@ class StreamActivity {
     }
 
     static updateActivity() {
-        let displayChannel = this.getDisplayChannel();
+        /*let displayChannel = this.getDisplayChannel();
 
         if (displayChannel) {
 	    if(this.activeChannel2 !== displayChannel) {
@@ -630,15 +614,15 @@ class StreamActivity {
 		
 	    	this.discordClient.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
 	    }
-        }
+        }*/
     }
 
     static init(discordClient) {
         this.discordClient = discordClient;
         this.onlineChannels = { };
-	this.activeChannel2 = null;
+	//this.activeChannel2 = null;
 
-        setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
+     //   setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
     }
 }
 
