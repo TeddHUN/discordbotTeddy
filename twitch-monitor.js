@@ -88,7 +88,7 @@ class TwitchMonitor {
         for (let i = 0; i < this.activeStreams.length; i++) {
             let _chanName = this.activeStreams[i];
 
-            if (nextOnlineList.indexOf(_chanName) === -1) {r
+            if (nextOnlineList.indexOf(_chanName) === -1) {
                 console.log('[TwitchMonitor]', 'Egy csatorna már nem közvetít:', _chanName);
                 this.handleChannelOffline(this.channelData[_chanName], this.streamData[_chanName]);
                 anyChanges = true;
