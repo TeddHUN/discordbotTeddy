@@ -569,6 +569,9 @@ class StreamActivity {
     }
 
     static setChannelOffline(channel) {
+	if(this.activeChannel2 == channel.name) {
+		this.activeChannel2 = null;	
+	}
 	delete this.onlineChannels[channel.name];
     }
 
@@ -595,7 +598,7 @@ class StreamActivity {
     }
 
     static updateActivity() {
-        /*let displayChannel = this.getDisplayChannel();
+        let displayChannel = this.getDisplayChannel();
 
         if (displayChannel) {
 	    if(this.activeChannel2 !== displayChannel) {
@@ -614,15 +617,15 @@ class StreamActivity {
 		
 	    	this.discordClient.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
 	    }
-        }*/
+        }
     }
 
     static init(discordClient) {
         this.discordClient = discordClient;
         this.onlineChannels = { };
-	//this.activeChannel2 = null;
+	this.activeChannel2 = null;
 
-     //   setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
+        setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
     }
 }
 
