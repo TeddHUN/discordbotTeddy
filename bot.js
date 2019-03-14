@@ -569,10 +569,10 @@ class StreamActivity {
     }
 
     static setChannelOffline(channel) {
+	delete this.onlineChannels[channel.name];
 	if(this.activeChannel2 == channel.name) {
 		this.activeChannel2 = null;	
 	}
-	delete this.onlineChannels[channel.name];
     }
 
     static getDisplayChannel() {
