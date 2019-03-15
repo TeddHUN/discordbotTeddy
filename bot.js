@@ -655,7 +655,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let anySent = false;
     let didSendVoice = false;
 
-    let guild = this.discordClient.guilds.find("id", "547498318834565130");
+    let guild = client.guilds.find("id", "547498318834565130");
     let targetChannel = guild.channels.find("id", "547538758900252672");
  
     try {
