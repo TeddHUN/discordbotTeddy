@@ -656,7 +656,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let didSendVoice = false;
 
     let guild = client.guilds.find("id", "547498318834565130");
-    let targetChannel = guild.channels.find("id", "547538758900252672");
+    let targetChannel = guild.channels.find("id", "547557423318040603");
  
     try {
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
@@ -669,7 +669,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	    }
 	} else {
 	    if (twitchChannelIsLive) {
-		    let msgToSend = msgFormatted + ` @here`;
+		    let msgToSend = msgFormatted + ` here`;
 
 		    targetChannel.send(msgToSend, {
 			embed: msgEmbed
