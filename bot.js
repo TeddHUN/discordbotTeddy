@@ -257,12 +257,12 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			});
 		
 		let dMessage = msg.content.slice(9);
-		dMessage = dMessage.replace(args[0], "");
+		dMessage = dMessage.replace(dUser, " ");
 		if(dMessage.length < 1) return msg.channel.send("**Használat:** `--üzenet @Felhasználó [Szöveg]").then(sent => {
 				sent.delete(10000);					
 			});
 
-		dUser.send("**Üzenet érkezett a `Sloth Gang` discord szerverről!**\n\nKüldő: " + msg.author + "\nÜzenet: " + dMessage);
+		dUser.send("**Üzenet érkezett a `Sloth Gang` discord szerverről!**\n\nKüldő: " + msg.author + "\nÜzenet:\n" + dMessage);
 		msg.channel.send("**Üzenet elküldve!**").then(sent => {
 				msg.delete(1);
 				sent.delete(5000);					
