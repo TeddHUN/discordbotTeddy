@@ -244,7 +244,24 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			}
 		}
 	}	
+	
+	if(command === "uzenet") {
+		if(!args[1] || !args[2]) {
+			msg.channel.send("**Használat:** `--uzenet @Felhasználó [Üzenet]").then(sent => {
+				sent.delete(5000);					
+			});
+			return;
+		}
+		let str = args[1];
+		let id = str.replace(/[<@!>]/g, '');
 
+		msg.delete(1);
+			
+		client.fetchUser(id).then(user => {
+			user.send(msg.content);
+		});
+	}
+	
 	/*if(command === "addstream") {
 		if(msg.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "352591575639130112");
