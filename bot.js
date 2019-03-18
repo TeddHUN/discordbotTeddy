@@ -257,7 +257,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			});
 		
 		let dMessage = msg.content.slice(9);
-		dMessage = dMessage.slice(args[0].length + 1);
+		dMessage = dMessage.replace(args[0], "");
 		if(dMessage.length < 1) return msg.channel.send("**Használat:** `--üzenet @Felhasználó [Szöveg]").then(sent => {
 				sent.delete(10000);					
 			});
