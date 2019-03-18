@@ -245,21 +245,26 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		}
 	}	
 	
-	if(command === "uzenet") {
-		if(!args[1] || !args[2]) {
-			msg.channel.send("**Használat:** `--uzenet @Felhasználó [Üzenet]").then(sent => {
-				sent.delete(5000);					
+	if(command === "uzenet" || command === "üzenet") {		
+		
+		if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Ehhez nincs jogod!").then(sent => {
+				sent.delete(10000);					
 			});
-			return;
-		}
-		let str = args[1];
-		let id = str.replace(/[<@!>]/g, '');
+		
+		let dUser = msg.guild.member(msg.mentions.users.first()) || msg.guild.members.get(args[0]);
+		if (!dUser) return msg.channel.send("**HIBA:** A felhasználó nem található!").then(sent => {
+				sent.delete(10000);					
+			});
+		
+		let dMessage = args.join(" ").slice(22);
+		if(dMessage.length < 1) return msg.channel.send("**Használat:** `--üzenet @Felhasználó [Szöveg]").then(sent => {
+				sent.delete(10000);					
+			});
 
-		msg.delete(1);
-			
-		client.fetchUser(id).then(user => {
-			user.send(msg.content);
-		});
+		dUser.send("**Üzenet érkezett a `Sloth Gang` discord szerverről!**\n\nKüldő: " + msg.author + "\nÜzenet: " + dMessage);
+		msg.channel.send("**Üzenet elküldve!**").then(sent => {
+				sent.delete(10000);					
+			});
 	}
 	
 	/*if(command === "addstream") {
@@ -457,7 +462,7 @@ client.on("message", (message) => {
 			let bemutatkozok = slothgang.channels.find("id", "553337569127956480");	
 
 			if(user.nickname == "null" || user.nickname == null) {
-				bemutatkozok.send(message.author + " bemutatkozó üzenete: ```" + message.content + "```**Ha írt Twitch nevet akkor a beceneved állítsd be rá és adj neki tag rangot, majd rakj egy ✅ reakciót ha kész!** 😃");
+				bemutatkozok.send(message.author + " bemutatkozó üzenete: ```" + message.content + "```**Ha írt Twitch nevet akkor a beceneved állítsd be rá és adj neki tag rangot, majd rakj egy ✅ reakciót ha kész!** 😃\n**Esetleg ha nem írt megfelelő bemutatkozást akkor a `--uzenet Megemlítés [Szöveg]` paranccsal tudsz neki üzenni!**");
 			} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
 		} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);		
 	}
