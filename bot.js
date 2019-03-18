@@ -262,7 +262,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				sent.delete(10000);					
 			});
 
-		dUser.send("**Üzenet érkezett a `Sloth Gang` discord szerverről!**\n\nKüldő: " + msg.author + "\nÜzenet:\n" + dMessage);
+		dUser.send("**Üzenet érkezett a `Sloth Gang` discord szerverről!**\n\nKüldő: " + msg.author + "\nÜzenet:" + dMessage);
 		msg.channel.send("**Üzenet elküldve!**").then(sent => {
 				msg.delete(1);
 				sent.delete(5000);					
