@@ -150,6 +150,11 @@ A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('Leallitva!');
 		return undefined;
+	} else if (command === 'leave') {
+		if (!msg.member.voiceChannel) return msg.channel.send(msg.author + ', Nem vagy hangcsatornában!');
+		serverQueue.songs = [];
+		serverQueue.connection.dispatcher.end('Leallitva!');
+		return undefined;
 	} else if (command === 'volume') {
 		msg.channel.send(msg.author + ", A funkció korlátozott!");
 		return undefined;
