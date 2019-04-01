@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const ytdl = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
-var mysql = require('mysql');
+//var mysql = require('mysql');
 
 var prefix = "--";
 
@@ -22,13 +22,13 @@ function generateMessages(){
     for (let role of roles) messages.push(`**${role}**`);
     return messages;
 }
-
+/*
 var con = mysql.createConnection({
   host: process.env.mysqlhost,
   user: process.env.mysqluser,
   password: process.env.mysqlpassword
 });
-
+*/
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
@@ -38,10 +38,10 @@ client.on('ready', () => {
     StreamActivity.init(client);
     TwitchMonitor.start();
 
-    con.connect(function(err) {
+    /*con.connect(function(err) {
 	  if (err) return undefined;
 	  console.log("Connected!");
-	});
+	});*/
 });
 
 client.on('message', async msg => { // eslint-disable-line
