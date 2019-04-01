@@ -39,7 +39,7 @@ client.on('ready', () => {
     TwitchMonitor.start();
 
     con.connect(function(err) {
-	  if (err) throw err;
+	  if (err) return undefined;
 	  console.log("Connected!");
 	});
 });
