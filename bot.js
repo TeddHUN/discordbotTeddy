@@ -40,7 +40,7 @@ client.on('ready', () => {
     TwitchMonitor.start();
 
     con.connect(function(err) {
-	  if (err) return undefined;
+	  if (err) return console.log("Hiba:"+err);
 	  console.log("Connected!");
 	});
 });
