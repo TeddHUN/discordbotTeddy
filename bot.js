@@ -721,8 +721,8 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	  targetChannel.send(msgToSend, {
 		embed: msgEmbed
 	   }).then((message) => {
-		//var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message + "' WHERE twitch = '" + twitchChannel.display_name + "'";
-		//con.query(sql, function (err, result) {});  
+		var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message + "' WHERE twitch = '" + twitchChannel.display_name + "'";
+		con.query(sql, function (err, result) {});  
 		console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
 	  });    
 	  anySent = true;
