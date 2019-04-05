@@ -700,10 +700,11 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let guild = client.guilds.find("id", "547498318834565130");
     let targetChannel = guild.channels.find("id", "547538758900252672");//
     
-    con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel + "'", function (err, result) {
+    con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.display_name + "'", function (err, result) {
 	if (err) throw err;
 	console.log(result);
     });
+	anySent = true;
  /*   try {
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
 	let existingMessage = oldMsgs[messageDiscriminator] || null;
