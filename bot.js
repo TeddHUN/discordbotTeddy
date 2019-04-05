@@ -701,31 +701,27 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let targetChannel = guild.channels.find("id", "547557423318040603");//
     
     let statusz = 0;
-    let uzenet = "";
+    let uzenet = '';
 			  
     con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.display_name + "'", function (err, result) {
-	console.log(result[0].status + ", " + result[0].twitch);
+	//console.log(result[0].status + ", " + result[0].twitch);
 	statusz = result[0].status;
 	uzenet = result[0].dcmessage;
     });
 	
     if (!twitchChannelIsLive) {
        if(statusz == 1) {
-          uzenet.delete();
+          targetChannel.fetchMessage(uzenet).delete();
           con.query("UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.display_name + "'");
        }	
     } else {
-    	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
-    	let existingMessage = oldMsgs[messageDiscriminator];
-	    
        if(statusz == 0) {
 	  let msgToSend = msgFormatted + ` `;
 
 	  targetChannel.send(msgToSend, {
 		embed: msgEmbed
 	   }).then((message) => {		
-		oldMsgs[messageDiscriminator] = message;
-		var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + oldMsgs[messageDiscriminator] + "' WHERE twitch = '" + twitchChannel.display_name + "'";
+		var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.display_name + "'";
 		con.query(sql, function (err, result) {});  
 		console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
 	  });    
