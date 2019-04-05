@@ -701,17 +701,17 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let targetChannel = guild.channels.find("id", "547557423318040603");//
     
     const statusz = 0;
-    let message = undefined;
+    let uzenet = undefined;
 	
     con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.display_name + "'", function (err, result) {
 	//console.log(result[0].status);
 	statusz = result[0].status;
-	message = result[0].dcmessage;
+	uzenet = result[0].dcmessage;
     });
 	
     if (!twitchChannelIsLive) {
        if(statusz == 1) {
-          message.delete();
+          uzenet.delete();
           con.query("UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.display_name + "'");
        }	
     } else {
