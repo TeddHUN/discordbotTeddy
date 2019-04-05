@@ -41,7 +41,7 @@ client.on('ready', () => {
 
     con.connect(function(err) {
 	  if (err) return console.log("Hiba:"+err);
-	  console.log("Connected!");
+	  console.log("MySQL: Csatlakozva!");
 	});
 });
 
@@ -700,7 +700,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let guild = client.guilds.find("id", "547498318834565130");
     let targetChannel = guild.channels.find("id", "547538758900252672");//
     
-    con.query("SELECT * FROM streamerek WHERE twitch = `" + twitchChannel + "`", function (err, result, fields) {
+    con.query("SELECT * FROM streamerek WHERE twitch = " + twitchChannel, function (err, result, fields) {
 	if (err) throw err;
 	console.log(result);
     });
