@@ -698,23 +698,35 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let didSendVoice = false;
 
     let guild = client.guilds.find("id", "547498318834565130");
-    let targetChannel = guild.channels.find("id", "547538758900252672");//
+    let targetChannel = guild.channels.find("id", "547557423318040603");//
     
     const statusz = 0;
+    let message = undefined;
 	
     con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.display_name + "'", function (err, result) {
-	if (err) throw err;
-	console.log(result[0].status);
+	//console.log(result[0].status);
 	statusz = result[0].status;
+	message = result[0].dcmessage;
     });
 	
-    if(statusz == 0) {
-	console.log("Nem streamel!");
+    if (!twitchChannelIsLive) {
+       if(statusz == 1) {
+          message.delete();
+          con.query("UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.display_name + "'");
+       }	
     } else {
-	console.log("Streamel!");    
+       if(statusz == 0) {
+	  let msgToSend = msgFormatted + ` `;
+
+	  targetChannel.send(msgToSend, {
+		embed: msgEmbed
+	   }).then((message) => {
+		con.query("UPDATE streamerek SET status = '1', dcmessage = '" + message + "' WHERE twitch = '" + twitchChannel.display_name + "'");  
+		console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
+	  });    
+	  anySent = true;
+       }
     }
-	
-	anySent = true;
  /*   try {
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
 	let existingMessage = oldMsgs[messageDiscriminator] || null;
