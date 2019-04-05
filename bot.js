@@ -27,7 +27,7 @@ var con = mysql.createConnection({
   host: process.env.mysqlhost,
   user: process.env.mysqluser,
   password: process.env.mysqlpassword,
-  database: "streamerek"
+  database: "jQCLgUoAO5"
 });
 
 client.on('ready', () => {
