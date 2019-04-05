@@ -36,8 +36,8 @@ client.on('ready', () => {
     client.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
     //client.user.setActivity('In Test Period', { type: 'WATCHING' });
 	
-    StreamActivity.init(client);
-    TwitchMonitor.start();
+    //StreamActivity.init(client);
+    //TwitchMonitor.start();
 
     con.connect(function(err) {
 	  if (err) return console.log("Hiba:"+err);
