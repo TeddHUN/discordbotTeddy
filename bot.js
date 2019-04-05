@@ -700,11 +700,11 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let guild = client.guilds.find("id", "547498318834565130");
     let targetChannel = guild.channels.find("id", "547557423318040603");//
     
-    const statusz = 0;
-    let uzenet = undefined;
+    var statusz = 0;
+    const uzenet = "";
 	
     con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.display_name + "'", function (err, result) {
-	//console.log(result[0].status);
+	console.log(result[0].status + ", " + result[0].twitch);
 	statusz = result[0].status;
 	uzenet = result[0].dcmessage;
     });
