@@ -36,8 +36,8 @@ client.on('ready', () => {
     client.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
     //client.user.setActivity('In Test Period', { type: 'WATCHING' });
 	
-    //StreamActivity.init(client);
-    //TwitchMonitor.start();
+    StreamActivity.init(client);
+    TwitchMonitor.start();
 
     con.connect(function(err) {
 	  if (err) return console.log("Hiba:"+err);
@@ -699,8 +699,12 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 
     let guild = client.guilds.find("id", "547498318834565130");
     let targetChannel = guild.channels.find("id", "547538758900252672");//
- 
-    try {
+    
+    con.query("SELECT * FROM streamerek WHERE twitch = `" + twitchChannel + "`", function (err, result, fields) {
+	if (err) throw err;
+	console.log(result);
+    });
+ /*   try {
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
 	let existingMessage = oldMsgs[messageDiscriminator] || null;
 
@@ -726,7 +730,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	anySent = true;
     } catch (e) {
 	console.warn('[Discord]', 'Üzenet küldési hiba:', e);
-    }
+    }*/
     return anySent;
 });
 
