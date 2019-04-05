@@ -700,10 +700,20 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let guild = client.guilds.find("id", "547498318834565130");
     let targetChannel = guild.channels.find("id", "547538758900252672");//
     
+    const statusz = 0;
+	
     con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.display_name + "'", function (err, result) {
 	if (err) throw err;
-	console.log(result);
+	console.log(result[0].status);
+	statusz = result[0].status;
     });
+	
+    if(statusz == 0) {
+	console.log("Nem streamel!");
+    } else {
+	console.log("Streamel!");    
+    }
+	
 	anySent = true;
  /*   try {
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
