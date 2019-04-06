@@ -704,7 +704,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let uzenet = '';
 			  
     con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.display_name + "'", function (err, result) {
-	//console.log(result[0].status + ", " + result[0].twitch);
+	console.log(result[0].status + ", " + result[0].twitch);
 	statusz = result[0].status;
 	uzenet = result[0].dcmessage;
     });
