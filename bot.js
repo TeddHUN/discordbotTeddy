@@ -705,29 +705,30 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 			  
     con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.display_name + "'", function (err, result) {
 	console.log(result[0].status + ", " + result[0].twitch);
-	statusz = result[0].status;
-	uzenet = result[0].dcmessage;
+	//statusz = result[0].status;
+	//uzenet = result[0].dcmessage;
+	    if (!twitchChannelIsLive) {
+	       if(result[0].status == 1) {
+		  targetChannel.fetchMessage(result[0].dcmessage).delete();
+		  con.query("UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.display_name + "'");
+	       }	
+	    } else {
+	       if(result[0].status == 0) {
+		  let msgToSend = msgFormatted + ` `;
+
+		  targetChannel.send(msgToSend, {
+			embed: msgEmbed
+		   }).then((message) => {		
+			var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.display_name + "'";
+			con.query(sql, function (err, result) {});  
+			console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
+		  });    
+		  anySent = true;
+	       }
+	    }
     });
 	
-    if (!twitchChannelIsLive) {
-       if(statusz == 1) {
-          targetChannel.fetchMessage(uzenet).delete();
-          con.query("UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.display_name + "'");
-       }	
-    } else {
-       if(statusz != 1) {
-	  let msgToSend = msgFormatted + ` `;
-
-	  targetChannel.send(msgToSend, {
-		embed: msgEmbed
-	   }).then((message) => {		
-		var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.display_name + "'";
-		con.query(sql, function (err, result) {});  
-		console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
-	  });    
-	  anySent = true;
-       }
-    }
+    
  /*   try {
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
 	let existingMessage = oldMsgs[messageDiscriminator] || null;
