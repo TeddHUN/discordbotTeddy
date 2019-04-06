@@ -709,7 +709,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	//uzenet = result[0].dcmessage;
 	    if (!twitchChannelIsLive) {
 	       if(result[0].status == 1) {
-		  targetChannel.fetchMessage(result[0].dcmessage).delete();
+		  targetChannel.fetchMessage(result[0].dcmessage).then(message => message.delete());
 		  var sql = "UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.display_name + "'";
 		  con.query(sql, function (err, result) {});  
 	       }	
