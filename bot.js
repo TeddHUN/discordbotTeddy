@@ -687,7 +687,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	.setColor(0x6441A4)
 	.setAuthor(twitchChannel.display_name, twitchChannel.logo)    
   	.setThumbnail(twitchChannel.logo)
-	.setDescription("https://twitch.tv/" + twitchChannel.display_name)
+	.setDescription("https://twitch.tv/" + twitchChannel.name)
     	.addField("Játék", twitchStream.game || "Nincs beállítva")
     	.addField("Nézők", twitchStream.viewers || "Az adás most indult.")
 	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs)
@@ -702,15 +702,15 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     
     let statusz = 0;
     let uzenet = '';
-		console.log(twitchChannel);	  
-    con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.display_name + "'", function (err, result) {
+		//console.log(twitchChannel);	  
+    con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.name + "'", function (err, result) {
 	//console.log(result[0].status + ", " + result[0].twitch);
 	//statusz = result[0].status;
 	//uzenet = result[0].dcmessage;
 	    if (!twitchChannelIsLive) {
 	       if(result[0].status == 1) {
 		  targetChannel.fetchMessage(result[0].dcmessage).then(message => message.delete());
-		  var sql = "UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.display_name + "'";
+		  var sql = "UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.name + "'";
 		  con.query(sql, function (err, result) {});  
 	       }	
 	    } else {
@@ -720,7 +720,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 		  targetChannel.send(msgToSend, {
 			embed: msgEmbed
 		   }).then((message) => {		
-			var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.display_name + "'";
+			var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.name + "'";
 			con.query(sql, function (err, result) {});  
 			console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
 		  });    
