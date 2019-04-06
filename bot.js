@@ -698,7 +698,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let didSendVoice = false;
 
     let guild = client.guilds.find("id", "547498318834565130");
-    let targetChannel = guild.channels.find("id", "547557423318040603");//
+    let targetChannel = guild.channels.find("id", "547538758900252672");//
     
     let statusz = 0;
     let uzenet = '';
@@ -715,7 +715,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	       }	
 	    } else {
 	       if(result[0].status == 0) {
-		  let msgToSend = msgFormatted + ` `;
+		  let msgToSend = msgFormatted + ` @here`;
 
 		  targetChannel.send(msgToSend, {
 			embed: msgEmbed
