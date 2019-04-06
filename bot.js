@@ -710,7 +710,8 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	    if (!twitchChannelIsLive) {
 	       if(result[0].status == 1) {
 		  targetChannel.fetchMessage(result[0].dcmessage).delete();
-		  con.query("UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.display_name + "'");
+		  var sql = "UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.display_name + "'";
+		  con.query(sql, function (err, result) {});  
 	       }	
 	    } else {
 	       if(result[0].status == 0) {
