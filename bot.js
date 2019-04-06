@@ -715,7 +715,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
           con.query("UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.display_name + "'");
        }	
     } else {
-       if(statusz == 0) {
+       if(statusz != 1) {
 	  let msgToSend = msgFormatted + ` `;
 
 	  targetChannel.send(msgToSend, {
