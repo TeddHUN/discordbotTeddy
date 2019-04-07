@@ -298,8 +298,23 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				sent.delete(10000);					
 			});
 		
-		dUser.send("**Üzenet érkezett a `Sloth Gang` discord szerverről!**\n\nKüldő: " + msg.author + "\nÜzenet:" + dMessage);
 		msg.channel.send(msg.author + ", megsimizte " + dUser + "-t!").then(sent => {
+				msg.delete(1);					
+			});
+	}
+	
+	if(command === "jebemta") {		
+		
+		if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Ehhez nincs jogod!").then(sent => {
+				sent.delete(10000);					
+			});
+		
+		let dUser = msg.guild.member(msg.mentions.users.first()) || msg.guild.members.get(args[0]);
+		if (!dUser) return msg.channel.send("**Használat:** `--jebemta @Felhasználó").then(sent => {
+				sent.delete(10000);					
+			});
+		
+		msg.channel.send(msg.author + ", jebem ta " + dUser + "-t!").then(sent => {
 				msg.delete(1);					
 			});
 	}
