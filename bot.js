@@ -294,16 +294,10 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			});
 		
 		let dUser = msg.guild.member(msg.mentions.users.first()) || msg.guild.members.get(args[0]);
-		if (!dUser) return msg.channel.send("**HIBA:** A felhasználó nem található!").then(sent => {
+		if (!dUser) return msg.channel.send("**Használat:** `--simi @Felhasználó").then(sent => {
 				sent.delete(10000);					
 			});
 		
-		let dMessage = msg.content.slice(9);
-		dMessage = dMessage.replace(dUser, " ");
-		if(dMessage.length < 1) return msg.channel.send("**Használat:** `--simi @Felhasználó").then(sent => {
-				sent.delete(10000);					
-			});
-
 		dUser.send("**Üzenet érkezett a `Sloth Gang` discord szerverről!**\n\nKüldő: " + msg.author + "\nÜzenet:" + dMessage);
 		msg.channel.send(msg.author + ", megsimizte " + dUser + "-t!").then(sent => {
 				msg.delete(1);					
