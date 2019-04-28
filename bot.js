@@ -474,7 +474,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		});		
 	}
 	
-	if(command == "szabalyzat"") {
+	if(command == "szabalyzat") {
 		if(msg.author.id != "312631597222592522") {
 			return msg.channel.send("Nincs hozzá jogod, bibíbí!");;	
 		}
