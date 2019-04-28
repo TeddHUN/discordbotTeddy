@@ -7,6 +7,7 @@ const mysql = require('mysql');
 var prefix = "--";
 
 const config = require('./config.json');
+const szabalyEmbed = require('./szabalyzat.json');
 const TwitchMonitor = require("./twitch-monitor");
 
 const youtube = new YouTube("AIzaSyBKR_t85ukmSb6C7Bm-ZMmH6nrfi9j9hJ4");
@@ -462,11 +463,25 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 	}*/
 	
 	if(command == "frissit") {
+		if(msg.author.id != "312631597222592522") {
+			return msg.channel.send("Nincs hozzá jogod, bibíbí!");;	
+		}
+		
 		serverStats(client.guilds.find("id", "547498318834565130"));
 		msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
 			msg.delete(1);
 			sent.delete(5000);
 		});		
+	}
+	
+	if(command == "szabalyzat"") {
+		if(msg.author.id != "312631597222592522") {
+			return msg.channel.send("Nincs hozzá jogod, bibíbí!");;	
+		}
+		let guild = client.guilds.find("id", "547498318834565130");
+   		let targetChannel = guild.channels.find("id", "572146712114757637");//
+	
+		targetChannel.send({ szabalyEmbed });
 	}
 	return undefined;
 });
