@@ -481,7 +481,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		let guild = client.guilds.find("id", "547498318834565130");
    		let targetChannel = guild.channels.find("id", "572146712114757637");//
 	
-		targetChannel.send({ szabalyEmbed });
+		targetChannel.send({ embed: szabalyEmbed });
 	}
 	return undefined;
 });
