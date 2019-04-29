@@ -1,7 +1,7 @@
 {
   "description": "A szabályok **nem** tudása nem mentesít a büntetés alól!",
   "color": 16276822,
-  "timestamp": "2019-04-28T21:51:00.000Z",
+  "timestamp": "2019-04-29T06:00:00.000Z",
   "footer": {
     "icon_url": "http://teddhun.hu/assets/logo.png",
     "text": "Utoljára frissítve"
@@ -27,7 +27,7 @@
     },
     {
       "name": "4. Moderátorokra vonatkozó szabályzat",
-      "value": "**4.1.** A moderátorok **kizárólag** a felhasználó Twitch nevét állíthatják be becenévnek egy másik felhasználón.\n**4.2.** A moderátorok **kizárlólag** az újoncok becenevét cserélhetik le, további esetben nem módosíthatják azt."
+      "value": "**4.1.** A moderátorok **kizárólag** a felhasználó Twitch nevét állíthatják be becenévnek egy másik felhasználón.\n**4.2.** A moderátorok **kizárólag** az újoncok becenevét cserélhetik le, további esetben nem módosíthatják azt."
     }
   ]
 }
