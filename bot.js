@@ -41,7 +41,7 @@ client.on('ready', () => {
     TwitchMonitor.start();
 
     con.connect(function(err) {
-	  if (err) return console.log("Hiba:"+err);
+	  if (err) return console.log(""+err);
 	  console.log("MySQL: Csatlakozva!");
 	});
 });
@@ -208,7 +208,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 
 	 if (command === 'leaveserver') {
 		if(msg.author.id != "312631597222592522") {
-			return msg.channel.send("Nincs hozzá jogod, bibíbí!");;	
+			return msg.channel.send("Nincs hozzá jogod, bibíbí!");	
 		}
 
 		if (!args[1]) return msg.channel.send("**Használat:** --leaveserver `[SzerverID]`");
@@ -464,7 +464,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 	
 	if(command == "frissit") {
 		if(msg.author.id != "312631597222592522") {
-			return msg.channel.send("Nincs hozzá jogod, bibíbí!");;	
+			return msg.channel.send("Nincs hozzá jogod, bibíbí!");
 		}
 		
 		serverStats(client.guilds.find("id", "547498318834565130"));
@@ -476,7 +476,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 	
 	if(command == "szabalyzat") {
 		if(msg.author.id != "312631597222592522") {
-			return msg.channel.send("Nincs hozzá jogod, bibíbí!");;	
+			return msg.channel.send("Nincs hozzá jogod, bibíbí!");
 		}
 		let guild = client.guilds.find("id", "547498318834565130");
    		let targetChannel = guild.channels.find("id", "572146712114757637");//
