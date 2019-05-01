@@ -40,6 +40,11 @@ client.on('ready', () => {
 	
     StreamActivity.init(client);
     TwitchMonitor.start();
+	
+    con.connect(function(err) {
+  	if (err) return console.log(""+err);
+  	console.log("MySQL: Csatlakozva " + twitchChannel.display_name + "!");
+    });
 });
 
 client.on('message', async msg => { // eslint-disable-line
@@ -749,12 +754,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     
     let statusz = 0;
     let uzenet = '';
-
-    con.connect(function(err) {
-  	if (err) return console.log(""+err);
-  	console.log("MySQL: Csatlakozva " + twitchChannel.display_name + "!");
-    });
-		//console.log(twitchChannel);	  
+	//console.log(twitchChannel);	  
     con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.name + "'", function (err, result) {
 	//console.log(result[0].status + ", " + result[0].twitch);
 	//statusz = result[0].status;
