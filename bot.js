@@ -779,7 +779,6 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 	       }
 	    }
     });
-    con.end();
     anySent = true;
 	
     
