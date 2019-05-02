@@ -731,6 +731,8 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 
     StreamActivity.setChannelOnline(twitchChannel);
 /*
+Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_official ! Kukkantsatok be hozzá!
+*/
     let msgFormatted = `${twitchChannel.display_name} élőadásban van, gyere és nézz be!`;
 	
     let cacheBustTs = (Date.now() / 1000).toFixed(0);
@@ -750,7 +752,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     let didSendVoice = false;
 
     let guild = client.guilds.find("id", "547498318834565130");
-    let targetChannel = guild.channels.find("id", "547538758900252672");//
+    let targetChannel = guild.channels.find("id", "547557423318040603");//
     
     let statusz = 0;
     let uzenet = '';
@@ -778,7 +780,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 		  });    
 	       }
 	    }
-    });*/
+    });
     anySent = true;
 	
     
