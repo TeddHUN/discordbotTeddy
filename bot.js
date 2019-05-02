@@ -28,9 +28,10 @@ var con = mysql.createConnection({
   host: process.env.mysqlhost,
   user: process.env.mysqluser,
   password: process.env.mysqlpassword,
-  database: "jQCLgUoAO5"
+  database: "id7127198_teddhun"
 });
-
+/*$conn = mysql_connect(“mysql#.000webhost.com”, “a3367xxx_test”,"******") or die(mysql_error());
+mysql_select_db(“a3367xxx_test”, $conn);*/
 
 client.on('ready', () => {
     console.log('Elindult!');
