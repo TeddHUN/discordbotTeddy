@@ -758,7 +758,7 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
     let uzenet = '';
 	console.log(twitchChannel);	  
     con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.name + "'", function (err, result) {
-	console.log(result[0].status + ", " + result[0].twitch);
+	console.log(""+result);
 	//statusz = result[0].status;
 	//uzenet = result[0].dcmessage;
 	    if (!twitchChannelIsLive) {
