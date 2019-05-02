@@ -730,7 +730,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
     } catch (e) { }
 
     StreamActivity.setChannelOnline(twitchChannel);
-
+/*
     let msgFormatted = `${twitchChannel.display_name} élőadásban van, gyere és nézz be!`;
 	
     let cacheBustTs = (Date.now() / 1000).toFixed(0);
@@ -778,7 +778,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 		  });    
 	       }
 	    }
-    });
+    });*/
     anySent = true;
 	
     
