@@ -28,7 +28,7 @@ var con = mysql.createConnection({
   host: process.env.mysqlhost,
   user: process.env.mysqluser,
   password: process.env.mysqlpassword,
-  database: "G9kQz67FGb"
+  database: process.env.mysqldatabase
 });
 /*$conn = mysql_connect(“mysql#.000webhost.com”, “a3367xxx_test”,"******") or die(mysql_error());
 mysql_select_db(“a3367xxx_test”, $conn);*/
