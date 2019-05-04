@@ -732,7 +732,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 /*
 Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_official ! Kukkantsatok be hozzá!
 */
-    let msgFormatted = `Hé , **${twitchChannel.display_name}** közvetítésbe kezdett\nKukkantsatok be hozzá!`;
+    let msgFormatted = `Hé, ** ${twitchChannel.display_name} ** közvetítésbe kezdett!\nKukkantsatok be hozzá!`;
 	
     let cacheBustTs = (Date.now() / 1000).toFixed(0);
 
@@ -772,7 +772,9 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
 	       }	
 	    } else {
 	       if(result[0].status == 0) {
-		  targetChannel.send(msgFormatted, {
+		       console.log("1");
+		  let msgToSend = msgFormatted;
+		  targetChannel.send(msgToSend, {
 			embed: msgEmbed
 		   }).then((message) => {		
 			var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.name + "'";
