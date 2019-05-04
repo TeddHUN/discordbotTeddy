@@ -735,65 +735,21 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
     let msgFormatted = `Hé , **${twitchChannel.display_name}** közvetítésbe kezdett\nKukkantsatok be hozzá!`;
 	
     let cacheBustTs = (Date.now() / 1000).toFixed(0);
-	
-	const msgEmbed = {
-  "title": twitchChannel.status,
-  "url": "https://twitch.tv/" + twitchChannel.display_name,
-  "color": 6570404,
-  "timestamp": Date.now(),
-  "footer": {
-    "icon_url": twitchChannel.logo,
-    "text": "Közvetítés kezdete"
-  },
-  "thumbnail": {
-    "url": twitchChannel.logo
-  },
-  "image": {
-    "url": twitchStream.preview.medium + "?t=" + cacheBustTs
-  },
-  "author": {
-    "name": "név",
-    "url": "https://twitch.tv/" + twitchChannel.display_name,
-    "icon_url": twitchChannel.logo
-  },
-  "fields": [
-    {
-      "name": "Játék",
-      "value": twitchStream.game || "Nincs beállítva",
-      "inline": true
-    },
-    {
-      "name": "Nézők",
-      "value": twitchStream.viewers || "Az adás most indult.",
-      "inline": true
-    },
-    {
-      "name": "Követők",
-      "value": twitchChannel.followers,
-      "inline": true
-    },
-    {
-      "name": "Összmegtekintés",
-      "value": twitchChannel.views,
-      "inline": true
-    },
-    {
-      "name": "Link",
-      "value": "https://twitch.tv/" + twitchChannel.display_name
-    }
-  ]
-};
-	
-    /*const msgEmbed = new Discord.RichEmbed()
+
+    const msgEmbed = new Discord.RichEmbed()
 	.setColor(0x6441A4)
-	.setAuthor(twitchChannel.display_name, twitchChannel.logo)    
+        .setTitle(twitchChannel.status)
+        .setURL("https://twitch.tv/" + twitchChannel.display_name)
+	.setAuthor(twitchChannel.display_name, twitchChannel.logo, "https://twitch.tv/" + twitchChannel.display_name)    
   	.setThumbnail(twitchChannel.logo)
-	.setDescription("https://twitch.tv/" + twitchChannel.name)
-    	.addField("Játék", twitchStream.game || "Nincs beállítva")
-    	.addField("Nézők", twitchStream.viewers || "Az adás most indult.")
+    	.addField("Játék", twitchStream.game || "Nincs beállítva", true)
+    	.addField("Nézők", twitchStream.viewers || "Az adás most indult.", true)
+    	.addField("Követők", twitchChannel.followers, true)
+    	.addField("Összmegtekintés", twitchChannel.views, true)
+    	.addField("Link", "https://twitch.tv/" + twitchChannel.display_name)
 	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs)
-    	//.setFooter("Fejlesztőm: TeddHUN", "https://support.discordapp.com/system/photos/3600/6196/6312/profile_image_116298876231_678183.jpg")
-    	.setTimestamp();*/
+    	.setFooter("Közvetítés kezdete", twitchChannel.logo)
+    	.setTimestamp();
 
     let anySent = false;
     let didSendVoice = false;
@@ -805,7 +761,7 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
     let uzenet = '';
 	//console.log(twitchChannel);	  
     con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.name + "'", function (err, result) {  
-	console.log(""+result);
+	//console.log(""+result);
 	//statusz = result[0].status;
 	//uzenet = result[0].dcmessage;
 	    if (!twitchChannelIsLive) {
