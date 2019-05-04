@@ -732,7 +732,7 @@ TwitchMonitor.onChannelLiveUpdate((twitchChannel, twitchStream, twitchChannelIsL
 /*
 Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_official ! Kukkantsatok be hozzá!
 */
-    let msgFormatted = `Hé, ** ${twitchChannel.display_name} ** közvetítésbe kezdett!\nKukkantsatok be hozzá!`;
+    let msgFormatted = `Hé @here, ** ${twitchChannel.display_name} ** közvetítésbe kezdett!\nKukkantsatok be hozzá!`;
 	
     let cacheBustTs = (Date.now() / 1000).toFixed(0);
 
