@@ -755,7 +755,7 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
     let didSendVoice = false;
 
     let guild = client.guilds.find("id", "547498318834565130");
-    let targetChannel = guild.channels.find("id", "547557423318040603");//
+    let targetChannel = guild.channels.find("id", process.env.dcstreamnotify);//
     
     let statusz = 0;
     let uzenet = '';
