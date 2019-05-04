@@ -742,11 +742,11 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
         .setURL("https://twitch.tv/" + twitchChannel.display_name)
 	.setAuthor(twitchChannel.display_name, twitchChannel.logo, "https://twitch.tv/" + twitchChannel.display_name)    
   	.setThumbnail(twitchChannel.logo)
-    	.addField("Játék", twitchStream.game || "Nincs beállítva", true)
+    	.addField("Játék", twitchStream.game || "Nincs beállítva")
     	.addField("Nézők", twitchStream.viewers || "Az adás most indult.", true)
     	.addField("Követők", twitchChannel.followers, true)
     	.addField("Összmegtekintés", twitchChannel.views, true)
-    	.addField("Link", "https://twitch.tv/" + twitchChannel.display_name)
+    	.addField("Link", "https://twitch.tv/" + twitchChannel.display_name, true)
 	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs)
     	.setFooter("Közvetítés kezdete", twitchChannel.logo)
     	.setTimestamp();
@@ -772,9 +772,7 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
 	       }	
 	    } else {
 	       if(result[0].status == 0) {
-		       console.log("1");
-		  let msgToSend = msgFormatted;
-		  targetChannel.send(msgToSend, {
+		  targetChannel.send(msgFormatted, {
 			embed: msgEmbed
 		   }).then((message) => {		
 			var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.name + "'";
