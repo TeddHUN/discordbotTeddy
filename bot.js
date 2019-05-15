@@ -355,10 +355,10 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				
 				con.query("INSERT INTO rangs (id, xp, rang) VALUES (msg.member.user.id, 0, 0)");
 			} else {
-				console.log("" + result[2] + ", " + result[1]);
+				//console.log("" + result[2] + ", " + result[1]);
 				//console.log("" + rangs[result[2]]); 
 				
-				/*const embed = new Discord.RichEmbed()
+				const embed = new Discord.RichEmbed()
 				    .setColor('#70EA6A')
 				    .setThumbnail(msg.member.user.avatarURL)
 				    .setAuthor(`${msg.member.user.username}#${msg.member.user.discriminator}`, msg.member.user.avatarURL)
@@ -367,14 +367,14 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				    .addField("Fiók létrehozva", `${msg.member.user.createdAt}`)
 				    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
 				    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
-				    .addField("Rang", rangs[result[2]].rang, true)
-				    .addField("XP", result[1] + "/" + rangs[result[2]].xp, true)
+				    .addField("Rang", rangs[result[0].rang].rang, true)
+				    .addField("XP", result[0].xp + "/" + rangs[result[2]].xp, true)
 				
 				msg.channel.send(msg.member + ", itt a statisztikád! :P", {
 				    embed: embed
 				}).then(sent => {
 					msg.delete(1);					
-				});	*/
+				});	
 			}
 		});
 		/*
