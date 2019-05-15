@@ -1,4 +1,4 @@
 {
-  "Kezdő gépelő": 100,
-  "Másod gépelő": 200  
+  {"rang":"Kezdő gépelő","xp":"100"},
+  {"rang":"Másod gépelő","xp":"20"}
 }
