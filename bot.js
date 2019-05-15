@@ -333,7 +333,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		
 		con.query("SELECT * FROM rangs WHERE id = '" + msg.member.user.id + "'", function (err, result) {
 			console.log("" + result[0] + ", " + err);
-			/*if(result[0] === "undefined") {
+			if(result[0] == undefined) {
 				msg.channel.send("**HIBA:** Nincs tábla, hamarosan lesz!").then(sent => {
 					msg.delete(1);
 					sent.delete(10000);					
@@ -343,7 +343,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 					msg.delete(1);
 					sent.delete(10000);					
 				});
-			}*/
+			}
 		});
 		/*
 		const embed = new Discord.RichEmbed()
