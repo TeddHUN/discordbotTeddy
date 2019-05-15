@@ -10,6 +10,8 @@ const config = require('./config.json');
 const szabalyEmbed = require('./szabalyzat.json');
 const TwitchMonitor = require("./twitch-monitor");
 
+const rangs = require('./rangs.json');
+
 const youtube = new YouTube(process.env.yttoken);
 const queue = new Map();
 
@@ -334,11 +336,25 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		con.query("SELECT * FROM rangs WHERE id = '" + msg.member.user.id + "'", function (err, result) {
 			console.log("" + result[0] + ", " + err);
 			if(result[0] == undefined) {
-				msg.channel.send("**HIBA:** Nincs tábla, hamarosan lesz!").then(sent => {
-					msg.delete(1);
-					sent.delete(10000);					
-				});
+				const embed = new Discord.RichEmbed()
+				    .setColor('#70EA6A')
+				    .setThumbnail(msg.member.user.avatarURL)
+				    .setAuthor(`${msg.member.user.username}#${msg.member.user.discriminator}`, msg.member.user.avatarURL)
+				   // .addField("ID:", `${msg.member.user.id}`, true)
+				    .addField("Becenév", msg.member.nickname || 'Még nincs', true)
+				    .addField("Fiók létrehozva", `${msg.member.user.createdAt}`)
+				    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
+				    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
+				    .addField("Rang", rangs[0].rang, true)
+				    .addField("XP", rangs[0].xp + "/100", true)
+				
+				msg.channel.send(msg.member + ", itt a statisztikád! :P", {
+				    embed: embed
+				}).then(sent => {
+					msg.delete(1);					
+				});				
 			} else {
+				
 				msg.channel.send("**HIBA:** Statisztika: ").then(sent => {
 					msg.delete(1);
 					sent.delete(10000);					
@@ -346,21 +362,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			}
 		});
 		/*
-		const embed = new Discord.RichEmbed()
-		    .setColor('#70EA6A')
-		    .setThumbnail(msg.member.user.avatarURL)
-		    .setAuthor(`${msg.member.user.username}#${msg.member.user.discriminator}`, msg.member.user.avatarURL)
-		   // .addField("ID:", `${msg.member.user.id}`, true)
-		    .addField("Becenév", msg.member.nickname || 'Még nincs', true)
-		    .addField("Fiók létrehozva", `${msg.member.user.createdAt}`)
-		    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
-		    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
-		    .addField("Rang", "Kezdő gépelő", true)
-		    .addField("XP", "0/100", true)
-		    .addField("Status:", `${user.presence.status}`, true)
-		    .addField("In Server", message.guild.name, true)
-		    .addField("Game:", `${user.presence.game ? user.presence.game.name : 'None'}`, true)
-		    .addField("Bot:", `${user.bot}`, true)
+		
 		
 		msg.channel.send(msg.member + ", itt a statisztikád! :P", {
 		    embed: embed
