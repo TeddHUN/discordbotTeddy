@@ -134,7 +134,7 @@ ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
 A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)
 					`);
 					try {
-						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
+						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 6, {
 							maxMatches: 1,
 							time: 10000,
 							errors: ['time']
@@ -322,6 +322,31 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		msg.channel.send(msg.author + ", jebem ta " + dUser + "-t!").then(sent => {
 				msg.delete(1);					
 			});
+	}
+	
+	if(command === "stats") {
+		
+		if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Tesztelés alatt!").then(sent => {
+			msg.delete(1);
+			sent.delete(10000);					
+		});
+		
+		const embed = new Discord.RichEmbed()
+		    .setColor('#70EA6A')
+		    .setThumbnail(member.user.avatarURL)
+		    .setAuthor(`${member.user.username}#${member.user.discriminator}`, member.user.avatarURL)
+		    //.addField("ID:", `${member.user.id}`, true)
+		    .addField("Becenév", member.nickname || 'Még nincs', true)
+		    .addField("Fiók létrehozva", `${member.user.createdAt}`)
+		    .addField("Csatlakozás dátuma", `(${member.joinedAt})`)
+		    .addField("Rang(ok)", member.roles.map(roles => `${roles.name}`).join(', '), true)
+		    .addField("Utolsó üzenet", member.user.lastMessage)
+		    .addField("Rang", "Kezdő gépelő", true)
+		    .addField("XP", "0/100", true)
+	
+		msg.channel.send(member + ", itt a statisztikád! :P", {
+		    embed: embed
+		});	
 	}
 	
 	/*if(command === "addstream") {
