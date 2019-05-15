@@ -355,6 +355,9 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				
 				con.query("INSERT INTO rangs (id, xp, rang) VALUES (msg.member.user.id, 0, 0)");
 			} else {
+				console.log("" + result[2] + ", " + result[1]);
+				console.log("" + rangs[result[2]]); 
+				
 				const embed = new Discord.RichEmbed()
 				    .setColor('#70EA6A')
 				    .setThumbnail(msg.member.user.avatarURL)
