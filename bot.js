@@ -326,25 +326,25 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 	
 	if(command === "stats") {
 		
-		if(!msg.author.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Tesztelés alatt!").then(sent => {
+		if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Tesztelés alatt!").then(sent => {
 			msg.delete(1);
 			sent.delete(10000);					
 		});
 		
 		const embed = new Discord.RichEmbed()
 		    .setColor('#70EA6A')
-		    .setThumbnail(msg.author.avatarURL)
-		    .setAuthor(`${msg.author.username}#${msg.author.discriminator}`, msg.author.avatarURL)
-		    //.addField("ID:", `${member.user.id}`, true)
-		    .addField("Becenév", msg.author.nickname || 'Még nincs', true)
-		    .addField("Fiók létrehozva", `${msg.author.createdAt}`)
-		    .addField("Csatlakozás dátuma", `(${msg.author.joinedAt})`)
-		    .addField("Rang(ok)", msg.author.roles.map(roles => `${roles.name}`).join(', '), true)
-		    .addField("Utolsó üzenet", msg.author.lastMessage)
+		    .setThumbnail(msg.member.user.avatarURL)
+		    .setAuthor(`${msg.member.user.username}#${msg.member.user.discriminator}`, msg.member.user.avatarURL)
+		   // .addField("ID:", `${msg.member.user.id}`, true)
+		    .addField("Becenév", msg.member.nickname || 'Még nincs', true)
+		    .addField("Fiók létrehozva", `${msg.member.user.createdAt}`)
+		    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
+		    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
+		    .addField("Utolsó üzenete", msg.member.user.lastMessage)		
 		    .addField("Rang", "Kezdő gépelő", true)
 		    .addField("XP", "0/100", true)
-	
-		msg.channel.send(member + ", itt a statisztikád! :P", {
+		
+		msg.channel.send(msg.member + ", itt a statisztikád! :P", {
 		    embed: embed
 		});	
 	}
