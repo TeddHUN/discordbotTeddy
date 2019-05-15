@@ -619,56 +619,28 @@ client.on("message", (message) => {
 					if(xp2 >= rangs[rang].xp) {
 						rang++;
 						con.query("UPDATE rangs SET xp = '0', rang = '" + rang + "' WHERE id = '" + message.member.user.id + "'"); 
-
-						if(rang+1 >= maxRang) {
-							const embed = {
-								  "description": "**Gratulálok, fejlődtél egy szintet!**",
-								  "color": 16312092,
-								  "author": {
-								    "name": message.author,
-								    "icon_url": message.member.user.avatarURL
-								  },
-								  "fields": [
-								    {
-								      "name": "Régi rangod:",
-								      "value": rangs[rang-1].rang,
-								      "inline": true
-								    },
-								    {
-								      "name": "Új rang:",
-								      "value": rangs[rang].rang,
-								      "inline": true
-								    }
-								  ]
-							};
-							message.channel.send(message.author + ", szintet léptél!", { embed });	
-						} else {
-							const embed = {
-								  "description": "**Gratulálok, fejlődtél egy szintet!**",
-								  "color": 16312092,
-								  "author": {
-								    "name": message.author,
-								    "icon_url": message.member.user.avatarURL
-								  },
-								  "fields": [
-								    {
-								      "name": "Régi rangod:",
-								      "value": rangs[rang-1].rang,
-								      "inline": true
-								    },
-								    {
-								      "name": "Új rang:",
-								      "value": rangs[rang].rang,
-								      "inline": true
-								    },
-								    {
-								      "name": "Következő ranghoz szükséges XP:",
-								      "value": rangs[rang+1].xp
-								    }
-								  ]
-							};
-							message.channel.send(message.author + ", szintet léptél!", { embed });	
-						}
+						
+						const embed = {
+							  "description": "**Gratulálok, fejlődtél egy szintet!**",
+							  "color": 16312092,
+							  "author": {
+							    "name": message.author,
+							    "icon_url": message.member.user.avatarURL
+							  },
+							  "fields": [
+							    {
+							      "name": "Régi rangod:",
+							      "value": rangs[rang-1].rang,
+							      "inline": true
+							    },
+							    {
+							      "name": "Új rang:",
+							      "value": rangs[rang].rang,
+							      "inline": true
+							    }
+							  ]
+						};
+						message.channel.send(message.author + ", szintet léptél!", { embed });	
 					} else {
 						con.query("UPDATE rangs SET xp = '" + xp2 + "' WHERE id = '" + message.member.user.id + "'");  
 					}
