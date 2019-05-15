@@ -607,7 +607,7 @@ client.on("message", (message) => {
 				bemutatkozok.send(message.author + " bemutatkozó üzenete: ```" + message.content + "```**Ha írt Twitch nevet akkor a beceneved állítsd be rá és adj neki tag rangot, majd rakj egy ✅ reakciót ha kész!** 😃\n**Esetleg ha nem írt megfelelő bemutatkozást akkor a `--uzenet Megemlítés [Szöveg]` paranccsal tudsz neki üzenni!**");
 			} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
 		} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);		
-	} else {
+	}/* else {
 		con.query("SELECT * FROM rangs WHERE id = '" + message.member.user.id + "'", function (err, result) {
 			if(result[0] == undefined) {
 				con.query("INSERT INTO rangs (id, xp, rang) VALUES ('" + message.member.user.id + "', 0, 0)");
@@ -647,7 +647,7 @@ client.on("message", (message) => {
 				}
 			}
 		});	
-	}
+	}*/
 });
 
 client.on('raw', event => {
