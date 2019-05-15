@@ -353,7 +353,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 					msg.delete(1);					
 				});	
 				
-				con.query("INSERT INTO rangs (id, xp, rang) VALUES (msg.member.user.id, 0, 0)");
+				con.query("INSERT INTO rangs (id, xp, rang) VALUES ('" + msg.member.user.id + "', 0, 0)");
 			} else {
 				//console.log("" + result[0].xp + ", " + result[0].rang);
 				var rang = result[0].rang;
