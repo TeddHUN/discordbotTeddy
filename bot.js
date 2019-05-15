@@ -332,11 +332,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		});
 		
 		con.query("SELECT * FROM rangs WHERE id = '" + msg.member.user.id + "'", function (err, result) {
-			msg.channel.send("**HIBA:** " + result).then(sent => {
-				msg.delete(1);			
-			});
-			
-			msg.channel.send("**HIBA:** " + err).then(sent => {
+			msg.channel.send("**HIBA:** " + result[0]).then(sent => {
 				msg.delete(1);			
 			});
 			/*if(err) {
