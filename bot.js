@@ -620,7 +620,7 @@ client.on("message", (message) => {
 						rang++;
 						con.query("UPDATE rangs SET xp = '0', rang = '" + rang + "' WHERE id = '" + message.member.user.id + "'"); 
 
-						if(rang >= maxRang) {
+						if(rang+1 >= maxRang) {
 							const embed = {
 								  "description": "**Gratulálok, fejlődtél egy szintet!**",
 								  "color": 16312092,
