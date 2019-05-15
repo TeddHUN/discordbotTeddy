@@ -612,11 +612,11 @@ client.on("message", (message) => {
 			if(result[0] == undefined) {
 				con.query("INSERT INTO rangs (id, xp, rang) VALUES ('" + message.member.user.id + "', 0, 0)");
 			} else {
-				var xp = result[0].xp + 1;
+				var xp2 = result[0].xp + 1;
 				var rang = result[0].rang;
 				
 				if(rang < maxRang) {				
-					if(xp >= rangs[rang].xp) {
+					if(xp2 >= rangs[rang].xp) {
 						rang++;
 						con.query("UPDATE rangs SET xp = '0', rang = '" + rang + "' WHERE id = '" + message.member.user.id + "'"); 
 
@@ -670,7 +670,7 @@ client.on("message", (message) => {
 							message.channel.send(message.author + ", szintet léptél!", { embed });	
 						}
 					} else {
-						con.query("UPDATE rangs SET xp = '" + xp + "' WHERE id = '" + message.member.user.id + "'");  
+						con.query("UPDATE rangs SET xp = '" + xp2 + "' WHERE id = '" + message.member.user.id + "'");  
 					}
 				}
 			}
