@@ -331,6 +331,20 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			sent.delete(10000);					
 		});
 		
+		con.query("SELECT * FROM rangs WHERE id = '" + msg.member.user.id + "'", function (err, result) {
+			if(err) {
+				msg.channel.send("**HIBA:** Nincs tábla, hamarosan lesz!").then(sent => {
+					msg.delete(1);
+					sent.delete(10000);					
+				});
+			} else {
+				msg.channel.send("**HIBA:** Statisztika: ").then(sent => {
+					msg.delete(1);
+					sent.delete(10000);					
+				});
+			}
+		});
+		/*
 		const embed = new Discord.RichEmbed()
 		    .setColor('#70EA6A')
 		    .setThumbnail(msg.member.user.avatarURL)
@@ -340,13 +354,12 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		    .addField("Fiók létrehozva", `${msg.member.user.createdAt}`)
 		    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
 		    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
-		    .addField("Utolsó üzenete", msg.member.user.lastMessage)		
 		    .addField("Rang", "Kezdő gépelő", true)
 		    .addField("XP", "0/100", true)
 		
 		msg.channel.send(msg.member + ", itt a statisztikád! :P", {
 		    embed: embed
-		});	
+		});	*/
 	}
 	
 	/*if(command === "addstream") {
