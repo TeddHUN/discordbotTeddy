@@ -326,21 +326,21 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 	
 	if(command === "stats") {
 		
-		if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Tesztelés alatt!").then(sent => {
+		if(!msg.author.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Tesztelés alatt!").then(sent => {
 			msg.delete(1);
 			sent.delete(10000);					
 		});
 		
 		const embed = new Discord.RichEmbed()
 		    .setColor('#70EA6A')
-		    .setThumbnail(member.user.avatarURL)
-		    .setAuthor(`${member.user.username}#${member.user.discriminator}`, member.user.avatarURL)
+		    .setThumbnail(msg.author.avatarURL)
+		    .setAuthor(`${msg.author.username}#${msg.author.discriminator}`, msg.author.avatarURL)
 		    //.addField("ID:", `${member.user.id}`, true)
-		    .addField("Becenév", member.nickname || 'Még nincs', true)
-		    .addField("Fiók létrehozva", `${member.user.createdAt}`)
-		    .addField("Csatlakozás dátuma", `(${member.joinedAt})`)
-		    .addField("Rang(ok)", member.roles.map(roles => `${roles.name}`).join(', '), true)
-		    .addField("Utolsó üzenet", member.user.lastMessage)
+		    .addField("Becenév", msg.author.nickname || 'Még nincs', true)
+		    .addField("Fiók létrehozva", `${msg.author.createdAt}`)
+		    .addField("Csatlakozás dátuma", `(${msg.author.joinedAt})`)
+		    .addField("Rang(ok)", msg.author.roles.map(roles => `${roles.name}`).join(', '), true)
+		    .addField("Utolsó üzenet", msg.author.lastMessage)
 		    .addField("Rang", "Kezdő gépelő", true)
 		    .addField("XP", "0/100", true)
 	
