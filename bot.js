@@ -334,7 +334,6 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		});
 		
 		con.query("SELECT * FROM rangs WHERE id = '" + msg.member.user.id + "'", function (err, result) {
-			console.log("" + result[0] + ", " + err);
 			if(result[0] == undefined) {
 				const embed = new Discord.RichEmbed()
 				    .setColor('#70EA6A')
@@ -346,19 +345,33 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
 				    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
 				    .addField("Rang", rangs[0].rang, true)
-				    .addField("XP", rangs[0].xp + "/100", true)
+				    .addField("XP", "0/100", true)
 				
 				msg.channel.send(msg.member + ", itt a statisztikád! :P", {
 				    embed: embed
 				}).then(sent => {
 					msg.delete(1);					
-				});				
-			} else {
+				});	
 				
-				msg.channel.send("**HIBA:** Statisztika: ").then(sent => {
-					msg.delete(1);
-					sent.delete(10000);					
-				});
+				con.query("INSERT INTO rangs (id, xp, rang) VALUES (msg.member.user.id, 0, 0)");
+			} else {
+				const embed = new Discord.RichEmbed()
+				    .setColor('#70EA6A')
+				    .setThumbnail(msg.member.user.avatarURL)
+				    .setAuthor(`${msg.member.user.username}#${msg.member.user.discriminator}`, msg.member.user.avatarURL)
+				   // .addField("ID:", `${msg.member.user.id}`, true)
+				    .addField("Becenév", msg.member.nickname || 'Még nincs', true)
+				    .addField("Fiók létrehozva", `${msg.member.user.createdAt}`)
+				    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
+				    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
+				    .addField("Rang", rangs[result[2]].rang, true)
+				    .addField("XP", result[1] + "/" + rangs[result[2]].xp, true)
+				
+				msg.channel.send(msg.member + ", itt a statisztikád! :P", {
+				    embed: embed
+				}).then(sent => {
+					msg.delete(1);					
+				});	
 			}
 		});
 		/*
