@@ -356,9 +356,9 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				con.query("INSERT INTO rangs (id, xp, rang) VALUES (msg.member.user.id, 0, 0)");
 			} else {
 				console.log("" + result[2] + ", " + result[1]);
-				console.log("" + rangs[result[2]]); 
+				//console.log("" + rangs[result[2]]); 
 				
-				const embed = new Discord.RichEmbed()
+				/*const embed = new Discord.RichEmbed()
 				    .setColor('#70EA6A')
 				    .setThumbnail(msg.member.user.avatarURL)
 				    .setAuthor(`${msg.member.user.username}#${msg.member.user.discriminator}`, msg.member.user.avatarURL)
@@ -374,7 +374,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				    embed: embed
 				}).then(sent => {
 					msg.delete(1);					
-				});	
+				});	*/
 			}
 		});
 		/*
