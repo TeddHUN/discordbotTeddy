@@ -624,18 +624,18 @@ client.on("message", (message) => {
 							  "description": "**Gratulálok, fejlődtél egy szintet!**",
 							  "color": 16312092,
 							  "author": {
-							    "name": message.author,
-							    "icon_url": message.member.user.avatarURL
+							    "name": ""+message.author,
+							    "icon_url": ""+message.member.user.avatarURL
 							  },
 							  "fields": [
 							    {
 							      "name": "Régi rangod:",
-							      "value": rangs[rang-1].rang,
+							      "value": ""+rangs[rang-1].rang,
 							      "inline": true
 							    },
 							    {
 							      "name": "Új rang:",
-							      "value": rangs[rang].rang,
+							      "value": ""+rangs[rang].rang,
 							      "inline": true
 							    }
 							  ]
