@@ -332,20 +332,17 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		});
 		
 		con.query("SELECT * FROM rangs WHERE id = '" + msg.member.user.id + "'", function (err, result) {
-			msg.channel.send("**HIBA:** " + result[0]).then(sent => {
-				msg.delete(1);			
-			});
-			/*if(err) {
-				msg.channel.send("**HIBA:** Nincs tábla, hamarosan lesz!").then(sent => {
-					msg.delete(1);
-					sent.delete(10000);					
-				});
-			} else {
+			if(result[0] === "undefined") {
 				msg.channel.send("**HIBA:** Statisztika: ").then(sent => {
 					msg.delete(1);
 					sent.delete(10000);					
 				});
-			}*/
+			} else {
+				msg.channel.send("**HIBA:** Nincs tábla, hamarosan lesz!").then(sent => {
+					msg.delete(1);
+					sent.delete(10000);					
+				});
+			}
 		});
 		/*
 		const embed = new Discord.RichEmbed()
