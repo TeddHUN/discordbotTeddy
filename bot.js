@@ -11,6 +11,7 @@ const szabalyEmbed = require('./szabalyzat.json');
 const TwitchMonitor = require("./twitch-monitor");
 
 const rangs = require('./rangs.json');
+var maxRang = 2;
 
 const youtube = new YouTube(process.env.yttoken);
 const queue = new Map();
@@ -343,7 +344,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				    .addField("Becenév", msg.member.nickname || 'Még nincs', true)
 				    .addField("Fiók létrehozva", `${msg.member.user.createdAt}`)
 				    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
-				    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
+				    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '))
 				    .addField("Rang", rangs[0].rang, true)
 				    .addField("XP", "0/100", true)
 				
@@ -369,7 +370,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 				    .addField("Becenév", msg.member.nickname || 'Még nincs', true)
 				    .addField("Fiók létrehozva", `${msg.member.user.createdAt}`)
 				    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
-				    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
+				    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '))
 				    .addField("Rang", rangs[rang].rang, true)
 				    .addField("XP", xp + "/" + rangs[rang].xp, true)
 				
@@ -571,6 +572,12 @@ client.on("guildMemberAdd", (member) => {
 		channel.send(member + ", csatlakozott a szerverre!", {
 		    embed: embed
 		});
+		
+		con.query("SELECT * FROM rangs WHERE id = '" + member.user.id + "'", function (err, result) {
+			if(result[0] == undefined) {
+				con.query("INSERT INTO rangs (id, xp, rang) VALUES ('" + member.user.id + "', 0, 0)");
+			}
+		});
 	}
 });
 
@@ -600,6 +607,74 @@ client.on("message", (message) => {
 				bemutatkozok.send(message.author + " bemutatkozó üzenete: ```" + message.content + "```**Ha írt Twitch nevet akkor a beceneved állítsd be rá és adj neki tag rangot, majd rakj egy ✅ reakciót ha kész!** 😃\n**Esetleg ha nem írt megfelelő bemutatkozást akkor a `--uzenet Megemlítés [Szöveg]` paranccsal tudsz neki üzenni!**");
 			} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
 		} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);		
+	} else {
+		con.query("SELECT * FROM rangs WHERE id = '" + message.member.user.id + "'", function (err, result) {
+			if(result[0] == undefined) {
+				con.query("INSERT INTO rangs (id, xp, rang) VALUES ('" + message.member.user.id + "', 0, 0)");
+			} else {
+				var xp = result[0].xp + 1;
+				var rang = result[0].rang;
+				
+				if(rang < maxRang) {				
+					if(xp >= rangs[rang].xp) {
+						rang++;
+						con.query("UPDATE rangs SET xp = '0', rang = '" + rang + "' WHERE id = '" + message.member.user.id + "'"); 
+
+						if(rang >= maxRang) {
+							const embed = {
+								  "description": "**Gratulálok, fejlődtél egy szintet!**",
+								  "color": 16312092,
+								  "author": {
+								    "name": message.author,
+								    "icon_url": message.member.user.avatarURL
+								  },
+								  "fields": [
+								    {
+								      "name": "Régi rangod:",
+								      "value": rangs[rang-1].rang,
+								      "inline": true
+								    },
+								    {
+								      "name": "Új rang:",
+								      "value": rangs[rang].rang,
+								      "inline": true
+								    }
+								  ]
+							};
+							message.channel.send(message.author + ", szintet léptél!", { embed });	
+						} else {
+							const embed = {
+								  "description": "**Gratulálok, fejlődtél egy szintet!**",
+								  "color": 16312092,
+								  "author": {
+								    "name": message.author,
+								    "icon_url": message.member.user.avatarURL
+								  },
+								  "fields": [
+								    {
+								      "name": "Régi rangod:",
+								      "value": rangs[rang-1].rang,
+								      "inline": true
+								    },
+								    {
+								      "name": "Új rang:",
+								      "value": rangs[rang].rang,
+								      "inline": true
+								    },
+								    {
+								      "name": "Következő ranghoz szükséges XP:",
+								      "value": rangs[rang+1].xp
+								    }
+								  ]
+							};
+							message.channel.send(message.author + ", szintet léptél!", { embed });	
+						}
+					} else {
+						con.query("UPDATE rangs SET xp = '" + xp + "' WHERE id = '" + message.member.user.id + "'");  
+					}
+				}
+			}
+		});	
 	}
 });
 
