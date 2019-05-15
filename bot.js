@@ -332,7 +332,14 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		});
 		
 		con.query("SELECT * FROM rangs WHERE id = '" + msg.member.user.id + "'", function (err, result) {
-			if(err) {
+			msg.channel.send("**HIBA:** " + result).then(sent => {
+				msg.delete(1);			
+			});
+			
+			msg.channel.send("**HIBA:** " + err).then(sent => {
+				msg.delete(1);			
+			});
+			/*if(err) {
 				msg.channel.send("**HIBA:** Nincs tábla, hamarosan lesz!").then(sent => {
 					msg.delete(1);
 					sent.delete(10000);					
@@ -342,7 +349,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 					msg.delete(1);
 					sent.delete(10000);					
 				});
-			}
+			}*/
 		});
 		/*
 		const embed = new Discord.RichEmbed()
@@ -356,6 +363,10 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
 		    .addField("Rang", "Kezdő gépelő", true)
 		    .addField("XP", "0/100", true)
+		    .addField("Status:", `${user.presence.status}`, true)
+		    .addField("In Server", message.guild.name, true)
+		    .addField("Game:", `${user.presence.game ? user.presence.game.name : 'None'}`, true)
+		    .addField("Bot:", `${user.bot}`, true)
 		
 		msg.channel.send(msg.member + ", itt a statisztikád! :P", {
 		    embed: embed
