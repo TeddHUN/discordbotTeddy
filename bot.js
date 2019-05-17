@@ -715,7 +715,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, kero) {
 		try {
 			var connection = await voiceChannel.join();
 			queueConstruct.connection = connection;
-			console.log(queueConstruct.connection);
+			console.log(queueConstruct.connection.client.id);
 			play(msg.guild, queueConstruct.songs[0]);
 		} catch (error) {
 			queue.delete(msg.guild.id);
