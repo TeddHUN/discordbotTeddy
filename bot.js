@@ -88,23 +88,6 @@ client.on('message', async msg => { // eslint-disable-line
 	    	});	
 	}
 	
-	if(command === 'test') {
-		const embed = new Discord.RichEmbed()
-		    .setColor('#70EA6A')
-		    .setThumbnail(msg.author.avatarURL)
-		    .setAuthor(`${msg.author.username}#${msg.author.discriminator}`, msg.author.avatarURL)
-		    .addField("ID:", `${msg.author.id}`, true)
-		    .addField("Becenév", msg.member.nickname || 'Még nincs', true)
-		    .addField("Fiók létrehozva", `${msg.author.createdAt}`)
-		    .addField("Csatlakozás dátuma", `(${msg.member.joinedAt})`)
-		    .addField("Rangok", msg.member.roles.map(roles => `${roles.name}`).join(', '), true)
-		    .addField("Utolsó üzenete", msg.author.lastMessage)
-	
-		msg.channel.send(msg.author, {
-		    embed: embed
-		});
-	}
-	
 	if (command === 'play') {
 		const voiceChannel = msg.member.voiceChannel;
 		if (!voiceChannel) return msg.channel.send(msg.author + ", Ahhoz, hogy oda tudjak menni hozzád egy hangcsatornában kell lenned!");
@@ -732,6 +715,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, kero) {
 		try {
 			var connection = await voiceChannel.join();
 			queueConstruct.connection = connection;
+			console.log(queueConstruct.connection);
 			play(msg.guild, queueConstruct.songs[0]);
 		} catch (error) {
 			queue.delete(msg.guild.id);
