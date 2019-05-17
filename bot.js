@@ -186,7 +186,7 @@ channel.send({ embed });*/
 		let index = 0;
 		var songs = serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${song.request}**`).join('\n');
 		const embed = {
-			"description": "Jelenleg megy: [" + serverQueue.songs[0].title + "](" + serverQueue.songs[0].url + "), Kérte: " + serverQueue.songs[0].request + "\n\n" + songs + "\n\n',
+			"description": "Jelenleg megy: [" + serverQueue.songs[0].title + "](" + serverQueue.songs[0].url + "), Kérte: " + serverQueue.songs[0].request + "\n\n" + songs + "\n\n",
 		"color": 12944669,
 		"author": "Várakozó zenék"
 		};		
