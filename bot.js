@@ -169,13 +169,31 @@ A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)
 		if (!serverQueue) return msg.channel.send('Jelenleg nem játszom semmit.');
 		return msg.channel.send(`🎶 Jelenleg megy: **${serverQueue.songs[0].title}**, Kérte: **${serverQueue.songs[0].request}**`);
 	} else if (command === 'queue') {
+		
+/*		const embed = {
+  "description": "Jelenleg megy: [teszt zene](url) (00:00/00:00)\n\n**`1.`** [jelenlegmegy](url)\n\n",
+  "color": 12944669,
+  "footer": {
+    "text": "A várakozó lista teljes hossza: 00:00"
+  },
+  "author": {
+    "name": "Várakozó zenék"
+  }
+};
+channel.send({ embed });*/
+		
 		if (!serverQueue) return msg.channel.send('Nincs itt semmi.');
 		let index = 0;
-		return msg.channel.send(`
+		const embed = {
+			"description": 'Jelenleg megy: [${serverQueue.songs[0].title}](${serverQueue.songs[0].url), Kérte: ${serverQueue.songs[0].request}\n\n ${serverQueue.songs.map(song => `**`${++index}.`** [${song.title}](song.url) - Kérte: **${song.request}**`).join('\n')} \n\n',
+		"color": 12944669,
+		"author": "Várakozó zenék"
+		};		
+		return msg.channel.send({embed});/*`
 __**Várakozó zenék:**__
 ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${song.request}**`).join('\n')}
 **🎶 Jelenleg megy:** ${serverQueue.songs[0].title}, Kérte: ${serverQueue.songs[0].request}
-		`);
+		`);*/
 	} else if (command === 'pause') {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
