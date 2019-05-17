@@ -37,7 +37,7 @@ var con = mysql.createConnection({
 client.on('ready', () => {
     console.log('Elindult!');
     client.user.setStatus("dnd");
-    client.user.setActivity('Értesítés, MusicBOT, Statisztika...', { type: 'WATCHING' });
+    client.user.setActivity('Értesítés, Statisztika...', { type: 'WATCHING' });
     //client.user.setActivity('In Test Period', { type: 'WATCHING' });
 	
     StreamActivity.init(client);
@@ -60,35 +60,8 @@ client.on('message', async msg => { // eslint-disable-line
 
 	let command = msg.content.toLowerCase().split(' ')[0];
 	command = command.slice(prefix.length);
-
-	if(command === 'cigi') {
-		msg.channel.send('🚬').then(async msg2 => {
-			msg.delete();
-			setTimeout(() => {
-			    msg2.edit('🚬 ☁ ');
-			}, 500);
-			setTimeout(() => {
-			    msg2.edit('🚬 ☁☁ ');
-			}, 2000);
-			setTimeout(() => {
-			    msg2.edit('🚬 ☁☁☁ ');
-			}, 4000);
-			setTimeout(() => {
-			    msg2.edit('🚬 ☁☁');
-			}, 4500);
-			setTimeout(() => {
-			    msg2.edit('🚬 ☁');
-			}, 5000);
-			setTimeout(() => {
-			    msg2.edit('🚬 ');
-			}, 5500);
-			setTimeout(() => {
-			    msg2.delete();
-			}, 6000);
-	    	});	
-	}
 	
-	if (command === 'play') {
+	/*if (command === 'play') {
 		const voiceChannel = msg.member.voiceChannel;
 		if (!voiceChannel) return msg.channel.send(msg.author + ", Ahhoz, hogy oda tudjak menni hozzád egy hangcsatornában kell lenned!");
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
@@ -180,7 +153,7 @@ A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)
     "name": "Várakozó zenék"
   }
 };
-channel.send({ embed });*/
+channel.send({ embed });
 		
 		if (!serverQueue) return msg.channel.send('Nincs itt semmi.');
 		let index = 0;
@@ -194,7 +167,7 @@ channel.send({ embed });*/
 __**Várakozó zenék:**__
 ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${song.request}**`).join('\n')}
 **🎶 Jelenleg megy:** ${serverQueue.songs[0].title}, Kérte: ${serverQueue.songs[0].request}
-		`);*/
+		`);
 	} else if (command === 'pause') {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
@@ -209,7 +182,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			return msg.channel.send('▶ A zene folytatva!');
 		}
 		return msg.channel.send('Jelenleg nem játszom semmit.');
-	}
+	}*/
 
 	 if (command === 'leaveserver') {
 		if(msg.author.id != "312631597222592522") {
@@ -233,7 +206,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		msg.channel.send(msg.author + " " + szoveg);
 	}
 		
-	if(command === "help") {
+	/*if(command === "help") {
 		const embed = new Discord.RichEmbed()
 		.setTitle("MusicBOT")
 		.setColor(0xFFFFFF)
@@ -250,6 +223,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		msg.channel.send("A segítséget elküldtem privát üzenetben!");
 		msg.author.send({embed});		
 	}	
+
 	if(command === "makerangget") {
 		if(msg.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "464233102143651840");
@@ -267,7 +241,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			    });
 			}
 		}
-	}	
+	}*/	
 	
 	if(command === "uzenet" || command === "üzenet") {		
 		
@@ -329,7 +303,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			});
 	}
 	
-	if(command === "stats") {
+	/*if(command === "stats") {
 		
 		if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Tesztelés alatt!").then(sent => {
 			msg.delete(1);
@@ -388,7 +362,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		
 		msg.channel.send(msg.member + ", itt a statisztikád! :P", {
 		    embed: embed
-		});	*/
+		});	
 	}
 	
 	/*if(command === "addstream") {
