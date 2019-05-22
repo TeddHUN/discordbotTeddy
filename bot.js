@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const ytdl = require('ytdl-core');
-const YouTube = require('simple-youtube-api');
+//const ytdl = require('ytdl-core');
+//const YouTube = require('simple-youtube-api');
 const mysql = require('mysql');
 
 var prefix = "--";
@@ -683,7 +683,7 @@ function serverStats(guild) {
 		membercountch.setName(usercount);
 	}
 }
-
+/*
 async function handleVideo(video, msg, voiceChannel, playlist = false, kero) {
 	const serverQueue = queue.get(msg.guild.id);
 	const song = {
@@ -742,7 +742,7 @@ function play(guild, song) {
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 
 	serverQueue.textChannel.send(`🎶 Zene elindítva: **${song.title}**, Kérte: **${song.request}**`);
-}
+}*/
 
 class StreamActivity {
     static setChannelOnline(channel) {
