@@ -9,10 +9,10 @@
   "dependencies": {
     "discord.js": "11.3.2",
     "request": "^2.81.0",
-    "ytdl-core" : "github:fent/node-ytdl-core#master",
+  //  "ytdl-core" : "github:fent/node-ytdl-core#master",
     "node-opus" : "^0.2.1",
     "twitch-api": "0.5.0",
-    "simple-youtube-api": "3.0.0",
+ //   "simple-youtube-api": "3.0.0",
     "mysql": "2.16.0"
   }
 }
