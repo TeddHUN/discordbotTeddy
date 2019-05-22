@@ -13,7 +13,7 @@ const TwitchMonitor = require("./twitch-monitor");
 const rangs = require('./rangs.json');
 var maxRang = 2;
 
-const youtube = new YouTube(process.env.yttoken);
+//const youtube = new YouTube(process.env.yttoken);
 const queue = new Map();
 
 let initialMessage = `@everyone A rangok igénylése **automatikusan** működik így ha szeretnél egy rangot akkor csak reagálj rá! ;)`;
