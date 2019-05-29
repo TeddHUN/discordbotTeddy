@@ -836,7 +836,7 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
     	.addField("Összmegtekintés", twitchChannel.views, true)
     	.addField("Link", "https://twitch.tv/" + twitchChannel.name, true)
 	.setImage(twitchStream.preview.medium + "?t=" + cacheBustTs)
-    	.setFooter("Közvetítés kezdete", twitchChannel.logo)
+    	.setFooter("Értesítés időpontja", twitchChannel.logo)
     	.setTimestamp();
 
     let anySent = false;
