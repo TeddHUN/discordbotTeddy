@@ -55,6 +55,11 @@ client.on('ready', () => {
 	
     StreamActivity.init(client);
     TwitchMonitor.start();
+	
+  con.connect(function(err) {
+  	if (err) return console.log(""+err);
+  	console.log("MySQL: Csatlakozva!");
+  });
 });
 
 client.on('message', async msg => { // eslint-disable-line
@@ -865,10 +870,6 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
     });
 	//console.log(twitchChannel);	  
     */
-  con.connect(function(err) {
-  	if (err) return console.log(""+err);
-  	console.log("MySQL: Csatlakozva!");
-  });
 	
   con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.name + "'", function (err, result) {  
 	//console.log(""+result[0].status);
@@ -901,7 +902,7 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
 	       }
 	    }
     });	
-  con.end();
+  //con.end();
   //sleep(5000);
   //con.end();	*/
   anySent = true;
