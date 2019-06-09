@@ -1,9 +1,22 @@
+/*const express = require("express");
+const app = express();
+
+app.get("/", (request, response) => {
+  console.log("BotReindítás");
+  response.sendStatus(200);
+});
+
+// listen for requests :)
+const listener = app.listen(process.env.PORT, function() {
+  console.log('Figyelés az adott porton: ' + listener.address().port);
+});*/
+
 const Discord = require('discord.js');
 const client = new Discord.Client();
-//const ytdl = require('ytdl-core');
-//const YouTube = require('simple-youtube-api');
-const mysql = require('mysql');
+const ytdl = require('ytdl-core');
+const YouTube = require('simple-youtube-api');
 
+const mysql = require('mysql');
 var prefix = "--";
 
 const config = require('./config.json');
@@ -13,7 +26,7 @@ const TwitchMonitor = require("./twitch-monitor");
 const rangs = require('./rangs.json');
 var maxRang = 2;
 
-//const youtube = new YouTube(process.env.yttoken);
+const youtube = new YouTube(process.env.yttoken);
 const queue = new Map();
 
 let initialMessage = `@everyone A rangok igénylése **automatikusan** működik így ha szeretnél egy rangot akkor csak reagálj rá! ;)`;
@@ -61,7 +74,7 @@ client.on('message', async msg => { // eslint-disable-line
 	let command = msg.content.toLowerCase().split(' ')[0];
 	command = command.slice(prefix.length);
 	
-	/*if (command === 'play') {
+	if (command === 'play') {
 		const voiceChannel = msg.member.voiceChannel;
 		if (!voiceChannel) return msg.channel.send(msg.author + ", Ahhoz, hogy oda tudjak menni hozzád egy hangcsatornában kell lenned!");
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
@@ -71,13 +84,13 @@ client.on('message', async msg => { // eslint-disable-line
 		if (!permissions.has('SPEAK')) {
 			return msg.channel.send(msg.author +  ", Nem tudok zenét lejátszani a csatornádon mert nincs jogom hozzá!");
 		}
-
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
 			const playlist = await youtube.getPlaylist(url);
 			const videos = await playlist.getVideos();
 			for (const video of Object.values(videos)) {
-				const video2 = await youtube.getVideoByID(video.id);
-				await handleVideo(video2, url, voiceChannel, true, msg.author);
+        console.log(video);
+				//const video2 = await youtube.getVideoByID(video.id);
+				await handleVideo(video, url, voiceChannel, true, msg.author);
 			}
 			return msg.channel.send(`✅ Zene hozzáadva a lejátszási listához: **${playlist.title}**, Kérte: **${msg.author}**`);
 		} else {
@@ -129,8 +142,8 @@ A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)
 		serverQueue.connection.dispatcher.end('Leallitva!');
 		return undefined;
 	} else if (command === 'volume') {
-		msg.channel.send(msg.author + ", A funkció korlátozott!");
-		return undefined;
+		/*msg.channel.send(msg.author + ", A funkció korlátozott!");
+		return undefined;*/
 		
 		if (!msg.member.voiceChannel) return msg.channel.send(msg.author + ', Nem vagy hangcsatornában!');
 		if (!serverQueue) return msg.channel.send('Jelenleg nem játszom semmit.');
@@ -143,7 +156,7 @@ A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)
 		return msg.channel.send(`🎶 Jelenleg megy: **${serverQueue.songs[0].title}**, Kérte: **${serverQueue.songs[0].request}**`);
 	} else if (command === 'queue') {
 		
-/*		const embed = {
+		/*const embed = {
   "description": "Jelenleg megy: [teszt zene](url) (00:00/00:00)\n\n**`1.`** [jelenlegmegy](url)\n\n",
   "color": 12944669,
   "footer": {
@@ -153,7 +166,7 @@ A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)
     "name": "Várakozó zenék"
   }
 };
-channel.send({ embed });
+channel.send({ embed });*/
 		
 		if (!serverQueue) return msg.channel.send('Nincs itt semmi.');
 		let index = 0;
@@ -167,7 +180,7 @@ channel.send({ embed });
 __**Várakozó zenék:**__
 ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${song.request}**`).join('\n')}
 **🎶 Jelenleg megy:** ${serverQueue.songs[0].title}, Kérte: ${serverQueue.songs[0].request}
-		`);
+		`);*/
 	} else if (command === 'pause') {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
@@ -182,7 +195,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			return msg.channel.send('▶ A zene folytatva!');
 		}
 		return msg.channel.send('Jelenleg nem játszom semmit.');
-	}*/
+	}
 
 	 if (command === 'leaveserver') {
 		if(msg.author.id != "312631597222592522") {
@@ -198,12 +211,19 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 	}
 
 	if(command === "szerverek") {
-		let szoveg = "**A következő szervereken vagyok elérhető:** \n\n";
+    const embed = new Discord.RichEmbed()
+    .setColor(8311585);
+    
+    var i = 0;
+    
 		client.guilds.forEach(guild => {
-			szoveg += "Szerver neve: **" + guild.name + ", ID: " + guild.id + "**\n";	
+      i++;
+      embed.addField(i + ". Szerver neve", "**" + guild.name + "**")
+      .addField("ID", "**" + guild.id + "**", true)
+      .addField("Tulajdonos", "**" + guild.owner.toString() + "**", true);
 		});
-		
-		msg.channel.send(msg.author + " " + szoveg);
+        
+		msg.channel.send(msg.author + ", **A következő szervereken vagyok elérhető:**", { embed });
 	}
 		
 	/*if(command === "help") {
@@ -223,14 +243,11 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		msg.channel.send("A segítséget elküldtem privát üzenetben!");
 		msg.author.send({embed});		
 	}	
-
 	if(command === "makerangget") {
 		if(msg.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "464233102143651840");
 			let channel = guild.channels.find("id", "470963699796934656");
-
 			msg.delete(1);
-
 			var toSend = generateMessages();
 			let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (msg, idx) => [msg, reactions[idx]])];
 			for (let mapObj of mappedArray){
@@ -281,6 +298,24 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			});
 		
 		msg.channel.send(msg.author + ", megsimizte " + dUser + "-t!").then(sent => {
+				msg.delete(1);					
+			});
+	}
+	
+	if(command === "puszi") {		
+		
+		/*if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Ehhez nincs jogod!").then(sent => {
+				msg.delete(1);
+				sent.delete(10000);					
+			});*/
+		
+		let dUser = msg.guild.member(msg.mentions.users.first()) || msg.guild.members.get(args[0]);
+		if (!dUser) return msg.channel.send("**Használat:** `--puszi @Felhasználó").then(sent => {
+				msg.delete(1);
+				sent.delete(10000);					
+			});
+		
+		msg.channel.send(msg.author + ", adott egy puszit " + dUser + "-nak/nek!").then(sent => {
 				msg.delete(1);					
 			});
 	}
@@ -369,11 +404,9 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		if(msg.author.id == 312631597222592522) {	
 			let guild = client.guilds.find("id", "352591575639130112");
 			let channel = guild.channels.find("id", "384300207933882370");	
-
 			msg.channel.send(msg.author + ", Menetrend kiküldve!").then(sent => {
 				msg.delete(1);
 				sent.delete(5000);
-
 				var idoszak = "2018.11.05 - 2018.11.11";
 				var streamek = 4; //Streamek száma
 				//Visszafele kell megadni az adatokat
@@ -383,28 +416,24 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 					"Dara, dara hátán! »R6S« | #22 🐻",
 					"Hétfői öldöklés! »PUBG« | #95 🐻"
 				];
-
 				 streamDatum= [
 					"nov. 9., péntek 20:00 – 22:00",
 					"nov. 7., szerda 17:30 – 18:30",
 					"nov. 6., kedd 17:30 – 19:30",
 					"nov. 5., hétfő 17:30 – 19:30"
 				];
-
 				streamKep = [ 
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/459525a6-6270-4392-80bc-cdb8ad294945-350x150",
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/ca31d1ef-04ca-44a4-9f0b-a623816094e6-350x150",
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/ec8eb0a4-e735-4e35-86c6-9401566e2a6f-350x150",
 					"https://static-cdn.jtvnw.net/twitch-event-images-v2/94cc9583-3123-4527-b2e1-51f21f42455c-350x150"
 				];
-
 				streamJatek = [
 					"Dead by Daylight",
 					"The Crew 2",
 					"Tom Clancy's Rainbow Six: Siege",
 					"PLAYERUNKNOWN'S BATTLEGROUNDS"
 				];
-
 				if(streamek > 1) {
 					channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak);	
 					//channel.send("@everyone :new: Streamek a láthatáron!\n**Időszak:** " + idoszak + "\n :exclamation: Hétvége még változhat!");	
@@ -412,14 +441,12 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 					//channel.send("@everyone :new: Új stream a láthatáron!\n**Időszak:** " + idoszak);
 					//channel.send("@everyone :exclamation: Változás!\nÚj esemény!");
 				}				
-
 				for (i = 0; i < streamek ; i++) { 
 				    const embed = new Discord.RichEmbed()
 					.setColor(0x6441A4)
 					.setTitle(streamNev[i])
 					.setDescription("**Kezdés:** " + streamDatum[i] + "\n**Játék:** " + streamJatek[i] + "\n**Közvetítés helyszíne:** https://twitch.tv/teddhun" + "\n" + ":heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign: :heavy_minus_sign:")
 					.setImage(streamKep[i]);
-
 				    channel.send({embed});
 				}
 			});
@@ -430,7 +457,6 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		if(!args[1]) return;
 		let str = args[1];
 		let id = str.replace(/[<@!>]/g, '');
-
 		msg.delete(1);
 			
 		client.fetchUser(id).then(user => {
@@ -478,9 +504,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		if(!args[1]) return;
 		let str = args[1];
 		let id = str.replace(/[<@!>]/g, '');
-
 		msg.delete(1);
-
 		client.fetchUser(id).then(user => {
 			user.send({embed: {
 					"description": "**Gratulálok, válaszaid meggyőzték a medvezért így átveheted a rangodat, ha szeretnéd!**\n\n Írj egy *köszönöm*-öt ahhoz, hogy megkapd.\n\n`Üdv a csapatban!` 😍 ",
@@ -549,11 +573,11 @@ client.on("guildMemberAdd", (member) => {
 		    embed: embed
 		});
 		
-		con.query("SELECT * FROM rangs WHERE id = '" + member.user.id + "'", function (err, result) {
+		/*con.query("SELECT * FROM rangs WHERE id = '" + member.user.id + "'", function (err, result) {
 			if(result[0] == undefined) {
 				con.query("INSERT INTO rangs (id, xp, rang) VALUES ('" + member.user.id + "', 0, 0)");
 			}
-		});
+		});*/
 	}
 });
 
@@ -626,7 +650,7 @@ client.on("message", (message) => {
 	}*/
 });
 
-client.on('raw', event => {
+/*client.on('raw', event => {
     if (event.t === 'MESSAGE_REACTION_ADD' || event.t == "MESSAGE_REACTION_REMOVE"){
         
         let channel = client.channels.get(event.d.channel_id);
@@ -673,7 +697,7 @@ client.on('raw', event => {
 	}
 	})
     }   
-});
+});*/
 
 function serverStats(guild) {	
 	if(guild.id == 547498318834565130) {//klandC	
@@ -683,7 +707,7 @@ function serverStats(guild) {
 		membercountch.setName(usercount);
 	}
 }
-/*
+
 async function handleVideo(video, msg, voiceChannel, playlist = false, kero) {
 	const serverQueue = queue.get(msg.guild.id);
 	const song = {
@@ -702,9 +726,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, kero) {
 			playing: true
 		};
 		queue.set(msg.guild.id, queueConstruct);
-
 		queueConstruct.songs.push(song);
-
 		try {
 			var connection = await voiceChannel.join();
 			queueConstruct.connection = connection;
@@ -721,10 +743,8 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, kero) {
 	}
 	return undefined;
 }
-
 function play(guild, song) {
 	const serverQueue = queue.get(guild.id);
-
 	if (!song) {
 		serverQueue.voiceChannel.leave();
 		queue.delete(guild.id);
@@ -740,9 +760,8 @@ function play(guild, song) {
 		})
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-
 	serverQueue.textChannel.send(`🎶 Zene elindítva: **${song.title}**, Kérte: **${song.request}**`);
-}*/
+}
 
 class StreamActivity {
     static setChannelOnline(channel) {
@@ -780,14 +799,12 @@ class StreamActivity {
 
     static updateActivity() {
 /*        let displayChannel = this.getDisplayChannel();
-
         if (displayChannel) {
 	    if(this.activeChannel2 !== displayChannel) {
 		    this.discordClient.user.setActivity("📡 " + displayChannel + " 📡", {
 			"url": "https://twitch.tv/"+displayChannel,
 			"type": "STREAMING"
 		    });
-
 		    this.activeChannel2 = displayChannel;
 		    console.log('[Aktivitás]', `Aktivitás frissítve: ${displayChannel} nézése.`);
 	    }
@@ -845,38 +862,51 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
     let guild = client.guilds.find("id", "547498318834565130");
     let targetChannel = guild.channels.find("id", process.env.dcstreamnotify);//
     
-    let statusz = 0;
+    /*let statusz = 0;
     let uzenet = '';
+    con.connect(function(err) {
+      if (err) return console.log(""+err);
+      console.log("MySQL: Csatlakozva!");
+    });
 	//console.log(twitchChannel);	  
-    con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.name + "'", function (err, result) {  
-	//console.log(""+result);
+    */
+  con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.name + "'", function (err, result) {  
+	//console.log(""+result[0].status);
 	//statusz = result[0].status;
 	//uzenet = result[0].dcmessage;
 	    if (!twitchChannelIsLive) {
 	       if(result[0].status == 1) {
-		  targetChannel.fetchMessage(result[0].dcmessage).then(message => message.delete());
-		  var sql = "UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.name + "'";
-		  con.query(sql, function (err, result) {});  
+          targetChannel.fetchMessage(result[0].dcmessage).then(message => message.delete());
+          var sql = "UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.name + "'";
+          con.query(sql, function (err, result) {
+          if (err) throw err;
+            console.log(result.affectedRows + " record(s) updated");
+          });
 	       }	
 	    } else {
 	       if(result[0].status == 0) {
-		  targetChannel.send(msgFormatted, {
-			embed: msgEmbed
-		   }).then((message) => {		
-			var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.name + "'";
-			con.query(sql, function (err, result) {});  
-			console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
-		  });    
+            
+            let sql = `UPDATE streamerek SET status = ?, dcmessage = ? WHERE twitch = ?`;
+ 
+            targetChannel.send(msgFormatted, {
+            embed: msgEmbed
+             }).then((message) => {	
+             let data = [1, message.id, twitchChannel.name];
+              //var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.name + "'";
+              var query = con.query(sql, data, function (err, result) { 	
+                console.log(result); });
+              console.log(query);
+              console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
+            });   
 	       }
 	    }
     });	
-    anySent = true;
-	
-    
+  //sleep(5000);
+  //con.end();	*/
+  anySent = true;
  /*   try {
 	let messageDiscriminator = `${targetChannel.guild.id}_${targetChannel.name}_${twitchChannel.name}_${twitchStream.created_at}`;
 	let existingMessage = oldMsgs[messageDiscriminator] || null;
-
 	if (existingMessage) {
 	    if (!twitchChannelIsLive) {
 	        existingMessage.delete();
@@ -885,7 +915,6 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
 	} else {
 	    if (twitchChannelIsLive) {
 		    let msgToSend = msgFormatted + ` @here`;
-
 		    targetChannel.send(msgToSend, {
 			embed: msgEmbed
 		    })
@@ -895,7 +924,6 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
 		    });
 	    }
 	}
-
 	anySent = true;
     } catch (e) {
 	console.warn('[Discord]', 'Üzenet küldési hiba:', e);
@@ -903,5 +931,13 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
     return anySent;
 });
 
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
 
 client.login(process.env.BOT_TOKEN);
