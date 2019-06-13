@@ -705,6 +705,19 @@ function serverStats(guild) {
 
 		let usercount = "E: " + guild.members.filter(member => !member.user.bot).size + " / B: " + guild.members.filter(member => member.user.bot).size;
 		membercountch.setName(usercount);
+	} else if(guild.id == 588686258658738197) {//haverok - zozi	
+		let tagokch = guild.channels.find("id", "588702712213012540");	
+		let emberekch = guild.channels.find("id", "588702714699972637");
+		let botokch = guild.channels.find("id", "588702717346709505");
+		
+		let usercount = "Tagok: " + guild.members.size;
+		tagokch.setName(usercount);
+				
+		usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
+		emberekch.setName(usercount);
+				
+		usercount = "Botok: " + guild.members.filter(member => member.user.bot).size;
+		botokch.setName(usercount);
 	}
 }
 
