@@ -532,7 +532,8 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 			return msg.channel.send("Nincs hozzá jogod, bibíbí!");
 		}
 		
-		serverStats(client.guilds.find("id", "547498318834565130"));
+		serverStats(client.guilds.find("id", "547498318834565130"));//klandc
+		serverStats(client.guilds.find("id", "588686258658738197"));//zozi
 		msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
 			msg.delete(1);
 			sent.delete(5000);
