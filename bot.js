@@ -711,7 +711,7 @@ function serverStats(guild) {
 		let emberch = guild.channels.find("id", "588842385736335417");	
 		let botch = guild.channels.find("id", "588842389217738783");	
 
-		let usercount = "Tagok: " + guild.members.size + " / B: " + guild.members.filter(member => member.user.bot).size;
+		let usercount = "Tagok: " + guild.members.size;
 		membercountch.setName(usercount);
 		
 		usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
