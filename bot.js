@@ -533,7 +533,6 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${so
 		}
 		
 		serverStats(client.guilds.find("id", "547498318834565130"));//klandc
-		serverStats(client.guilds.find("id", "588686258658738197"));//zozi
 		msg.channel.sendMessage(msg.author + " Átírva!").then(sent => {
 			msg.delete(1);
 			sent.delete(5000);
@@ -706,19 +705,6 @@ function serverStats(guild) {
 
 		let usercount = "E: " + guild.members.filter(member => !member.user.bot).size + " / B: " + guild.members.filter(member => member.user.bot).size;
 		membercountch.setName(usercount);
-	} else if(guild.id == 588833384936112157) {//haverok - zozi	
-		let tagokch = guild.channels.find("id", "588842382980808726");	
-		let emberekch = guild.channels.find("id", "588842385736335417");
-		let botokch = guild.channels.find("id", "588842389217738783");
-		
-		let usercount = "Tagok: " + guild.members.size;
-		tagokch.setName(usercount);
-				
-		usercount = "Emberek: " + guild.members.filter(member => !member.user.bot).size;
-		emberekch.setName(usercount);
-				
-		usercount = "Botok: " + guild.members.filter(member => member.user.bot).size;
-		botokch.setName(usercount);
 	}
 }
 
