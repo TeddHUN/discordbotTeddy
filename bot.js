@@ -706,10 +706,10 @@ function serverStats(guild) {
 
 		let usercount = "E: " + guild.members.filter(member => !member.user.bot).size + " / B: " + guild.members.filter(member => member.user.bot).size;
 		membercountch.setName(usercount);
-	} else if(guild.id == 588686258658738197) {//haverok - zozi	
-		let tagokch = guild.channels.find("id", "588702712213012540");	
-		let emberekch = guild.channels.find("id", "588702714699972637");
-		let botokch = guild.channels.find("id", "588702717346709505");
+	} else if(guild.id == 588833384936112157) {//haverok - zozi	
+		let tagokch = guild.channels.find("id", "588842382980808726");	
+		let emberekch = guild.channels.find("id", "588842385736335417");
+		let botokch = guild.channels.find("id", "588842389217738783");
 		
 		let usercount = "Tagok: " + guild.members.size;
 		tagokch.setName(usercount);
