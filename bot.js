@@ -85,11 +85,11 @@ client.on('message', async msg => { // eslint-disable-line
 			const playlist = await youtube.getPlaylist(url);
 			const videos = await playlist.getVideos();
 			for (const video of Object.values(videos)) {
-				console.log(video);
+				//console.log(video);
 				//const video2 = await youtube.getVideoByID(video.id);
-				//await handleVideo(video, url, voiceChannel, true, msg.author);
+				await handleVideo(video, msg, voiceChannel, true, msg.author);
 			}
-			return msg.channel.send(`✅ Zenék hozzáadva a lejátszási listához: **${playlist.title}**, Kérte: **${msg.author}**`);
+			return msg.channel.send(`✅ Zenék hozzáadva a lejátszási listához: **${playlist.title}** (**${Object.values(videos)}**, Kérte: **${msg.author}**`);
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
