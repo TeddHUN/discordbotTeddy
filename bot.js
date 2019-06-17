@@ -107,16 +107,16 @@ client.on('message', async msg => { // eslint-disable-line
 							time: 10000,
 							errors: ['time']
 						});
-					} catch (error) {
-						console.error(err);
+					} catch (err) {
+						console.log("1: " + err);
 						talalatok.delete();
 						return msg.channel.send('❌ Nem érkezett válasz ezért nem történik lejátszás!').then(sent => { sent.delete(5000); });
 					}
 					
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-				} catch (error) {
-					//console.error(err);
+				} catch (err) {
+					console.log("2: " + err);
 					return msg.channel.send(msg.author + ', nem tudok lejátszani az alábbi listából. Hiba: #0: Kritikus hiba, fejlesztő szükséges!');
 				}
 			}
