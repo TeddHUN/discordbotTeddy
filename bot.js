@@ -84,12 +84,14 @@ client.on('message', async msg => { // eslint-disable-line
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
 			const playlist = await youtube.getPlaylist(url);
 			const videos = await playlist.getVideos();
+			var darab = 0;
 			for (const video of Object.values(videos)) {
 				//console.log(video);
 				//const video2 = await youtube.getVideoByID(video.id);
 				await handleVideo(video, msg, voiceChannel, true, msg.author);
+				darab++;
 			}
-			return msg.channel.send(`✅ Zenék hozzáadva a lejátszási listához: **${playlist.title}** (**${Object.values(videos)}**, Kérte: **${msg.author}**`);
+			return msg.channel.send(`✅ Zenék hozzáadva a lejátszási listához: **${playlist.title}** (**${darab}**, Kérte: **${msg.author}**`);
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
@@ -97,7 +99,7 @@ client.on('message', async msg => { // eslint-disable-line
 				try {
 					var videos = await youtube.searchVideos(searchString, 5);
 					let index = 0;
-					var talalatok = msg.channel.send(`🎶 több találatot találtam, ` + msg.author + `!\n**Válasz az alábbiak közül:**` + videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n') + `\nA válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)`);
+					var talalatok = msg.channel.send(`🎶 több találatot találtam, ` + msg.author + `!\n**Válasz az alábbiak közül:**\n` + videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n') + `\nA válaszodat 1-től 5-ig számozással várom válaszban. (**10 másodperc**)`);
 					
 					try {
 						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 6, {
