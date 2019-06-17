@@ -108,7 +108,7 @@ client.on('message', async msg => { // eslint-disable-line
 							errors: ['time']
 						});
 					} catch (err) {
-						console.log("1: " + err);
+						console.log("1: " + talalatok);
 						talalatok.delete();
 						return msg.channel.send('❌ Nem érkezett válasz ezért nem történik lejátszás!').then(sent => { sent.delete(5000); });
 					}
@@ -116,7 +116,7 @@ client.on('message', async msg => { // eslint-disable-line
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
-					console.log("2: " + err);
+					//console.log("2: " + err);
 					return msg.channel.send(msg.author + ', nem tudok lejátszani az alábbi listából. Hiba: #0: Kritikus hiba, fejlesztő szükséges!');
 				}
 			}
