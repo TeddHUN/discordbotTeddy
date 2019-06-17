@@ -108,7 +108,7 @@ client.on('message', async msg => { // eslint-disable-line
 							errors: ['time']
 						});
 					} catch (err) {
-						console.log("1: " + talalatok);
+						console.log("1: " + talalatok.id);
 						talalatok.delete();
 						return msg.channel.send('❌ Nem érkezett válasz ezért nem történik lejátszás!').then(sent => { sent.delete(5000); });
 					}
