@@ -97,10 +97,11 @@ client.on('message', async msg => { // eslint-disable-line
 				try {
 					var videos = await youtube.searchVideos(searchString, 5);
 					let index = 0;
-					var talalatok = msg.channel.send(`🎶 Több találatot találtam, ` + msg.author + `!\n
-					__**Válasz az alábbiak közül:**__
-					${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
-					A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)`);
+					var talalatok = msg.channel.send(`🎶 Több találatot találtam, ` + msg.author + `!\n						var talalatok = msg.channel.send(`🎶 több találatot találtam, ` + msg.author + `!\n__**Válasz az alábbiak közül:**__${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)`);
+__**Válasz az alábbiak közül:**__	
+ ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}	
+A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)	
+					`);
 					
 					try {
 						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 6, {
