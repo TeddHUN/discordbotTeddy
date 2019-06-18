@@ -210,10 +210,10 @@ client.on('message', async msg => { // eslint-disable-line
 		let oldal = "";
 		var i = 0;
 		for(i; i < 5; i++) {
-			oldal += "**" + ++i + ".** - **" + serverQueue.songs[i].title + "**, Kérte: " + serverQueue.songs[i].request + "\n";
+			oldal += "**" + i+1 + ".** - **" + serverQueue.songs[i].title + "**, Kérte: " + serverQueue.songs[i].request + "\n";
 		}
 		
-		const embed = { "description": "🔴 Lejátszási lista tartalma: \n\n" + oldal, "color": 6075135 };						  
+		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + oldal + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
 		return msg.channel.send({ embed });
 	}
 	
