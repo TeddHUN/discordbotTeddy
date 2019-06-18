@@ -832,7 +832,7 @@ function play(guild, song, playlist = false) {
 }
 
 function getQueueSongs(guild) {
-	const serverQueue = queue.get(guild.id);
+	const serverQueue = queue.get(guild);
 	var darab = 0;
 	for (const v of Object.values(serverQueue)) {			
 		darab++;
