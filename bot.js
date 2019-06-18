@@ -817,7 +817,7 @@ function play(guild, song, playlist = false) {
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 	if(!playlist) {
 		const embed = { "description": "🎵 Most játszom: **" + song.title + "**, Kérte: " + song.request, "color": 6075135 };
-		await serverQueue.textChannel.send({ embed });
+		serverQueue.textChannel.send({ embed });
 	}
 }
 
