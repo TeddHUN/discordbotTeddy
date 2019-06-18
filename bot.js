@@ -206,10 +206,9 @@ client.on('message', async msg => { // eslint-disable-line
 		}
 		//console.log('Teszt: ', serverQueue.songs[0]); 
 		
-		var darab = serverQueue.songs.size;
+		var darab = serverQueue.songs.lenght;
 		let oldal = "";
-		var i = 0;
-		for(i; i < 5; i++) {
+		for(var i = 0; i < 5; i++) {
 			oldal += "**" + i+1 + ".** - **" + serverQueue.songs[i].title + "**, Kérte: " + serverQueue.songs[i].request + "\n";
 		}
 		
