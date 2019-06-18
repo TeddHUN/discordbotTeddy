@@ -214,13 +214,13 @@ client.on('message', async msg => { // eslint-disable-line
 		*/
 		let tosend = [];
 		serverQueue.songs.forEach((song, i) => {
-			if(i == 1) tosend.push(`**Jelenleg megy:**\n${song.title} - Kérte: ${song.request}`);
-			else tosend.push(`${i}. ${song.title} - Kérte: ${song.request}`);
+			if(i == 1) tosend.push(`**Jelenleg megy:**\n${song.title} - Kérte: ${song.request}\n\n`);
+			else tosend.push(`${i-1}. ${song.title} - Kérte: ${song.request}`);
 		});
 		
 		//msg.channel.sendMessage(`__**${msg.guild.name}'s Music Queue:**__ Currently **${tosend.length}** songs queued ${(tosend.length > 15 ? '*[Only next 15 shown]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``);
 		var darab = getQueueSongs(msg.guild.id);
-		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend.slice(1,16).join('\n') + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
+		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend.slice(0,15).join('\n') + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
 		return msg.channel.send({ embed });
 	}
 	
@@ -834,7 +834,11 @@ function play(guild, song, playlist = false) {
 
 function getQueueSongs(guild) {
 	const serverQueue = queue.get(guild);	
-	return serverQueue.songs.lenght;
+	var darab = 0;
+	serverQueue.songs.forEach((song, i) => {
+		darab++;
+	});
+	return darab;
 }
 
 class StreamActivity {
