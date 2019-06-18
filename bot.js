@@ -107,7 +107,7 @@ client.on('message', async msg => { // eslint-disable-line
 			try {
 				console.log("asd");
 				var video = await youtube.getVideo(url);
-				await handleVideo(video, msg, voiceChannel, false, msg.author);
+				return handleVideo(video, msg, voiceChannel, false, msg.author);
 				console.log("asd2");
 			} catch (error) {
 				try {
@@ -797,8 +797,12 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, kero) {
 		}
 	} else {
 		serverQueue.songs.push(song);
-		/*if (playlist) return undefined;
-		else return msg.channel.send(`✅ Zene hozzáadva a lejátszási listához: **${song.title}**, Kérte: **${song.request}**`);*/
+		if (playlist) return undefined;		
+		return msg.channel.send({ embed });
+		else {
+			const embed = { "description": `✅ Zene hozzáadva a lejátszási listához: **${song.title}**, Kérte: **${song.request}**`, "color": 6075135 };
+			return msg.channel.send({ embed });
+		}
 	}
 	return undefined;
 }
