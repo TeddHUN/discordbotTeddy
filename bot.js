@@ -205,14 +205,13 @@ client.on('message', async msg => { // eslint-disable-line
 			return msg.channel.send({ embed });
 		}
 		//console.log('Teszt: ', serverQueue.songs[0]); 
-		
-		var darab = serverQueue.songs.lenght;
+	
 		let oldal = "";
 		for(var i = 1; i <= 5; i++) {
 			oldal += "**" + i + ".** - **" + serverQueue.songs[i].title + "**, Kérte: " + serverQueue.songs[i].request + "\n";
 		}
 		
-		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + oldal + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
+		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + oldal + "\n\nÖsszesen **" + getQueueSongs(msg.guild.id) + "** zene van a listán!", "color": 6075135 };						  
 		return msg.channel.send({ embed });
 	}
 	
@@ -818,8 +817,17 @@ function play(guild, song, playlist = false) {
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 	if(!playlist) {
 		const embed = { "description": "🎵 Most játszom: **" + song.title + "**, Kérte: " + song.request, "color": 6075135 };
-		serverQueue.textChannel.send({ embed });
+		await serverQueue.textChannel.send({ embed });
 	}
+}
+
+function getQueueSongs(guild) {
+	const serverQueue = queue.get(guild.id);
+	var darab = 0;
+	for (const v of Object.values(serverQueue)) {			
+		darab++;
+	}	
+	return darab;
 }
 
 class StreamActivity {
