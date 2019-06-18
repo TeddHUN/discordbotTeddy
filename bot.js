@@ -204,7 +204,7 @@ client.on('message', async msg => { // eslint-disable-line
 			const embed = { "description": `❌ A lejátszási lista üres!`, "color": 6075135 };
 			return msg.channel.send({ embed });
 		}
-		console.log('Teszt: ', serverQueue.songs); 
+		console.log('Teszt: ', serverQueue.songs[0]); 
 		/*
 		var darab = serverQueue.songs.size;
 		let oldal = "";
