@@ -101,7 +101,7 @@ client.on('message', async msg => { // eslint-disable-line
 				darab++;
 			}
 			
-			const embed = { "description": '✅ Zenék hozzáadva a lejátszási listához: **${playlist.title}** (**${darab}**), Kérte: **${msg.author}**', "color": 6075135 };
+			const embed = { "description": "✅ Zenék hozzáadva a lejátszási listához: **" + playlist.title + "** (**" + darab + "**), Kérte: **" + msg.author, "color": 6075135 };
 			return msg.channel.send({ embed });
 		} else {
 			try {
@@ -632,7 +632,7 @@ client.on("message", (message) => {
 			let bemutatkozok = slothgang.channels.find("id", "553337569127956480");	
 
 			if(user.nickname == "null" || user.nickname == null) {
-				bemutatkozok.send(message.author + " bemutatkozó üzenete: ```" + message.content + "```**Ha írt Twitch nevet akkor a beceneved állítsd be rá és adj neki tag rangot, majd rakj egy ✅ reakciót ha kész!** 😃\n**Esetleg ha nem írt megfelelő bemutatkozást akkor a `--uzenet Megemlítés [Szöveg]` paranccsal tudsz neki üzenni!**");
+				bemutatkozok.send(message.author + " bemutatkozó üzenete: ```" + message.content + "```**Ha írt Twitch nevet akkor a beceneved állítsd be rá és adj neki tag rangot, majd rakj egy ✅ reakciót ha kész!** 😃\n**Esetleg ha nem írt megfelelő bemutatkozást akkor a `-uzenet Megemlítés [Szöveg]` paranccsal tudsz neki üzenni!**");
 			} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);
 		} else client.users.get("312631597222592522").send(message.author + " üzenete: " + message.content);		
 	}/* else {
@@ -772,19 +772,19 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, kero) {
 			var connection = await voiceChannel.join();
 			queueConstruct.connection = connection;
 			console.log(queueConstruct.connection.client.id);
-			play(msg.guild, queueConstruct.songs[0]);
+			play(msg.guild, queueConstruct.songs[0], playlist);
 		} catch (error) {
 			queue.delete(msg.guild.id);
 			return msg.channel.send(`Nem tudok csatlakozni: ${error}`);
 		}
 	} else {
 		serverQueue.songs.push(song);
-		if (playlist) return undefined;
-		else return msg.channel.send(`✅ Zene hozzáadva a lejátszási listához: **${song.title}**, Kérte: **${song.request}**`);
+		/*if (playlist) return undefined;
+		else return msg.channel.send(`✅ Zene hozzáadva a lejátszási listához: **${song.title}**, Kérte: **${song.request}**`);*/
 	}
 	return undefined;
 }
-function play(guild, song) {
+function play(guild, song, playlist = false) {
 	const serverQueue = queue.get(guild.id);
 	if (!song) {
 		serverQueue.voiceChannel.leave();
@@ -801,7 +801,7 @@ function play(guild, song) {
 		})
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-	serverQueue.textChannel.send(`🎶 Zene elindítva: **${song.title}**, Kérte: **${song.request}**`);
+	if(!playlist) serverQueue.textChannel.send(`🎶 Zene elindítva: **${song.title}**, Kérte: **${song.request}**`);
 }
 
 class StreamActivity {
