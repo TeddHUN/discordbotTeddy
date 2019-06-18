@@ -204,16 +204,16 @@ client.on('message', async msg => { // eslint-disable-line
 			const embed = { "description": `❌ A lejátszási lista üres!`, "color": 6075135 };
 			return msg.channel.send({ embed });
 		}
-		console.log('Teszt: ', serverQueue.songs[0]); 
-		/*
+		//console.log('Teszt: ', serverQueue.songs[0]); 
+		
 		var darab = serverQueue.songs.size;
 		let oldal = "";
 		for(var i = 0; i < 5; i++) {
-			oldal += ++i + ". " + serverQueue.songs[i].song.title + ", Kérte: " + serverQueue.songs[i].song.request + "\n";
+			oldal += "**" + ++i + ".** - **" + serverQueue.songs[i].title + "**, Kérte: " + serverQueue.songs[i].request + "\n";
 		}
 		
 		const embed = { "description": "" + oldal, "color": 6075135 };						  
-		return msg.channel.send({ embed });*/
+		return msg.channel.send({ embed });
 	}
 	
 	if (command === 'leaveserver') {
