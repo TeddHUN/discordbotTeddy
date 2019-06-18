@@ -17,7 +17,7 @@ const ytdl = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
 
 const mysql = require('mysql');
-var prefix = "--";
+var prefix = "-";
 
 const config = require('./config.json');
 const szabalyEmbed = require('./szabalyzat.json');
