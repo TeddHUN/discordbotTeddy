@@ -834,7 +834,7 @@ function play(guild, song, playlist = false) {
 
 function getQueueSongs(guild) {
 	const serverQueue = queue.get(guild);	
-	return serverQueue.songs.lenght();
+	return serverQueue.songs.lenght;
 }
 
 class StreamActivity {
