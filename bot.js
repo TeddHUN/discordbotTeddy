@@ -56,7 +56,10 @@ client.on('ready', () => {
     StreamActivity.init(client);
     TwitchMonitor.start();
 	
-  
+    con.connect(function(err) {
+  	if (err) return console.log(""+err);
+   	console.log("MySQL: Csatlakozva!");
+    });
 });
 
 client.on('message', async msg => { // eslint-disable-line
@@ -976,49 +979,39 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
       console.log("MySQL: Csatlakozva!");
     });
 	//console.log(twitchChannel);	  
-    */
+    */	
+ con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.name + "'", function (err, result) {  
+	//console.log(""+result[0].status);
+	//statusz = result[0].status;
+	//uzenet = result[0].dcmessage;
+	    if (!twitchChannelIsLive) {
+	       if(result.status == 1) {
+	  targetChannel.fetchMessage(result.dcmessage).then(message => message.delete());
+	  var sql = "UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.name + "'";
+	  con.query(sql, function (err, result) {
+	  if (err) throw err;
+	    console.log(result.affectedRows + " record(s) updated");
+	  });
+	       }	
+	    } else {
+		    console.log("check");
+	       if(result.status == 0) {
 
-  con.connect(function(err) {
-  	if (err) return console.log(""+err);
-  	console.log("MySQL: Csatlakozva!");
-  });
-	
-  setTimeout(function () {
-	con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.name + "'", function (err, result) {  
-		//console.log(""+result[0].status);
-		//statusz = result[0].status;
-		//uzenet = result[0].dcmessage;
-		    if (!twitchChannelIsLive) {
-		       if(result.status == 1) {
-		  targetChannel.fetchMessage(result.dcmessage).then(message => message.delete());
-		  var sql = "UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.name + "'";
-		  con.query(sql, function (err, result) {
-		  if (err) throw err;
-		    console.log(result.affectedRows + " record(s) updated");
-		  });
-		       }	
-		    } else {
-			    console.log("check");
-		       if(result.status == 0) {
+	    let sql = `UPDATE streamerek SET status = ?, dcmessage = ? WHERE twitch = ?`;
 
-		    let sql = `UPDATE streamerek SET status = ?, dcmessage = ? WHERE twitch = ?`;
-
-		    targetChannel.send(msgFormatted, {
-		    embed: msgEmbed
-		     }).then((message) => {	
-		     let data = [1, message.id, twitchChannel.name];
-		      //var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.name + "'";
-		      var query = con.query(sql, data, function (err, result) { 	
-			console.log(result); });
-		      console.log(query);
-		      console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
-		    });   
-		       }
-		    }
-	    });	
-	  con.end();
-	  console.log("MySQL lecsatlakozva!");
-  }, 5000);
+	    targetChannel.send(msgFormatted, {
+	    embed: msgEmbed
+	     }).then((message) => {	
+	     let data = [1, message.id, twitchChannel.name];
+	      //var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.name + "'";
+	      var query = con.query(sql, data, function (err, result) { 	
+		console.log(result); });
+	      console.log(query);
+	      console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
+	    });   
+	       }
+	    }
+    });
   
   //sleep(5000);
   //con.end();	*/
