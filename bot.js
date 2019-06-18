@@ -106,6 +106,7 @@ client.on('message', async msg => { // eslint-disable-line
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
+				handleVideo(video, msg, voiceChannel, false, msg.author);
 			} catch (error) {
 				try {
 					var videos = await youtube.searchVideos(searchString, 5);
@@ -134,7 +135,6 @@ client.on('message', async msg => { // eslint-disable-line
 					return msg.channel.send({ embed });
 				}
 			}
-			return handleVideo(video, msg, voiceChannel, false, msg.author);
 		}
 	} else if (command === 'stop') {
 		if (!msg.member.voiceChannel) {
