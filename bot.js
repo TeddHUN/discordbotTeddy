@@ -160,9 +160,9 @@ client.on('message', async msg => { // eslint-disable-line
 			const embed = { "description": 'A semmit nem tudom átugrani!', "color": 13632027 };
 			return msg.channel.send({ embed });
 		}	
-		serverQueue.connection.dispatcher.end('Atugorva!');	
 		const embed = { "description": '⏩ Zene átugorva!', "color": 6075135 };
-		msg.channel.send({ embed });	
+		await msg.channel.send({ embed });
+		serverQueue.connection.dispatcher.end('Atugorva!');		
 		return undefined;
 	} else if (command === 'volume') {
 		msg.channel.send(msg.author + ", A funkció korlátozott!");
