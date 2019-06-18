@@ -206,13 +206,20 @@ client.on('message', async msg => { // eslint-disable-line
 			return msg.channel.send({ embed });
 		}
 		//console.log('Teszt: ', serverQueue.songs[0]); 
-	
+	/*
 		let oldal = "";
 		for(var i = 1; i <= 5; i++) {
 			oldal += "**" + i + ".** - **" + serverQueue.songs[i].title + "**, Kérte: " + serverQueue.songs[i].request + "\n";
 		}
+		*/
+		let tosend = [];
+		serverQueue.songs.forEach((song, i) => {
+			tosend.push(`${i+1}. ${song.title} - Kérte: ${song.request}`);
+		});
 		
-		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + oldal + "\n\nÖsszesen **" + getQueueSongs(msg.guild.id) + "** zene van a listán!", "color": 6075135 };						  
+		//msg.channel.sendMessage(`__**${msg.guild.name}'s Music Queue:**__ Currently **${tosend.length}** songs queued ${(tosend.length > 15 ? '*[Only next 15 shown]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``);
+		var darab = getQueueSongs(msg.guild.id);
+		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
 		return msg.channel.send({ embed });
 	}
 	
