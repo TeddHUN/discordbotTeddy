@@ -209,7 +209,7 @@ client.on('message', async msg => { // eslint-disable-line
 		var darab = serverQueue.songs.lenght;
 		let oldal = "";
 		for(var i = 0; i < 5; i++) {
-			oldal += "**" + i+1 + ".** - **" + serverQueue.songs[i].title + "**, Kérte: " + serverQueue.songs[i].request + "\n";
+			oldal += "**" + ++i + ".** - **" + serverQueue.songs[i].title + "**, Kérte: " + serverQueue.songs[i].request + "\n";
 		}
 		
 		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + oldal + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
