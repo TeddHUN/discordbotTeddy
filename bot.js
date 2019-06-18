@@ -223,7 +223,7 @@ client.on('message', async msg => { // eslint-disable-line
 		
 		//msg.channel.sendMessage(`__**${msg.guild.name}'s Music Queue:**__ Currently **${tosend.length}** songs queued ${(tosend.length > 15 ? '*[Only next 15 shown]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``);
 		var darab = getQueueSongs(msg.guild.id);
-		var oldal = 1;
+		let oldal = 1;
 		var maxOldal = Math.round(darab % 15);
 		console.log(":" + maxOldal);
 		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend.slice(0,16).join('\n') + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
@@ -241,7 +241,7 @@ client.on('message', async msg => { // eslint-disable-line
 					if(oldal === 1) return;
 					oldal--;
 					const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
-					sent.edit(embed2);
+					sent.edit("t", { embed2 });
 					console.log("Hátra");
 				});
 
@@ -249,7 +249,7 @@ client.on('message', async msg => { // eslint-disable-line
 					if(oldal === maxOldal) return;
 					oldal++;
 					const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
-					sent.edit(embed2);
+					sent.edit("t", { embed2 });
 					console.log("Előre");
 				});
 			});
