@@ -249,7 +249,7 @@ client.on('message', async msg => { // eslint-disable-line
 					if(oldal === maxOldal) return;
 					oldal++;
 					const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
-					sent.edit("t", { embed2 });
+					sent.edit("t2", { embed2 });
 					console.log("Előre");
 				});
 			});
