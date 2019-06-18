@@ -105,8 +105,10 @@ client.on('message', async msg => { // eslint-disable-line
 			return msg.channel.send({ embed });
 		} else {
 			try {
+				console.log("asd");
 				var video = await youtube.getVideo(url);
-				handleVideo(video, msg, voiceChannel, false, msg.author);
+				await handleVideo(video, msg, voiceChannel, false, msg.author);
+				console.log("asd2");
 			} catch (error) {
 				try {
 					var videos = await youtube.searchVideos(searchString, 5);
@@ -134,7 +136,9 @@ client.on('message', async msg => { // eslint-disable-line
 					const embed = { "description": msg.author + ', nem tudok lejátszani az alábbi listából. Hiba: #0: Kritikus hiba, fejlesztő szükséges!', "color": 13632027 };
 					return msg.channel.send({ embed });
 				}
+				console.log("asd3");
 			}
+				console.log("asd4");
 		}
 	} else if (command === 'stop') {
 		if (!msg.member.voiceChannel) {
