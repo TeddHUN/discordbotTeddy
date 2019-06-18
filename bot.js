@@ -802,7 +802,7 @@ function play(guild, song, playlist = false) {
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 	if(!playlist) {
-		const embed = { "description": "🎵 Most játszom: **" + song.title + ", Kérte: " + song.request, "color": 6075135 };
+		const embed = { "description": "🎵 Most játszom: **" + song.title + "**, Kérte: " + song.request, "color": 6075135 };
 		serverQueue.textChannel.send({ embed });
 	}
 }
