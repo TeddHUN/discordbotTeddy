@@ -985,7 +985,7 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
 	//statusz = result[0].status;
 	//uzenet = result[0].dcmessage;
 	    if (!twitchChannelIsLive) {
-	       if(result.status == 1) {
+	       if(result[0].status == 1) {
 	  targetChannel.fetchMessage(result.dcmessage).then(message => message.delete());
 	  var sql = "UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.name + "'";
 	  con.query(sql, function (err, result) {
@@ -995,7 +995,7 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
 	       }	
 	    } else {
 		    console.log("check");
-	       if(result.status == 0) {
+	       if(result[0].status == 0) {
 
 	    let sql = `UPDATE streamerek SET status = ?, dcmessage = ? WHERE twitch = ?`;
 
