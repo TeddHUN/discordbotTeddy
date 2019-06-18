@@ -219,7 +219,7 @@ client.on('message', async msg => { // eslint-disable-line
 		
 		//msg.channel.sendMessage(`__**${msg.guild.name}'s Music Queue:**__ Currently **${tosend.length}** songs queued ${(tosend.length > 15 ? '*[Only next 15 shown]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``);
 		var darab = getQueueSongs(msg.guild.id);
-		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
+		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend.slice(0,15).join('\n') + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
 		return msg.channel.send({ embed });
 	}
 	
