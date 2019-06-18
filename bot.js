@@ -226,28 +226,37 @@ client.on('message', async msg => { // eslint-disable-line
 		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend.slice(0,16).join('\n') + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
 		return msg.channel.send({ embed }).then(sent => {
 			sent.react('⏪').then(r => {
-				sent.react('⏩');
-				
-				const backwardsFilter = (reaction, user) => reaction.emoji.name === '⏪' && user.id === msg.author.id;
-				const forwardsFilter = (reaction, user) => reaction.emoji.name === '⏩' && user.id === msg.author.id;
-				
-				const backwards = sent.createReactionCollector(backwardsFilter, { time: 60000 });
-				const forwards = sent.createReactionCollector(forwardsFilter, { time: 60000 });
-				
-				backwards.on('collect', r => {
-					if(oldal === 1) return;
-					oldal--;
-					const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
-					sent.edit({ embed2 });
-					console.log("Hátra");
-				});
-				
-				forwards.on('collect', r => {
-					if(oldal === maxOldal) return;
-					oldal++;
-					const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
-					sent.edit({ embed2 });
-					console.log("Előre");
+				sent.react('⏩').then( r => {
+					sent.react('🗑️');	
+					
+					const backwardsFilter = (reaction, user) => reaction.emoji.name === '⏪' && user.id === msg.author.id;
+					const forwardsFilter = (reaction, user) => reaction.emoji.name === '⏩' && user.id === msg.author.id;
+					const trashFilter = (reaction, user) => reaction.emoji.name === '🗑️' && user.id === msg.author.id;
+
+					const backwards = sent.createReactionCollector(backwardsFilter, { time: 60000 });
+					const forwards = sent.createReactionCollector(forwardsFilter, { time: 60000 });
+					const trash = sent.createReactionCollector(trashFilter, { time: 60000 });
+
+					backwards.on('collect', r => {
+						if(oldal === 1) return;
+						oldal--;
+						const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
+						sent.edit({ embed2 });
+						console.log("Hátra");
+					});
+
+					forwards.on('collect', r => {
+						if(oldal === maxOldal) return;
+						oldal++;
+						const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
+						sent.edit({ embed2 });
+						console.log("Előre");
+					});
+					
+					trash.on('collect', r => {
+						sent.delete();
+						console.log("Törlés");
+					});
 				});
 			});
 		});
@@ -983,41 +992,42 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
   	console.log("MySQL: Csatlakozva!");
   });
 	
-  sleep(5000);
-	
-  con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.name + "'", function (err, result) {  
-	//console.log(""+result[0].status);
-	//statusz = result[0].status;
-	//uzenet = result[0].dcmessage;
-	    if (!twitchChannelIsLive) {
-	       if(result[0].status == 1) {
-          targetChannel.fetchMessage(result[0].dcmessage).then(message => message.delete());
-          var sql = "UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.name + "'";
-          con.query(sql, function (err, result) {
-          if (err) throw err;
-            console.log(result.affectedRows + " record(s) updated");
-          });
-	       }	
-	    } else {
-	       if(result[0].status == 0) {
-            
-            let sql = `UPDATE streamerek SET status = ?, dcmessage = ? WHERE twitch = ?`;
- 
-            targetChannel.send(msgFormatted, {
-            embed: msgEmbed
-             }).then((message) => {	
-             let data = [1, message.id, twitchChannel.name];
-              //var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.name + "'";
-              var query = con.query(sql, data, function (err, result) { 	
-                console.log(result); });
-              console.log(query);
-              console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
-            });   
-	       }
-	    }
-    });	
-  con.end();
-  console.log("MySQL lecsatlakozva!");
+  setTimeout(function () {
+	con.query("SELECT * FROM streamerek WHERE twitch = '" + twitchChannel.name + "'", function (err, result) {  
+		//console.log(""+result[0].status);
+		//statusz = result[0].status;
+		//uzenet = result[0].dcmessage;
+		    if (!twitchChannelIsLive) {
+		       if(result[0].status == 1) {
+		  targetChannel.fetchMessage(result[0].dcmessage).then(message => message.delete());
+		  var sql = "UPDATE streamerek SET status = '0' WHERE twitch = '" + twitchChannel.name + "'";
+		  con.query(sql, function (err, result) {
+		  if (err) throw err;
+		    console.log(result.affectedRows + " record(s) updated");
+		  });
+		       }	
+		    } else {
+		       if(result[0].status == 0) {
+
+		    let sql = `UPDATE streamerek SET status = ?, dcmessage = ? WHERE twitch = ?`;
+
+		    targetChannel.send(msgFormatted, {
+		    embed: msgEmbed
+		     }).then((message) => {	
+		     let data = [1, message.id, twitchChannel.name];
+		      //var sql = "UPDATE streamerek SET status = '1', dcmessage = '" + message.id + "' WHERE twitch = '" + twitchChannel.name + "'";
+		      var query = con.query(sql, data, function (err, result) { 	
+			console.log(result); });
+		      console.log(query);
+		      console.log('[Discord]', `Értesítés kiküldve a(z) ${targetChannel.guild.name} szerveren a(z) #${targetChannel.name} szobában ${twitchChannel.display_name}-ról/ről!`);
+		    });   
+		       }
+		    }
+	    });	
+	  con.end();
+	  console.log("MySQL lecsatlakozva!");
+  }, 5000);
+  
   //sleep(5000);
   //con.end();	*/
   anySent = true;
