@@ -797,9 +797,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, kero) {
 		}
 	} else {
 		serverQueue.songs.push(song);
-		if (playlist) return undefined;		
-		return msg.channel.send({ embed });
-		else {
+		if (!playlist) {
 			const embed = { "description": `✅ Zene hozzáadva a lejátszási listához: **${song.title}**, Kérte: **${song.request}**`, "color": 6075135 };
 			return msg.channel.send({ embed });
 		}
