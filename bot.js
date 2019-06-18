@@ -222,7 +222,7 @@ client.on('message', async msg => { // eslint-disable-line
 		var darab = getQueueSongs(msg.guild.id);
 		var oldal = 1;
 		var maxOldal = Math.round(darab / 15);
-		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend.slice(0,15).join('\n') + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
+		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend.slice(0,16).join('\n') + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
 		return msg.channel.send({ embed }).then(sent => {
 			sent.react('⏪').then(r => {
 				sent.react('⏩');
