@@ -101,7 +101,7 @@ client.on('message', async msg => { // eslint-disable-line
 				darab++;
 			}
 			
-			const embed = { "description": "✅ Zenék hozzáadva a lejátszási listához: **" + playlist.title + "** (**" + darab + "**), Kérte: **" + msg.author, "color": 6075135 };
+			const embed = { "description": "✅ Zenék hozzáadva a lejátszási listához: **" + playlist.title + "** (**" + darab + "**), Kérte: " + msg.author, "color": 6075135 };
 			return msg.channel.send({ embed });
 		} else {
 			try {
@@ -160,9 +160,9 @@ client.on('message', async msg => { // eslint-disable-line
 			const embed = { "description": 'A semmit nem tudom átugrani!', "color": 13632027 };
 			return msg.channel.send({ embed });
 		}		
-		serverQueue.connection.dispatcher.end('Atugorva!');
-		const embed = { "description": '⏩ Átugorva!', "color": 6075135 };
-		msg.channel.send({ embed });	
+		const embed = { "description": '⏩ Zene átugorva!', "color": 6075135 };
+		msg.channel.send({ embed });
+		serverQueue.connection.dispatcher.end('Atugorva!');	
 		return undefined;
 	} else if (command === 'volume') {
 		msg.channel.send(msg.author + ", A funkció korlátozott!");
@@ -801,7 +801,10 @@ function play(guild, song, playlist = false) {
 		})
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-	if(!playlist) serverQueue.textChannel.send(`🎶 Zene elindítva: **${song.title}**, Kérte: **${song.request}**`);
+	if(!playlist) {
+		const embed = { "description": "🎵 Most játszom: **" + song.title + ", Kérte: " + song.request, "color": 6075135 };
+		serverQueue.textChannel.send({ embed });
+	}
 }
 
 class StreamActivity {
