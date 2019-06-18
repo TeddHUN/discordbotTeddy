@@ -208,11 +208,12 @@ client.on('message', async msg => { // eslint-disable-line
 		
 		var darab = serverQueue.songs.size;
 		let oldal = "";
-		for(var i = 0; i < 5; i++) {
+		var i = 0;
+		for(i; i < 5; i++) {
 			oldal += "**" + ++i + ".** - **" + serverQueue.songs[i].title + "**, Kérte: " + serverQueue.songs[i].request + "\n";
 		}
 		
-		const embed = { "description": "" + oldal, "color": 6075135 };						  
+		const embed = { "description": "🔴 Lejátszási lista tartalma: \n\n" + oldal, "color": 6075135 };						  
 		return msg.channel.send({ embed });
 	}
 	
