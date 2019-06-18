@@ -226,37 +226,28 @@ client.on('message', async msg => { // eslint-disable-line
 		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend.slice(0,16).join('\n') + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
 		return msg.channel.send({ embed }).then(sent => {
 			sent.react('⏪').then(r => {
-				sent.react('⏩').then( r => {
-					sent.react('🗑️');	
-					
-					const backwardsFilter = (reaction, user) => reaction.emoji.name === '⏪' && user.id === msg.author.id;
-					const forwardsFilter = (reaction, user) => reaction.emoji.name === '⏩' && user.id === msg.author.id;
-					const trashFilter = (reaction, user) => reaction.emoji.name === '🗑️' && user.id === msg.author.id;
+				sent.react('⏩');
+				
+				const backwardsFilter = (reaction, user) => reaction.emoji.name === '⏪' && user.id === msg.author.id;
+				const forwardsFilter = (reaction, user) => reaction.emoji.name === '⏩' && user.id === msg.author.id;
 
-					const backwards = sent.createReactionCollector(backwardsFilter, { time: 60000 });
-					const forwards = sent.createReactionCollector(forwardsFilter, { time: 60000 });
-					const trash = sent.createReactionCollector(trashFilter, { time: 60000 });
+				const backwards = sent.createReactionCollector(backwardsFilter, { time: 60000 });
+				const forwards = sent.createReactionCollector(forwardsFilter, { time: 60000 });
 
-					backwards.on('collect', r => {
-						if(oldal === 1) return;
-						oldal--;
-						const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
-						sent.edit({ embed2 });
-						console.log("Hátra");
-					});
+				backwards.on('collect', r => {
+					if(oldal === 1) return;
+					oldal--;
+					const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
+					sent.edit(embed2);
+					console.log("Hátra");
+				});
 
-					forwards.on('collect', r => {
-						if(oldal === maxOldal) return;
-						oldal++;
-						const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
-						sent.edit({ embed2 });
-						console.log("Előre");
-					});
-					
-					trash.on('collect', r => {
-						sent.delete();
-						console.log("Törlés");
-					});
+				forwards.on('collect', r => {
+					if(oldal === maxOldal) return;
+					oldal++;
+					const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
+					sent.edit(embed2);
+					console.log("Előre");
 				});
 			});
 		});
@@ -1007,6 +998,7 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
 		  });
 		       }	
 		    } else {
+			    console.log("check");
 		       if(result.status == 0) {
 
 		    let sql = `UPDATE streamerek SET status = ?, dcmessage = ? WHERE twitch = ?`;
