@@ -98,21 +98,17 @@ client.on('message', async msg => { // eslint-disable-line
 			} catch (error) {
 				try {
 					var videos = await youtube.searchVideos(searchString, 5);
-					let index = 0;					
-					var talalatok = msg.channel.send(msg.author + `, Több találatot találtam!\n
-__**Válasz az alábbiak közül:**__
-${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
-A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)
-					`);
+					let index = 0;	
+					const talalatok = await msg.channel.send("🎶 Több találatot találtam, " + msg.author + "!\n**Válasz az alábbiak közül:** " + videos.map(video2 => "**" + ++index + " -** **`" + video2.title + "`**").join('\n') + "A válaszodat 1-től 5-ig számozással várom válaszban. (**10 másodperc**)");
 					
 					try {
 						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 6, {
 							maxMatches: 1,
-							time: 5000,
+							time: 10000,
 							errors: ['time']
 						});
 					} catch (err) {
-						console.log("1: " + talalatok.toString());
+						console.log("1: " + talalatok);
 						talalatok.delete();
 						return msg.channel.send('❌ Nem érkezett válasz ezért nem történik lejátszás!').then(sent => { sent.delete(5000); });
 					}
@@ -120,7 +116,7 @@ A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
-					//console.log("2: " + err);
+					console.log("2: " + err);
 					return msg.channel.send(msg.author + ', nem tudok lejátszani az alábbi listából. Hiba: #0: Kritikus hiba, fejlesztő szükséges!');
 				}
 			}
