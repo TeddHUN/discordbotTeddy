@@ -112,7 +112,7 @@ A válaszodat 1-től 5-ig számozással várom válaszban. (10 másodperc)
 							errors: ['time']
 						});
 					} catch (err) {
-						console.log("1: " + talalatok);
+						console.log("1: " + talalatok.toString());
 						talalatok.delete();
 						return msg.channel.send('❌ Nem érkezett válasz ezért nem történik lejátszás!').then(sent => { sent.delete(5000); });
 					}
