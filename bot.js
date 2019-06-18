@@ -227,8 +227,8 @@ client.on('message', async msg => { // eslint-disable-line
 			sent.react('⏪').then(r => {
 				sent.react('⏩');
 				
-				const backwardsFilter = {reaction, user} => reaction.emoji.name === '⏪' && user.id === message.author.id;
-				const forwardsFilter = {reaction, user} => reaction.emoji.name === '⏩' && user.id === message.author.id;
+				const backwardsFilter = (reaction, user) => reaction.emoji.name === '⏪' && user.id === message.author.id;
+				const forwardsFilter = (reaction, user) => reaction.emoji.name === '⏩' && user.id === message.author.id;
 				
 				const backwards = sent.createReactionCollector(backwardsFilter, { time: 60000 });
 				const forwards = sent.createReactionCollector(forwardsFilter, { time: 60000 });
