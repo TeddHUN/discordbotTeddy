@@ -214,14 +214,40 @@ client.on('message', async msg => { // eslint-disable-line
 		*/
 		let tosend = [];
 		serverQueue.songs.forEach((song, i) => {
-			if(i == 1) tosend.push(`**Jelenleg megy:**\n${song.title} - Kérte: ${song.request}\n\n`);
+			if(i == 0) tosend.push(`**Jelenleg megy:**\n${song.title} - Kérte: ${song.request}\n\n`);
 			else tosend.push(`${i-1}. ${song.title} - Kérte: ${song.request}`);
 		});
 		
 		//msg.channel.sendMessage(`__**${msg.guild.name}'s Music Queue:**__ Currently **${tosend.length}** songs queued ${(tosend.length > 15 ? '*[Only next 15 shown]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``);
 		var darab = getQueueSongs(msg.guild.id);
+		var oldal = 1;
+		var maxOldal = Math.round(darab / 15);
 		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend.slice(0,15).join('\n') + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
-		return msg.channel.send({ embed });
+		return msg.channel.send({ embed }).then(sent => {
+			sent.react('⏪').then(r => {
+				sent.react('⏩');
+				
+				const backwardsFilter = {reaction, user} => reaction.emoji.name === '⏪' && user.id === message.author.id;
+				const forwardsFilter = {reaction, user} => reaction.emoji.name === '⏩' && user.id === message.author.id;
+				
+				const backwards = sent.createReactionCollector(backwardsFilter, { time: 60000 });
+				const forwards = sent.createReactionCollector(forwardsFilter, { time: 60000 });
+				
+				backwards.on('collect', r => {
+					if(oldal === 1) return;
+					oldal--;
+					embed.setDescription("Oldal: " + oldal);
+					sent.edit(embed);
+				});
+				
+				forwards.on('collect', r => {
+					if(oldal === maxOldal) return;
+					oldal++;
+					embed.setDescription("Oldal: " + oldal);
+					sent.edit(embed);
+				});
+			});
+		});
 	}
 	
 	if (command === 'leaveserver') {
