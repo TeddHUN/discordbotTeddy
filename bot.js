@@ -76,10 +76,19 @@ client.on('message', async msg => { // eslint-disable-line
 
 	if (command === 'play') {
 		const voiceChannel = msg.member.voiceChannel;
-		if (!voiceChannel) return msg.channel.send(msg.author + ", a csatlakozáshoz egy hangcsatornában kell lenned!");
+		if (!voiceChannel) {
+			const embed = { "description": msg.author + ", a csatlakozáshoz egy hangcsatornában kell lenned!", "color": 13632027 };
+			return msg.channel.send({ embed });			
+		}
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
-		if (!permissions.has('CONNECT')) return msg.channel.send(msg.author + " , a hangcsatornához nem tudok csatlakozni. Hiba: #1: Jog hiánya (permission)");
-		if (!permissions.has('SPEAK')) return msg.channel.send(msg.author +  ", a hangcsatornában nem tudok zenét lejátszani. Hiba: #1: Jog hiánya (permission)");
+		if (!permissions.has('CONNECT')) {
+			const embed = { "description": msg.author + " , a hangcsatornához nem tudok csatlakozni. Hiba: #1: Jog hiánya (permission)", "color": 13632027 };
+			return msg.channel.send({ embed });
+		}
+		if (!permissions.has('SPEAK')) {
+			const embed = { "description": msg.author +  ", a hangcsatornában nem tudok zenét lejátszani. Hiba: #1: Jog hiánya (permission)", "color": 13632027 };
+			return msg.channel.send({ embed });
+		}
 		
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
 			const playlist = await youtube.getPlaylist(url);
@@ -101,7 +110,7 @@ client.on('message', async msg => { // eslint-disable-line
 				try {
 					var videos = await youtube.searchVideos(searchString, 5);
 					let index = 0;	
-					const embed = { "description": "🎶 Több találatot találtam, " + msg.author + "!\n\n**Válasz az alábbiak közül:**\n" + videos.map(video2 => "**" + ++index + " -** **`" + video2.title + "`**").join('\n') + "\nA válaszodat 1-től 5-ig számozással várom válaszban. (**10 másodperc**)", "color": 6075135 };
+					const embed = { "description": "🎶 Több találatot találtam, " + msg.author + "!\n\n**Válasz az alábbiak közül:**\n```" + videos.map(video2 => "**" + ++index + " -** **`" + video2.title + "`**").join('\n') + "```\nA válaszodat 1-től 5-ig számozással várom válaszban. (**10 másodperc**)", "color": 6075135 };
 					const talalatok = await msg.channel.send({ embed });
 					
 					try {
@@ -128,10 +137,19 @@ client.on('message', async msg => { // eslint-disable-line
 			return handleVideo(video, msg, voiceChannel, false, msg.author);
 		}
 	} else if (command === 'stop') {
-		if (!msg.member.voiceChannel) return msg.channel.send(msg.author + ', Nem vagy hangcsatornában!');
-		if (!serverQueue) return msg.channel.send('A semmit nem tudom megállítani!');
+		if (!msg.member.voiceChannel) {
+			const embed = { "description": msg.author + ', Nem vagy hangcsatornában!', "color": 13632027 };
+			return msg.channel.send({ embed });
+		}
+		if (!serverQueue) {
+			const embed = { "description": 'A semmit nem tudom megállítani!', "color": 13632027 };
+			return msg.channel.send({ embed });
+		}
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('Leallitva!');
+		
+		const embed = { "description": '✅ Oké, vettem!', "color": 6075135 };
+		msg.channel.send({ embed });		
 		return undefined;
 	}
 	
