@@ -159,10 +159,10 @@ client.on('message', async msg => { // eslint-disable-line
 		if (!serverQueue) {
 			const embed = { "description": 'A semmit nem tudom átugrani!', "color": 13632027 };
 			return msg.channel.send({ embed });
-		}		
-		const embed = { "description": '⏩ Zene átugorva!', "color": 6075135 };
-		msg.channel.send({ embed });
+		}	
 		serverQueue.connection.dispatcher.end('Atugorva!');	
+		const embed = { "description": '⏩ Zene átugorva!', "color": 6075135 };
+		msg.channel.send({ embed });	
 		return undefined;
 	} else if (command === 'volume') {
 		msg.channel.send(msg.author + ", A funkció korlátozott!");
@@ -204,7 +204,7 @@ client.on('message', async msg => { // eslint-disable-line
 			const embed = { "description": `❌ A lejátszási lista üres!`, "color": 6075135 };
 			return msg.channel.send({ embed });
 		}
-		console.log(""+serverQueue.songs);
+		console.log(""+serverQueue.songs.toString());
 		/*
 		var darab = serverQueue.songs.size;
 		let oldal = "";
