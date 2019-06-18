@@ -110,7 +110,7 @@ client.on('message', async msg => { // eslint-disable-line
 				try {
 					var videos = await youtube.searchVideos(searchString, 5);
 					let index = 0;	
-					const embed = { "description": "🎶 Több találatot találtam, " + msg.author + "!\n\n**Válasz az alábbiak közül:**\n```" + videos.map(video2 => "**" + ++index + " -** **`" + video2.title + "`**").join('\n') + "```\nA válaszodat 1-től 5-ig számozással várom válaszban. (**10 másodperc**)", "color": 6075135 };
+					const embed = { "description": "🎶 Több találatot találtam, " + msg.author + "!\n\n**Válasz az alábbiak közül:**\n" + videos.map(video2 => "**" + ++index + " -** **`" + video2.title + "`**").join('\n') + "\nA válaszodat 1-től 5-ig számozással várom válaszban. (**10 másodperc**)", "color": 6075135 };
 					const talalatok = await msg.channel.send({ embed });
 					
 					try {
@@ -138,7 +138,7 @@ client.on('message', async msg => { // eslint-disable-line
 		}
 	} else if (command === 'stop') {
 		if (!msg.member.voiceChannel) {
-			const embed = { "description": msg.author + ', Nem vagy hangcsatornában!', "color": 13632027 };
+			const embed = { "description": msg.author + ', nem vagy hangcsatornában!', "color": 13632027 };
 			return msg.channel.send({ embed });
 		}
 		if (!serverQueue) {
@@ -151,6 +151,54 @@ client.on('message', async msg => { // eslint-disable-line
 		const embed = { "description": '✅ Oké, vettem!', "color": 6075135 };
 		msg.channel.send({ embed });		
 		return undefined;
+	} else if (command === 'skip') {
+		if (!msg.member.voiceChannel) {
+			const embed = { "description": msg.author + ', nem vagy hangcsatornában!', "color": 13632027 };
+			return msg.channel.send({ embed });
+		}
+		if (!serverQueue) {
+			const embed = { "description": 'A semmit nem tudom átugrani!', "color": 13632027 };
+			return msg.channel.send({ embed });
+		}		
+		serverQueue.connection.dispatcher.end('Atugorva!');
+		const embed = { "description": '⏩ Átugorva!', "color": 6075135 };
+		msg.channel.send({ embed });	
+		return undefined;
+	} else if (command === 'volume') {
+		msg.channel.send(msg.author + ", A funkció korlátozott!");
+		return undefined;
+		
+		if (!msg.member.voiceChannel) return msg.channel.send(msg.author + ', Nem vagy hangcsatornában!');
+		if (!serverQueue) return msg.channel.send('Jelenleg nem játszom semmit.');
+		if (!args[1]) return msg.channel.send(`Jelenlegi hangerő: **${serverQueue.volume}**`);
+		serverQueue.volume = args[1];
+		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
+		return msg.channel.send(`Hangerő beállítva: **${args[1]}** -ra/re!`);
+	} else if (command === 'np') {
+		if (!serverQueue) {
+			const embed = { "description": "❌ Jelenleg nem játszom semmit!", "color": 13632027 };
+			return msg.channel.send({ embed });
+		}
+		const embed = { "description": `🎶 Jelenleg megy: **${serverQueue.songs[0].title}**, Kérte: **${serverQueue.songs[0].request}**`, "color": 6075135 };
+		return msg.channel.send({ embed });
+	} else if (command === 'pause') {
+		if (serverQueue && serverQueue.playing) {
+			serverQueue.playing = false;
+			serverQueue.connection.dispatcher.pause();
+			const embed = { "description": `⏸ A zene megállítva!`, "color": 6075135 };
+			return msg.channel.send({ embed });
+		}
+		const embed = { "description": "❌ Jelenleg nem játszom semmit!", "color": 13632027 };
+		return msg.channel.send({ embed });
+	} else if (command === 'resume') {
+		if (serverQueue && !serverQueue.playing) {
+			serverQueue.playing = true;
+			serverQueue.connection.dispatcher.resume();
+			const embed = { "description": `▶️ A zene folytatva!`, "color": 6075135 };
+			return msg.channel.send({ embed });
+		}
+		const embed = { "description": "❌ Jelenleg nem játszom semmit!", "color": 13632027 };
+		return msg.channel.send({ embed });
 	}
 	
 	if (command === 'leaveserver') {
