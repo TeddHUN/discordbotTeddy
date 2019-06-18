@@ -91,7 +91,9 @@ client.on('message', async msg => { // eslint-disable-line
 				await handleVideo(video, msg, voiceChannel, true, msg.author);
 				darab++;
 			}
-			return msg.channel.send(`✅ Zenék hozzáadva a lejátszási listához: **${playlist.title}** (**${darab}**, Kérte: **${msg.author}**`);
+			
+			const embed = { "description": '✅ Zenék hozzáadva a lejátszási listához: **${playlist.title}** (**${darab}**), Kérte: **${msg.author}**', "color": 6075135 };
+			return msg.channel.send({ embed });
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
@@ -99,7 +101,8 @@ client.on('message', async msg => { // eslint-disable-line
 				try {
 					var videos = await youtube.searchVideos(searchString, 5);
 					let index = 0;	
-					const talalatok = await msg.channel.send("🎶 Több találatot találtam, " + msg.author + "!\n\n**Válasz az alábbiak közül:**\n" + videos.map(video2 => "**" + ++index + " -** **`" + video2.title + "`**").join('\n') + "\nA válaszodat 1-től 5-ig számozással várom válaszban. (**10 másodperc**)");
+					const embed = { "description": "🎶 Több találatot találtam, " + msg.author + "!\n\n**Válasz az alábbiak közül:**\n" + videos.map(video2 => "**" + ++index + " -** **`" + video2.title + "`**").join('\n') + "\nA válaszodat 1-től 5-ig számozással várom válaszban. (**10 másodperc**)", "color": 6075135 };
+					const talalatok = await msg.channel.send({ embed });
 					
 					try {
 						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 6, {
@@ -110,14 +113,16 @@ client.on('message', async msg => { // eslint-disable-line
 					} catch (err) {
 						//console.log("1: " + talalatok);
 						talalatok.delete();
-						return msg.channel.send('❌ Nem érkezett válasz ezért nem történik lejátszás!').then(sent => { sent.delete(10000); });
+						const embed = { "description": "❌ Nem érkezett válasz ezért nem történik lejátszás!", "color": 13632027 };
+						return msg.channel.send({ embed }).then(sent => { sent.delete(10000); });
 					}
 					
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
 					//console.log("2: " + err);
-					return msg.channel.send(msg.author + ', nem tudok lejátszani az alábbi listából. Hiba: #0: Kritikus hiba, fejlesztő szükséges!');
+					const embed = { "description": msg.author + ', nem tudok lejátszani az alábbi listából. Hiba: #0: Kritikus hiba, fejlesztő szükséges!', "color": 13632027 };
+					return msg.channel.send({ embed });
 				}
 			}
 			return handleVideo(video, msg, voiceChannel, false, msg.author);
