@@ -95,13 +95,13 @@ client.on('message', async msg => { // eslint-disable-line
 			const videos = await playlist.getVideos();
 			var darab = 0;
 			for (const video of Object.values(videos)) {
-				//console.log(video);
+				console.log(video);
 				//const video2 = await youtube.getVideoByID(video.id);
 				await handleVideo(video, msg, voiceChannel, true, msg.author);
 				darab++;
 			}
 			
-			const embed = { "description": "✅ Zenék hozzáadva a lejátszási listához: **" + playlist.title + "** (**" + darab + "**), Kérte: " + msg.author, "color": 6075135 };
+			const embed = { "description": "✅ Playlist hozzáadva a lejátszási listához: **" + playlist.title + "** (**" + darab + "**), Kérte: " + msg.author, "color": 6075135 };
 			return msg.channel.send({ embed });
 		} else {
 			try {
@@ -198,6 +198,16 @@ client.on('message', async msg => { // eslint-disable-line
 			return msg.channel.send({ embed });
 		}
 		const embed = { "description": "❌ Jelenleg nem játszom semmit!", "color": 13632027 };
+		return msg.channel.send({ embed });
+	} else if(command === 'queue') {
+		if (!serverQueue) {			
+			const embed = { "description": `❌ A lejátszási lista üres!`, "color": 6075135 };
+			return msg.channel.send({ embed });
+		}
+		
+		var songs = serverQueue.songs.map(song => `**${++index} -** ${song.title} - Kérte: **${song.request}**`).join('\n');
+		
+		const embed = { "description": "" + songs, "color": 6075135 };						  
 		return msg.channel.send({ embed });
 	}
 	
