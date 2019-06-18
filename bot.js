@@ -239,6 +239,7 @@ client.on('message', async msg => { // eslint-disable-line
 					oldal--;
 					const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
 					sent.edit({ embed2 });
+					console.log("Hátra");
 				});
 				
 				forwards.on('collect', r => {
@@ -246,6 +247,7 @@ client.on('message', async msg => { // eslint-disable-line
 					oldal++;
 					const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
 					sent.edit({ embed2 });
+					console.log("Előre");
 				});
 			});
 		});
@@ -1015,6 +1017,7 @@ Hé @here, natrex_official közvetítésbe kezdett https://www.twitch.tv/natrex_
 	    }
     });	
   con.end();
+  console.log("MySQL lecsatlakozva!");
   //sleep(5000);
   //con.end();	*/
   anySent = true;
