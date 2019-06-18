@@ -236,15 +236,15 @@ client.on('message', async msg => { // eslint-disable-line
 				backwards.on('collect', r => {
 					if(oldal === 1) return;
 					oldal--;
-					embed.setDescription("Oldal: " + oldal);
-					sent.edit(embed);
+					embed = { "description": "Oldal: " + oldal, "color": 6075135 };
+					sent.edit({ embed });
 				});
 				
 				forwards.on('collect', r => {
 					if(oldal === maxOldal) return;
 					oldal++;
-					embed.setDescription("Oldal: " + oldal);
-					sent.edit(embed);
+					embed = { "description": "Oldal: " + oldal, "color": 6075135 };
+					sent.edit({ embed });
 				});
 			});
 		});
