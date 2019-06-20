@@ -1055,9 +1055,9 @@ var db_config = {
 };
 
 function handleDisconnect() {
-  connection = mysql.createConnection(db_config);
+  con = mysql.createConnection(db_config);
 
-  connection.connect(function(err) {
+  con.connect(function(err) {
     if(err) {
 	console.log('MySQL error, database: ', err);
 	setTimeout(handleDisconnect, 2000);
@@ -1066,7 +1066,7 @@ function handleDisconnect() {
     }
   }); 
 
-  connection.on('error', function(err) {
+  con.on('error', function(err) {
     console.log('MySQL error: ', err);
     if(err.code === 'PROTOCOL_CONNECTION_LOST') {
       handleDisconnect();
