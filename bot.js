@@ -1059,7 +1059,7 @@ function handleDisconnect() {
 
   connection.connect(function(err) {
     if(err) {
-	console.log('error when connecting to db:', err);
+	console.log('MySQL error, database: ', err);
 	setTimeout(handleDisconnect, 2000);
     } else {
 	console.log("MySQL: Csatlakozva!");
@@ -1067,7 +1067,7 @@ function handleDisconnect() {
   }); 
 
   connection.on('error', function(err) {
-    console.log('db error', err);
+    console.log('MySQL error: ', err);
     if(err.code === 'PROTOCOL_CONNECTION_LOST') {
       handleDisconnect();
     } else {
