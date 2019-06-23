@@ -13,8 +13,6 @@ const listener = app.listen(process.env.PORT, function() {
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const ytdl = require('ytdl-core');
-const YouTube = require('simple-youtube-api');
 
 const mysql = require('mysql');
 var prefix = "-";
@@ -25,9 +23,6 @@ const TwitchMonitor = require("./twitch-monitor");
 
 const rangs = require('./rangs.json');
 var maxRang = 2;
-
-const youtube = new YouTube(process.env.yttoken);
-const queue = new Map();
 
 let initialMessage = `@everyone A rangok igénylése **automatikusan** működik így ha szeretnél egy rangot akkor csak reagálj rá! ;)`;
 const roles = ["The Crew", "The Crew 2", "PC", "XBOX", "PS"];
@@ -64,192 +59,9 @@ client.on('message', async msg => { // eslint-disable-line
 	const args = msg.content.split(' ');
 	const searchString = args.slice(1).join(' ');
 	const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
-	const serverQueue = queue.get(msg.guild.id);
 
 	let command = msg.content.toLowerCase().split(' ')[0];
 	command = command.slice(prefix.length);
-
-	if (command === 'play') {
-		const voiceChannel = msg.member.voiceChannel;
-		if (!voiceChannel) {
-			const embed = { "description": msg.author + ", a csatlakozáshoz egy hangcsatornában kell lenned!", "color": 13632027 };
-			return msg.channel.send({ embed });			
-		}
-		const permissions = voiceChannel.permissionsFor(msg.client.user);
-		if (!permissions.has('CONNECT')) {
-			const embed = { "description": msg.author + " , a hangcsatornához nem tudok csatlakozni. Hiba: #1: Jog hiánya (permission)", "color": 13632027 };
-			return msg.channel.send({ embed });
-		}
-		if (!permissions.has('SPEAK')) {
-			const embed = { "description": msg.author +  ", a hangcsatornában nem tudok zenét lejátszani. Hiba: #1: Jog hiánya (permission)", "color": 13632027 };
-			return msg.channel.send({ embed });
-		}
-		
-		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-			const playlist = await youtube.getPlaylist(url);
-			const videos = await playlist.getVideos();
-			var darab = 0;
-			for (const video of Object.values(videos)) {
-				//console.log(video);
-				//const video2 = await youtube.getVideoByID(video.id);
-				await handleVideo(video, msg, voiceChannel, true, msg.author);
-				darab++;
-			}
-			
-			const embed = { "description": "✅ Playlist hozzáadva a lejátszási listához: **" + playlist.title + "** (**" + darab + "**), Kérte: " + msg.author, "color": 6075135 };
-			return msg.channel.send({ embed });
-		} else {
-			try {
-				console.log("asd");
-				var video = await youtube.getVideo(url);
-				return handleVideo(video, msg, voiceChannel, false, msg.author);
-				console.log("asd2");
-			} catch (error) {
-				try {
-					var videos = await youtube.searchVideos(searchString, 5);
-					let index = 0;	
-					const embed = { "description": "🎶 Több találatot találtam, " + msg.author + "!\n\n**Válasz az alábbiak közül:**\n" + videos.map(video2 => "**" + ++index + " -** **`" + video2.title + "`**").join('\n') + "\nA válaszodat 1-től 5-ig számozással várom válaszban. (**10 másodperc**)", "color": 6075135 };
-					const talalatok = await msg.channel.send({ embed });
-					
-					try {
-						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 6, {
-							maxMatches: 1,
-							time: 10000,
-							errors: ['time']
-						});
-					} catch (err) {
-						//console.log("1: " + talalatok);
-						talalatok.delete();
-						const embed = { "description": "❌ Nem érkezett válasz ezért nem történik lejátszás!", "color": 13632027 };
-						return msg.channel.send({ embed }).then(sent => { sent.delete(10000); });
-					}
-					
-					const videoIndex = parseInt(response.first().content);
-					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-				} catch (err) {
-					//console.log("2: " + err);
-					const embed = { "description": msg.author + ', nem tudok lejátszani az alábbi listából. Hiba: #0: Kritikus hiba, fejlesztő szükséges!', "color": 13632027 };
-					return msg.channel.send({ embed });
-				}
-				console.log("asd3");
-			}
-				console.log("asd4");
-		}
-	} else if (command === 'stop') {
-		if (!msg.member.voiceChannel) {
-			const embed = { "description": msg.author + ', nem vagy hangcsatornában!', "color": 13632027 };
-			return msg.channel.send({ embed });
-		}
-		if (!serverQueue) {
-			const embed = { "description": 'A semmit nem tudom megállítani!', "color": 13632027 };
-			return msg.channel.send({ embed });
-		}
-		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('Leallitva!');
-		
-		const embed = { "description": '✅ Oké, vettem!', "color": 6075135 };
-		msg.channel.send({ embed });		
-		return undefined;
-	} else if (command === 'skip') {
-		if (!msg.member.voiceChannel) {
-			const embed = { "description": msg.author + ', nem vagy hangcsatornában!', "color": 13632027 };
-			return msg.channel.send({ embed });
-		}
-		if (!serverQueue) {
-			const embed = { "description": 'A semmit nem tudom átugrani!', "color": 13632027 };
-			return msg.channel.send({ embed });
-		}	
-		const embed = { "description": '⏩ Zene átugorva!', "color": 6075135 };
-		await msg.channel.send({ embed });
-		serverQueue.connection.dispatcher.end('Atugorva!');		
-		return undefined;
-	} else if (command === 'volume') {
-		msg.channel.send(msg.author + ", A funkció korlátozott!");
-		return undefined;
-		
-		if (!msg.member.voiceChannel) return msg.channel.send(msg.author + ', Nem vagy hangcsatornában!');
-		if (!serverQueue) return msg.channel.send('Jelenleg nem játszom semmit.');
-		if (!args[1]) return msg.channel.send(`Jelenlegi hangerő: **${serverQueue.volume}**`);
-		serverQueue.volume = args[1];
-		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
-		return msg.channel.send(`Hangerő beállítva: **${args[1]}** -ra/re!`);
-	} else if (command === 'np') {
-		if (!serverQueue) {
-			const embed = { "description": "❌ Jelenleg nem játszom semmit!", "color": 13632027 };
-			return msg.channel.send({ embed });
-		}
-		const embed = { "description": `🎶 Jelenleg megy: **${serverQueue.songs[0].title}**, Kérte: **${serverQueue.songs[0].request}**`, "color": 6075135 };
-		return msg.channel.send({ embed });
-	} else if (command === 'pause') {
-		if (serverQueue && serverQueue.playing) {
-			serverQueue.playing = false;
-			serverQueue.connection.dispatcher.pause();
-			const embed = { "description": `⏸ A zene megállítva!`, "color": 6075135 };
-			return msg.channel.send({ embed });
-		}
-		const embed = { "description": "❌ Jelenleg nem játszom semmit!", "color": 13632027 };
-		return msg.channel.send({ embed });
-	} else if (command === 'resume') {
-		if (serverQueue && !serverQueue.playing) {
-			serverQueue.playing = true;
-			serverQueue.connection.dispatcher.resume();
-			const embed = { "description": `▶️ A zene folytatva!`, "color": 6075135 };
-			return msg.channel.send({ embed });
-		}
-		const embed = { "description": "❌ Jelenleg nem játszom semmit!", "color": 13632027 };
-		return msg.channel.send({ embed });
-	} else if(command === 'queue') {
-		if (!serverQueue) {			
-			const embed = { "description": `❌ A lejátszási lista üres!`, "color": 6075135 };
-			return msg.channel.send({ embed });
-		}
-		//console.log('Teszt: ', serverQueue.songs[0]); 
-	/*
-		let oldal = "";
-		for(var i = 1; i <= 5; i++) {
-			oldal += "**" + i + ".** - **" + serverQueue.songs[i].title + "**, Kérte: " + serverQueue.songs[i].request + "\n";
-		}
-		*/
-		let tosend = [];
-		serverQueue.songs.forEach((song, i) => {
-			if(i == 0) tosend.push(`**Jelenleg megy:**\n${song.title} - Kérte: ${song.request}\n\n`);
-			else tosend.push(`${i}. ${song.title} - Kérte: ${song.request}`);
-		});
-		
-		//msg.channel.sendMessage(`__**${msg.guild.name}'s Music Queue:**__ Currently **${tosend.length}** songs queued ${(tosend.length > 15 ? '*[Only next 15 shown]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``);
-		var darab = getQueueSongs(msg.guild.id);
-		let oldal = 1;
-		var maxOldal = Math.round(darab % 15);
-		console.log(":" + maxOldal);
-		const embed = { "description": "**Lejátszási lista tartalma:** \n\n" + tosend.slice(0,16).join('\n') + "\n\nÖsszesen **" + darab + "** zene van a listán!", "color": 6075135 };						  
-		return msg.channel.send({ embed }).then(sent => {
-			sent.react('⏪').then(r => {
-				sent.react('⏩');
-				
-				const backwardsFilter = (reaction, user) => reaction.emoji.name === '⏪' && user.id === msg.author.id;
-				const forwardsFilter = (reaction, user) => reaction.emoji.name === '⏩' && user.id === msg.author.id;
-
-				const backwards = sent.createReactionCollector(backwardsFilter, { time: 60000 });
-				const forwards = sent.createReactionCollector(forwardsFilter, { time: 60000 });
-
-				backwards.on('collect', r => {
-					if(oldal === 1) return;
-					oldal--;
-					const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
-					sent.edit("t", { embed2 });
-					console.log("Hátra");
-				});
-
-				forwards.on('collect', r => {
-					if(oldal === maxOldal) return;
-					oldal++;
-					const embed2 = { "description": "Oldal: " + oldal, "color": 6075135 };
-					sent.edit("t2", { embed2 });
-					console.log("Előre");
-				});
-			});
-		});
-	}
 	
 	if (command === 'leaveserver') {
 		if(msg.author.id != "312631597222592522") {
@@ -815,75 +627,6 @@ function serverStats(guild) {
 		usercount = "Botok: " + guild.members.filter(member => member.user.bot).size;
 		botch.setName(usercount);
 	}
-}
-
-async function handleVideo(video, msg, voiceChannel, playlist = false, kero) {
-	const serverQueue = queue.get(msg.guild.id);
-	const song = {
-		id: video.id,
-		title: video.title,
-		request: kero,
-		url: `https://www.youtube.com/watch?v=${video.id}`
-	};
-	if (!serverQueue) {
-		const queueConstruct = {
-			textChannel: msg.channel,
-			voiceChannel: voiceChannel,
-			connection: null,
-			songs: [],
-			volume: 5,
-			playing: true
-		};
-		queue.set(msg.guild.id, queueConstruct);
-		queueConstruct.songs.push(song);
-		try {
-			var connection = await voiceChannel.join();
-			queueConstruct.connection = connection;
-			console.log(queueConstruct.connection.client.id);
-			play(msg.guild, queueConstruct.songs[0], playlist);
-		} catch (error) {
-			queue.delete(msg.guild.id);
-			return msg.channel.send(`Nem tudok csatlakozni: ${error}`);
-		}
-	} else {
-		serverQueue.songs.push(song);
-		if (!playlist) {
-			const embed = { "description": `✅ Zene hozzáadva a lejátszási listához: **${song.title}**, Kérte: **${song.request}**`, "color": 6075135 };
-			return msg.channel.send({ embed });
-		}
-	}
-	return undefined;
-}
-function play(guild, song, playlist = false) {
-	const serverQueue = queue.get(guild.id);
-	if (!song) {
-		serverQueue.voiceChannel.leave();
-		queue.delete(guild.id);
-		return;
-	}
-	
-	const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
-		.on('end', reason => {
-			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-			else console.log(reason);
-			serverQueue.songs.shift();
-			play(guild, serverQueue.songs[0]);
-		})
-		.on('error', error => console.error(error));
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-	if(!playlist) {
-		const embed = { "description": "🎵 Most játszom: **" + song.title + "**, Kérte: " + song.request, "color": 6075135 };
-		serverQueue.textChannel.send({ embed });
-	}
-}
-
-function getQueueSongs(guild) {
-	const serverQueue = queue.get(guild);	
-	var darab = 0;
-	serverQueue.songs.forEach((song, i) => {
-		darab++;
-	});
-	return darab;
 }
 
 class StreamActivity {
