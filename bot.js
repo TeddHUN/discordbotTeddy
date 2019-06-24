@@ -222,6 +222,24 @@ client.on('message', async msg => { // eslint-disable-line
 			});
 	}
 	
+	if(command === "csók") {		
+		
+		/*if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Ehhez nincs jogod!").then(sent => {
+				msg.delete(1);
+				sent.delete(10000);					
+			});*/
+		
+		let dUser = msg.guild.member(msg.mentions.users.first()) || msg.guild.members.get(args[0]);
+		if (!dUser) return msg.channel.send("**Használat:** `-csók @Felhasználó").then(sent => {
+				msg.delete(1);	
+				sent.delete(10000);					
+			});
+		
+		msg.channel.send(msg.author + " küldött egy virtuális csókot " + dUser + " számára!").then(sent => {
+				msg.delete(1);					
+			});
+	}
+	
 	/*if(command === "stats") {
 		
 		if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Tesztelés alatt!").then(sent => {
