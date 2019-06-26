@@ -222,6 +222,24 @@ client.on('message', async msg => { // eslint-disable-line
 			});
 	}
 	
+	if(command === "pofon") {		
+		
+		/*if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Ehhez nincs jogod!").then(sent => {
+				msg.delete(1);
+				sent.delete(10000);					
+			});*/
+		
+		let dUser = msg.guild.member(msg.mentions.users.first()) || msg.guild.members.get(args[0]);
+		if (!dUser) return msg.channel.send("**Használat:** `-pofon @Felhasználó").then(sent => {
+				msg.delete(1);	
+				sent.delete(10000);					
+			});
+		
+		msg.channel.send(msg.author + " ellopta Thanos kesztyűjét majd a kövek erejével adott egy sajtos-tejfölöst " + dUser + " számára!").then(sent => {
+				msg.delete(1);					
+			});
+	}
+	
 	if(command === "csók") {		
 		
 		/*if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("**HIBA:** Ehhez nincs jogod!").then(sent => {
